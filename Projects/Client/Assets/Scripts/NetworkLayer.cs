@@ -1,6 +1,7 @@
 ﻿//Rambo Team
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
+using System;
 
 namespace RamboTeam.Client
 {
@@ -13,6 +14,7 @@ namespace RamboTeam.Client
 		}
 
 		private Client client = null;
+		private byte[] outBuffer = null;
 
 		protected override void Awake()
 		{
@@ -21,8 +23,6 @@ namespace RamboTeam.Client
 			Instance = this;
 
 			Connect("127.0.0.1");
-
-			Send(new byte[] { 10, 20, 40 });
 		}
 
 		public void Connect(string Host)
@@ -33,9 +33,12 @@ namespace RamboTeam.Client
 			client.OnMessageReceived += Client_OnMessageReceived;
 		}
 
-		public void Send(byte[] Buffer)
+		public void Send(byte[] Buffer, int Length)
 		{
-			client.Send(Buffer);
+			byte[] buffer = new byte[Length];
+			Array.Copy(Buffer, buffer, Length);
+
+			client.Send(buffer);
 		}
 
 		private void Client_OnMessageReceived(NetworkingPlayer Player, Binary Frame)
