@@ -2,6 +2,7 @@
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
+using System;
 
 namespace RamboTeam.Server
 {
@@ -9,6 +10,8 @@ namespace RamboTeam.Server
 	{
 		static void Main(string[] args)
 		{
+			Console.Write(Constants.SERVER_HEADER_TEXT);
+
 			UDPServer networkHandle = new UDPServer(Constants.MAX_CONNECTION_COUNT);
 
 			networkHandle.binaryMessageReceived += NetworkHandle_binaryMessageReceived;

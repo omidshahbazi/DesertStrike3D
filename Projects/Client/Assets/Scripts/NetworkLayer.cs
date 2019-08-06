@@ -1,5 +1,4 @@
 ﻿//Rambo Team
-
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 
@@ -22,16 +21,16 @@ namespace RamboTeam.Client
 			Instance = this;
 
 			Connect("127.0.0.1");
+
+			Send(new byte[] { 10, 20, 40 });
 		}
 
 		public void Connect(string Host)
 		{
 			client = new Client();
-			client.Connect("127.0.0.1");
+			client.Connect(Host);
 
 			client.OnMessageReceived += Client_OnMessageReceived;
-
-			Send(new byte[] { 10, 20, 40 });
 		}
 
 		public void Send(byte[] Buffer)
