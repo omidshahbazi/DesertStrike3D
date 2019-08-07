@@ -20,9 +20,9 @@ namespace RamboTeam.Server
 
 		public void Bind()
 		{
-			socket.Connect("127.0.0.1", Constants.PORT);
+			socket.Connect("127.0.0.1", Constants.PORT_NUMBER);
 
-			Log("Waiting for clients on port [" + Constants.PORT + "].");
+			Log("Listening for clients on port [" + Constants.PORT_NUMBER + "].");
 		}
 
 		public void Unbind()

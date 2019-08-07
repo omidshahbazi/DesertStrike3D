@@ -16,7 +16,7 @@ namespace RamboTeam.Client
 		public void Connect(string Host)
 		{
 			client = new UDPClient();
-			client.Connect("127.0.0.1", Constants.PORT);
+			client.Connect("127.0.0.1", Constants.PORT_NUMBER);
 
 			client.binaryMessageReceived += Client_binaryMessageReceived;
 		}
