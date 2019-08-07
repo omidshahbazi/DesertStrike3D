@@ -5,6 +5,8 @@ namespace RamboTeam.Client
 {
 	public class ChopterPilotController : MonoBehaviorBase
 	{
+		private float nextSyncTime = 0.0F;
+
 		public float Speed = 10;
 
 		protected override void Start()
@@ -20,6 +22,13 @@ namespace RamboTeam.Client
 
 			if (Input.GetKey(KeyCode.Space))
 				transform.Translate(transform.forward * Time.deltaTime * Speed, Space.World);
+
+			if (Time.time <= nextSyncTime)
+			{
+				SendPosition();
+
+				nextSyncTime += 1;
+			}
 		}
 
 		private static float GetAngle()
