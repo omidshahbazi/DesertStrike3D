@@ -16,6 +16,8 @@ namespace RamboTeam.Client
 		private UDPClient socket = null;
 #endif
 
+		private long nextPingTime = 0;
+
 		public event ConnectionEventHandler OnConnected;
 		public event MessageReceivedEventHandler OnMessageReceived;
 
@@ -34,6 +36,16 @@ namespace RamboTeam.Client
 #endif
 
 			socket.binaryMessageReceived += OnBinaryMessageReceived;
+		}
+
+		public void Service()
+		{
+			if (socket.Time.Milliseconds >= nextPingTime)
+			{
+				socket.Ping();
+
+				nextPingTime = socket.Time.Milliseconds + 500;
+			}
 		}
 
 		public void Send(BufferStream Buffer)

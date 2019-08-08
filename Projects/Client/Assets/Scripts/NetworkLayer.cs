@@ -33,6 +33,13 @@ namespace RamboTeam.Client
 			Connect("127.0.0.1");
 		}
 
+		protected override void Update()
+		{
+			base.Update();
+
+			//client.Service();
+		}
+
 		public void Connect(string Host)
 		{
 			client = new Client();

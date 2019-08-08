@@ -40,7 +40,7 @@ namespace RamboTeam.Client
 				{
 					SendSyncChopterTransform();
 
-					nextSyncTime += 1;
+					nextSyncTime = Time.time + 1;
 				}
 			}
 		}

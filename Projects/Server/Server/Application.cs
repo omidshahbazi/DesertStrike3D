@@ -25,7 +25,6 @@ namespace RamboTeam.Server
 			socket = new UDPServer(Constants.MAX_CONNECTION_COUNT);
 #endif
 
-
 			socket.serverAccepted += OnServerAccepted;
 			socket.playerConnected += OnPlayerConnected;
 			socket.playerDisconnected += OnPlayerDisconnected;
@@ -40,6 +39,8 @@ namespace RamboTeam.Server
 		public void Bind()
 		{
 			socket.Connect("0.0.0.0", Constants.PORT_NUMBER);
+
+			socket.StartAcceptingConnections();
 
 #if USING_TCP
 			Log("Listening for clients on TCP port [" + Constants.PORT_NUMBER + "].");
