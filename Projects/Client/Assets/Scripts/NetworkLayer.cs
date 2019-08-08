@@ -2,6 +2,7 @@
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
+using UnityEngine;
 
 namespace RamboTeam.Client
 {
@@ -26,6 +27,8 @@ namespace RamboTeam.Client
 			base.Awake();
 
 			Instance = this;
+
+			Application.runInBackground = true;
 
 			Connect("127.0.0.1");
 		}
@@ -75,7 +78,7 @@ namespace RamboTeam.Client
 				}
 				else if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
 				{
-
+					NetworkCommands.HandleSyncChopterTransform(buffer);
 				}
 			}
 		}

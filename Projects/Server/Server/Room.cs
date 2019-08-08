@@ -36,8 +36,6 @@ namespace RamboTeam.Server
 
 			if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
 			{
-				System.Console.WriteLine("Sync");
-
 				if (SecondaryPlayer != null)
 					Send(SecondaryPlayer, Buffer);
 			}

@@ -9,6 +9,22 @@ namespace RamboTeam.Client
 
 		public float Speed = 10;
 
+		protected override void Start()
+		{
+			base.Start();
+
+			NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
+		}
+
+		private void OnSyncChopterTransform(Vector3 Position, Vector3 Rotation)
+		{
+			if (NetworkLayer.Instance.IsPilot)
+				return;
+
+			transform.position = Position;
+			transform.rotation = Quaternion.Euler(Rotation);
+		}
+
 		protected override void Update()
 		{
 			base.Update();
