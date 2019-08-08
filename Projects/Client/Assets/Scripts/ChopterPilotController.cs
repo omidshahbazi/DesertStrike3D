@@ -28,7 +28,7 @@ namespace RamboTeam.Client
 			if (Input.GetKey(KeyCode.Space))
 				transform.Translate(transform.forward * Time.deltaTime * Speed, Space.World);
 
-			if (Time.time <= nextSyncTime)
+			if (Time.time >= nextSyncTime)
 			{
                 SendSyncChopterTransform();
 
