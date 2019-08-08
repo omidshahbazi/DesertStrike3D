@@ -1,4 +1,6 @@
 ﻿//Rambo Team
+using BeardedManStudios.Forge.Networking;
+
 namespace RamboTeam.Common
 {
     public static class Constants
@@ -30,6 +32,6 @@ namespace RamboTeam.Common
 
 		public const int MAX_CONNECTION_COUNT = 32;
 
-		public const int BINARY_FRAME_GROUP_ID = 55;
+		public const int BINARY_FRAME_GROUP_ID = MessageGroupIds.START_OF_GENERIC_IDS + 1;
 	}
 }

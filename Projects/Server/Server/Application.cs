@@ -64,7 +64,7 @@ namespace RamboTeam.Server
 
 		private void OnServerAccepted(NetWorker Sender)
 		{
-			Log("Server accepted.");
+			Log("Server accepted."); 
 		}
 
 		private void OnPlayerConnected(NetworkingPlayer Player, NetWorker Sender)
