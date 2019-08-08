@@ -24,8 +24,8 @@ namespace RamboTeam.Server
 			get { return (MasterPlayer != null && SecondaryPlayer != null); }
 		}
 
-		public Room(TCPServer Socket, NetworkingPlayer MasterPlayer) :
-			base(Socket)
+		public Room(Application Application, NetworkingPlayer MasterPlayer) :
+			base(Application)
 		{
 			this.MasterPlayer = MasterPlayer;
 		}

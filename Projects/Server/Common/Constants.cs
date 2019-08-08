@@ -26,8 +26,10 @@ namespace RamboTeam.Common
 |   |_________/        |_|       |_|  \_\     |_____|    |_|  \_\    |________|    |
 |__________________________________________________________________________________|";
 
-		public const int PORT_NUMBER = 11718;
+		public const int PORT_NUMBER = 5555;
 
 		public const int MAX_CONNECTION_COUNT = 32;
-    }
+
+		public const int BINARY_FRAME_GROUP_ID = 1;
+	}
 }

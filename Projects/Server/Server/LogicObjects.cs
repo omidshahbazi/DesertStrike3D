@@ -7,20 +7,20 @@ namespace RamboTeam.Server
 {
 	class LogicObjects
 	{
-		public TCPServer Socket
+		public Application Application
 		{
 			get;
 			private set;
 		}
 
-		public LogicObjects(TCPServer Socket)
+		public LogicObjects(Application Application)
 		{
-			this.Socket = Socket;
+			this.Application = Application;
 		}
 
 		public void Send(NetworkingPlayer Player, BufferStream Buffer)
 		{
-			Socket.Send(Player.TcpClientHandle, new Binary(Socket.Time.Timestep, false, Buffer.Buffer, Receivers.Target, 1, false));
+			Application.Send(Player, Buffer);
 		}
 	}
 }

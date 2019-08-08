@@ -9,8 +9,8 @@ namespace RamboTeam.Server
 	{
 		private List<Room> rooms = new List<Room>();
 
-		public Lobby(TCPServer Socket) :
-			base(Socket)
+		public Lobby(Application Application) :
+			base(Application)
 		{
 		}
 
@@ -48,7 +48,7 @@ namespace RamboTeam.Server
 				return room;
 			}
 
-			room = new Room(Socket, Player);
+			room = new Room(Application, Player);
 
 			rooms.Add(room);
 
