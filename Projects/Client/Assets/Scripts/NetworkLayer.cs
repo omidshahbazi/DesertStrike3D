@@ -37,7 +37,7 @@ namespace RamboTeam.Client
 		{
 			base.Update();
 
-			//client.Service();
+			client.Service();
 		}
 
 		public void Connect(string Host)

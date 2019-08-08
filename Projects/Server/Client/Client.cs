@@ -44,7 +44,7 @@ namespace RamboTeam.Client
 			{
 				socket.Ping();
 
-				nextPingTime = socket.Time.Milliseconds + 500;
+				nextPingTime = socket.Time.Milliseconds + 1000;
 			}
 		}
 
