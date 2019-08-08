@@ -1,6 +1,7 @@
 ﻿//Rambo Team
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
+using RamboTeam.Common;
 using System;
 
 namespace RamboTeam.Client
@@ -14,7 +15,6 @@ namespace RamboTeam.Client
 		}
 
 		private Client client = null;
-		private byte[] outBuffer = null;
 
 		protected override void Awake()
 		{
@@ -33,16 +33,29 @@ namespace RamboTeam.Client
 			client.OnMessageReceived += Client_OnMessageReceived;
 		}
 
-		public void Send(byte[] Buffer, int Length)
+		public void Send(BufferStream Buffer)
 		{
-			byte[] buffer = new byte[Length];
-			Array.Copy(Buffer, buffer, Length);
-
-			client.Send(buffer);
+			client.Send(Buffer);
 		}
 
 		private void Client_OnMessageReceived(NetworkingPlayer Player, Binary Frame)
 		{
+			BufferStream buffer = new BufferStream(Frame.StreamData.byteArr);
+
+			byte category = buffer.ReadByte();
+			byte command = buffer.ReadByte();
+
+			if (category == Commands.Category.LOBBY)
+			{
+
+			}
+			else if (category == Commands.Category.ROOM)
+			{
+				if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
+				{
+
+				}
+			}
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿//Rambo Team
 namespace RamboTeam.Common
 {
-    public class Constants
+    public static class Constants
     {
 		public const string SERVER_HEADER_TEXT =
 @" _________________________________________________________________________________

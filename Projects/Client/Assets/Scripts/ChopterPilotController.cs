@@ -12,6 +12,11 @@ namespace RamboTeam.Client
 		protected override void Start()
 		{
 			base.Start();
+
+			//
+			// TODO: Place Holder
+			//
+			NetworkCommands.JoinToRoom();
 		}
 
 		protected override void Update()
@@ -25,7 +30,7 @@ namespace RamboTeam.Client
 
 			if (Time.time <= nextSyncTime)
 			{
-				SendPosition();
+                SendSyncChopterTransform();
 
 				nextSyncTime += 1;
 			}

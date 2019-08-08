@@ -21,9 +21,9 @@ namespace RamboTeam.Client
 			client.binaryMessageReceived += Client_binaryMessageReceived;
 		}
 
-		public void Send(byte[] Buffer)
+		public void Send(BufferStream Buffer)
 		{
-			client.Send(new Binary(client.Time.Timestep, false, Buffer, Receivers.Target, 1, false), true);
+			client.Send(new Binary(client.Time.Timestep, false, Buffer.Buffer, Receivers.Target, 1, false), true);
 		}
 
 		private void Client_binaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)

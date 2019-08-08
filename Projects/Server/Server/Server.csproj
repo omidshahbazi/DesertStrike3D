@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogicObjects.cs" />
+    <Compile Include="Lobby.cs" />
+    <Compile Include="Room.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
-﻿using BeardedManStudios.Forge.Networking;
+﻿//Rambo Team
+using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
 
@@ -8,12 +9,16 @@ namespace RamboTeam.Server
 	{
 		private UDPServer socket = null;
 
+		private Lobby lobby = null;
+
 		public Application()
 		{
 			socket = new UDPServer(Constants.MAX_CONNECTION_COUNT);
 
 			socket.playerAccepted += OnPlayerAccepted;
 			socket.binaryMessageReceived += OnBinaryMessageReceived;
+
+			lobby = new Lobby(socket);
 
 			Log("Application created.");
 		}
@@ -30,13 +35,30 @@ namespace RamboTeam.Server
 			socket.Disconnect(false);
 		}
 
+		private void OnBinaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)
+		{
+			BufferStream buffer = new BufferStream(Frame.StreamData.byteArr);
+
+			byte category = buffer.ReadByte();
+
+			if (category == Commands.Category.LOBBY)
+			{
+				lobby.HandleRequest(buffer, Player);
+			}
+			else if (category == Commands.Category.ROOM)
+			{
+				Room room = lobby.FindRoom(Player);
+
+				if (room == null)
+					return;
+
+				room.HandleRequest(buffer, Player);
+			}
+		}
+
 		private static void OnPlayerAccepted(NetworkingPlayer Player, NetWorker Sender)
 		{
 			Log("Player [" + Player.IPEndPointHandle + "] accepted.");
-		}
-
-		private static void OnBinaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)
-		{
 		}
 
 		private static void Log(string Content)
