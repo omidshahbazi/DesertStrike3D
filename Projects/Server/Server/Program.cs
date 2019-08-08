@@ -1,6 +1,7 @@
 ﻿//Rambo Team
 using RamboTeam.Common;
 using System;
+using System.Threading;
 
 namespace RamboTeam.Server
 {
@@ -16,6 +17,7 @@ namespace RamboTeam.Server
 
 			while (true)
 			{
+				Thread.Sleep(1);
 			}
 		}
 	}

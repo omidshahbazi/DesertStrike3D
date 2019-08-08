@@ -9,13 +9,13 @@ namespace RamboTeam.Client
 
 	public class Client
 	{
-		private UDPClient client = null;
+		private TCPClient client = null;
 
 		public event MessageReceivedEventHandler OnMessageReceived;
 
 		public void Connect(string Host)
 		{
-			client = new UDPClient();
+			client = new TCPClient();
 			client.Connect("127.0.0.1", Constants.PORT_NUMBER);
 
 			client.binaryMessageReceived += Client_binaryMessageReceived;
@@ -23,7 +23,8 @@ namespace RamboTeam.Client
 
 		public void Send(BufferStream Buffer)
 		{
-			client.Send(new Binary(client.Time.Timestep, false, Buffer.Buffer, Receivers.Target, 1, false), true);
+			//client.Send(new Binary(client.Time.Timestep, false, Buffer.Buffer, Receivers.Target, 1, false), true);
+			client.Send(new Binary(client.Time.Timestep, false, Buffer.Buffer, Receivers.Target, 1, false));
 		}
 
 		private void Client_binaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)

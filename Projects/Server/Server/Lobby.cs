@@ -9,7 +9,7 @@ namespace RamboTeam.Server
 	{
 		private List<Room> rooms = new List<Room>();
 
-		public Lobby(UDPServer Socket) :
+		public Lobby(TCPServer Socket) :
 			base(Socket)
 		{
 		}

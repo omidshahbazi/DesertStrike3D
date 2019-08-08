@@ -24,7 +24,7 @@ namespace RamboTeam.Server
 			get { return (MasterPlayer != null && SecondaryPlayer != null); }
 		}
 
-		public Room(UDPServer Socket, NetworkingPlayer MasterPlayer) :
+		public Room(TCPServer Socket, NetworkingPlayer MasterPlayer) :
 			base(Socket)
 		{
 			this.MasterPlayer = MasterPlayer;
@@ -36,7 +36,8 @@ namespace RamboTeam.Server
 
 			if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
 			{
-				Console.WriteLine("Sync");
+				System.Console.WriteLine("Sync");
+
 				if (SecondaryPlayer != null)
 					Send(SecondaryPlayer, Buffer);
 			}

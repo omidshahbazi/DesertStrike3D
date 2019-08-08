@@ -7,20 +7,26 @@ namespace RamboTeam.Server
 {
 	class Application
 	{
-		private UDPServer socket = null;
+		private TCPServer socket = null;
 
 		private Lobby lobby = null;
 
 		public Application()
 		{
-			socket = new UDPServer(Constants.MAX_CONNECTION_COUNT);
+			socket = new TCPServer(Constants.MAX_CONNECTION_COUNT);
 
 			socket.playerAccepted += OnPlayerAccepted;
 			socket.binaryMessageReceived += OnBinaryMessageReceived;
+			socket.playerDisconnected += Socket_playerDisconnected;
 
 			lobby = new Lobby(socket);
 
 			Log("Application created.");
+		}
+
+		private void Socket_playerDisconnected(NetworkingPlayer player, NetWorker sender)
+		{
+			//throw new System.NotImplementedException();
 		}
 
 		public void Bind()
