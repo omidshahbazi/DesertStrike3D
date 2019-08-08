@@ -2,7 +2,6 @@
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
-using System;
 
 namespace RamboTeam.Client
 {
@@ -15,6 +14,12 @@ namespace RamboTeam.Client
 		}
 
 		private Client client = null;
+
+		public bool IsPilot
+		{
+			get;
+			private set;
+		}
 
 		protected override void Awake()
 		{
@@ -51,7 +56,15 @@ namespace RamboTeam.Client
 			}
 			else if (category == Commands.Category.ROOM)
 			{
-				if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
+				if (command == Commands.Room.MASTER)
+				{
+					IsPilot = true;
+				}
+				else if (command == Commands.Room.SECONDARY)
+				{
+					IsPilot = false;
+				}
+				else if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
 				{
 
 				}

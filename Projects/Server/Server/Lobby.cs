@@ -1,17 +1,29 @@
 ﻿//Rambo Team
 using BeardedManStudios.Forge.Networking;
 using RamboTeam.Common;
+using System;
 using System.Collections.Generic;
 
 namespace RamboTeam.Server
 {
 	class Lobby : LogicObjects
 	{
-		private List<Room> rooms = new List<Room>();
+		private List<Room> rooms = null;
+		private BufferStream buffer = null;
 
 		public Lobby(Application Application) :
 			base(Application)
 		{
+			rooms = new List<Room>();
+			buffer = new BufferStream(new byte[64]);
+		}
+
+		public void HandlePlayerDisconnection(NetworkingPlayer Player)
+		{
+			Room room = FindRoom(Player);
+
+			if (room != null)
+				rooms.Remove(room);
 		}
 
 		public void HandleRequest(BufferStream Buffer, NetworkingPlayer Player)
@@ -28,10 +40,30 @@ namespace RamboTeam.Server
 		{
 			Room room = GetAnEmptyRoom(Player);
 
-			if (room.MasterPlayer != Player)
-				room.SetSecondaryPlayer(Player);
+			buffer.Reset();
 
-			//Send(Player, )
+			if (room.MasterPlayer == Player)
+				buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.MASTER);
+			else
+			{
+				buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.SECONDARY);
+				room.SetSecondaryPlayer(Player);
+			}
+
+			Send(Player, buffer);
+		}
+
+		public Room FindRoom(NetworkingPlayer Player)
+		{
+			for (int i = 0; i < rooms.Count; ++i)
+			{
+				Room room = rooms[i];
+
+				if (room.MasterPlayer == Player || room.SecondaryPlayer == Player)
+					return room;
+			}
+
+			return null;
 		}
 
 		private Room GetAnEmptyRoom(NetworkingPlayer Player)
@@ -53,19 +85,6 @@ namespace RamboTeam.Server
 			rooms.Add(room);
 
 			return room;
-		}
-
-		public Room FindRoom(NetworkingPlayer Player)
-		{
-			for (int i = 0; i < rooms.Count; ++i)
-			{
-				Room room = rooms[i];
-
-				if (room.MasterPlayer == Player || room.SecondaryPlayer == Player)
-					return room;
-			}
-
-			return null;
 		}
 	}
 }

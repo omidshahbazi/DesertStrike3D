@@ -56,9 +56,9 @@ namespace RamboTeam.Server
 		public void Send(NetworkingPlayer Player, BufferStream Buffer)
 		{
 #if USING_TCP
-			socket.Send(Player.TcpClientHandle, new Binary(socket.Time.Timestep, true, Buffer.Buffer, Receivers.Target, Constants.BINARY_FRAME_GROUP_ID, true));
+			socket.Send(Player.TcpClientHandle, new Binary(socket.Time.Timestep, true, Buffer.Buffer, Receivers.All, Constants.BINARY_FRAME_GROUP_ID, true));
 #else
-			socket.Send(Player, new Binary(socket.Time.Timestep, false, Buffer.Buffer, Receivers.Target, Constants.BINARY_FRAME_GROUP_ID, false), false);
+			socket.Send(Player, new Binary(socket.Time.Timestep, false, Buffer.Buffer, Receivers.All, Constants.BINARY_FRAME_GROUP_ID, false), true);
 #endif
 		}
 
@@ -74,6 +74,8 @@ namespace RamboTeam.Server
 
 		private void OnPlayerDisconnected(NetworkingPlayer Player, NetWorker Sender)
 		{
+			lobby.HandlePlayerDisconnection(Player);
+
 			Log("Player [" + Player.IPEndPointHandle + "] disconnected.");
 		}
 
@@ -84,6 +86,9 @@ namespace RamboTeam.Server
 
 		private void OnBinaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)
 		{
+			if (Frame.GroupId != Constants.BINARY_FRAME_GROUP_ID)
+				return;
+
 			BufferStream buffer = new BufferStream(Frame.StreamData.byteArr);
 
 			byte category = buffer.ReadByte();

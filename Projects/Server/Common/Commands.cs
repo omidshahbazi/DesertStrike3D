@@ -15,8 +15,10 @@ namespace RamboTeam.Common
 		}
 
         public static class Room
-        {
-            public const byte SYNC_CHOPTER_TRANSFORM = 1;
-        }
+		{
+			public const byte MASTER = 1;
+			public const byte SECONDARY = 2;
+			public const byte SYNC_CHOPTER_TRANSFORM = 3;
+		}
     }
 }

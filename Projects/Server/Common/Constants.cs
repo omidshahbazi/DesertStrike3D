@@ -30,6 +30,6 @@ namespace RamboTeam.Common
 
 		public const int MAX_CONNECTION_COUNT = 32;
 
-		public const int BINARY_FRAME_GROUP_ID = 1;
+		public const int BINARY_FRAME_GROUP_ID = 55;
 	}
 }

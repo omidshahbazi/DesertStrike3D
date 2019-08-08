@@ -23,16 +23,19 @@ namespace RamboTeam.Client
 		{
 			base.Update();
 
-			transform.localRotation = Quaternion.Euler(0, GetAngle() - 90, 0);
-
-			if (Input.GetKey(KeyCode.Space))
-				transform.Translate(transform.forward * Time.deltaTime * Speed, Space.World);
-
-			if (Time.time >= nextSyncTime)
+			if (NetworkLayer.Instance.IsPilot)
 			{
-                SendSyncChopterTransform();
+				transform.localRotation = Quaternion.Euler(0, GetAngle() - 90, 0);
 
-				nextSyncTime += 1;
+				if (Input.GetKey(KeyCode.Space))
+					transform.Translate(transform.forward * Time.deltaTime * Speed, Space.World);
+
+				if (Time.time >= nextSyncTime)
+				{
+					SendSyncChopterTransform();
+
+					nextSyncTime += 1;
+				}
 			}
 		}
 
