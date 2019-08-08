@@ -2,10 +2,10 @@
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
-using System;
 
 namespace RamboTeam.Client
 {
+	public delegate void ConnectionEventHandler();
 	public delegate void MessageReceivedEventHandler(NetworkingPlayer Player, Binary Frame);
 
 	public class Client
@@ -16,6 +16,7 @@ namespace RamboTeam.Client
 		private UDPClient socket = null;
 #endif
 
+		public event ConnectionEventHandler OnConnected;
 		public event MessageReceivedEventHandler OnMessageReceived;
 
 		public void Connect(string Host)
@@ -30,9 +31,6 @@ namespace RamboTeam.Client
 
 #if DEBUG
 			socket.serverAccepted += OnServerAccepted;
-			socket.playerConnected += OnPlayerConnected;
-			socket.playerDisconnected += OnPlayerDisconnected;
-			socket.playerAccepted += OnPlayerAccepted;
 #endif
 
 			socket.binaryMessageReceived += OnBinaryMessageReceived;
@@ -47,27 +45,11 @@ namespace RamboTeam.Client
 #endif
 		}
 
-#if DEBUG
 		private void OnServerAccepted(NetWorker Sender)
 		{
-			Console.WriteLine("Server accepted.");
+			if (OnConnected != null)
+				OnConnected();
 		}
-
-		private void OnPlayerConnected(NetworkingPlayer Player, NetWorker Sender)
-		{
-			Console.WriteLine("Player [" + Player.IPEndPointHandle + "] connected.");
-		}
-
-		private void OnPlayerDisconnected(NetworkingPlayer Player, NetWorker Sender)
-		{
-			Console.WriteLine("Player [" + Player.IPEndPointHandle + "] disconnected.");
-		}
-
-		private static void OnPlayerAccepted(NetworkingPlayer Player, NetWorker Sender)
-		{
-			Console.WriteLine("Player [" + Player.IPEndPointHandle + "] accepted.");
-		}
-#endif
 
 		private void OnBinaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)
 		{

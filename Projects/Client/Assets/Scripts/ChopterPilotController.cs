@@ -9,16 +9,6 @@ namespace RamboTeam.Client
 
 		public float Speed = 10;
 
-		protected override void Start()
-		{
-			base.Start();
-
-			//
-			// TODO: Place Holder
-			//
-			NetworkCommands.JoinToRoom();
-		}
-
 		protected override void Update()
 		{
 			base.Update();

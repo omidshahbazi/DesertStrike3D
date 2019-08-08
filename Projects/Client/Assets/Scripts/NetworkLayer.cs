@@ -35,7 +35,16 @@ namespace RamboTeam.Client
 			client = new Client();
 			client.Connect(Host);
 
-			client.OnMessageReceived += Client_OnMessageReceived;
+			client.OnConnected += OnConnected;
+			client.OnMessageReceived += OnMessageReceived;
+		}
+
+		private void OnConnected()
+		{
+			//
+			// TODO: Place Holder
+			//
+			NetworkCommands.JoinToRoom();
 		}
 
 		public void Send(BufferStream Buffer)
@@ -43,7 +52,7 @@ namespace RamboTeam.Client
 			client.Send(Buffer);
 		}
 
-		private void Client_OnMessageReceived(NetworkingPlayer Player, Binary Frame)
+		private void OnMessageReceived(NetworkingPlayer Player, Binary Frame)
 		{
 			BufferStream buffer = new BufferStream(Frame.StreamData.byteArr);
 
