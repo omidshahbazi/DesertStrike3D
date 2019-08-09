@@ -2,6 +2,7 @@
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RamboTeam.Client
@@ -15,12 +16,7 @@ namespace RamboTeam.Client
 		}
 
 		private Client client = null;
-
-		public bool IsPilot
-		{
-			get;
-			private set;
-		}
+		private List<Binary> incommingMessages = null;
 
 		protected override void Awake()
 		{
@@ -37,11 +33,44 @@ namespace RamboTeam.Client
 		{
 			base.Update();
 
-			client.Service();
+			while (incommingMessages.Count != 0)
+			{
+				Binary messageInfo = incommingMessages[0];
+				incommingMessages.RemoveAt(0);
+
+				BufferStream buffer = new BufferStream(messageInfo.StreamData.byteArr);
+
+				byte category = buffer.ReadByte();
+				byte command = buffer.ReadByte();
+
+				if (category == Commands.Category.LOBBY)
+				{
+
+				}
+				else if (category == Commands.Category.ROOM)
+				{
+					if (command == Commands.Room.MASTER)
+					{
+						NetworkCommands.HandleJoinedToRoom(buffer);
+						NetworkCommands.HandlePilot(buffer);
+					}
+					else if (command == Commands.Room.SECONDARY)
+					{
+						NetworkCommands.HandleJoinedToRoom(buffer);
+						NetworkCommands.HandleCommando(buffer);
+					}
+					else if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
+					{
+						NetworkCommands.HandleSyncChopterTransform(buffer);
+					}
+				}
+			}
 		}
 
 		public void Connect(string Host)
 		{
+			incommingMessages = new List<Binary>();
+
 			client = new Client();
 			client.Connect(Host);
 
@@ -64,30 +93,8 @@ namespace RamboTeam.Client
 
 		private void OnMessageReceived(NetworkingPlayer Player, Binary Frame)
 		{
-			BufferStream buffer = new BufferStream(Frame.StreamData.byteArr);
+			incommingMessages.Add(Frame);
 
-			byte category = buffer.ReadByte();
-			byte command = buffer.ReadByte();
-
-			if (category == Commands.Category.LOBBY)
-			{
-
-			}
-			else if (category == Commands.Category.ROOM)
-			{
-				if (command == Commands.Room.MASTER)
-				{
-					IsPilot = true;
-				}
-				else if (command == Commands.Room.SECONDARY)
-				{
-					IsPilot = false;
-				}
-				else if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
-				{
-					NetworkCommands.HandleSyncChopterTransform(buffer);
-				}
-			}
 		}
 	}
 }

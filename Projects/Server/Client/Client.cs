@@ -38,16 +38,6 @@ namespace RamboTeam.Client
 			socket.binaryMessageReceived += OnBinaryMessageReceived;
 		}
 
-		public void Service()
-		{
-			if (socket.Time.Milliseconds >= nextPingTime)
-			{
-				socket.Ping();
-
-				nextPingTime = socket.Time.Milliseconds + 1000;
-			}
-		}
-
 		public void Send(BufferStream Buffer)
 		{
 #if USING_TCP
