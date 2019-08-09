@@ -13,7 +13,17 @@ namespace RamboTeam.Client
 		{
 		}
 
-		protected virtual void Update()
+        protected virtual void OnEnable()
+        {
+
+        }
+
+        protected virtual void OnDisable()
+        {
+
+        }
+
+        protected virtual void Update()
 		{
         }
 
