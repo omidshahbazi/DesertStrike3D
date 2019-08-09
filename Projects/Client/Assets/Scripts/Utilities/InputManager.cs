@@ -5,15 +5,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public InputManager Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
-    private InputManager instance = null;
+ 
 
     public delegate void KeyPressedDelegate();
     public delegate void MousePressedDelegate(Vector3 Position);
@@ -24,15 +16,20 @@ public class InputManager : MonoBehaviour
     private class MouseInputMap : Dictionary<KeyCode, MousePressedDelegate>
     { }
 
-
     private InputMap inputMap = new InputMap();
     private MouseInputMap mouseInputMap = new MouseInputMap();
     private Dictionary<KeyCode, KeyPressedDelegate>.Enumerator kepadMap;
     private Dictionary<KeyCode, MousePressedDelegate>.Enumerator mouseMap;
 
+    public InputManager Instance
+    {
+        get;
+        private set;
+    }
+
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Update()
