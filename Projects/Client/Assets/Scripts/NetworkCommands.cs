@@ -4,12 +4,16 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
+	public delegate void NetworkEventHandler();
 	public delegate void SyncChopterTransformEventHandler(Vector3 Position, Vector3 Rotation);
 
 	public static class NetworkCommands
 	{
 		private static BufferStream buffer = new BufferStream(new byte[64]);
 
+		public static event NetworkEventHandler OnJoinedToRoom;
+		public static event NetworkEventHandler OnPilot;
+		public static event NetworkEventHandler OnCommando;
 		public static event SyncChopterTransformEventHandler OnSyncChopterTransform;
 
 		public static void JoinToRoom()
@@ -30,6 +34,24 @@ namespace RamboTeam.Client
 			WriteVector3(Rotation);
 
 			NetworkLayer.Instance.Send(buffer);
+		}
+
+		public static void HandleJoinedToRoom(BufferStream Buffer)
+		{
+			if (OnJoinedToRoom != null)
+				OnJoinedToRoom();
+		}
+
+		public static void HandlePilot(BufferStream Buffer)
+		{
+			if (OnPilot != null)
+				OnPilot();
+		}
+
+		public static void HandleCommando(BufferStream Buffer)
+		{
+			if (OnCommando != null)
+				OnCommando();
 		}
 
 		public static void HandleSyncChopterTransform(BufferStream Buffer)

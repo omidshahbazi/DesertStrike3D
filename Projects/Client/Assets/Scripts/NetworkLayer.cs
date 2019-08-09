@@ -18,12 +18,6 @@ namespace RamboTeam.Client
 		private Client client = null;
 		private List<Binary> incommingMessages = null;
 
-		public bool IsPilot
-		{
-			get;
-			private set;
-		}
-
 		protected override void Awake()
 		{
 			base.Awake();
@@ -57,11 +51,13 @@ namespace RamboTeam.Client
 				{
 					if (command == Commands.Room.MASTER)
 					{
-						IsPilot = true;
+						NetworkCommands.HandleJoinedToRoom(buffer);
+						NetworkCommands.HandlePilot(buffer);
 					}
 					else if (command == Commands.Room.SECONDARY)
 					{
-						IsPilot = false;
+						NetworkCommands.HandleJoinedToRoom(buffer);
+						NetworkCommands.HandleCommando(buffer);
 					}
 					else if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
 					{

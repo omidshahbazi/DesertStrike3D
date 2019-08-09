@@ -26,10 +26,5 @@ namespace RamboTeam.Client
         protected virtual void Update()
 		{
         }
-
-        protected void SendSyncChopterTransform()
-        {
-            NetworkCommands.SyncChopterTransform(transform.position, transform.rotation.eulerAngles);
-        }
     }
 }

@@ -5,31 +5,55 @@ namespace RamboTeam.Client
 {
 	public class ChopterPilotController : MonoBehaviorBase
 	{
+		private const float SYNC_PERIOD = 1.0F;
+
 		private float nextSyncTime = 0.0F;
+		private Vector3 lastPosition = Vector3.zero;
+		private Quaternion lastRotation = Quaternion.identity;
 
 		public float Speed = 10;
+
+		public bool IsPilot
+		{
+			get;
+			private set;
+		}
 
 		protected override void Start()
 		{
 			base.Start();
 
+			NetworkCommands.OnPilot += OnPilot;
+			NetworkCommands.OnCommando += OnCommando;
 			NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
+		}
+
+		private void OnPilot()
+		{
+			IsPilot = true;
+		}
+
+		private void OnCommando()
+		{
+			IsPilot = false;
 		}
 
 		private void OnSyncChopterTransform(Vector3 Position, Vector3 Rotation)
 		{
-			if (NetworkLayer.Instance.IsPilot)
+			if (IsPilot)
 				return;
 
-			transform.position = Position;
-			transform.rotation = Quaternion.Euler(Rotation);
+			lastPosition = Position;
+			lastRotation = Quaternion.Euler(Rotation);
+
+			nextSyncTime = Time.time + SYNC_PERIOD;
 		}
 
 		protected override void Update()
 		{
 			base.Update();
 
-			if (NetworkLayer.Instance.IsPilot)
+			if (IsPilot)
 			{
 				transform.localRotation = Quaternion.Euler(0, GetAngle() - 90, 0);
 
@@ -38,10 +62,17 @@ namespace RamboTeam.Client
 
 				if (Time.time >= nextSyncTime)
 				{
-					SendSyncChopterTransform();
+					NetworkCommands.SyncChopterTransform(transform.position, transform.rotation.eulerAngles);
 
-					nextSyncTime = Time.time + 1;
+					nextSyncTime = Time.time + SYNC_PERIOD;
 				}
+			}
+			else
+			{
+				float t = SYNC_PERIOD - (nextSyncTime - Time.time);
+
+				transform.position = Vector3.Lerp(transform.position, lastPosition, t);
+				transform.rotation = Quaternion.Lerp(transform.rotation, lastRotation, t);
 			}
 		}
 
