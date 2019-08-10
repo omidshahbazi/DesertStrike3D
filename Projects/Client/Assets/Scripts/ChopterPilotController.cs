@@ -18,6 +18,9 @@ namespace RamboTeam.Client
 		private Quaternion lastRotation = Quaternion.identity;
 
 		[SerializeField]
+		private Transform cameraPositionTransform = null;
+
+		[SerializeField]
 		private Transform cameraTargetTransform = null;
 
 		public float MovementSpeed = 10;
@@ -27,6 +30,17 @@ namespace RamboTeam.Client
 		{
 			get;
 			private set;
+		}
+
+		public bool IsMoving
+		{
+			get;
+			private set;
+		}
+
+		public Transform CameraPositionTransform
+		{
+			get { return cameraPositionTransform; }
 		}
 
 		public Transform CameraTargetTransform
@@ -77,15 +91,27 @@ namespace RamboTeam.Client
 
 			if (IsPilot)
 			{
+				IsMoving = false;
+
 				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+				{
 					transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
+					IsMoving = true;
+				}
 				else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+				{
 					transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
+					IsMoving = true;
+				}
 
 				if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+				{
 					transform.Rotate(0, Time.deltaTime * RotationSpeed * -1, 0, Space.World);
+				}
 				else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+				{
 					transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);
+				}
 
 				if (Time.time >= nextSyncTime)
 				{
@@ -97,6 +123,8 @@ namespace RamboTeam.Client
 			else
 			{
 				float t = SYNC_PERIOD - (nextSyncTime - Time.time);
+
+				IsMoving = (t != 1.0F);
 
 				transform.position = Vector3.Lerp(transform.position, lastPosition, t);
 				transform.rotation = Quaternion.Lerp(transform.rotation, lastRotation, t);

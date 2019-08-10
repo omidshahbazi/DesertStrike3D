@@ -6,30 +6,49 @@ namespace RamboTeam.Client
 	public class CameraController : MonoBehaviorBase
 	{
 		public float Speed = 10.0F;
+		public float BaseDistance = 30;
+		public float OffsetRadius = 10;
 
-		private Transform targetTransform;
-		private Transform chopterTransform;
+		private ChopterPilotController chopter = null;
+		private Transform chopterTransform = null;
 
 		protected override void Start()
 		{
 			base.Start();
 
-			targetTransform = ChopterPilotController.Instance.CameraTargetTransform;
-			chopterTransform = ChopterPilotController.Instance.transform;
+			chopter = ChopterPilotController.Instance;
+			chopterTransform = chopter.transform;
 		}
 
 		protected override void LateUpdate()
 		{
 			base.LateUpdate();
 
-			float t = Time.deltaTime * Speed;
+			Vector3 forward = chopterTransform.position + new Vector3(0, 1, -1);
+			forward = (forward - chopterTransform.position).normalized;
+			Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
 
-			transform.position = Vector3.Lerp(transform.position, targetTransform.position, t);
+			float speed = Speed;
 
-			//Vector3 rot = transform.rotation.eulerAngles;
-			//transform.rotation = Quaternion.Euler(rot.x, Mathf.Lerp(rot.y,  chopterTransform.rotation.y, t), rot.z);
+			if (chopter.IsMoving)
+			{
+				Vector3 chopterForward = chopterTransform.forward;
+				chopterForward.y = 0;
+				float angle = Vector3.Angle(chopterForward, Vector3.right);
 
-			transform.LookAt(chopterTransform);
+				if (chopterForward.z < 0)
+					angle = 360 - angle;
+
+				angle *= Mathf.Deg2Rad;
+
+				targetPos.x += OffsetRadius * Mathf.Cos(angle);
+				targetPos.z += OffsetRadius * Mathf.Sin(angle);
+			}
+
+			float t = Time.deltaTime * speed;
+
+			transform.position = Vector3.Lerp(transform.position, targetPos, t);
+			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
 		}
 	}
 }
