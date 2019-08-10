@@ -28,8 +28,6 @@ namespace RamboTeam.Client
 			forward = (forward - chopterTransform.position).normalized;
 			Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
 
-			float speed = Speed;
-
 			if (chopter.IsMoving)
 			{
 				Vector3 chopterForward = chopterTransform.forward;
@@ -45,7 +43,7 @@ namespace RamboTeam.Client
 				targetPos.z += OffsetRadius * Mathf.Sin(angle);
 			}
 
-			float t = Time.deltaTime * speed;
+			float t = Time.deltaTime * Speed;
 
 			transform.position = Vector3.Lerp(transform.position, targetPos, t);
 			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);

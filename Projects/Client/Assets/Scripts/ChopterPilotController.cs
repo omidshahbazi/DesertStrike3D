@@ -122,12 +122,12 @@ namespace RamboTeam.Client
 			}
 			else
 			{
-				float t = SYNC_PERIOD - (nextSyncTime - Time.time);
-
-				IsMoving = (t != 1.0F);
+				float t = Time.deltaTime;
 
 				transform.position = Vector3.Lerp(transform.position, lastPosition, t);
 				transform.rotation = Quaternion.Lerp(transform.rotation, lastRotation, t);
+
+				IsMoving = ((lastPosition - transform.position).sqrMagnitude > 1);
 			}
 		}
 	}
