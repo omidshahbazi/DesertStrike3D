@@ -92,6 +92,8 @@ namespace RamboTeam.Server
 
 			BufferStream buffer = new BufferStream(Frame.StreamData.byteArr);
 
+			buffer.Print();
+
 			byte category = buffer.ReadByte();
 
 			if (category == Commands.Category.LOBBY)
