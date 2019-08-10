@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
- 
 
     public delegate void KeyPressedDelegate();
     public delegate void MousePressedDelegate(Vector3 Position);
@@ -21,7 +20,7 @@ public class InputManager : MonoBehaviour
     private Dictionary<KeyCode, KeyPressedDelegate>.Enumerator kepadMap;
     private Dictionary<KeyCode, MousePressedDelegate>.Enumerator mouseMap;
 
-    public InputManager Instance
+    public static InputManager Instance
     {
         get;
         private set;
