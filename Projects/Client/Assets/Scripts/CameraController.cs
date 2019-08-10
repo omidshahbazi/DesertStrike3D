@@ -7,23 +7,29 @@ namespace RamboTeam.Client
 	{
 		public float Speed = 10.0F;
 
-		[SerializeField]
-		private GameObject TargetGameObject;
-
-		[SerializeField]
-		private GameObject ChopterGameObject;
+		private Transform targetTransform;
+		private Transform chopterTransform;
 
 		protected override void Start()
 		{
 			base.Start();
+
+			targetTransform = ChopterPilotController.Instance.CameraTargetTransform;
+			chopterTransform = ChopterPilotController.Instance.transform;
 		}
 
-		protected override void Update()
+		protected override void LateUpdate()
 		{
-			base.Update();
+			base.LateUpdate();
 
-			transform.position = TargetGameObject.transform.position;
-			transform.LookAt(ChopterGameObject.transform);
+			float t = Time.deltaTime * Speed;
+
+			transform.position = Vector3.Lerp(transform.position, targetTransform.position, t);
+
+			//Vector3 rot = transform.rotation.eulerAngles;
+			//transform.rotation = Quaternion.Euler(rot.x, Mathf.Lerp(rot.y,  chopterTransform.rotation.y, t), rot.z);
+
+			transform.LookAt(chopterTransform);
 		}
 	}
 }

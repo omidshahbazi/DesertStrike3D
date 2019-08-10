@@ -21,10 +21,14 @@ namespace RamboTeam.Client
         protected virtual void OnDisable()
         {
 
-        }
+		}
 
-        protected virtual void Update()
+		protected virtual void Update()
 		{
-        }
-    }
+		}
+
+		protected virtual void LateUpdate()
+		{
+		}
+	}
 }

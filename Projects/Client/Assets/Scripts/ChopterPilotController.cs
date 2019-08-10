@@ -5,11 +5,20 @@ namespace RamboTeam.Client
 {
 	public class ChopterPilotController : MonoBehaviorBase
 	{
+		public static ChopterPilotController Instance
+		{
+			get;
+			private set;
+		}
+
 		private const float SYNC_PERIOD = 1.0F;
 
 		private float nextSyncTime = 0.0F;
 		private Vector3 lastPosition = Vector3.zero;
 		private Quaternion lastRotation = Quaternion.identity;
+
+		[SerializeField]
+		private Transform cameraTargetTransform = null;
 
 		public float MovementSpeed = 10;
 		public float RotationSpeed = 10;
@@ -18,6 +27,18 @@ namespace RamboTeam.Client
 		{
 			get;
 			private set;
+		}
+
+		public Transform CameraTargetTransform
+		{
+			get { return cameraTargetTransform; }
+		}
+
+		protected override void Awake()
+		{
+			base.Awake();
+
+			Instance = this;
 		}
 
 		protected override void Start()
