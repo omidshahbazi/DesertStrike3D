@@ -39,7 +39,9 @@ namespace RamboTeam.Client
 
 				angle *= Mathf.Deg2Rad;
 
-				targetPos.x += OffsetRadius * Mathf.Cos(angle);
+				float cosAngle = Mathf.Cos(angle);
+
+				targetPos.x += OffsetRadius * cosAngle * (Screen.width / (float)Screen.height);
 				targetPos.z += OffsetRadius * Mathf.Sin(angle);
 			}
 

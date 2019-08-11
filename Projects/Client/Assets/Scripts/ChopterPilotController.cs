@@ -17,12 +17,6 @@ namespace RamboTeam.Client
 		private Vector3 lastPosition = Vector3.zero;
 		private Quaternion lastRotation = Quaternion.identity;
 
-		[SerializeField]
-		private Transform cameraPositionTransform = null;
-
-		[SerializeField]
-		private Transform cameraTargetTransform = null;
-
 		public float MovementSpeed = 10;
 		public float RotationSpeed = 10;
 
@@ -36,16 +30,6 @@ namespace RamboTeam.Client
 		{
 			get;
 			private set;
-		}
-
-		public Transform CameraPositionTransform
-		{
-			get { return cameraPositionTransform; }
-		}
-
-		public Transform CameraTargetTransform
-		{
-			get { return cameraTargetTransform; }
 		}
 
 		protected override void Awake()
