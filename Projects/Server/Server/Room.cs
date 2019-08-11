@@ -34,7 +34,8 @@ namespace RamboTeam.Server
 		{
 			byte command = Buffer.ReadByte();
 
-			if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
+			if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM ||
+				command == Commands.Room.SYNC_CHOPTER_FIRE)
 			{
 				if (SecondaryPlayer != null)
 					Send(SecondaryPlayer, Buffer);

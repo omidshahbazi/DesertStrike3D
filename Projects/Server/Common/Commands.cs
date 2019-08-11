@@ -19,6 +19,14 @@ namespace RamboTeam.Common
 			public const byte MASTER = 1;
 			public const byte SECONDARY = 2;
 			public const byte SYNC_CHOPTER_TRANSFORM = 3;
+			public const byte SYNC_CHOPTER_FIRE = 4;
 		}
-    }
+
+		public static class Bullet
+		{
+			public const byte Hellfire = 0;
+			public const byte Hydra = 1;
+			public const byte Gatling = 2;
+		}
+	}
 }

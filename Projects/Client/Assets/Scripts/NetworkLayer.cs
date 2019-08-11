@@ -63,6 +63,17 @@ namespace RamboTeam.Client
 					{
 						NetworkCommands.HandleSyncChopterTransform(buffer);
 					}
+					else if (command == Commands.Room.SYNC_CHOPTER_FIRE)
+					{
+						byte bulletType = buffer.ReadByte();
+
+						if (bulletType == Commands.Bullet.Hellfire)
+							NetworkCommands.HandleSyncChopterShotHellfire(buffer);
+						else if (bulletType == Commands.Bullet.Hydra)
+							NetworkCommands.HandleSyncChopterShotHydra(buffer);
+						else if (bulletType == Commands.Bullet.Gatling)
+							NetworkCommands.HandleSyncChopterShotGatling(buffer);
+					}
 				}
 			}
 		}
