@@ -70,7 +70,11 @@ namespace RamboTeam.Common
 
 		public void Print(int BytesPerLine = 8)
 		{
-			int rowCount = Buffer.Length % BytesPerLine;
+			Console.Write("Size: ");
+			Console.Write(Buffer.Length);
+			Console.WriteLine();
+
+			int rowCount = (int)Math.Ceiling(Buffer.Length / (float)BytesPerLine);
 
 			for (int i = 0; i < rowCount; ++i)
 			{
@@ -78,19 +82,36 @@ namespace RamboTeam.Common
 				{
 					int index = (i * BytesPerLine) + j;
 
-					Console.Write(Buffer[index].ToString("X2"));
+					string hexValue = "  ";
+
+					if (index < Buffer.Length)
+						hexValue = Buffer[index].ToString("X2");
+
+					Console.Write(hexValue);
 					Console.Write(' ');
 				}
+
+				Console.Write('\t');
 
 				for (int j = 0; j < BytesPerLine; ++j)
 				{
 					int index = (i * BytesPerLine) + j;
 
-					Console.Write((char)Buffer[index]);
+					if (index >= Buffer.Length)
+						break;
+
+					byte b = Buffer[index];
+
+					if (b == 0)
+						b = (byte)'.';
+
+					Console.Write((char)b);
 				}
 
 				Console.WriteLine();
 			}
+
+			Console.WriteLine();
 		}
 	}
 }

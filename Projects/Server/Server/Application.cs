@@ -8,7 +8,6 @@ namespace RamboTeam.Server
 {
 	class Application
 	{
-
 #if USING_TCP
 		private TCPServer socket = null;
 #else
@@ -16,6 +15,12 @@ namespace RamboTeam.Server
 #endif
 
 		private Lobby lobby = null;
+
+		public bool DebugModeEnabled
+		{
+			get;
+			set;
+		}
 
 		public Application()
 		{
@@ -65,7 +70,7 @@ namespace RamboTeam.Server
 
 		private void OnServerAccepted(NetWorker Sender)
 		{
-			Log("Server accepted."); 
+			Log("Server accepted.");
 		}
 
 		private void OnPlayerConnected(NetworkingPlayer Player, NetWorker Sender)
@@ -92,7 +97,8 @@ namespace RamboTeam.Server
 
 			BufferStream buffer = new BufferStream(Frame.StreamData.byteArr);
 
-			buffer.Print();
+			if (DebugModeEnabled)
+				buffer.Print();
 
 			byte category = buffer.ReadByte();
 

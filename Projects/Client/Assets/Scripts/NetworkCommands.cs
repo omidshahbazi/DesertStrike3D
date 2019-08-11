@@ -36,6 +36,17 @@ namespace RamboTeam.Client
 			NetworkLayer.Instance.Send(buffer);
 		}
 
+		//public static void SyncChopterTransform(Vector3 Position, Vector3 Rotation)
+		//{
+		//	buffer.Reset();
+		//	buffer.WriteBytes(Commands.Category.ROOM);
+		//	buffer.WriteBytes(Commands.Room.SYNC_CHOPTER_TRANSFORM);
+		//	WriteVector3(Position);
+		//	WriteVector3(Rotation);
+
+		//	NetworkLayer.Instance.Send(buffer);
+		//}
+
 		public static void HandleJoinedToRoom(BufferStream Buffer)
 		{
 			if (OnJoinedToRoom != null)

@@ -13,6 +13,10 @@ namespace RamboTeam.Server
 
 			Application application = new Application();
 
+#if DEBUG
+			application.DebugModeEnabled = true;
+#endif
+
 			application.Bind();
 
 			while (true)
