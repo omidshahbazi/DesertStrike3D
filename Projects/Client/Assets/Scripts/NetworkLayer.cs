@@ -86,6 +86,7 @@ namespace RamboTeam.Client
 			client.Connect(Host);
 
 			client.OnConnected += OnConnected;
+			client.OnDisconnected += OnDisconnected;
 			client.OnMessageReceived += OnMessageReceived;
 		}
 
@@ -95,6 +96,11 @@ namespace RamboTeam.Client
 			// TODO: Place Holder
 			//
 			NetworkCommands.JoinToRoom();
+		}
+
+		private void OnDisconnected()
+		{
+			Debug.LogError("Disconnected");
 		}
 
 		public void Send(BufferStream Buffer)

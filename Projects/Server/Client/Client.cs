@@ -16,9 +16,8 @@ namespace RamboTeam.Client
 		private UDPClient socket = null;
 #endif
 
-		private long nextPingTime = 0;
-
 		public event ConnectionEventHandler OnConnected;
+		public event ConnectionEventHandler OnDisconnected;
 		public event MessageReceivedEventHandler OnMessageReceived;
 
 		public void Connect(string Host)
@@ -32,7 +31,8 @@ namespace RamboTeam.Client
 			socket.Connect("127.0.0.1", Constants.PORT_NUMBER);
 
 #if DEBUG
-			socket.serverAccepted += OnServerAccepted;
+			socket.serverAccepted += OnConnetedEvent;
+			socket.disconnected += OnDisconnectedEvent;
 #endif
 
 			socket.binaryMessageReceived += OnBinaryMessageReceived;
@@ -47,10 +47,16 @@ namespace RamboTeam.Client
 #endif
 		}
 
-		private void OnServerAccepted(NetWorker Sender)
+		private void OnConnetedEvent(NetWorker Sender)
 		{
 			if (OnConnected != null)
 				OnConnected();
+		}
+
+		private void OnDisconnectedEvent(NetWorker Sender)
+		{
+			if (OnDisconnected != null)
+				OnDisconnected();
 		}
 
 		private void OnBinaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)
