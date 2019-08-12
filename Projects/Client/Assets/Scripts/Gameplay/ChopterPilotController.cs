@@ -41,13 +41,22 @@ namespace RamboTeam.Client
 			lastPosition = transform.position;
 		}
 
-		protected override void Start()
+		protected override void OnEnable()
 		{
-			base.Start();
+			base.OnEnable();
 
 			NetworkCommands.OnPilot += OnPilot;
 			NetworkCommands.OnCommando += OnCommando;
 			NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
+		}
+
+		protected override void OnDisable()
+		{
+			base.OnDisable();
+
+			NetworkCommands.OnPilot -= OnPilot;
+			NetworkCommands.OnCommando -= OnCommando;
+			NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
 		}
 
 		private void OnPilot()

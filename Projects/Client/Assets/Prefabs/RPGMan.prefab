@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3214566486326185791}
   - component: {fileID: 1642189435113148323}
   - component: {fileID: 7096407228940770113}
-  - component: {fileID: -6743358397346006337}
+  - component: {fileID: -3735986819651232320}
   m_Layer: 0
   m_Name: RPGMan
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &-6743358397346006337
+--- !u!114 &-3735986819651232320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3379263801069881210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab03c4d13553364bb51e8cba1e125e9, type: 3}
+  m_Script: {fileID: 11500000, guid: cc42db7350a6ff342b2c923f34e5d516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 40

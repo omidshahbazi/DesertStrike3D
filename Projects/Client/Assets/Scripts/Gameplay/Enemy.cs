@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
-	public class EnemyLogic : MonoBehaviorBase
+	public class Enemy : MonoBehaviorBase
 	{
 		private Transform target = null;
 
@@ -17,6 +17,12 @@ namespace RamboTeam.Client
 		[SerializeField]
 		private GameObject BulletPrefab = null;
 
+		protected bool IsPilot
+		{
+			get;
+			private set;
+		}
+
 		protected override void Start()
 		{
 			base.Start();
@@ -27,11 +33,37 @@ namespace RamboTeam.Client
 			target = ChopterPilotController.Instance.transform;
 		}
 
+		protected override void OnEnable()
+		{
+			base.OnEnable();
+
+			NetworkCommands.OnPilot += OnPilot;
+			NetworkCommands.OnCommando += OnCommando;
+		}
+
+		protected override void OnDisable()
+		{
+			base.OnDisable();
+
+			NetworkCommands.OnPilot -= OnPilot;
+			NetworkCommands.OnCommando -= OnCommando;
+		}
+
+		private void OnPilot()
+		{
+			IsPilot = true;
+		}
+
+		private void OnCommando()
+		{
+			IsPilot = false;
+		}
+
 		protected override void Update()
 		{
 			base.Update();
 
-			if (target == null)
+			if (!IsPilot || target == null)
 				return;
 
 			Vector3 diff = target.position - transform.position;
@@ -44,13 +76,18 @@ namespace RamboTeam.Client
 
 			nextShotTime = Time.time + rateOfShot;
 
-			Shot(diff.normalized, diff.magnitude);
+			Shot(transform.position, diff.normalized);
 		}
 
-		protected void Shot(Vector3 Direction, float Distance)
+		protected virtual void Shot(Vector3 Position, Vector3 Direction)
+		{
+			ShotInternal(Position, Direction);
+		}
+
+		protected void ShotInternal(Vector3 Position, Vector3 Direction)
 		{
 			GameObject newObject = GameObject.Instantiate(BulletPrefab);
-			newObject.transform.position = transform.position;
+			newObject.transform.position = Position;
 
 			Bullet bullet = newObject.GetComponent<Bullet>();
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2436145447997514426}
   - component: {fileID: 5502641993119710543}
   - component: {fileID: 6376943157712853956}
-  - component: {fileID: 6665876279711890365}
+  - component: {fileID: 5879614530279865479}
   m_Layer: 0
   m_Name: Rifleman
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6665876279711890365
+--- !u!114 &5879614530279865479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8984716912836730897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab03c4d13553364bb51e8cba1e125e9, type: 3}
+  m_Script: {fileID: 11500000, guid: fde6ad620848a5d4087b2f4671118420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 40

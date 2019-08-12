@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7929095361634050591}
   - component: {fileID: 8969697353086467924}
   - component: {fileID: 4153033870584459964}
-  - component: {fileID: -6428054270130270345}
+  - component: {fileID: -7732029372451843069}
   m_Layer: 0
   m_Name: MissleLauncher
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &-6428054270130270345
+--- !u!114 &-7732029372451843069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2481277917060714786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab03c4d13553364bb51e8cba1e125e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e798bdf04bf4942ba92285250ae6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 40

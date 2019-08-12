@@ -25,12 +25,20 @@ namespace RamboTeam.Client
 			currentHP = HP;
 		}
 
-		protected override void Start()
+		protected override void OnEnable()
 		{
-			base.Start();
+			base.OnEnable();
 
 			NetworkCommands.OnPilot += OnPilot;
 			NetworkCommands.OnCommando += OnCommando;
+		}
+
+		protected override void OnDisable()
+		{
+			base.OnDisable();
+
+			NetworkCommands.OnPilot -= OnPilot;
+			NetworkCommands.OnCommando -= OnCommando;
 		}
 
 		private void OnPilot()

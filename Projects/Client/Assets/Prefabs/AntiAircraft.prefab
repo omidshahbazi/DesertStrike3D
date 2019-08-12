@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8965760085775791965}
   - component: {fileID: 8965760085775791964}
   - component: {fileID: 8965760085775791967}
-  - component: {fileID: 5113157854800996103}
+  - component: {fileID: 832423156418593743}
   m_Layer: 0
   m_Name: AntiAircraft
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5113157854800996103
+--- !u!114 &832423156418593743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8965760085775791961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab03c4d13553364bb51e8cba1e125e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b8e8ad976b5c1547addcdb0c4bbec0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 30

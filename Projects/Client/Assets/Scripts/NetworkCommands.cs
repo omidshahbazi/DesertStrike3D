@@ -7,6 +7,7 @@ namespace RamboTeam.Client
 	public delegate void NetworkEventHandler();
 	public delegate void SyncChopterTransformEventHandler(Vector3 Position, Vector3 Rotation);
 	public delegate void SyncChopterShotEventHandler(Vector3 Position);
+	public delegate void SyncEnemyShotEventHandler(Vector3 Position, Vector3 Direction);
 
 	public static class NetworkCommands
 	{
@@ -15,10 +16,17 @@ namespace RamboTeam.Client
 		public static event NetworkEventHandler OnJoinedToRoom;
 		public static event NetworkEventHandler OnPilot;
 		public static event NetworkEventHandler OnCommando;
+
 		public static event SyncChopterTransformEventHandler OnSyncChopterTransform;
 		public static event SyncChopterShotEventHandler OnSyncChopterShotHellfire;
 		public static event SyncChopterShotEventHandler OnSyncChopterShotHydra;
 		public static event SyncChopterShotEventHandler OnSyncChopterShotGatling;
+
+		public static event SyncEnemyShotEventHandler OnSyncChopterShotAntiAircraft;
+		public static event SyncEnemyShotEventHandler OnSyncChopterShotM3VDA;
+		public static event SyncEnemyShotEventHandler OnSyncChopterShotMissleLauncher;
+		public static event SyncEnemyShotEventHandler OnSyncChopterShotRifleMan;
+		public static event SyncEnemyShotEventHandler OnSyncChopterShotRPGMan;
 
 		public static void JoinToRoom()
 		{
@@ -45,7 +53,7 @@ namespace RamboTeam.Client
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM);
 			buffer.WriteBytes(Commands.Room.SYNC_CHOPTER_FIRE);
-			buffer.WriteBytes(Commands.Bullet.Hellfire);
+			buffer.WriteBytes(Commands.Bullet.HELLFIRE);
 			WriteVector3(Position);
 
 			NetworkLayer.Instance.Send(buffer);
@@ -56,7 +64,7 @@ namespace RamboTeam.Client
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM);
 			buffer.WriteBytes(Commands.Room.SYNC_CHOPTER_FIRE);
-			buffer.WriteBytes(Commands.Bullet.Hydra);
+			buffer.WriteBytes(Commands.Bullet.HYDRA);
 			WriteVector3(Position);
 
 			NetworkLayer.Instance.Send(buffer);
@@ -67,8 +75,68 @@ namespace RamboTeam.Client
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM);
 			buffer.WriteBytes(Commands.Room.SYNC_CHOPTER_FIRE);
-			buffer.WriteBytes(Commands.Bullet.Gatling);
+			buffer.WriteBytes(Commands.Bullet.GATLING);
 			WriteVector3(Position);
+
+			NetworkLayer.Instance.Send(buffer);
+		}
+
+		public static void SyncEnemyShotAntiAircraft(Vector3 Position, Vector3 Directions)
+		{
+			buffer.Reset();
+			buffer.WriteBytes(Commands.Category.ROOM);
+			buffer.WriteBytes(Commands.Room.SYNC_ENEMY_FIRE);
+			buffer.WriteBytes(Commands.Enemy.ANTI_AIRCRAFT);
+			WriteVector3(Position);
+			WriteVector3(Directions);
+
+			NetworkLayer.Instance.Send(buffer);
+		}
+
+		public static void SyncEnemyShotM3VDA(Vector3 Position, Vector3 Directions)
+		{
+			buffer.Reset();
+			buffer.WriteBytes(Commands.Category.ROOM);
+			buffer.WriteBytes(Commands.Room.SYNC_ENEMY_FIRE);
+			buffer.WriteBytes(Commands.Enemy.M3VDA);
+			WriteVector3(Position);
+			WriteVector3(Directions);
+
+			NetworkLayer.Instance.Send(buffer);
+		}
+
+		public static void SyncEnemyShotMissleLauncher(Vector3 Position, Vector3 Directions)
+		{
+			buffer.Reset();
+			buffer.WriteBytes(Commands.Category.ROOM);
+			buffer.WriteBytes(Commands.Room.SYNC_ENEMY_FIRE);
+			buffer.WriteBytes(Commands.Enemy.MISSLE_LAUNCHER);
+			WriteVector3(Position);
+			WriteVector3(Directions);
+
+			NetworkLayer.Instance.Send(buffer);
+		}
+
+		public static void SyncEnemyShotRifleMan(Vector3 Position, Vector3 Directions)
+		{
+			buffer.Reset();
+			buffer.WriteBytes(Commands.Category.ROOM);
+			buffer.WriteBytes(Commands.Room.SYNC_ENEMY_FIRE);
+			buffer.WriteBytes(Commands.Enemy.RIFLE_MAN);
+			WriteVector3(Position);
+			WriteVector3(Directions);
+
+			NetworkLayer.Instance.Send(buffer);
+		}
+
+		public static void SyncEnemyShotRPGMan(Vector3 Position, Vector3 Directions)
+		{
+			buffer.Reset();
+			buffer.WriteBytes(Commands.Category.ROOM);
+			buffer.WriteBytes(Commands.Room.SYNC_ENEMY_FIRE);
+			buffer.WriteBytes(Commands.Enemy.RPG_MAN);
+			WriteVector3(Position);
+			WriteVector3(Directions);
 
 			NetworkLayer.Instance.Send(buffer);
 		}
@@ -138,6 +206,86 @@ namespace RamboTeam.Client
 
 			if (OnSyncChopterShotGatling != null)
 				OnSyncChopterShotGatling(pos);
+		}
+
+		public static void HandleSyncChopterShotAntiAircraft(BufferStream Buffer)
+		{
+			Vector3 pos = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			Vector3 dir = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			if (OnSyncChopterShotAntiAircraft != null)
+				OnSyncChopterShotAntiAircraft(pos, dir);
+		}
+
+		public static void HandleSyncChopterShotM3VDA(BufferStream Buffer)
+		{
+			Vector3 pos = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			Vector3 dir = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			if (OnSyncChopterShotM3VDA != null)
+				OnSyncChopterShotM3VDA(pos, dir);
+		}
+
+		public static void HandleSyncChopterShotMissleLauncher(BufferStream Buffer)
+		{
+			Vector3 pos = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			Vector3 dir = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			if (OnSyncChopterShotMissleLauncher != null)
+				OnSyncChopterShotMissleLauncher(pos, dir);
+		}
+
+		public static void HandleSyncChopterShotRifleMan(BufferStream Buffer)
+		{
+			Vector3 pos = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			Vector3 dir = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			if (OnSyncChopterShotRifleMan != null)
+				OnSyncChopterShotRifleMan(pos, dir);
+		}
+
+		public static void HandleSyncChopterShotRPGMan(BufferStream Buffer)
+		{
+			Vector3 pos = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			Vector3 dir = Vector3.zero;
+			pos.x = Buffer.ReadFloat32();
+			pos.y = Buffer.ReadFloat32();
+			pos.z = Buffer.ReadFloat32();
+
+			if (OnSyncChopterShotRPGMan != null)
+				OnSyncChopterShotRPGMan(pos, dir);
 		}
 
 		private static void WriteVector3(Vector3 Value)
