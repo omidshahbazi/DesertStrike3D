@@ -30,5 +30,10 @@ namespace RamboTeam.Client
 		protected virtual void LateUpdate()
 		{
 		}
+
+		protected virtual void OnDrawGizmosSelected()
+		{
+			
+		}
 	}
 }
