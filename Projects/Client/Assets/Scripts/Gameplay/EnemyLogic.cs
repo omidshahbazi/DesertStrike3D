@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
-	public abstract class EnemyLogic : MonoBehaviorBase
+	public class EnemyLogic : MonoBehaviorBase
 	{
+		private Transform target = null;
+
 		private float sqrRange = 0;
 		private float rateOfShot = 0;
 		private float nextShotTime = 0;
@@ -12,11 +14,8 @@ namespace RamboTeam.Client
 		public float Range = 10;
 		public float ShotPerSecond = 1;
 
-		protected Transform Target
-		{
-			get;
-			private set;
-		}
+		[SerializeField]
+		private GameObject BulletPrefab = null;
 
 		protected override void Start()
 		{
@@ -25,16 +24,17 @@ namespace RamboTeam.Client
 			sqrRange = Range * Range;
 			rateOfShot = 1 / ShotPerSecond;
 
-			Target = ChopterPilotController.Instance.transform;
+			target = ChopterPilotController.Instance.transform;
 		}
 
 		protected override void Update()
 		{
 			base.Update();
 
-			Vector3 diff = Target.position - transform.position;
+			if (target == null)
+				return;
 
-			Target = null;
+			Vector3 diff = target.position - transform.position;
 
 			if (diff.sqrMagnitude > sqrRange)
 				return;
@@ -47,7 +47,15 @@ namespace RamboTeam.Client
 			Shot(diff.normalized, diff.magnitude);
 		}
 
-		protected abstract void Shot(Vector3 Direction, float Distance);
+		protected void Shot(Vector3 Direction, float Distance)
+		{
+			GameObject newObject = GameObject.Instantiate(BulletPrefab);
+			newObject.transform.position = transform.position;
+
+			Bullet bullet = newObject.GetComponent<Bullet>();
+
+			bullet.SetParamaeters(Direction);
+		}
 
 		protected override void OnDrawGizmosSelected()
 		{

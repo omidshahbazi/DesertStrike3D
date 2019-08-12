@@ -35,5 +35,10 @@ namespace RamboTeam.Client
 		{
 			
 		}
+
+		protected virtual void OnTriggerEnter(Collider Collision)
+		{
+			
+		}
 	}
 }

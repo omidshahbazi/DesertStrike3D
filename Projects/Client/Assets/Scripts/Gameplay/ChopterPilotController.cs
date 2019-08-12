@@ -37,6 +37,8 @@ namespace RamboTeam.Client
 			base.Awake();
 
 			Instance = this;
+
+			lastPosition = transform.position;
 		}
 
 		protected override void Start()

@@ -428,7 +428,7 @@ PrefabInstance:
     - target: {fileID: 1282614176317508976, guid: 356997536d2512d499e461df7770bbee,
         type: 3}
       propertyPath: m_Name
-      value: Helicopter
+      value: Chopter
       objectReference: {fileID: 0}
     - target: {fileID: 1282614176317508941, guid: 356997536d2512d499e461df7770bbee,
         type: 3}
@@ -760,6 +760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5113157854800996103, guid: 73a9fded29d274e4a96adde10a609d57,
+        type: 3}
+      propertyPath: Range
+      value: 27.62
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73a9fded29d274e4a96adde10a609d57, type: 3}
