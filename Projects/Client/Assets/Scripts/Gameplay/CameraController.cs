@@ -5,12 +5,31 @@ namespace RamboTeam.Client
 {
 	public class CameraController : MonoBehaviorBase
 	{
+		public static CameraController Instance
+		{
+			get;
+			private set;
+		}
+
 		public float Speed = 10.0F;
 		public float BaseDistance = 30;
 		public float OffsetRadius = 10;
 
 		private ChopterPilotController chopter = null;
 		private Transform chopterTransform = null;
+
+		public Vector3 PanOffset
+		{
+			get;
+			set;
+		}
+
+		protected override void Awake()
+		{
+			base.Awake();
+
+			Instance = this;
+		}
 
 		protected override void Start()
 		{
@@ -45,7 +64,7 @@ namespace RamboTeam.Client
 
 			float t = Time.deltaTime * Speed;
 
-			transform.position = Vector3.Lerp(transform.position, targetPos, t);
+			transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
 			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
 		}
 	}

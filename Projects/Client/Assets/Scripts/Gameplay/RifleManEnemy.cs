@@ -10,7 +10,7 @@ namespace RamboTeam.Client
 			base.OnEnable();
 
 			if (!IsPilot)
-				NetworkCommands.OnSyncChopterShotRifleMan += OnFire;
+				NetworkCommands.OnSyncRifleManShot += OnFire;
 		}
 
 		protected override void OnDisable()
@@ -18,7 +18,7 @@ namespace RamboTeam.Client
 			base.OnDisable();
 
 			if (!IsPilot)
-				NetworkCommands.OnSyncChopterShotRifleMan -= OnFire;
+				NetworkCommands.OnSyncRifleManShot -= OnFire;
 		}
 
 		private void OnFire(Vector3 Position, Vector3 Direction)
@@ -30,7 +30,7 @@ namespace RamboTeam.Client
 		{
 			base.Shot(Position, Direction);
 
-			NetworkCommands.SyncEnemyShotRifleMan(Position, Direction);
+			NetworkCommands.SyncRifleManShot(Position, Direction);
 		}
 	}
 }

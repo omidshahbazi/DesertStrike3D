@@ -79,15 +79,15 @@ namespace RamboTeam.Client
 						byte bulletType = buffer.ReadByte();
 
 						if (bulletType == Commands.Enemy.ANTI_AIRCRAFT)
-							NetworkCommands.HandleSyncChopterShotAntiAircraft(buffer);
+							NetworkCommands.HandleSyncAntiAircraftShot(buffer);
 						else if (bulletType == Commands.Enemy.M3VDA)
-							NetworkCommands.HandleSyncChopterShotM3VDA(buffer);
+							NetworkCommands.HandleSyncM3VDAShot(buffer);
 						else if (bulletType == Commands.Enemy.MISSLE_LAUNCHER)
-							NetworkCommands.HandleSyncChopterShotMissleLauncher(buffer);
+							NetworkCommands.HandleSyncMissleLauncherShot(buffer);
 						else if (bulletType == Commands.Enemy.RIFLE_MAN)
-							NetworkCommands.HandleSyncChopterShotRifleMan(buffer);
+							NetworkCommands.HandleSyncRifleManShot(buffer);
 						else if (bulletType == Commands.Enemy.RPG_MAN)
-							NetworkCommands.HandleSyncChopterShotRPGMan(buffer);
+							NetworkCommands.HandleSyncRPGManShot(buffer);
 					}
 				}
 			}

@@ -11,7 +11,8 @@ namespace RamboTeam.Client
 			private set;
 		}
 
-		private const float SYNC_PERIOD = 1.0F;
+		private const float SYNC_RATE = 10;
+		private const float SYNC_PERIOD = 1 / SYNC_RATE;
 
 		private float nextSyncTime = 0.0F;
 		private Vector3 lastPosition = Vector3.zero;
@@ -84,28 +85,53 @@ namespace RamboTeam.Client
 		{
 			base.Update();
 
+			bool isControlDown = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
+			if (isControlDown)
+			{
+				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+				{
+					CameraController.Instance.PanOffset += Vector3.forward;
+				}
+				else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+				{
+					CameraController.Instance.PanOffset -= Vector3.forward;
+				}
+
+				if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+				{
+					CameraController.Instance.PanOffset += Vector3.right;
+				}
+				else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+				{
+					CameraController.Instance.PanOffset -= Vector3.right;
+				}
+			}
+
 			if (IsPilot)
 			{
 				IsMoving = false;
 
-				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+				if (!isControlDown)
 				{
-					transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
-					IsMoving = true;
-				}
-				else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-				{
-					transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
-					IsMoving = true;
-				}
+					if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+					{
+						transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
+						IsMoving = true;
+					}
+					else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+					{
+						transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
+						IsMoving = true;
+					}
 
-				if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-				{
-					transform.Rotate(0, Time.deltaTime * RotationSpeed * -1, 0, Space.World);
-				}
-				else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-				{
-					transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);
+					if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+					{
+						transform.Rotate(0, Time.deltaTime * RotationSpeed * -1, 0, Space.World);
+					}
+					else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+					{
+						transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);
+					}
 				}
 
 				if (Time.time >= nextSyncTime)
