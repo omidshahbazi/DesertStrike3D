@@ -689,6 +689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3743304798874040074}
   - component: {fileID: 3743304798874040075}
+  - component: {fileID: 242434198}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -727,6 +728,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3743304798874040069}
   m_CullTransparentMesh: 0
+--- !u!114 &242434198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743304798874040069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800b50ad0dab41d4481c620a6ee6cdc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SingleButton: {fileID: 1008437592}
+  CoOpButton: {fileID: 1466675607}
+  QuitButton: {fileID: 289465596}
 --- !u!1 &3743304799789676273
 GameObject:
   m_ObjectHideFlags: 0
