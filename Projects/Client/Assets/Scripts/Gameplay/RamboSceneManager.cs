@@ -6,28 +6,20 @@ using UnityEngine.SceneManagement;
 
 namespace RamboTeam.Client
 {
-    public class RamboSceneManager : MonoBehaviorBase
+    public class RamboSceneManager : RamboTeam.Client.Utilities.RamboSinglton<RamboSceneManager>
     {
-
-        public static RamboSceneManager Instance
-        {
-            get;
-            private set;
-        }
-
         public string CurrentSceneName
         {
             get;
             private set;
         }
+
         public Action FinalAction { get; private set; }
 
         protected override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(this.gameObject);
-            if (Instance == null)
-                Instance = this;
+
             Init();
         }
 

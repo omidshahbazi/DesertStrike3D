@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : RamboTeam.Client.Utilities.RamboSinglton<InputManager>
 {
 
     public delegate void KeyPressedDelegate();
@@ -20,18 +20,8 @@ public class InputManager : MonoBehaviour
     private Dictionary<KeyCode, KeyPressedDelegate>.Enumerator kepadMap;
     private Dictionary<KeyCode, MousePressedDelegate>.Enumerator mouseMap;
 
-    public static InputManager Instance
-    {
-        get;
-        private set;
-    }
 
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    private void Update()
+    protected override  void Update()
     {
         kepadMap = inputMap.GetEnumerator();
         while (kepadMap.MoveNext())
