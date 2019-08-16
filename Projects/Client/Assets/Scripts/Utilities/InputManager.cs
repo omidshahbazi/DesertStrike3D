@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManager>
 {
-
+    public delegate void KeyRealeased(KeyCode KeyCode);
     public delegate void KeyPressedDelegate();
     public delegate void MousePressedDelegate(Vector3 Position);
-
+    public event KeyRealeased OnKeyRealeased;
     private class InputMap : Dictionary<KeyCode, KeyPressedDelegate>
     { }
 
@@ -29,6 +31,10 @@ public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManag
             var current = kepadMap.Current;
             if (Input.GetKeyDown(current.Key))
                 current.Value.Invoke();
+
+            if(Input.GetKeyUp(current.Key))
+                OnKeyRealeased?.Invoke(current.Key);
+           
         }
 
         mouseMap = mouseInputMap.GetEnumerator();
@@ -40,6 +46,7 @@ public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManag
         }
     }
 
+  
 
     public void AddInput(KeyCode KeyCode, KeyPressedDelegate Action)
     {

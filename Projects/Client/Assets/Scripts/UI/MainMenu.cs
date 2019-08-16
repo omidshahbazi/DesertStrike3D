@@ -55,8 +55,6 @@ namespace RamboTeam.Client.UI
             }
         }
 
-
-
         private IEnumerator ShowTutorial()
         {
             yield return new WaitForSeconds(2.0F);
