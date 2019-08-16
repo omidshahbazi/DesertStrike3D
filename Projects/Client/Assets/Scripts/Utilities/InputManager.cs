@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : RamboTeam.Client.Utilities.RamboSinglton<InputManager>
+public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManager>
 {
 
     public delegate void KeyPressedDelegate();

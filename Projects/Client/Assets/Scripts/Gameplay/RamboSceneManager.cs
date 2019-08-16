@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace RamboTeam.Client
 {
-    public class RamboSceneManager : RamboTeam.Client.Utilities.RamboSinglton<RamboSceneManager>
+    public class RamboSceneManager : RamboTeam.Client.Utilities.RamboSingelton<RamboSceneManager>
     {
         public string CurrentSceneName
         {
