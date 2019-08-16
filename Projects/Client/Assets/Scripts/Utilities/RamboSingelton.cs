@@ -28,16 +28,20 @@ namespace RamboTeam.Client.Utilities
 
         private static T _Instance = null;
 
-        private void OnApplicationQuit()
-        {
-            if (_Instance.gameObject != null)
-                GameObject.Destroy(_Instance.gameObject);
-        }
+        //private void OnApplicationQuit()
+        //{
+        //    if (!Application.isPlaying)
+        //        return;
+        //    if (gameObject != null)
+        //        GameObject.Destroy(this.gameObject);
+        //}
 
         private void OnDestroy()
         {
-            if (_Instance.gameObject != null)
-                GameObject.Destroy(_Instance.gameObject);
+            if (!Application.isPlaying)
+                return;
+            if (gameObject != null)
+                GameObject.Destroy(this.gameObject);
         }
     }
 
