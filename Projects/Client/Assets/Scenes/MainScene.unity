@@ -154,12 +154,12 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_NormalBias: 0.59
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -750,6 +750,46 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1523695162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8796443330205561621, guid: 356997536d2512d499e461df7770bbee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1282614177004873326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1523695166
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523695162}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21ec8eb1e005ac24897429970ead0a71, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &1523695167
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523695162}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1779617442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -821,6 +861,16 @@ PrefabInstance:
         type: 3}
       propertyPath: Speed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781662371478220346, guid: ee4fb6220c084c54199196de75d02774,
+        type: 3}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781662371478220346, guid: ee4fb6220c084c54199196de75d02774,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4fb6220c084c54199196de75d02774, type: 3}
@@ -1231,7 +1281,7 @@ PrefabInstance:
     - target: {fileID: 413547496749230302, guid: f37880cf9b30ae94a9a2e71f1532f05c,
         type: 3}
       propertyPath: m_MaterialType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 413547496749230302, guid: f37880cf9b30ae94a9a2e71f1532f05c,
         type: 3}
@@ -1275,7 +1325,7 @@ PrefabInstance:
     - target: {fileID: 1282614176317508941, guid: 356997536d2512d499e461df7770bbee,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20
+      value: 20.84
       objectReference: {fileID: 0}
     - target: {fileID: 1282614176317508941, guid: 356997536d2512d499e461df7770bbee,
         type: 3}
@@ -1330,6 +1380,16 @@ PrefabInstance:
     - target: {fileID: 3531565312315608945, guid: 356997536d2512d499e461df7770bbee,
         type: 3}
       propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531565312315608945, guid: 356997536d2512d499e461df7770bbee,
+        type: 3}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531565312313707921, guid: 356997536d2512d499e461df7770bbee,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
