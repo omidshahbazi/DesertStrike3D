@@ -18,8 +18,16 @@ namespace RamboTeam.Client
 		private Vector3 lastPosition = Vector3.zero;
 		private Quaternion lastRotation = Quaternion.identity;
 
+		private float verticalRoation = 0;
+		private float horizontalRoation = 0;
+
 		public float MovementSpeed = 10;
 		public float RotationSpeed = 10;
+		public float VerticalRotation = 15;
+		public float HorizontalRotation = 10;
+
+		[SerializeField]
+		private GameObject ChopterModel;
 
 		public bool IsPilot
 		{
@@ -85,6 +93,8 @@ namespace RamboTeam.Client
 		{
 			base.Update();
 
+			float t = Time.deltaTime;
+
 			bool isControlDown = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
 			if (isControlDown)
 			{
@@ -113,25 +123,38 @@ namespace RamboTeam.Client
 
 				if (!isControlDown)
 				{
+					verticalRoation = 0;
+					horizontalRoation = 0;
+
 					if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 					{
+						verticalRoation = VerticalRotation;
+
 						transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
 						IsMoving = true;
 					}
-					else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+					if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 					{
+						verticalRoation = VerticalRotation * -1;
+
 						transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
 						IsMoving = true;
 					}
 
 					if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
 					{
+						horizontalRoation = HorizontalRotation;
+
 						transform.Rotate(0, Time.deltaTime * RotationSpeed * -1, 0, Space.World);
 					}
-					else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+					if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 					{
+						horizontalRoation = HorizontalRotation * -1;
+
 						transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);
 					}
+
+					ChopterModel.transform.localRotation = Quaternion.Lerp(ChopterModel.transform.localRotation, Quaternion.Euler(verticalRoation, 0, horizontalRoation), t);
 				}
 
 				if (Time.time >= nextSyncTime)
@@ -143,8 +166,6 @@ namespace RamboTeam.Client
 			}
 			else
 			{
-				float t = Time.deltaTime;
-
 				transform.position = Vector3.Lerp(transform.position, lastPosition, t);
 				transform.rotation = Quaternion.Lerp(transform.rotation, lastRotation, t);
 

@@ -50,6 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 40
   RotationSpeed: 75
+  VerticalRotation: 30
+  HorizontalRotation: 20
+  ChopterModel: {fileID: 3531565312313610673}
 --- !u!114 &-3877245281971093171
 MonoBehaviour:
   m_ObjectHideFlags: 0
