@@ -102,7 +102,7 @@ namespace RamboTeam.Client
 				{
 					CameraController.Instance.PanOffset += Vector3.forward;
 				}
-				else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+				if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 				{
 					CameraController.Instance.PanOffset -= Vector3.forward;
 				}
@@ -111,7 +111,7 @@ namespace RamboTeam.Client
 				{
 					CameraController.Instance.PanOffset += Vector3.right;
 				}
-				else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+				if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
 				{
 					CameraController.Instance.PanOffset -= Vector3.right;
 				}
