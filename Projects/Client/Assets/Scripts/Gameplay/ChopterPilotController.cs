@@ -11,7 +11,7 @@ namespace RamboTeam.Client
 			private set;
 		}
 
-		private const float SYNC_RATE = 10;
+		private const float SYNC_RATE = 2;
 		private const float SYNC_PERIOD = 1 / SYNC_RATE;
 
 		private float nextSyncTime = 0.0F;
