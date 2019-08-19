@@ -43,7 +43,7 @@ namespace RamboTeam.Client
 		{
 			base.LateUpdate();
 
-			Vector3 forward = chopterTransform.position + new Vector3(0, 2, -1);
+			Vector3 forward = chopterTransform.position + new Vector3(-1, 1, -1);
 			forward = (forward - chopterTransform.position).normalized;
 			Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
 
