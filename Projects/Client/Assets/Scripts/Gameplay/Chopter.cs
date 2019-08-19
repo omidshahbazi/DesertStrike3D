@@ -11,8 +11,9 @@ namespace RamboTeam.Client
 			private set;
 		}
 
-		private float currentHP = 0;
-		private bool isPilot = false;
+        public float currentHP { get; private set; } = 0;
+
+        private bool isPilot = false;
 
 		public float HP = 100;
 
@@ -58,7 +59,10 @@ namespace RamboTeam.Client
 
 			currentHP = Mathf.Clamp(currentHP - Damage, 0, HP);
 
-			if (currentHP == 0)
+            UI.HUDMenu.Instance.UpdateHP();
+
+
+            if (currentHP == 0)
 			{
 				Debug.Log("Dead");
 			}
