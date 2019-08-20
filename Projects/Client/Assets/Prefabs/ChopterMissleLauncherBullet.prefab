@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6754532364264199890}
   - component: {fileID: 121694177630838935}
-  - component: {fileID: -4311168226842266507}
+  - component: {fileID: 5352328510650858390}
   m_Layer: 0
   m_Name: ChopterMissleLauncherBullet
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 10.8}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4311168226842266507
+--- !u!114 &5352328510650858390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,14 +55,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 670093052942939127}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eea467d933820414f827aadef8e626bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 85b7167b69f54b646990c71ab02baef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Layers:
-    serializedVersion: 2
-    m_Bits: 512
-  speed: 5
-  damage: 10
+  Speed: 10
+  Damage: 10
   Lifetime: 20
 --- !u!1 &4430543639503721239
 GameObject:
@@ -91,7 +88,7 @@ Transform:
   m_GameObject: {fileID: 4430543639503721239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 11, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 6754532364264199890}
   m_RootOrder: 0

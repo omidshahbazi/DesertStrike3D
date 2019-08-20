@@ -83,8 +83,8 @@ namespace RamboTeam.Client
             nextPos = !nextPos;
             Vector3 pos = nextPos  ? RightMissleLuncher.position : LeftMissleLuncher.position;
             GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
-            Projectile ps = newObject.GetComponent<Projectile>();
-            ps.InitialSetUp(pos, Vector3.right);
+            Bullet ps = newObject.GetComponent<Bullet>();
+            ps.SetParamaeters(this.transform.forward);
         }
 
         protected override void OnDisable()
