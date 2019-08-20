@@ -26,7 +26,7 @@ namespace RamboTeam.Client
 
         private const float SYNC_RATE = 2;
         private const float SYNC_PERIOD = 1 / SYNC_RATE;
-      
+
         private float nextSyncTime = 0.0F;
         private Vector3 lastPosition = Vector3.zero;
         private Quaternion lastRotation = Quaternion.identity;
@@ -39,9 +39,14 @@ namespace RamboTeam.Client
         public float VerticalRotation = 15;
         public float HorizontalRotation = 10;
 
+        //Weapons Count
+        public uint HellfireCount { get; private set; } = 16;
+        public uint HydraCount { get; private set; } = 34;
+        public uint GatlingGunCount { get; private set; } = 1120;
+
         [SerializeField]
         private GameObject ChopterModel;
-        private bool  nextPos;
+        private bool nextPos;
 
         public bool IsPilot
         {
@@ -71,20 +76,22 @@ namespace RamboTeam.Client
             NetworkCommands.OnPilot += OnPilot;
             NetworkCommands.OnCommando += OnCommando;
             NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
-            InputManager.Instance.AddInput(KeyCode.Z, ShootMissle);
+            InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
         }
 
-        private void ShootMissle()
+        private void ShootHellFireMissle()
         {
-            if (Time.time < nextShotTime)
+            if (Chopter.Instance.IsDead || !IsPilot || HellfireCount == 0 || Time.time < nextShotTime)
                 return;
 
             nextShotTime = Time.time + MissleLuncherRateOfShot;
             nextPos = !nextPos;
-            Vector3 pos = nextPos  ? RightMissleLuncher.position : LeftMissleLuncher.position;
+            Vector3 pos = nextPos ? RightMissleLuncher.position : LeftMissleLuncher.position;
             GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
             Bullet ps = newObject.GetComponent<Bullet>();
             ps.SetParamaeters(this.transform.forward);
+            HellfireCount--;
+            EventManager.OnHellfireUpdateCall();
         }
 
         protected override void OnDisable()
@@ -94,7 +101,7 @@ namespace RamboTeam.Client
             NetworkCommands.OnPilot -= OnPilot;
             NetworkCommands.OnCommando -= OnCommando;
             NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
-            InputManager.Instance.RemoveInput(KeyCode.Z, ShootMissle);
+            InputManager.Instance.RemoveInput(KeyCode.Z, ShootHellFireMissle);
         }
 
         private void OnPilot()
