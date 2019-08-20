@@ -98,22 +98,27 @@ namespace RamboTeam.Client
 			bool isControlDown = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
 			if (isControlDown)
 			{
+				Vector3 chopterForward = CameraController.Instance.transform.forward;
+				chopterForward.y = 0;
+				Vector3 chopterRight = CameraController.Instance.transform.right;
+				chopterRight.y = 0;
+
 				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 				{
-					CameraController.Instance.PanOffset += Vector3.forward;
+					CameraController.Instance.PanOffset += chopterForward;
 				}
 				if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 				{
-					CameraController.Instance.PanOffset -= Vector3.forward;
+					CameraController.Instance.PanOffset -= chopterForward;
 				}
 
 				if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 				{
-					CameraController.Instance.PanOffset += Vector3.right;
+					CameraController.Instance.PanOffset += chopterRight;
 				}
 				if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
 				{
-					CameraController.Instance.PanOffset -= Vector3.right;
+					CameraController.Instance.PanOffset -= chopterRight;
 				}
 			}
 
@@ -121,11 +126,11 @@ namespace RamboTeam.Client
 			{
 				IsMoving = false;
 
+				verticalRoation = 0;
+				horizontalRoation = 0;
+
 				if (!isControlDown)
 				{
-					verticalRoation = 0;
-					horizontalRoation = 0;
-
 					if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 					{
 						verticalRoation = VerticalRotation;
@@ -153,9 +158,9 @@ namespace RamboTeam.Client
 
 						transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);
 					}
-
-					ChopterModel.transform.localRotation = Quaternion.Lerp(ChopterModel.transform.localRotation, Quaternion.Euler(verticalRoation, 0, horizontalRoation), t);
 				}
+
+				ChopterModel.transform.localRotation = Quaternion.Lerp(ChopterModel.transform.localRotation, Quaternion.Euler(verticalRoation, 0, horizontalRoation), t);
 
 				if (Time.time >= nextSyncTime)
 				{

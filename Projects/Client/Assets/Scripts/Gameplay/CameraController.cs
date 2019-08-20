@@ -51,6 +51,7 @@ namespace RamboTeam.Client
 			{
 				Vector3 chopterForward = chopterTransform.forward;
 				chopterForward.y = 0;
+
 				float angle = Vector3.Angle(chopterForward, Vector3.right);
 
 				if (chopterForward.z < 0)
