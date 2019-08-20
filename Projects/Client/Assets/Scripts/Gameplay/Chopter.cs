@@ -5,7 +5,9 @@ namespace RamboTeam.Client
 {
 	public class Chopter : MonoBehaviorBase
 	{
-		public static Chopter Instance
+        [SerializeField]
+        private GameObject smokeParticle;
+        public static Chopter Instance
 		{
 			get;
 			private set;
@@ -24,6 +26,7 @@ namespace RamboTeam.Client
 			Instance = this;
 
 			currentHP = HP;
+            smokeParticle.SetActive(false);
 		}
 
 		protected override void OnEnable()
@@ -64,6 +67,7 @@ namespace RamboTeam.Client
 
             if (currentHP == 0)
 			{
+                smokeParticle.SetActive(true);
 				Debug.Log("Dead");
 			}
 		}
