@@ -47,7 +47,7 @@ namespace RamboTeam.Client.UI
             }
             else
             {
-                yield return new WaitForSeconds(4.0F);
+                yield return new WaitForSeconds(0.0F);
                 StartCoroutine(ShowTutorial());
                 StopCoroutine(ShowStory());
                 Story.gameObject.SetActive(false);
@@ -57,7 +57,7 @@ namespace RamboTeam.Client.UI
 
         private IEnumerator ShowTutorial()
         {
-            yield return new WaitForSeconds(2.0F);
+            yield return new WaitForSeconds(0.0F);
             MainMenuMusic.Stop();
             RamboSceneManager.Instance.LoadScene("MainScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
