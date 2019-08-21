@@ -31,9 +31,52 @@ namespace RamboTeam.Client.UI
             if (Instance == null)
                 Instance = this;
 
+            armorText.text = Chopter.Instance.currentHP.ToString();
+            lifeText.text = Chopter.Instance.LifeCount.ToString();
+            rescueText.text = Chopter.Instance.currentRefugeesCount.ToString();
+            fuelText.text = Chopter.Instance.FuelAmount.ToString();
+            hellfireText.text = ChopterPilotController.Instance.HellfireCount.ToString();
+            hydraText.text = ChopterPilotController.Instance.HydraCount.ToString();
+            gatlingGunText.text = ChopterPilotController.Instance.GatlingGunCount.ToString();
         }
 
-        public void UpdateHP()
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            EventManager.OnHealthUpdate += OnUpdateHealth;
+            EventManager.OnHellfireUpdate += OnUpdateHellfire;
+            EventManager.OnFuelUpdate += OnUpdateFuel;
+            EventManager.OnLifeUpdate += OnUpdateLife;
+
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            EventManager.OnHealthUpdate -= OnUpdateHealth;
+            EventManager.OnHellfireUpdate -= OnUpdateHellfire;
+            EventManager.OnFuelUpdate -= OnUpdateFuel;
+            EventManager.OnLifeUpdate -= OnUpdateLife;
+        }
+
+        private void OnUpdateLife()
+        {
+            lifeText.text = Chopter.Instance.currentLifeCount.ToString();
+        }
+
+        private void OnUpdateFuel()
+        {
+            fuelText.text = Chopter.Instance.currentFuelAmount.ToString();
+        }
+
+        private void OnUpdateHellfire()
+        {
+            hellfireText.text = ChopterPilotController.Instance.HellfireCount.ToString();
+        }
+
+        private void OnUpdateHealth()
         {
             armorText.text = Chopter.Instance.currentHP.ToString();
         }
