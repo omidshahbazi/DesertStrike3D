@@ -54,6 +54,7 @@ namespace RamboTeam.Client.UI
                 return;
             this.gameObject.SetActive(true);
             this.TutorialPanel.SetActive(true);
+            this.gameObject.transform.SetAsLastSibling();
             Time.timeScale = 0;
             InputManager.Instance.OnKeyRealeased += OnkeyCode;
         }

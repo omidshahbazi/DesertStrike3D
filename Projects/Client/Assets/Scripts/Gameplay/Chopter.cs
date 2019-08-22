@@ -1,4 +1,5 @@
 ﻿//Rambo Team
+using RamboTeam.Client.UI;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -121,11 +122,24 @@ namespace RamboTeam.Client
             IsDead = true;
             currentLifeCount--;
 
+
             if (currentLifeCount == 0)
+            {
+                EventManager.OnLifeUpdateCall();
+                StartCoroutine(DoGameOver());
                 return;
+            }
 
             StartCoroutine(ReviveChopter());
         }
+
+        private IEnumerator DoGameOver()
+        {
+            yield return new WaitForSecondsRealtime(2.0F);
+
+            GameOver.Instance.Open();
+        }
+
 
         private IEnumerator ReviveChopter()
         {

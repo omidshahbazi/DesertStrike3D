@@ -15,6 +15,8 @@ namespace RamboTeam.Client.UI
         }
 
         public Button ReturnToMainMenu;
+
+        private bool isOpen = false;
      
         // Start is called before the first frame update
         protected override void Awake()
@@ -26,11 +28,24 @@ namespace RamboTeam.Client.UI
 
             ReturnToMainMenu.onClick.AddListener(() =>
             {
-                this.gameObject.SetActive(false);
+                Close();
                 RamboSceneManager.Instance.LoadScene("MainMenu", UnityEngine.SceneManagement.LoadSceneMode.Single);
             });
 
-            this.gameObject.SetActive(false); 
+            this.gameObject.SetActive(false);
+            isOpen = false;
+        }
+
+        public void Open()
+        {
+            gameObject.SetActive(true);
+            isOpen = true;
+        }
+
+        public void Close()
+        {
+            gameObject.SetActive(false);
+            isOpen = false;
         }
    
     }

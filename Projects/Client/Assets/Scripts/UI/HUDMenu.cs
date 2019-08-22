@@ -38,6 +38,15 @@ namespace RamboTeam.Client.UI
             hellfireText.text = ChopterPilotController.Instance.HellfireCount.ToString();
             hydraText.text = ChopterPilotController.Instance.HydraCount.ToString();
             gatlingGunText.text = ChopterPilotController.Instance.GatlingGunCount.ToString();
+
+            StartCoroutine(SendOnPilotMessage()); //Temporary 
+        }
+
+        private IEnumerator SendOnPilotMessage()//temporary to play wwithout server
+        {
+            yield return new WaitForSeconds(1.0F);
+
+            NetworkCommands.HandlePilot(null); 
         }
 
         protected override void OnEnable()
