@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fa698560b688845bf08bafe6dc1b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AdditionalVertexStreamMesh: {fileID: 0}
 --- !u!64 &144089230
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -474,7 +473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fa698560b688845bf08bafe6dc1b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AdditionalVertexStreamMesh: {fileID: 0}
 --- !u!64 &323799559
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -785,31 +783,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c66a6f9606e5a143ba00c00fc9dd17d, type: 3}
---- !u!1 &697587260 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3531565312313610673, guid: 356997536d2512d499e461df7770bbee,
-    type: 3}
-  m_PrefabInstance: {fileID: 1282614177004873326}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &697587262
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 697587260}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 308eb00e17ecd0b4a913a5c42ea824f2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &781168826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ef5bf711d29819d49aa2f2b746cef20b,
@@ -864,7 +837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fa698560b688845bf08bafe6dc1b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AdditionalVertexStreamMesh: {fileID: 0}
 --- !u!64 &814189823
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1584,7 +1556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fa698560b688845bf08bafe6dc1b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AdditionalVertexStreamMesh: {fileID: 0}
 --- !u!64 &1363804931
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2013,7 +1984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fa698560b688845bf08bafe6dc1b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AdditionalVertexStreamMesh: {fileID: 0}
 --- !u!64 &1831710192
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2596,45 +2566,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 190542415041830114, guid: 356997536d2512d499e461df7770bbee,
+    - target: {fileID: -3877245281971093171, guid: 356997536d2512d499e461df7770bbee,
         type: 3}
-      propertyPath: MissleLuncherRateOfShot
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 537646499, guid: 356997536d2512d499e461df7770bbee, type: 3}
-      propertyPath: m_LocalRotation.y
+      propertyPath: chopterDeathAnimation
+      value: 
+      objectReference: {fileID: 1282614177004873328}
+    - target: {fileID: -3877245281971093171, guid: 356997536d2512d499e461df7770bbee,
+        type: 3}
+      propertyPath: chopterRotorBladeAnimation
+      value: 
+      objectReference: {fileID: 1282614177004873327}
+    - target: {fileID: 697587262, guid: 356997536d2512d499e461df7770bbee, type: 3}
+      propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 537646499, guid: 356997536d2512d499e461df7770bbee, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 537646499, guid: 356997536d2512d499e461df7770bbee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2119469389, guid: 356997536d2512d499e461df7770bbee, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2119469389, guid: 356997536d2512d499e461df7770bbee, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2119469389, guid: 356997536d2512d499e461df7770bbee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 537646498, guid: 356997536d2512d499e461df7770bbee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2119469388, guid: 356997536d2512d499e461df7770bbee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 356997536d2512d499e461df7770bbee, type: 3}
+--- !u!95 &1282614177004873327 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1523695166, guid: 356997536d2512d499e461df7770bbee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1282614177004873326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1282614177004873328 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 697587262, guid: 356997536d2512d499e461df7770bbee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1282614177004873326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7161471158507354066
 PrefabInstance:
   m_ObjectHideFlags: 0

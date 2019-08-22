@@ -10,6 +10,10 @@ namespace RamboTeam.Client
     {
         [SerializeField]
         private GameObject smokeParticle;
+        [SerializeField]
+        private Animator chopterDeathAnimation;
+        [SerializeField]
+        private Animator chopterRotorBladeAnimation;
 
         private float nextFuelUpdateTime = 0.0F;
         public static Chopter Instance
@@ -122,6 +126,9 @@ namespace RamboTeam.Client
             IsDead = true;
             currentLifeCount--;
 
+            chopterRotorBladeAnimation.enabled = false;
+            chopterDeathAnimation.enabled = true;
+            chopterDeathAnimation.Play("ChopperDeath", -1, 0.0F);
 
             if (currentLifeCount == 0)
             {
@@ -129,7 +136,7 @@ namespace RamboTeam.Client
                 StartCoroutine(DoGameOver());
                 return;
             }
-
+            
             StartCoroutine(ReviveChopter());
         }
 
@@ -143,10 +150,13 @@ namespace RamboTeam.Client
 
         private IEnumerator ReviveChopter()
         {
-            yield return new WaitForSecondsRealtime(2.0F);
+
+            yield return new WaitForSecondsRealtime(chopterDeathAnimation.GetCurrentAnimatorClipInfo(0).Length + 0.5F);
 
             Debug.Log("Revive");
-
+            chopterDeathAnimation.enabled = false;
+            chopterRotorBladeAnimation.enabled = true;
+            chopterDeathAnimation.transform.localPosition = Vector3.zero;
             currentFuelAmount = FuelAmount;
             currentHP = HP;
             currentRefugeesCount = 0;
