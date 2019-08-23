@@ -3,56 +3,64 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
-	public class Bullet : MonoBehaviorBase
-	{
-		private Chopter chopter = null;
-		private Vector3 direction = Vector3.zero;
-		private float endOfLifetime = 0;
+    public class Bullet : MonoBehaviorBase
+    {
+        private Chopter chopter = null;
+        private Vector3 direction = Vector3.zero;
+        private float endOfLifetime = 0;
 
-		public float Speed = 10;
-		public float Damage = 10;
-		public float Lifetime = 20;
+        [SerializeField]
+        public LayerMask ChopterLayer;
+        [SerializeField]
+        public LayerMask enemyLayer;
 
-		protected override void Start()
-		{
-			base.Start();
+        public float Speed = 10;
+        public float Damage = 10;
+        public float Lifetime = 20;
 
-			chopter = Chopter.Instance;
+        protected override void Start()
+        {
+            base.Start();
 
-			endOfLifetime = Time.time + Lifetime;
-		}
+            chopter = Chopter.Instance;
 
-		protected override void Update()
-		{
-			base.Update();
+            endOfLifetime = Time.time + Lifetime;
+        }
 
-			transform.Translate(direction * Speed * Time.deltaTime, Space.World);
+        protected override void Update()
+        {
+            base.Update();
 
-			if (Time.time >= endOfLifetime)
-				Kill();
-		}
+            transform.Translate(direction * Speed * Time.deltaTime, Space.World);
 
-		protected override void OnTriggerEnter(Collider Collider)
-		{
-			base.OnTriggerEnter(Collider);
+            if (Time.time >= endOfLifetime)
+                Kill();
+        }
 
-			Debug.Log("Collide");
+        protected override void OnTriggerEnter(Collider Collider)
+        {
+            base.OnTriggerEnter(Collider);
 
-			chopter.ApplyDamage(Damage);
+            Debug.Log("Collide");
 
-			Kill();
-		}
+            if (Collider.gameObject.layer == ChopterLayer)
+                chopter.ApplyDamage(Damage);
+            else if (Collider.gameObject.layer == enemyLayer)
+                Debug.Log("EnemyColid");
 
-		private void Kill()
-		{
-			Destroy(gameObject);
-		}
+            Kill();
+        }
 
-		public void SetParamaeters(Vector3 Direction)
-		{
-			direction = Direction;
+        private void Kill()
+        {
+            Destroy(gameObject);
+        }
 
-			transform.forward = direction;
-		}
-	}
+        public void SetParamaeters(Vector3 Direction)
+        {
+            direction = Direction;
+
+            transform.forward = direction;
+        }
+    }
 }

@@ -79,20 +79,7 @@ namespace RamboTeam.Client
             InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
         }
 
-        private void ShootHellFireMissle()
-        {
-            if (Chopter.Instance.IsDead || !IsPilot || HellfireCount == 0 || Time.time < nextShotTime)
-                return;
-
-            nextShotTime = Time.time + MissleLuncherRateOfShot;
-            nextPos = !nextPos;
-            Vector3 pos = nextPos ? RightMissleLuncher.position : LeftMissleLuncher.position;
-            GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
-            Bullet ps = newObject.GetComponent<Bullet>();
-            ps.SetParamaeters(this.transform.forward);
-            HellfireCount--;
-            EventManager.OnHellfireUpdateCall();
-        }
+       
 
         protected override void OnDisable()
         {
@@ -207,6 +194,22 @@ namespace RamboTeam.Client
 
                 IsMoving = ((lastPosition - transform.position).sqrMagnitude > 1);
             }
+        }
+
+
+        private void ShootHellFireMissle()
+        {
+            if (Chopter.Instance.IsDead || !IsPilot || HellfireCount == 0 || Time.time < nextShotTime)
+                return;
+
+            nextShotTime = Time.time + MissleLuncherRateOfShot;
+            nextPos = !nextPos;
+            Vector3 pos = nextPos ? RightMissleLuncher.position : LeftMissleLuncher.position;
+            GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
+            Bullet ps = newObject.GetComponent<Bullet>();
+            ps.SetParamaeters(this.transform.forward);
+            HellfireCount--;
+            EventManager.OnHellfireUpdateCall();
         }
     }
 }
