@@ -1,6 +1,7 @@
 ﻿//Rambo Team
 using RamboTeam.Client.GamePlayLogic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RamboTeam.Client
@@ -59,6 +60,8 @@ namespace RamboTeam.Client
         private bool nextPos;
         private bool nextAirCraftPos;
 
+        private List<Enemy> enemiesList = new List<Enemy>();
+
         public bool IsPilot
         {
             get;
@@ -89,6 +92,7 @@ namespace RamboTeam.Client
             NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
             InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
             InputManager.Instance.AddInput(KeyCode.X, ShootAirCraft);
+            QueryEnemies();
         }
 
 
@@ -238,6 +242,12 @@ namespace RamboTeam.Client
             ps.SetParamaeters(this.transform.forward);
             HydraCount--;
             EventManager.OnHellfireUpdateCall();
+        }
+
+
+        private void QueryEnemies()
+        {
+           enemiesList.AddRange(FindObjectsOfType<Enemy>());
         }
     }
 }

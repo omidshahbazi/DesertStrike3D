@@ -1,5 +1,6 @@
 ﻿//Rambo Team
 using UnityEngine;
+using RamboTeam.Client.Utilities;
 
 namespace RamboTeam.Client
 {
@@ -43,13 +44,13 @@ namespace RamboTeam.Client
         {
             base.OnTriggerEnter(Collider);
 
-            Debug.Log("Collide");
-            if (Collider.gameObject.layer != LayerShouldAttack)
+            if (!LayerShouldAttack.IsContains(Collider.gameObject.layer))
                 return;
+            Debug.Log("Collide");
 
-            if (Collider.gameObject.layer == ChopterLayer)
+            if (ChopterLayer.IsContains(Collider.gameObject.layer))
                 chopter.ApplyDamage(Damage);
-            else if (Collider.gameObject.layer == enemyLayer)
+            else if (enemyLayer.IsContains(Collider.gameObject.layer))
             {
                 Enemy enemy = Collider.gameObject.GetComponent<Enemy>();
                 if (enemy == null)
