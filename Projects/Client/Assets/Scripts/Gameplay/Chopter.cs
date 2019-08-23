@@ -15,6 +15,7 @@ namespace RamboTeam.Client
         [SerializeField]
         private Animator chopterRotorBladeAnimation;
 
+
         private float nextFuelUpdateTime = 0.0F;
         public static Chopter Instance
         {
@@ -22,20 +23,26 @@ namespace RamboTeam.Client
             private set;
         }
 
+        public ChoppersPicker pickUp;
+        //Weapons Count
+
+
+        public uint HellfireCount = 16;
+        public uint HydraCount = 34;
+        public uint GatlingGunCount = 1120;
+
+        /////////////////////////
+        public float HP = 100;
+        public uint LifeCount = 3;
+        public uint FuelAmount = 120;
+
+
         public float currentHP { get; private set; } = 0;
         public uint currentLifeCount { get; private set; } = 0;
         public uint currentFuelAmount { get; private set; } = 0;
         public uint currentRefugeesCount { get; private set; } = 0;
-
         public bool IsDead { get; private set; } = false;
-
-
         private bool isPilot = false;
-
-        public float HP = 100;
-        public uint LifeCount { get; private set; } = 3;
-        public uint FuelAmount { get; private set; } = 120;
-
         public float FuelCostTime = 2.0f;
 
         protected override void Awake()
@@ -90,6 +97,11 @@ namespace RamboTeam.Client
             }
         }
 
+        internal void TriggerHellfireShot()
+        {
+            HellfireCount--;
+        }
+
         private void OnPilot()
         {
             isPilot = true;
@@ -136,7 +148,7 @@ namespace RamboTeam.Client
                 StartCoroutine(DoGameOver());
                 return;
             }
-            
+
             StartCoroutine(ReviveChopter());
         }
 
@@ -168,6 +180,65 @@ namespace RamboTeam.Client
             EventManager.OnFuelUpdateCall();
 
             IsDead = false;
+        }
+
+        protected override void OnTriggerEnter(Collider other)
+        {
+            base.OnTriggerEnter(other);
+
+            if (IsDead)
+                return;
+            Debug.Log("Chopper OnTriggerEnter: " + other.gameObject.name);
+
+            if (other.gameObject.tag == "Picker")
+            {
+                if (pickUp.pickedItem == null)
+                    return;
+
+                switch (pickUp.pickedItem.Type)
+                {
+                    case PickUpBehaviour.PickUpType.Refugee:
+                        {
+                            currentRefugeesCount += pickUp.pickedItem.Amount;
+                        }
+                        break;
+                    case PickUpBehaviour.PickUpType.HellfireAmmo:
+                        {
+                            HellfireCount += pickUp.pickedItem.Amount;
+
+                        }
+                        break;
+                    case PickUpBehaviour.PickUpType.HydraAmmo:
+                        {
+                            HydraCount += pickUp.pickedItem.Amount;
+                        }
+                        break;
+                    case PickUpBehaviour.PickUpType.GatlingGun:
+                        GatlingGunCount += pickUp.pickedItem.Amount;
+                        break;
+                    case PickUpBehaviour.PickUpType.Fuel:
+                        currentFuelAmount += pickUp.pickedItem.Amount;
+                        break;
+                    case PickUpBehaviour.PickUpType.HealthPack:
+                        currentHP += pickUp.pickedItem.Amount;
+                        break;
+                    default:
+                        break;
+                }
+                pickUp.DestroyPickedItem();
+            }
+        }
+        protected override void OnTriggerExit(Collider Collision)
+        {
+            base.OnTriggerExit(Collision);
+
+            Debug.Log("Chopper OnTriggerExit: " + Collision.gameObject.name);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("Chopper OnCollisionEnter: " + collision.gameObject.name);
+
         }
     }
 }

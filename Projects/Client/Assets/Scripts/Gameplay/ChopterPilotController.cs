@@ -39,10 +39,7 @@ namespace RamboTeam.Client
         public float VerticalRotation = 15;
         public float HorizontalRotation = 10;
 
-        //Weapons Count
-        public uint HellfireCount { get; private set; } = 16;
-        public uint HydraCount { get; private set; } = 34;
-        public uint GatlingGunCount { get; private set; } = 1120;
+
 
         [SerializeField]
         private GameObject ChopterModel;
@@ -81,7 +78,7 @@ namespace RamboTeam.Client
 
         private void ShootHellFireMissle()
         {
-            if (Chopter.Instance.IsDead || !IsPilot || HellfireCount == 0 || Time.time < nextShotTime)
+            if (Chopter.Instance.IsDead || !IsPilot || Chopter.Instance.HellfireCount == 0 || Time.time < nextShotTime)
                 return;
 
             nextShotTime = Time.time + MissleLuncherRateOfShot;
@@ -90,7 +87,7 @@ namespace RamboTeam.Client
             GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
             Bullet ps = newObject.GetComponent<Bullet>();
             ps.SetParamaeters(this.transform.forward);
-            HellfireCount--;
+            Chopter.Instance.TriggerHellfireShot();
             EventManager.OnHellfireUpdateCall();
         }
 
