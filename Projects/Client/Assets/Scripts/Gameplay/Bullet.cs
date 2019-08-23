@@ -10,6 +10,8 @@ namespace RamboTeam.Client
         private float endOfLifetime = 0;
 
         [SerializeField]
+        public LayerMask LayerShouldAttack;
+        [SerializeField]
         public LayerMask ChopterLayer;
         [SerializeField]
         public LayerMask enemyLayer;
@@ -42,6 +44,8 @@ namespace RamboTeam.Client
             base.OnTriggerEnter(Collider);
 
             Debug.Log("Collide");
+            if (Collider.gameObject.layer != LayerShouldAttack)
+                return;
 
             if (Collider.gameObject.layer == ChopterLayer)
                 chopter.ApplyDamage(Damage);
