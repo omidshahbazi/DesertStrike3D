@@ -59,6 +59,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b7167b69f54b646990c71ab02baef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LayerShouldAttack:
+    serializedVersion: 2
+    m_Bits: 512
+  ChopterLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
   Speed: 150
   Damage: 50
   Lifetime: 20

@@ -1,6 +1,7 @@
 ﻿//Rambo Team
 using RamboTeam.Client.GamePlayLogic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RamboTeam.Client
@@ -14,6 +15,9 @@ namespace RamboTeam.Client
         }
 
         [SerializeField]
+        public float RangeDetect = 15F;
+
+        [SerializeField]
         public GameObject MissleLuncher;
         [SerializeField]
         public Transform RightMissleLuncher;
@@ -22,7 +26,17 @@ namespace RamboTeam.Client
         [SerializeField]
         public float MissleLuncherRateOfShot;
 
+        [SerializeField]
+        public GameObject AirCraftLuncher;
+        [SerializeField]
+        public Transform RightAirCraft;
+        [SerializeField]
+        public Transform LeftAirCraft;
+        [SerializeField]
+        public float AirCraftRateOfShot;
+
         private float nextShotTime;
+        private float nextAirCraftShotTime;
 
         private const float SYNC_RATE = 2;
         private const float SYNC_PERIOD = 1 / SYNC_RATE;
@@ -39,11 +53,17 @@ namespace RamboTeam.Client
         public float VerticalRotation = 15;
         public float HorizontalRotation = 10;
 
-
+        //Weapons Count
+        public uint HellfireCount { get; private set; } = 16;
+        public uint HydraCount { get; private set; } = 34;
+        public uint GatlingGunCount { get; private set; } = 1120;
 
         [SerializeField]
         private GameObject ChopterModel;
         private bool nextPos;
+        private bool nextAirCraftPos;
+
+        private List<Enemy> enemiesList = new List<Enemy>();
 
         public bool IsPilot
         {
@@ -56,6 +76,7 @@ namespace RamboTeam.Client
             get;
             private set;
         }
+        public float sqrRange { get; private set; }
 
         protected override void Awake()
         {
@@ -74,21 +95,10 @@ namespace RamboTeam.Client
             NetworkCommands.OnCommando += OnCommando;
             NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
             InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
-        }
-
-        private void ShootHellFireMissle()
-        {
-            if (Chopter.Instance.IsDead || !IsPilot || Chopter.Instance.HellfireCount == 0 || Time.time < nextShotTime)
-                return;
-
-            nextShotTime = Time.time + MissleLuncherRateOfShot;
-            nextPos = !nextPos;
-            Vector3 pos = nextPos ? RightMissleLuncher.position : LeftMissleLuncher.position;
-            GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
-            Bullet ps = newObject.GetComponent<Bullet>();
-            ps.SetParamaeters(this.transform.forward);
-            Chopter.Instance.TriggerHellfireShot();
-            EventManager.OnHellfireUpdateCall();
+            InputManager.Instance.AddInput(KeyCode.X, ShootAirCraft);
+            QueryEnemies();
+            Enemy.OnEnemyDead += RemoveEnemyFromList;
+            sqrRange = RangeDetect * RangeDetect;
         }
 
         protected override void OnDisable()
@@ -99,6 +109,8 @@ namespace RamboTeam.Client
             NetworkCommands.OnCommando -= OnCommando;
             NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
             InputManager.Instance.RemoveInput(KeyCode.Z, ShootHellFireMissle);
+            InputManager.Instance.RemoveInput(KeyCode.X, ShootAirCraft);
+            Enemy.OnEnemyDead -= RemoveEnemyFromList;
         }
 
         private void OnPilot()
@@ -204,6 +216,92 @@ namespace RamboTeam.Client
 
                 IsMoving = ((lastPosition - transform.position).sqrMagnitude > 1);
             }
+        }
+
+        private void ShootHellFireMissle()
+        {
+            if (Chopter.Instance.IsDead || !IsPilot || HellfireCount == 0 || Time.time < nextShotTime)
+                return;
+
+            nextShotTime = Time.time + MissleLuncherRateOfShot;
+            nextPos = !nextPos;
+            Vector3 pos = nextPos ? RightMissleLuncher.position : LeftMissleLuncher.position;
+            GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
+            Bullet ps = newObject.GetComponent<Bullet>();
+            (Enemy en, Vector3 dir) = SearchClosetTarge();
+            ps.SetParamaeters(en == null ? this.transform.forward : dir);
+            HellfireCount--;
+            EventManager.OnHellfireUpdateCall();
+        }
+
+
+        private void ShootAirCraft()
+        {
+            if (Chopter.Instance.IsDead || !IsPilot || HydraCount == 0 || Time.time < nextAirCraftShotTime)
+                return;
+
+            nextAirCraftShotTime = Time.time + AirCraftRateOfShot;
+            nextAirCraftPos = !nextAirCraftPos;
+            Vector3 pos = nextAirCraftPos ? RightAirCraft.position : LeftAirCraft.position;
+            GameObject newObject = GameObject.Instantiate(AirCraftLuncher, pos, Quaternion.identity) as GameObject;
+            Bullet ps = newObject.GetComponent<Bullet>();
+
+            (Enemy en, Vector3 dir) = SearchClosetTarge();
+            ps.SetParamaeters(en == null ? this.transform.forward : dir);
+            HydraCount--;
+            EventManager.OnHellfireUpdateCall();
+        }
+
+        private (Enemy, Vector3) SearchClosetTarge()
+        {
+            Enemy findTarget = null;
+            Vector3 dir = Vector3.zero;
+            float closetPoint = float.MaxValue;
+            for (int i = 0; i < enemiesList.Count; ++i)
+            {
+                Enemy en = enemiesList[i];
+                Vector3 orgin = this.transform.position;
+                Vector3 target = en.transform.position;
+                orgin.y = target.y = 0;
+                Vector3 diff = orgin - target;
+                float mag = diff.sqrMagnitude;
+
+                if (mag > sqrRange)
+                    continue;
+
+
+                if ((mag < closetPoint))
+                {
+                   
+                    closetPoint = diff.sqrMagnitude;
+
+                
+                    float angle = Vector3.Angle(( en.transform.position-this.transform.position), transform.forward);
+                    if (angle<30)
+                    {
+                        Debug.Log(angle);
+                        findTarget = en;
+                        //They Are looking each other
+                        dir =(this.transform.position - en.transform.position).normalized;
+
+                    }
+                }
+
+            }
+
+
+            return (findTarget, -1*dir);
+        }
+
+        private void RemoveEnemyFromList(Enemy Enemy)
+        {
+            if (enemiesList.Contains(Enemy))
+                enemiesList.Remove(Enemy);
+        }
+
+        private void QueryEnemies()
+        {
+            enemiesList.AddRange(FindObjectsOfType<Enemy>());
         }
     }
 }

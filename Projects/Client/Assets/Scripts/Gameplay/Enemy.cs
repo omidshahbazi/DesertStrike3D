@@ -1,10 +1,13 @@
 ﻿//Rambo Team
+using System;
 using UnityEngine;
 
 namespace RamboTeam.Client
 {
+    public delegate void EnemyDead(Enemy Enemy);
     public class Enemy : MonoBehaviorBase
     {
+        public static EnemyDead OnEnemyDead;
         private Transform target = null;
 
         private float sqrRange = 0;
@@ -17,11 +20,19 @@ namespace RamboTeam.Client
         [SerializeField]
         private GameObject BulletPrefab = null;
 
+        [SerializeField]
+        public float HP { get; private set; } = 100;
+        private float currentHP;
+
         protected bool IsPilot
         {
             get;
             private set;
         }
+
+
+        private bool IsDead { get; set; } = false;
+
 
         protected override void Start()
         {
@@ -33,12 +44,16 @@ namespace RamboTeam.Client
             target = ChopterPilotController.Instance.transform;
         }
 
+
+
         protected override void OnEnable()
         {
             base.OnEnable();
 
             NetworkCommands.OnPilot += OnPilot;
             NetworkCommands.OnCommando += OnCommando;
+            IsDead = false;
+            currentHP = HP;
         }
 
         protected override void OnDisable()
@@ -48,6 +63,8 @@ namespace RamboTeam.Client
             NetworkCommands.OnPilot -= OnPilot;
             NetworkCommands.OnCommando -= OnCommando;
         }
+
+
 
         private void OnPilot()
         {
@@ -63,7 +80,7 @@ namespace RamboTeam.Client
         {
             base.Update();
 
-            if (!IsPilot || target == null || Chopter.Instance.IsDead)
+            if (!IsPilot || target == null || Chopter.Instance.IsDead || IsDead)
                 return;
 
             Vector3 diff = target.position - transform.position;
@@ -92,6 +109,29 @@ namespace RamboTeam.Client
             Bullet bullet = newObject.GetComponent<Bullet>();
 
             bullet.SetParamaeters(Direction);
+        }
+
+        public void ApplyDamage(float Damage)
+        {
+
+            if (IsDead)
+                return;
+
+            currentHP = Mathf.Clamp(currentHP - Damage, 0, HP);
+
+            EventManager.OnHealthUpdateCall();
+
+
+            if (currentHP == 0)
+            {
+                OnEnemyDeath();
+            }
+        }
+
+        private void OnEnemyDeath()
+        {
+            IsDead = true;
+            OnEnemyDead?.Invoke(this);
         }
 
         protected override void OnDrawGizmosSelected()
