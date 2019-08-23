@@ -50,7 +50,13 @@ namespace RamboTeam.Client
             if (Collider.gameObject.layer == ChopterLayer)
                 chopter.ApplyDamage(Damage);
             else if (Collider.gameObject.layer == enemyLayer)
-                Debug.Log("EnemyColid");
+            {
+                Enemy enemy = Collider.gameObject.GetComponent<Enemy>();
+                if (enemy == null)
+                    return;
+
+                enemy.ApplyDamage(Damage);
+            }
 
             Kill();
         }
