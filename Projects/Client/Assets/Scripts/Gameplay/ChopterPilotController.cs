@@ -53,11 +53,6 @@ namespace RamboTeam.Client
         public float VerticalRotation = 15;
         public float HorizontalRotation = 10;
 
-        //Weapons Count
-        public uint HellfireCount { get; private set; } = 16;
-        public uint HydraCount { get; private set; } = 34;
-        public uint GatlingGunCount { get; private set; } = 1120;
-
         [SerializeField]
         private GameObject ChopterModel;
         private bool nextPos;
@@ -220,7 +215,7 @@ namespace RamboTeam.Client
 
         private void ShootHellFireMissle()
         {
-            if (Chopter.Instance.IsDead || !IsPilot || HellfireCount == 0 || Time.time < nextShotTime)
+            if (Chopter.Instance.IsDead || !IsPilot || Chopter.Instance.HellfireCount == 0 || Time.time < nextShotTime)
                 return;
 
             nextShotTime = Time.time + MissleLuncherRateOfShot;
@@ -230,14 +225,13 @@ namespace RamboTeam.Client
             Bullet ps = newObject.GetComponent<Bullet>();
             (Enemy en, Vector3 dir) = SearchClosetTarge();
             ps.SetParamaeters(en == null ? this.transform.forward : dir);
-            HellfireCount--;
-            EventManager.OnHellfireUpdateCall();
+            Chopter.Instance.TriggerHellfireShot();
         }
 
 
         private void ShootAirCraft()
         {
-            if (Chopter.Instance.IsDead || !IsPilot || HydraCount == 0 || Time.time < nextAirCraftShotTime)
+            if (Chopter.Instance.IsDead || !IsPilot || Chopter.Instance.HydraCount == 0 || Time.time < nextAirCraftShotTime)
                 return;
 
             nextAirCraftShotTime = Time.time + AirCraftRateOfShot;
@@ -248,8 +242,7 @@ namespace RamboTeam.Client
 
             (Enemy en, Vector3 dir) = SearchClosetTarge();
             ps.SetParamaeters(en == null ? this.transform.forward : dir);
-            HydraCount--;
-            EventManager.OnHellfireUpdateCall();
+            Chopter.Instance.TriggerHydraShot();
         }
 
         private (Enemy, Vector3) SearchClosetTarge()

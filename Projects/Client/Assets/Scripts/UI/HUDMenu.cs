@@ -46,7 +46,7 @@ namespace RamboTeam.Client.UI
         {
             yield return new WaitForSeconds(1.0F);
 
-            NetworkCommands.HandlePilot(null); 
+            NetworkCommands.HandlePilot(null);
         }
 
         protected override void OnEnable()
@@ -57,7 +57,9 @@ namespace RamboTeam.Client.UI
             EventManager.OnHellfireUpdate += OnUpdateHellfire;
             EventManager.OnFuelUpdate += OnUpdateFuel;
             EventManager.OnLifeUpdate += OnUpdateLife;
-
+            EventManager.OnRefugeeUpdate += OnUpdateRefugee;
+            EventManager.OnHydraUpdate += OnUpdateHydra;
+            EventManager.OnGatlingGunUpdate += OnUpdateGatlingGun;
         }
 
         protected override void OnDisable()
@@ -68,6 +70,25 @@ namespace RamboTeam.Client.UI
             EventManager.OnHellfireUpdate -= OnUpdateHellfire;
             EventManager.OnFuelUpdate -= OnUpdateFuel;
             EventManager.OnLifeUpdate -= OnUpdateLife;
+            EventManager.OnRefugeeUpdate -= OnUpdateRefugee;
+            EventManager.OnHydraUpdate -= OnUpdateHydra;
+            EventManager.OnGatlingGunUpdate -= OnUpdateGatlingGun;
+
+        }
+
+        private void OnUpdateRefugee()
+        {
+            rescueText.text = Chopter.Instance.currentRefugeesCount.ToString();
+        }
+
+        private void OnUpdateHydra()
+        {
+            hydraText.text = Chopter.Instance.HydraCount.ToString();
+        }
+
+        private void OnUpdateGatlingGun()
+        {
+            gatlingGunText.text = Chopter.Instance.GatlingGunCount.ToString();
         }
 
         private void OnUpdateLife()

@@ -1,4 +1,5 @@
 ﻿//Rambo Team
+using System;
 using UnityEngine;
 
 namespace RamboTeam.Client
@@ -8,6 +9,11 @@ namespace RamboTeam.Client
     public delegate void HellfireUpdateEventHandler();
     public delegate void FuelUpdateEventHandler();
     public delegate void LifeUpdateEventHandler();
+    public delegate void HydraUpdateEventHandler();
+    public delegate void GatlingGunUpdateEventHandler();
+    public delegate void RefugeeUpdateEventHandler();
+
+
 
     public static class EventManager
     {
@@ -15,6 +21,11 @@ namespace RamboTeam.Client
         public static event HellfireUpdateEventHandler OnHellfireUpdate;
         public static event FuelUpdateEventHandler OnFuelUpdate;
         public static event LifeUpdateEventHandler OnLifeUpdate;
+        public static event HydraUpdateEventHandler OnHydraUpdate;
+        public static event GatlingGunUpdateEventHandler OnGatlingGunUpdate;
+        public static event RefugeeUpdateEventHandler OnRefugeeUpdate;
+
+
 
         public static void OnHealthUpdateCall()
         {
@@ -39,6 +50,24 @@ namespace RamboTeam.Client
         {
             if (OnLifeUpdate != null)
                 OnLifeUpdate();
+        }
+
+        public static void OnHydraUpdateCall()
+        {
+            if (OnHydraUpdate != null)
+                OnHydraUpdate();
+        }
+
+        internal static void OnGatlingGunUpdateCall()
+        {
+            if (OnGatlingGunUpdate != null)
+                OnGatlingGunUpdate();
+        }
+
+        internal static void OnRefugeeUpdateCall()
+        {
+            if (OnRefugeeUpdate != null)
+                OnRefugeeUpdate();
         }
     }
 }

@@ -100,6 +100,7 @@ namespace RamboTeam.Client
         internal void TriggerHellfireShot()
         {
             HellfireCount--;
+            EventManager.OnHellfireUpdateCall();
         }
 
         private void OnPilot()
@@ -188,7 +189,6 @@ namespace RamboTeam.Client
 
             if (IsDead)
                 return;
-            Debug.Log("Chopper OnTriggerEnter: " + other.gameObject.name);
 
             if (other.gameObject.tag == "Picker")
             {
@@ -200,27 +200,33 @@ namespace RamboTeam.Client
                     case PickUpBehaviour.PickUpType.Refugee:
                         {
                             currentRefugeesCount += pickUp.pickedItem.Amount;
+                            EventManager.OnRefugeeUpdateCall();
                         }
                         break;
                     case PickUpBehaviour.PickUpType.HellfireAmmo:
                         {
                             HellfireCount += pickUp.pickedItem.Amount;
-
+                            EventManager.OnHellfireUpdateCall();
                         }
                         break;
                     case PickUpBehaviour.PickUpType.HydraAmmo:
                         {
                             HydraCount += pickUp.pickedItem.Amount;
+                            EventManager.OnHydraUpdateCall();
                         }
                         break;
                     case PickUpBehaviour.PickUpType.GatlingGun:
                         GatlingGunCount += pickUp.pickedItem.Amount;
+                        EventManager.OnGatlingGunUpdateCall();
+
                         break;
                     case PickUpBehaviour.PickUpType.Fuel:
                         currentFuelAmount += pickUp.pickedItem.Amount;
+                        EventManager.OnFuelUpdateCall();
                         break;
                     case PickUpBehaviour.PickUpType.HealthPack:
                         currentHP += pickUp.pickedItem.Amount;
+                        EventManager.OnHealthUpdateCall();
                         break;
                     default:
                         break;
@@ -228,17 +234,11 @@ namespace RamboTeam.Client
                 pickUp.DestroyPickedItem();
             }
         }
-        protected override void OnTriggerExit(Collider Collision)
+
+        internal void TriggerHydraShot()
         {
-            base.OnTriggerExit(Collision);
-
-            Debug.Log("Chopper OnTriggerExit: " + Collision.gameObject.name);
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log("Chopper OnCollisionEnter: " + collision.gameObject.name);
-
+            HydraCount--;
+            EventManager.OnHydraUpdateCall();
         }
     }
 }
