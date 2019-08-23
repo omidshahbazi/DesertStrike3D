@@ -30,9 +30,9 @@ namespace RamboTeam.Client
             private set;
         }
 
-       
-        private bool IsDead { get;  set; } = false;
-       
+
+        private bool IsDead { get; set; } = false;
+
 
         protected override void Start()
         {
@@ -44,7 +44,7 @@ namespace RamboTeam.Client
             target = ChopterPilotController.Instance.transform;
         }
 
- 
+
 
         protected override void OnEnable()
         {
@@ -53,6 +53,7 @@ namespace RamboTeam.Client
             NetworkCommands.OnPilot += OnPilot;
             NetworkCommands.OnCommando += OnCommando;
             IsDead = false;
+            currentHP = HP;
         }
 
         protected override void OnDisable()
@@ -63,7 +64,7 @@ namespace RamboTeam.Client
             NetworkCommands.OnCommando -= OnCommando;
         }
 
-    
+
 
         private void OnPilot()
         {
@@ -112,7 +113,7 @@ namespace RamboTeam.Client
 
         public void ApplyDamage(float Damage)
         {
-           
+
             if (IsDead)
                 return;
 
