@@ -8,9 +8,11 @@ using UnityEngine;
 public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManager>
 {
     public delegate void KeyRealeased(KeyCode KeyCode);
+    public delegate void AnyKeyPressed();
     public delegate void KeyPressedDelegate();
     public delegate void MousePressedDelegate(Vector3 Position);
     public event KeyRealeased OnKeyRealeased;
+    public event AnyKeyPressed OnAnyKeyPressd;
     private class InputMap : Dictionary<KeyCode, KeyPressedDelegate>
     { }
 
@@ -43,7 +45,13 @@ public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManag
             var current = mouseMap.Current;
             if (Input.GetKeyDown(current.Key))
                 current.Value(Input.mousePosition);
+
+            if (Input.GetKeyUp(current.Key))
+                OnKeyRealeased?.Invoke(current.Key);
         }
+
+        if (Input.anyKeyDown)
+            OnAnyKeyPressd?.Invoke();
     }
 
   

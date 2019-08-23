@@ -26,8 +26,8 @@ namespace RamboTeam.Client.UI
             TutorialPanel.gameObject.SetActive(false);
             SingleButton.onClick.AddListener(() =>
             {
-                Story.gameObject.SetActive(true);
-                StartCoroutine(ShowStory());
+                ShowStory();
+                InputManager.Instance.OnAnyKeyPressd+=ShowTutorial;
 
             });
 
@@ -36,28 +36,23 @@ namespace RamboTeam.Client.UI
 
 
 
-        private IEnumerator ShowStory()
+        private void ShowStory()
         {
-            if (Input.anyKeyDown)
-            {
-                Story.gameObject.SetActive(false);
-                TutorialPanel.gameObject.SetActive(true);
-                StopCoroutine(ShowStory());
-                StartCoroutine(ShowTutorial());
-            }
-            else
-            {
-                yield return new WaitForSeconds(4.0F);
-                StartCoroutine(ShowTutorial());
-                StopCoroutine(ShowStory());
-                Story.gameObject.SetActive(false);
-                TutorialPanel.gameObject.SetActive(true);
-            }
+            Story.gameObject.SetActive(true);
+           
         }
 
-        private IEnumerator ShowTutorial()
+        private void ShowTutorial()
         {
-            yield return new WaitForSeconds(2.0F);
+            TutorialPanel.gameObject.SetActive(true);
+            InputManager.Instance.OnAnyKeyPressd -= ShowTutorial;
+            InputManager.Instance.OnAnyKeyPressd += loadGame;
+          
+        }
+
+        private void loadGame()
+        {
+            InputManager.Instance.OnAnyKeyPressd -= loadGame;
             MainMenuMusic.Stop();
             RamboSceneManager.Instance.LoadScene("MainScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
