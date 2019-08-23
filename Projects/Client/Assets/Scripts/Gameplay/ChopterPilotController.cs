@@ -22,7 +22,17 @@ namespace RamboTeam.Client
         [SerializeField]
         public float MissleLuncherRateOfShot;
 
+        [SerializeField]
+        public GameObject AirCraftLuncher;
+        [SerializeField]
+        public Transform RightAirCraft;
+        [SerializeField]
+        public Transform LeftAirCraft;
+        [SerializeField]
+        public float AirCraftRateOfShot;
+
         private float nextShotTime;
+        private float nextAirCraftShotTime;
 
         private const float SYNC_RATE = 2;
         private const float SYNC_PERIOD = 1 / SYNC_RATE;
@@ -47,6 +57,7 @@ namespace RamboTeam.Client
         [SerializeField]
         private GameObject ChopterModel;
         private bool nextPos;
+        private bool nextAirCraftPos;
 
         public bool IsPilot
         {
@@ -77,9 +88,9 @@ namespace RamboTeam.Client
             NetworkCommands.OnCommando += OnCommando;
             NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
             InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
+            InputManager.Instance.AddInput(KeyCode.X, ShootAirCraft);
         }
 
-       
 
         protected override void OnDisable()
         {
@@ -89,6 +100,7 @@ namespace RamboTeam.Client
             NetworkCommands.OnCommando -= OnCommando;
             NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
             InputManager.Instance.RemoveInput(KeyCode.Z, ShootHellFireMissle);
+            InputManager.Instance.RemoveInput(KeyCode.X, ShootAirCraft);
         }
 
         private void OnPilot()
@@ -196,7 +208,6 @@ namespace RamboTeam.Client
             }
         }
 
-
         private void ShootHellFireMissle()
         {
             if (Chopter.Instance.IsDead || !IsPilot || HellfireCount == 0 || Time.time < nextShotTime)
@@ -209,6 +220,23 @@ namespace RamboTeam.Client
             Bullet ps = newObject.GetComponent<Bullet>();
             ps.SetParamaeters(this.transform.forward);
             HellfireCount--;
+            EventManager.OnHellfireUpdateCall();
+        }
+
+
+
+        private void ShootAirCraft()
+        {
+            if (Chopter.Instance.IsDead || !IsPilot || HydraCount == 0 || Time.time < nextAirCraftShotTime)
+                return;
+
+            nextAirCraftShotTime = Time.time + AirCraftRateOfShot;
+            nextAirCraftPos = !nextAirCraftPos;
+            Vector3 pos = nextAirCraftPos ? RightAirCraft.position : LeftAirCraft.position;
+            GameObject newObject = GameObject.Instantiate(AirCraftLuncher, pos, Quaternion.identity) as GameObject;
+            Bullet ps = newObject.GetComponent<Bullet>();
+            ps.SetParamaeters(this.transform.forward);
+            HydraCount--;
             EventManager.OnHellfireUpdateCall();
         }
     }
