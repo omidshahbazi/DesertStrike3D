@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
+    public delegate void EnemyDead(Enemy Enemy);
     public class Enemy : MonoBehaviorBase
     {
+        public static EnemyDead OnEnemyDead;
         private Transform target = null;
 
         private float sqrRange = 0;
@@ -42,6 +44,8 @@ namespace RamboTeam.Client
             target = ChopterPilotController.Instance.transform;
         }
 
+ 
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -58,6 +62,8 @@ namespace RamboTeam.Client
             NetworkCommands.OnPilot -= OnPilot;
             NetworkCommands.OnCommando -= OnCommando;
         }
+
+    
 
         private void OnPilot()
         {
@@ -124,6 +130,7 @@ namespace RamboTeam.Client
         private void OnEnemyDeath()
         {
             IsDead = true;
+            OnEnemyDead?.Invoke(this);
         }
 
         protected override void OnDrawGizmosSelected()
