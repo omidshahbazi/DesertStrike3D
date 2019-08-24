@@ -13,7 +13,7 @@ namespace RamboTeam.Client
 		private const byte ON_CONNECTED_COMMAND = byte.MaxValue;
 		private const byte ON_DISCONNECTED_COMMAND = byte.MaxValue - 1;
 
-		public static NetworkLayer instance = null;
+		private static NetworkLayer instance = null;
 		public static NetworkLayer Instance
 		{
 			get

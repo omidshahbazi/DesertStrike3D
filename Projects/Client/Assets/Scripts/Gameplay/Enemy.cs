@@ -26,8 +26,7 @@ namespace RamboTeam.Client
 
         protected bool IsPilot
         {
-            get;
-            private set;
+			get { return NetworkLayer.Instance.IsPilot; }
         }
 
 
@@ -50,30 +49,8 @@ namespace RamboTeam.Client
         {
             base.OnEnable();
 
-            NetworkCommands.OnPilot += OnPilot;
-            NetworkCommands.OnCommando += OnCommando;
             IsDead = false;
             currentHP = HP;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-
-            NetworkCommands.OnPilot -= OnPilot;
-            NetworkCommands.OnCommando -= OnCommando;
-        }
-
-
-
-        private void OnPilot()
-        {
-            IsPilot = true;
-        }
-
-        private void OnCommando()
-        {
-            IsPilot = false;
         }
 
         protected override void Update()
