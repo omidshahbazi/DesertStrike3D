@@ -36,8 +36,10 @@ namespace RamboTeam.Client
 		public uint LifeCount = 3;
 		public uint FuelAmount = 120;
 
-
-		public float currentHP { get; private set; } = 0;
+        public uint currentHellfireCount { get; private set; } = 0;
+        public uint currentHydraCount { get; private set; } = 0;
+        public uint currentGatlingGunCount { get; private set; } = 0;
+        public float currentHP { get; private set; } = 0;
 		public uint currentLifeCount { get; private set; } = 0;
 		public uint currentFuelAmount { get; private set; } = 0;
 		public uint currentRefugeesCount { get; private set; } = 0;
@@ -59,8 +61,11 @@ namespace RamboTeam.Client
 			currentFuelAmount = FuelAmount;
 			currentLifeCount = LifeCount;
 			currentRefugeesCount = currentRefugeesCount;
+            currentGatlingGunCount = GatlingGunCount;
+            currentHydraCount = HydraCount;
+            currentHellfireCount = HellfireCount;
 
-			smokeParticle.SetActive(false);
+            smokeParticle.SetActive(false);
 			nextFuelUpdateTime = Time.time + FuelCostTime;
 		}
 
@@ -87,8 +92,8 @@ namespace RamboTeam.Client
 
 		internal void TriggerHellfireShot()
 		{
-			HellfireCount--;
-			EventManager.OnHellfireUpdateCall();
+            currentHellfireCount--;
+            EventManager.OnHellfireUpdateCall();
 		}
 
 		public void ApplyDamage(float Damage)
@@ -215,8 +220,8 @@ namespace RamboTeam.Client
 
 		internal void TriggerHydraShot()
 		{
-			HydraCount--;
-			EventManager.OnHydraUpdateCall();
+            currentHydraCount--;
+            EventManager.OnHydraUpdateCall();
 		}
 	}
 }
