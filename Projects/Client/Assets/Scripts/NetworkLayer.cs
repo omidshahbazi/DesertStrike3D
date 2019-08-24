@@ -13,10 +13,21 @@ namespace RamboTeam.Client
 		private const byte ON_CONNECTED_COMMAND = byte.MaxValue;
 		private const byte ON_DISCONNECTED_COMMAND = byte.MaxValue - 1;
 
+		public static NetworkLayer instance = null;
 		public static NetworkLayer Instance
 		{
-			get;
-			private set;
+			get
+			{
+				if (instance == null)
+				{
+					GameObject gameObject = new GameObject("NetworkLayer");
+					DontDestroyOnLoad(gameObject);
+					instance = gameObject.AddComponent<NetworkLayer>();
+				}
+
+				return instance;
+
+			}
 		}
 
 		private Client client = null;
@@ -31,16 +42,13 @@ namespace RamboTeam.Client
 		public bool IsPilot
 		{
 			get;
-			private set;
+			set;
 		}
 
 		protected override void Awake()
 		{
 			base.Awake();
 
-			DontDestroyOnLoad(gameObject);
-
-			Instance = this;
 
 			Application.runInBackground = true;
 

@@ -21,23 +21,27 @@ namespace RamboTeam.Client.UI
 		{
 			base.Awake();
 
+			NetworkLayer networkLayer = NetworkLayer.Instance;
+
 			MainMenuMusic = GetComponent<AudioSource>();
 			MainMenuMusic.Play();
 			Story.gameObject.SetActive(false);
 			TutorialPanel.gameObject.SetActive(false);
 			SingleButton.onClick.AddListener(() =>
 			{
+				NetworkLayer.Instance.IsPilot = true;
 				ShowStory();
 				InputManager.Instance.OnAnyKeyPressd += ShowTutorial;
 			});
 
 			QuitButton.onClick.AddListener(() => Application.Quit());
 
-			CoOpButton.interactable = false;
 			NetworkCommands.OnConnected += NetworkCommands_OnConnected;
 			NetworkCommands.OnDisconnected += NetworkCommands_OnDisconnected;
 
 			NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
+
+			CoOpButton.interactable = false;
 		}
 
 		private void NetworkCommands_OnConnected()
