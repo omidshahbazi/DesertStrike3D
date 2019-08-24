@@ -13,6 +13,9 @@ namespace RamboTeam.Client
 	{
 		private static BufferStream buffer = new BufferStream(new byte[64]);
 
+		public static event NetworkEventHandler OnConnected;
+		public static event NetworkEventHandler OnDisconnected;
+
 		public static event NetworkEventHandler OnJoinedToRoom;
 		public static event NetworkEventHandler OnPilot;
 		public static event NetworkEventHandler OnCommando;
@@ -141,19 +144,31 @@ namespace RamboTeam.Client
 			NetworkLayer.Instance.Send(buffer);
 		}
 
-		public static void HandleJoinedToRoom(BufferStream Buffer)
+		public static void HandleConnected()
+		{
+			if (OnConnected != null)
+				OnConnected();
+		}
+
+		public static void HandleDisconnected()
+		{
+			if (OnDisconnected != null)
+				OnDisconnected();
+		}
+
+		public static void HandleJoinedToRoom()
 		{
 			if (OnJoinedToRoom != null)
 				OnJoinedToRoom();
 		}
 
-		public static void HandlePilot(BufferStream Buffer)
+		public static void HandlePilot()
 		{
 			if (OnPilot != null)
 				OnPilot();
 		}
 
-		public static void HandleCommando(BufferStream Buffer)
+		public static void HandleCommando()
 		{
 			if (OnCommando != null)
 				OnCommando();

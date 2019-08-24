@@ -9,6 +9,10 @@ namespace RamboTeam.Client
 {
 	public class NetworkLayer : MonoBehaviorBase
 	{
+		private const byte ON_CONNECTION_CATEGORY = byte.MaxValue;
+		private const byte ON_CONNECTED_COMMAND = byte.MaxValue;
+		private const byte ON_DISCONNECTED_COMMAND = byte.MaxValue - 1;
+
 		public static NetworkLayer Instance
 		{
 			get;
@@ -16,11 +20,25 @@ namespace RamboTeam.Client
 		}
 
 		private Client client = null;
-		private List<Binary> incommingMessages = null;
+		private List<BufferStream> incommingMessages = null;
+
+		public bool IsConnected
+		{
+			get;
+			private set;
+		}
+
+		public bool IsPilot
+		{
+			get;
+			private set;
+		}
 
 		protected override void Awake()
 		{
 			base.Awake();
+
+			DontDestroyOnLoad(gameObject);
 
 			Instance = this;
 
@@ -35,15 +53,24 @@ namespace RamboTeam.Client
 
 			while (incommingMessages.Count != 0)
 			{
-				Binary messageInfo = incommingMessages[0];
+				BufferStream buffer = incommingMessages[0];
 				incommingMessages.RemoveAt(0);
-
-				BufferStream buffer = new BufferStream(messageInfo.StreamData.byteArr);
 
 				byte category = buffer.ReadByte();
 				byte command = buffer.ReadByte();
 
-				if (category == Commands.Category.LOBBY)
+				if (category == ON_CONNECTION_CATEGORY)
+				{
+					if (category == ON_CONNECTED_COMMAND)
+					{
+						NetworkCommands.HandleConnected();
+					}
+					else if (category == ON_DISCONNECTED_COMMAND)
+					{
+						NetworkCommands.HandleDisconnected();
+					}
+				}
+				else if (category == Commands.Category.LOBBY)
 				{
 
 				}
@@ -51,13 +78,15 @@ namespace RamboTeam.Client
 				{
 					if (command == Commands.Room.MASTER)
 					{
-						NetworkCommands.HandleJoinedToRoom(buffer);
-						NetworkCommands.HandlePilot(buffer);
+						IsPilot = true;
+						NetworkCommands.HandleJoinedToRoom();
+						NetworkCommands.HandlePilot();
 					}
 					else if (command == Commands.Room.SECONDARY)
 					{
-						NetworkCommands.HandleJoinedToRoom(buffer);
-						NetworkCommands.HandleCommando(buffer);
+						IsPilot = false;
+						NetworkCommands.HandleJoinedToRoom();
+						NetworkCommands.HandleCommando();
 					}
 					else if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
 					{
@@ -95,7 +124,7 @@ namespace RamboTeam.Client
 
 		public void Connect(string Host)
 		{
-			incommingMessages = new List<Binary>();
+			incommingMessages = new List<BufferStream>();
 
 			client = new Client();
 			client.Connect(Host);
@@ -107,14 +136,19 @@ namespace RamboTeam.Client
 
 		private void OnConnected()
 		{
-			//
-			// TODO: Place Holder
-			//
-			NetworkCommands.JoinToRoom();
+			IsConnected = true;
+
+			incommingMessages.Add(new BufferStream(new byte[] { ON_CONNECTION_CATEGORY, ON_CONNECTED_COMMAND }));
+
+			Debug.Log("Connected");
 		}
 
 		private void OnDisconnected()
 		{
+			IsConnected = false;
+
+			incommingMessages.Add(new BufferStream(new byte[] { ON_CONNECTION_CATEGORY, ON_DISCONNECTED_COMMAND }));
+
 			Debug.LogError("Disconnected");
 		}
 
@@ -125,7 +159,7 @@ namespace RamboTeam.Client
 
 		private void OnMessageReceived(NetworkingPlayer Player, Binary Frame)
 		{
-			incommingMessages.Add(Frame);
+			incommingMessages.Add(new BufferStream(Frame.StreamData.byteArr));
 
 		}
 	}
