@@ -20,8 +20,8 @@ namespace RamboTeam.Client
         [SerializeField]
         private GameObject BulletPrefab = null;
 
+        public float HP = 100;
         [SerializeField]
-        public float HP { get; private set; } = 100;
         private float currentHP;
 
         protected bool IsPilot
