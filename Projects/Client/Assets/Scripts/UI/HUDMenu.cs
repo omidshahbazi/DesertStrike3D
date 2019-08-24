@@ -32,12 +32,12 @@ namespace RamboTeam.Client.UI
                 Instance = this;
 
             armorText.text = Chopter.Instance.currentHP.ToString();
-            lifeText.text = Chopter.Instance.LifeCount.ToString();
+            lifeText.text = Chopter.Instance.currentLifeCount.ToString();
             rescueText.text = Chopter.Instance.currentRefugeesCount.ToString();
-            fuelText.text = Chopter.Instance.FuelAmount.ToString();
-            hellfireText.text = Chopter.Instance.HellfireCount.ToString();
-            hydraText.text = Chopter.Instance.HydraCount.ToString();
-            gatlingGunText.text = Chopter.Instance.GatlingGunCount.ToString();
+            fuelText.text = Chopter.Instance.currentFuelAmount.ToString();
+            hellfireText.text = Chopter.Instance.currentHellfireCount.ToString();
+            hydraText.text = Chopter.Instance.currentHydraCount.ToString();
+            gatlingGunText.text = Chopter.Instance.currentGatlingGunCount.ToString();
 
             //StartCoroutine(SendOnPilotMessage()); //Temporary 
         }
@@ -83,12 +83,12 @@ namespace RamboTeam.Client.UI
 
         private void OnUpdateHydra()
         {
-            hydraText.text = Chopter.Instance.HydraCount.ToString();
+            hydraText.text = Chopter.Instance.currentHydraCount.ToString();
         }
 
         private void OnUpdateGatlingGun()
         {
-            gatlingGunText.text = Chopter.Instance.GatlingGunCount.ToString();
+            gatlingGunText.text = Chopter.Instance.currentGatlingGunCount.ToString();
         }
 
         private void OnUpdateLife()
@@ -103,7 +103,7 @@ namespace RamboTeam.Client.UI
 
         private void OnUpdateHellfire()
         {
-            hellfireText.text = Chopter.Instance.HellfireCount.ToString();
+            hellfireText.text = Chopter.Instance.currentHellfireCount.ToString();
         }
 
         private void OnUpdateHealth()

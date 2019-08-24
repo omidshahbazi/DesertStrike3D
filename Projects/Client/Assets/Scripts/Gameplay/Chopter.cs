@@ -25,18 +25,20 @@ namespace RamboTeam.Client
 
         public ChoppersPicker pickUp;
         //Weapons Count
-
-
         public uint HellfireCount = 16;
         public uint HydraCount = 34;
         public uint GatlingGunCount = 1120;
+
+
 
         /////////////////////////
         public float HP = 100;
         public uint LifeCount = 3;
         public uint FuelAmount = 120;
 
-
+        public uint currentHellfireCount { get; private set; } = 0;
+        public uint currentHydraCount { get; private set; } = 0;
+        public uint currentGatlingGunCount { get; private set; } = 0;
         public float currentHP { get; private set; } = 0;
         public uint currentLifeCount { get; private set; } = 0;
         public uint currentFuelAmount { get; private set; } = 0;
@@ -55,6 +57,9 @@ namespace RamboTeam.Client
             currentFuelAmount = FuelAmount;
             currentLifeCount = LifeCount;
             currentRefugeesCount = currentRefugeesCount;
+            currentGatlingGunCount = GatlingGunCount;
+            currentHydraCount = HydraCount;
+            currentHellfireCount = HellfireCount;
 
             smokeParticle.SetActive(false);
             nextFuelUpdateTime = Time.time + FuelCostTime;
@@ -99,7 +104,7 @@ namespace RamboTeam.Client
 
         internal void TriggerHellfireShot()
         {
-            HellfireCount--;
+            currentHellfireCount--;
             EventManager.OnHellfireUpdateCall();
         }
 
@@ -205,27 +210,27 @@ namespace RamboTeam.Client
                         break;
                     case PickUpBehaviour.PickUpType.HellfireAmmo:
                         {
-                            HellfireCount += pickUp.pickedItem.Amount;
+                            currentHellfireCount = Math.Min(currentHellfireCount + pickUp.pickedItem.Amount , HellfireCount);
                             EventManager.OnHellfireUpdateCall();
                         }
                         break;
                     case PickUpBehaviour.PickUpType.HydraAmmo:
                         {
-                            HydraCount += pickUp.pickedItem.Amount;
+                            currentHydraCount = Math.Min(currentHydraCount + pickUp.pickedItem.Amount , HydraCount);
                             EventManager.OnHydraUpdateCall();
                         }
                         break;
                     case PickUpBehaviour.PickUpType.GatlingGun:
-                        GatlingGunCount += pickUp.pickedItem.Amount;
+                        currentGatlingGunCount = Math.Min(currentGatlingGunCount + pickUp.pickedItem.Amount , GatlingGunCount);
                         EventManager.OnGatlingGunUpdateCall();
 
                         break;
                     case PickUpBehaviour.PickUpType.Fuel:
-                        currentFuelAmount += pickUp.pickedItem.Amount;
+                        currentFuelAmount = Math.Min(currentFuelAmount + pickUp.pickedItem.Amount, FuelAmount);
                         EventManager.OnFuelUpdateCall();
                         break;
                     case PickUpBehaviour.PickUpType.HealthPack:
-                        currentHP += pickUp.pickedItem.Amount;
+                        currentHP = Math.Min(currentHP+ pickUp.pickedItem.Amount , HP);
                         EventManager.OnHealthUpdateCall();
                         break;
                     default:
@@ -237,7 +242,7 @@ namespace RamboTeam.Client
 
         internal void TriggerHydraShot()
         {
-            HydraCount--;
+            currentHydraCount--;
             EventManager.OnHydraUpdateCall();
         }
     }
