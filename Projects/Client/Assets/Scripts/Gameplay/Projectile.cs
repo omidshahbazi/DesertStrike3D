@@ -13,25 +13,26 @@ namespace RamboTeam.Client.GamePlayLogic
 
         [SerializeField]
         public LayerMask Layers;
-
+  
         private Vector3 startPosition = Vector3.zero;
-
-        private float range = float.MinValue;
-
-        private float speed = float.MinValue;
-
-        private float damage = float.MinValue;
+      
+        [SerializeField]
+        public float speed = float.MinValue;
+        [SerializeField]
+        public float damage = float.MinValue;
+        [SerializeField]
+        public float Lifetime = 20;
 
         private bool IsDamaging = false;
-  
-        public void InitialSetUp(Vector3 StartPosition, float Range, float Speed, float Damage)
+        private float endOfLifetime;
+        private Vector3 Direction;
+
+        public void InitialSetUp(Vector3 StartPosition, Vector3 Direction)
         {
             IsDamaging = false;
             this.startPosition = transform.position = StartPosition;
-            this.range = Range;
-            this.speed = Speed;
-            this.damage = Damage;
-            this.transform.LookAt(Vector3.forward);
+            this.transform.LookAt(this.Direction = Direction);
+            endOfLifetime = Time.time + Lifetime;
         }
 
         protected override void OnEnable()
@@ -49,10 +50,13 @@ namespace RamboTeam.Client.GamePlayLogic
             base.Update();
             if (IsDamaging)
                 return;
+       
             float movmentDistance = Time.deltaTime*speed;
-            Vector3 movement = Vector3.forward *movmentDistance ;
+            Vector3 movement = Direction * movmentDistance ;
             CheckCollision(movmentDistance);
             this.transform.Translate(movement);
+            if (Time.time >= endOfLifetime)
+                Destroy(this.gameObject);
         }
         
         private void CheckCollision(float MovmentValue)

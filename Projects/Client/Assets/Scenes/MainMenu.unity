@@ -246,6 +246,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Story
       objectReference: {fileID: 0}
+    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_Text
+      value: "Video   Game   is   not   any   moving   object   on \nevery   digital
+        \  screen"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
 --- !u!224 &242434193 stripped

@@ -31,9 +31,82 @@ namespace RamboTeam.Client.UI
             if (Instance == null)
                 Instance = this;
 
+            armorText.text = Chopter.Instance.currentHP.ToString();
+            lifeText.text = Chopter.Instance.LifeCount.ToString();
+            rescueText.text = Chopter.Instance.currentRefugeesCount.ToString();
+            fuelText.text = Chopter.Instance.FuelAmount.ToString();
+            hellfireText.text = Chopter.Instance.HellfireCount.ToString();
+            hydraText.text = Chopter.Instance.HydraCount.ToString();
+            gatlingGunText.text = Chopter.Instance.GatlingGunCount.ToString();
+
+            StartCoroutine(SendOnPilotMessage()); //Temporary 
         }
 
-        public void UpdateHP()
+        private IEnumerator SendOnPilotMessage()//temporary to play wwithout server
+        {
+            yield return new WaitForSeconds(1.0F);
+
+            NetworkCommands.HandlePilot(null);
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            EventManager.OnHealthUpdate += OnUpdateHealth;
+            EventManager.OnHellfireUpdate += OnUpdateHellfire;
+            EventManager.OnFuelUpdate += OnUpdateFuel;
+            EventManager.OnLifeUpdate += OnUpdateLife;
+            EventManager.OnRefugeeUpdate += OnUpdateRefugee;
+            EventManager.OnHydraUpdate += OnUpdateHydra;
+            EventManager.OnGatlingGunUpdate += OnUpdateGatlingGun;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            EventManager.OnHealthUpdate -= OnUpdateHealth;
+            EventManager.OnHellfireUpdate -= OnUpdateHellfire;
+            EventManager.OnFuelUpdate -= OnUpdateFuel;
+            EventManager.OnLifeUpdate -= OnUpdateLife;
+            EventManager.OnRefugeeUpdate -= OnUpdateRefugee;
+            EventManager.OnHydraUpdate -= OnUpdateHydra;
+            EventManager.OnGatlingGunUpdate -= OnUpdateGatlingGun;
+
+        }
+
+        private void OnUpdateRefugee()
+        {
+            rescueText.text = Chopter.Instance.currentRefugeesCount.ToString();
+        }
+
+        private void OnUpdateHydra()
+        {
+            hydraText.text = Chopter.Instance.HydraCount.ToString();
+        }
+
+        private void OnUpdateGatlingGun()
+        {
+            gatlingGunText.text = Chopter.Instance.GatlingGunCount.ToString();
+        }
+
+        private void OnUpdateLife()
+        {
+            lifeText.text = Chopter.Instance.currentLifeCount.ToString();
+        }
+
+        private void OnUpdateFuel()
+        {
+            fuelText.text = Chopter.Instance.currentFuelAmount.ToString();
+        }
+
+        private void OnUpdateHellfire()
+        {
+            hellfireText.text = Chopter.Instance.HellfireCount.ToString();
+        }
+
+        private void OnUpdateHealth()
         {
             armorText.text = Chopter.Instance.currentHP.ToString();
         }

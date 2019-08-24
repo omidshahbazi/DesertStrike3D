@@ -1,104 +1,144 @@
 ﻿//Rambo Team
+using System;
 using UnityEngine;
 
 namespace RamboTeam.Client
 {
-	public class Enemy : MonoBehaviorBase
-	{
-		private Transform target = null;
+    public delegate void EnemyDead(Enemy Enemy);
+    public class Enemy : MonoBehaviorBase
+    {
+        public static EnemyDead OnEnemyDead;
+        private Transform target = null;
 
-		private float sqrRange = 0;
-		private float rateOfShot = 0;
-		private float nextShotTime = 0;
+        private float sqrRange = 0;
+        private float rateOfShot = 0;
+        private float nextShotTime = 0;
 
-		public float Range = 10;
-		public float ShotPerSecond = 1;
+        public float Range = 10;
+        public float ShotPerSecond = 1;
 
-		[SerializeField]
-		private GameObject BulletPrefab = null;
+        [SerializeField]
+        private GameObject BulletPrefab = null;
 
-		protected bool IsPilot
-		{
-			get;
-			private set;
-		}
+        [SerializeField]
+        public float HP { get; private set; } = 100;
+        private float currentHP;
 
-		protected override void Start()
-		{
-			base.Start();
+        protected bool IsPilot
+        {
+            get;
+            private set;
+        }
 
-			sqrRange = Range * Range;
-			rateOfShot = 1 / ShotPerSecond;
 
-			target = ChopterPilotController.Instance.transform;
-		}
+        private bool IsDead { get; set; } = false;
 
-		protected override void OnEnable()
-		{
-			base.OnEnable();
 
-			NetworkCommands.OnPilot += OnPilot;
-			NetworkCommands.OnCommando += OnCommando;
-		}
+        protected override void Start()
+        {
+            base.Start();
 
-		protected override void OnDisable()
-		{
-			base.OnDisable();
+            sqrRange = Range * Range;
+            rateOfShot = 1 / ShotPerSecond;
 
-			NetworkCommands.OnPilot -= OnPilot;
-			NetworkCommands.OnCommando -= OnCommando;
-		}
+            target = ChopterPilotController.Instance.transform;
+        }
 
-		private void OnPilot()
-		{
-			IsPilot = true;
-		}
 
-		private void OnCommando()
-		{
-			IsPilot = false;
-		}
 
-		protected override void Update()
-		{
-			base.Update();
+        protected override void OnEnable()
+        {
+            base.OnEnable();
 
-			if (!IsPilot || target == null)
-				return;
+            NetworkCommands.OnPilot += OnPilot;
+            NetworkCommands.OnCommando += OnCommando;
+            IsDead = false;
+            currentHP = HP;
+        }
 
-			Vector3 diff = target.position - transform.position;
+        protected override void OnDisable()
+        {
+            base.OnDisable();
 
-			if (diff.sqrMagnitude > sqrRange)
-				return;
+            NetworkCommands.OnPilot -= OnPilot;
+            NetworkCommands.OnCommando -= OnCommando;
+        }
 
-			if (Time.time < nextShotTime)
-				return;
 
-			nextShotTime = Time.time + rateOfShot;
 
-			Shot(transform.position, diff.normalized);
-		}
+        private void OnPilot()
+        {
+            IsPilot = true;
+        }
 
-		protected virtual void Shot(Vector3 Position, Vector3 Direction)
-		{
-			ShotInternal(Position, Direction);
-		}
+        private void OnCommando()
+        {
+            IsPilot = false;
+        }
 
-		protected void ShotInternal(Vector3 Position, Vector3 Direction)
-		{
-			GameObject newObject = GameObject.Instantiate(BulletPrefab);
-			newObject.transform.position = Position;
+        protected override void Update()
+        {
+            base.Update();
 
-			Bullet bullet = newObject.GetComponent<Bullet>();
+            if (!IsPilot || target == null || Chopter.Instance.IsDead || IsDead)
+                return;
 
-			bullet.SetParamaeters(Direction);
-		}
+            Vector3 diff = target.position - transform.position;
 
-		protected override void OnDrawGizmosSelected()
-		{
-			base.OnDrawGizmosSelected();
+            if (diff.sqrMagnitude > sqrRange)
+                return;
 
-			Gizmos.DrawWireSphere(transform.position, Range);
-		}
-	}
+            if (Time.time < nextShotTime)
+                return;
+
+            nextShotTime = Time.time + rateOfShot;
+
+            Shot(transform.position, diff.normalized);
+        }
+
+        protected virtual void Shot(Vector3 Position, Vector3 Direction)
+        {
+            ShotInternal(Position, Direction);
+        }
+
+        protected void ShotInternal(Vector3 Position, Vector3 Direction)
+        {
+            GameObject newObject = GameObject.Instantiate(BulletPrefab);
+            newObject.transform.position = Position;
+
+            Bullet bullet = newObject.GetComponent<Bullet>();
+
+            bullet.SetParamaeters(Direction);
+        }
+
+        public void ApplyDamage(float Damage)
+        {
+
+            if (IsDead)
+                return;
+
+            currentHP = Mathf.Clamp(currentHP - Damage, 0, HP);
+
+            EventManager.OnHealthUpdateCall();
+
+
+            if (currentHP == 0)
+            {
+                OnEnemyDeath();
+            }
+        }
+
+        private void OnEnemyDeath()
+        {
+            IsDead = true;
+            OnEnemyDead?.Invoke(this);
+        }
+
+        protected override void OnDrawGizmosSelected()
+        {
+            base.OnDrawGizmosSelected();
+
+            Gizmos.DrawWireSphere(transform.position, Range);
+        }
+    }
 }

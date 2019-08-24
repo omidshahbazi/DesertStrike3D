@@ -1,181 +1,300 @@
 ﻿//Rambo Team
+using RamboTeam.Client.GamePlayLogic;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RamboTeam.Client
 {
-	public class ChopterPilotController : MonoBehaviorBase
-	{
-		public static ChopterPilotController Instance
-		{
-			get;
-			private set;
-		}
+    public class ChopterPilotController : MonoBehaviorBase
+    {
+        public static ChopterPilotController Instance
+        {
+            get;
+            private set;
+        }
 
-		private const float SYNC_RATE = 2;
-		private const float SYNC_PERIOD = 1 / SYNC_RATE;
+        [SerializeField]
+        public float RangeDetect = 15F;
 
-		private float nextSyncTime = 0.0F;
-		private Vector3 lastPosition = Vector3.zero;
-		private Quaternion lastRotation = Quaternion.identity;
+        [SerializeField]
+        public GameObject MissleLuncher;
+        [SerializeField]
+        public Transform RightMissleLuncher;
+        [SerializeField]
+        public Transform LeftMissleLuncher;
+        [SerializeField]
+        public float MissleLuncherRateOfShot;
 
-		private float verticalRoation = 0;
-		private float horizontalRoation = 0;
+        [SerializeField]
+        public GameObject AirCraftLuncher;
+        [SerializeField]
+        public Transform RightAirCraft;
+        [SerializeField]
+        public Transform LeftAirCraft;
+        [SerializeField]
+        public float AirCraftRateOfShot;
 
-		public float MovementSpeed = 10;
-		public float RotationSpeed = 10;
-		public float VerticalRotation = 15;
-		public float HorizontalRotation = 10;
+        private float nextShotTime;
+        private float nextAirCraftShotTime;
 
-		[SerializeField]
-		private GameObject ChopterModel;
+        private const float SYNC_RATE = 2;
+        private const float SYNC_PERIOD = 1 / SYNC_RATE;
 
-		public bool IsPilot
-		{
-			get;
-			private set;
-		}
+        private float nextSyncTime = 0.0F;
+        private Vector3 lastPosition = Vector3.zero;
+        private Quaternion lastRotation = Quaternion.identity;
 
-		public bool IsMoving
-		{
-			get;
-			private set;
-		}
+        private float verticalRoation = 0;
+        private float horizontalRoation = 0;
 
-		protected override void Awake()
-		{
-			base.Awake();
+        public float MovementSpeed = 10;
+        public float RotationSpeed = 10;
+        public float VerticalRotation = 15;
+        public float HorizontalRotation = 10;
 
-			Instance = this;
+        [SerializeField]
+        private GameObject ChopterModel;
+        private bool nextPos;
+        private bool nextAirCraftPos;
 
-			lastPosition = transform.position;
-		}
+        private List<Enemy> enemiesList = new List<Enemy>();
 
-		protected override void OnEnable()
-		{
-			base.OnEnable();
+        public bool IsPilot
+        {
+            get;
+            private set;
+        }
 
-			NetworkCommands.OnPilot += OnPilot;
-			NetworkCommands.OnCommando += OnCommando;
-			NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
-		}
+        public bool IsMoving
+        {
+            get;
+            private set;
+        }
+        public float sqrRange { get; private set; }
 
-		protected override void OnDisable()
-		{
-			base.OnDisable();
+        protected override void Awake()
+        {
+            base.Awake();
 
-			NetworkCommands.OnPilot -= OnPilot;
-			NetworkCommands.OnCommando -= OnCommando;
-			NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
-		}
+            Instance = this;
 
-		private void OnPilot()
-		{
-			IsPilot = true;
-		}
+            lastPosition = transform.position;
+        }
 
-		private void OnCommando()
-		{
-			IsPilot = false;
-		}
+        protected override void OnEnable()
+        {
+            base.OnEnable();
 
-		private void OnSyncChopterTransform(Vector3 Position, Vector3 Rotation)
-		{
-			if (IsPilot)
-				return;
+            NetworkCommands.OnPilot += OnPilot;
+            NetworkCommands.OnCommando += OnCommando;
+            NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
+            InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
+            InputManager.Instance.AddInput(KeyCode.X, ShootAirCraft);
+            QueryEnemies();
+            Enemy.OnEnemyDead += RemoveEnemyFromList;
+            sqrRange = RangeDetect * RangeDetect;
+        }
 
-			lastPosition = Position;
-			lastRotation = Quaternion.Euler(Rotation);
+        protected override void OnDisable()
+        {
+            base.OnDisable();
 
-			nextSyncTime = Time.time + SYNC_PERIOD;
-		}
+            NetworkCommands.OnPilot -= OnPilot;
+            NetworkCommands.OnCommando -= OnCommando;
+            NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
+            InputManager.Instance.RemoveInput(KeyCode.Z, ShootHellFireMissle);
+            InputManager.Instance.RemoveInput(KeyCode.X, ShootAirCraft);
+            Enemy.OnEnemyDead -= RemoveEnemyFromList;
+        }
 
-		protected override void Update()
-		{
-			base.Update();
+        private void OnPilot()
+        {
+            IsPilot = true;
+        }
 
-			float t = Time.deltaTime;
+        private void OnCommando()
+        {
+            IsPilot = false;
+        }
 
-			bool isControlDown = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
-			if (isControlDown)
-			{
-				Vector3 chopterForward = CameraController.Instance.transform.forward;
-				chopterForward.y = 0;
-				Vector3 chopterRight = CameraController.Instance.transform.right;
-				chopterRight.y = 0;
+        private void OnSyncChopterTransform(Vector3 Position, Vector3 Rotation)
+        {
+            if (IsPilot)
+                return;
 
-				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-				{
-					CameraController.Instance.PanOffset += chopterForward;
-				}
-				if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-				{
-					CameraController.Instance.PanOffset -= chopterForward;
-				}
+            lastPosition = Position;
+            lastRotation = Quaternion.Euler(Rotation);
 
-				if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-				{
-					CameraController.Instance.PanOffset += chopterRight;
-				}
-				if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-				{
-					CameraController.Instance.PanOffset -= chopterRight;
-				}
-			}
+            nextSyncTime = Time.time + SYNC_PERIOD;
+        }
 
-			if (IsPilot)
-			{
-				IsMoving = false;
+        protected override void Update()
+        {
+            base.Update();
 
-				verticalRoation = 0;
-				horizontalRoation = 0;
+            float t = Time.deltaTime;
 
-				if (!isControlDown)
-				{
-					if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-					{
-						verticalRoation = VerticalRotation;
+            bool isControlDown = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
+            if (isControlDown)
+            {
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                {
+                    CameraController.Instance.PanOffset += Vector3.forward;
+                }
+                if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                {
+                    CameraController.Instance.PanOffset -= Vector3.forward;
+                }
 
-						transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
-						IsMoving = true;
-					}
-					if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-					{
-						verticalRoation = VerticalRotation * -1;
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    CameraController.Instance.PanOffset += Vector3.right;
+                }
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    CameraController.Instance.PanOffset -= Vector3.right;
+                }
+            }
 
-						transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
-						IsMoving = true;
-					}
+            if (IsPilot)
+            {
+                IsMoving = false;
 
-					if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-					{
-						horizontalRoation = HorizontalRotation;
+                if (!isControlDown)
+                {
+                    verticalRoation = 0;
+                    horizontalRoation = 0;
 
-						transform.Rotate(0, Time.deltaTime * RotationSpeed * -1, 0, Space.World);
-					}
-					if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-					{
-						horizontalRoation = HorizontalRotation * -1;
+                    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                    {
+                        verticalRoation = VerticalRotation;
 
-						transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);
-					}
-				}
+                        transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
+                        IsMoving = true;
+                    }
+                    if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                    {
+                        verticalRoation = VerticalRotation * -1;
 
-				ChopterModel.transform.localRotation = Quaternion.Lerp(ChopterModel.transform.localRotation, Quaternion.Euler(verticalRoation, 0, horizontalRoation), t);
+                        transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
+                        IsMoving = true;
+                    }
 
-				if (Time.time >= nextSyncTime)
-				{
-					NetworkCommands.SyncChopterTransform(transform.position, transform.rotation.eulerAngles);
+                    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        horizontalRoation = HorizontalRotation;
 
-					nextSyncTime = Time.time + SYNC_PERIOD;
-				}
-			}
-			else
-			{
-				transform.position = Vector3.Lerp(transform.position, lastPosition, t);
-				transform.rotation = Quaternion.Lerp(transform.rotation, lastRotation, t);
+                        transform.Rotate(0, Time.deltaTime * RotationSpeed * -1, 0, Space.World);
+                    }
+                    if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                    {
+                        horizontalRoation = HorizontalRotation * -1;
 
-				IsMoving = ((lastPosition - transform.position).sqrMagnitude > 1);
-			}
-		}
-	}
+                        transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);
+                    }
+
+                    ChopterModel.transform.localRotation = Quaternion.Lerp(ChopterModel.transform.localRotation, Quaternion.Euler(verticalRoation, 0, horizontalRoation), t);
+                }
+
+                if (Time.time >= nextSyncTime)
+                {
+                    NetworkCommands.SyncChopterTransform(transform.position, transform.rotation.eulerAngles);
+
+                    nextSyncTime = Time.time + SYNC_PERIOD;
+                }
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, lastPosition, t);
+                transform.rotation = Quaternion.Lerp(transform.rotation, lastRotation, t);
+
+                IsMoving = ((lastPosition - transform.position).sqrMagnitude > 1);
+            }
+        }
+
+        private void ShootHellFireMissle()
+        {
+            if (Chopter.Instance.IsDead || !IsPilot || Chopter.Instance.HellfireCount == 0 || Time.time < nextShotTime)
+                return;
+
+            nextShotTime = Time.time + MissleLuncherRateOfShot;
+            nextPos = !nextPos;
+            Vector3 pos = nextPos ? RightMissleLuncher.position : LeftMissleLuncher.position;
+            GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
+            Bullet ps = newObject.GetComponent<Bullet>();
+            (Enemy en, Vector3 dir) = SearchClosetTarge();
+            ps.SetParamaeters(en == null ? this.transform.forward : dir);
+            Chopter.Instance.TriggerHellfireShot();
+        }
+
+
+        private void ShootAirCraft()
+        {
+            if (Chopter.Instance.IsDead || !IsPilot || Chopter.Instance.HydraCount == 0 || Time.time < nextAirCraftShotTime)
+                return;
+
+            nextAirCraftShotTime = Time.time + AirCraftRateOfShot;
+            nextAirCraftPos = !nextAirCraftPos;
+            Vector3 pos = nextAirCraftPos ? RightAirCraft.position : LeftAirCraft.position;
+            GameObject newObject = GameObject.Instantiate(AirCraftLuncher, pos, Quaternion.identity) as GameObject;
+            Bullet ps = newObject.GetComponent<Bullet>();
+
+            (Enemy en, Vector3 dir) = SearchClosetTarge();
+            ps.SetParamaeters(en == null ? this.transform.forward : dir);
+            Chopter.Instance.TriggerHydraShot();
+        }
+
+        private (Enemy, Vector3) SearchClosetTarge()
+        {
+            Enemy findTarget = null;
+            Vector3 dir = Vector3.zero;
+            float closetPoint = float.MaxValue;
+            for (int i = 0; i < enemiesList.Count; ++i)
+            {
+                Enemy en = enemiesList[i];
+                Vector3 orgin = this.transform.position;
+                Vector3 target = en.transform.position;
+                orgin.y = target.y = 0;
+                Vector3 diff = orgin - target;
+                float mag = diff.sqrMagnitude;
+
+                if (mag > sqrRange)
+                    continue;
+
+
+                if ((mag < closetPoint))
+                {
+                   
+                    closetPoint = diff.sqrMagnitude;
+
+                
+                    float angle = Vector3.Angle(( en.transform.position-this.transform.position), transform.forward);
+                    if (angle<30)
+                    {
+                        Debug.Log(angle);
+                        findTarget = en;
+                        //They Are looking each other
+                        dir =(this.transform.position - en.transform.position).normalized;
+
+                    }
+                }
+
+            }
+
+
+            return (findTarget, -1*dir);
+        }
+
+        private void RemoveEnemyFromList(Enemy Enemy)
+        {
+            if (enemiesList.Contains(Enemy))
+                enemiesList.Remove(Enemy);
+        }
+
+        private void QueryEnemies()
+        {
+            enemiesList.AddRange(FindObjectsOfType<Enemy>());
+        }
+    }
 }
