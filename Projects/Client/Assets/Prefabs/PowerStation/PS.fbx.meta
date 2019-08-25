@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3c401494da3525f4d98923781a90ec30
+guid: 339facf8cac208f4ca3c4a9af158b9e9
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cube_002_Cube_000_Cube_002_Cube_000Mat
-    second: {fileID: 2100000, guid: e79c7975e9c78974fa567ec4883b7463, type: 2}
+      name: lambert1
+    second: {fileID: 2100000, guid: 293e5bd45a03b9443ac20ab71b04c802, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -39,7 +39,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 5
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -85,7 +85,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 5
+    globalScale: 10
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
