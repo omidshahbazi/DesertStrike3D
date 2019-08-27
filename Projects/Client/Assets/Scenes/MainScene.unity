@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AdditionalVertexStreamMesh: {fileID: 0}
+  _meshRenderer: {fileID: 144089231}
 --- !u!64 &144089230
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -569,6 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AdditionalVertexStreamMesh: {fileID: 0}
+  _meshRenderer: {fileID: 323799560}
 --- !u!64 &323799559
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1020,6 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AdditionalVertexStreamMesh: {fileID: 0}
+  _meshRenderer: {fileID: 814189824}
 --- !u!64 &814189823
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1701,6 +1704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AdditionalVertexStreamMesh: {fileID: 0}
+  _meshRenderer: {fileID: 1363804932}
 --- !u!64 &1363804931
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2288,6 +2292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AdditionalVertexStreamMesh: {fileID: 0}
+  _meshRenderer: {fileID: 1831710193}
 --- !u!64 &1831710192
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2791,6 +2796,11 @@ PrefabInstance:
     - target: {fileID: 413547496749230302, guid: f37880cf9b30ae94a9a2e71f1532f05c,
         type: 3}
       propertyPath: m_ReflectionProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 413547496749230302, guid: f37880cf9b30ae94a9a2e71f1532f05c,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 413547496749230301, guid: f37880cf9b30ae94a9a2e71f1532f05c,
