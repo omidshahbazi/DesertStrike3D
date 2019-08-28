@@ -204,7 +204,7 @@ MonoBehaviour:
   RightMissleLuncher: {fileID: 537646499}
   LeftMissleLuncher: {fileID: 2119469389}
   MissleLuncherRateOfShot: 1
-  GaltingGunRateOfShot: 0.01
+  GaltingGunRateOfShot: 0.1
   GaltingPosition: {fileID: 0}
   GaltingBulletPrefab: {fileID: 670093052942939127, guid: f2f5a6e0226e41f45aed0e1af888229c,
     type: 3}
@@ -234,10 +234,10 @@ MonoBehaviour:
   chopterDeathAnimation: {fileID: 697587262}
   chopterRotorBladeAnimation: {fileID: 1523695166}
   pickUp: {fileID: 100012975161125560}
-  HellfireCount: 16
+  HellfireCount: 8
   HydraCount: 34
   GatlingGunCount: 1120
-  HP: 100
+  HP: 600
   LifeCount: 3
   FuelAmount: 120
   FuelCostTime: 2
