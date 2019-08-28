@@ -21,6 +21,9 @@ namespace RamboTeam.Client
         public float Damage = 10;
         public float Lifetime = 20;
 
+        public GameObject impactParticle;
+        private Vector3 targetPos;
+
         protected override void Start()
         {
             base.Start();
@@ -48,14 +51,19 @@ namespace RamboTeam.Client
                 return;
             Debug.Log("Collide");
 
+
             if (ChopterLayer.IsContains(Collider.gameObject.layer))
+            {
+                 targetPos = chopter.transform.position;
                 chopter.ApplyDamage(Damage);
+            }
             else if (enemyLayer.IsContains(Collider.gameObject.layer))
             {
                 Enemy enemy = Collider.gameObject.GetComponent<Enemy>();
                 if (enemy == null)
                     return;
 
+                targetPos = enemy.transform.position;
                 enemy.ApplyDamage(Damage);
             }
 
@@ -64,6 +72,11 @@ namespace RamboTeam.Client
 
         private void Kill()
         {
+            if (impactParticle != null)
+            {
+                GameObject impactObj = GameObject.Instantiate(impactParticle, targetPos, Quaternion.Euler(new Vector3(-90f, 0f, 0f))) as GameObject;
+            }
+
             Destroy(gameObject);
         }
 

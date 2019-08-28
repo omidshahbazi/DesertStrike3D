@@ -72,6 +72,8 @@ MonoBehaviour:
   Speed: 150
   Damage: 50
   Lifetime: 20
+  impactParticle: {fileID: 6919667222657781936, guid: 9f94d7d63b7704b4e8dadfbc95d4e706,
+    type: 3}
 --- !u!82 &-3928201692156105479
 AudioSource:
   m_ObjectHideFlags: 0
