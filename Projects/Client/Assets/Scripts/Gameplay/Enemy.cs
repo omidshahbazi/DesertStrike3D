@@ -108,6 +108,7 @@ namespace RamboTeam.Client
         private void OnEnemyDeath()
         {
             IsDead = true;
+            gameObject.SetActive(false);
             OnEnemyDead?.Invoke(this);
         }
 
