@@ -96,7 +96,13 @@ namespace RamboTeam.Client
             EventManager.OnHellfireUpdateCall();
 		}
 
-		public void ApplyDamage(float Damage)
+        internal void TriggerGaltingfireShot()
+        {
+            currentGatlingGunCount--;
+            EventManager.OnGatlingGunUpdateCall();
+        }
+
+        public void ApplyDamage(float Damage)
 		{
 			if (!IsPilot)
 				return;

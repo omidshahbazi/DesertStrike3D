@@ -36,7 +36,10 @@ public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManag
 
             if(Input.GetKeyUp(current.Key))
                 OnKeyRealeased?.Invoke(current.Key);
-           
+
+            if(Input.GetKey(current.Key))
+                current.Value.Invoke();
+
         }
 
         mouseMap = mouseInputMap.GetEnumerator();
@@ -48,6 +51,9 @@ public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManag
 
             if (Input.GetKeyUp(current.Key))
                 OnKeyRealeased?.Invoke(current.Key);
+
+            if (Input.GetKey(current.Key))
+                current.Value.Invoke(Input.mousePosition);
         }
 
         if (Input.anyKeyDown)

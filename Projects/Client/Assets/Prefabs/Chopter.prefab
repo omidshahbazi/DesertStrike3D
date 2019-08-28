@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &232543981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232543982}
+  m_Layer: 10
+  m_Name: GaltingGunPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &232543982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232543981}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.07, y: -3, z: 14.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3531565312313707921}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &486607754
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +204,10 @@ MonoBehaviour:
   RightMissleLuncher: {fileID: 537646499}
   LeftMissleLuncher: {fileID: 2119469389}
   MissleLuncherRateOfShot: 1
+  GaltingGunRateOfShot: 0.01
+  GaltingPosition: {fileID: 0}
+  GaltingBulletPrefab: {fileID: 670093052942939127, guid: f2f5a6e0226e41f45aed0e1af888229c,
+    type: 3}
   AirCraftLuncher: {fileID: 380807794240379697, guid: 83cde31e922d795498133c5484d3eb74,
     type: 3}
   RightAirCraft: {fileID: 486607755}
@@ -372,6 +406,7 @@ Transform:
   - {fileID: 185765959000315729}
   - {fileID: 149038985180748134}
   - {fileID: 361195261490994062}
+  - {fileID: 232543982}
   m_Father: {fileID: 1282614176317508941}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -559,11 +594,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3531565312313707921}
     m_Modifications:
-    - target: {fileID: 1652491331545971774, guid: 3417c8bd14247d44d876287400d2c321,
-        type: 3}
-      propertyPath: m_Name
-      value: Ladder
-      objectReference: {fileID: 0}
     - target: {fileID: 1652491331545971775, guid: 3417c8bd14247d44d876287400d2c321,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -619,6 +649,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1652491331545971774, guid: 3417c8bd14247d44d876287400d2c321,
+        type: 3}
+      propertyPath: m_Name
+      value: Ladder
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3417c8bd14247d44d876287400d2c321, type: 3}
 --- !u!4 &361195261490994062 stripped
@@ -646,21 +681,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3531565312313707921}
     m_Modifications:
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_Name
-      value: SmokeParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -714,6 +734,21 @@ PrefabInstance:
     - target: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_Name
+      value: SmokeParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,

@@ -27,6 +27,14 @@ namespace RamboTeam.Client
         public float MissleLuncherRateOfShot;
 
         [SerializeField]
+        public float GaltingGunRateOfShot;
+        [SerializeField]
+        public Transform GaltingPosition;
+        [SerializeField]
+        public GameObject GaltingBulletPrefab;
+
+
+        [SerializeField]
         public GameObject AirCraftLuncher;
         [SerializeField]
         public Transform RightAirCraft;
@@ -83,6 +91,7 @@ namespace RamboTeam.Client
             NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
             InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
             InputManager.Instance.AddInput(KeyCode.X, ShootAirCraft);
+            InputManager.Instance.AddInput(KeyCode.C, MachineGunShoot);
             QueryEnemies();
             Enemy.OnEnemyDead += RemoveEnemyFromList;
             sqrRange = RangeDetect * RangeDetect;
@@ -95,6 +104,7 @@ namespace RamboTeam.Client
             NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
             InputManager.Instance.RemoveInput(KeyCode.Z, ShootHellFireMissle);
             InputManager.Instance.RemoveInput(KeyCode.X, ShootAirCraft);
+            InputManager.Instance.RemoveInput(KeyCode.C, MachineGunShoot);
             Enemy.OnEnemyDead -= RemoveEnemyFromList;
         }
 
@@ -207,6 +217,25 @@ namespace RamboTeam.Client
             ps.SetParamaeters(en == null ? this.transform.forward : dir);
             Chopter.Instance.TriggerHellfireShot();
         }
+
+
+        private void MachineGunShoot()
+        {
+            Debug.Log("key triggered");
+            if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.GatlingGunCount == 0 || Time.time < nextShotTime)
+                return;
+
+            nextShotTime = Time.time + GaltingGunRateOfShot;
+           
+           
+            GameObject newObject = GameObject.Instantiate(GaltingBulletPrefab, GaltingPosition.position, Quaternion.identity) as GameObject;
+            Bullet ps = newObject.GetComponent<Bullet>();
+            (Enemy en, Vector3 dir) = SearchClosetTarge();
+            ps.SetParamaeters(en == null ? this.transform.forward : dir);
+            Chopter.Instance.TriggerGaltingfireShot();
+        }
+    
+
 
 
         private void ShootAirCraft()
