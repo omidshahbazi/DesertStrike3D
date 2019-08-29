@@ -74,7 +74,7 @@ namespace RamboTeam.Client
         {
             if (impactParticle != null)
             {
-                GameObject impactObj = GameObject.Instantiate(impactParticle, targetPos, Quaternion.Euler(new Vector3(-90f, 0f, 0f))) as GameObject;
+                GameObject impactObj = GameObject.Instantiate(impactParticle, targetPos, Quaternion.identity) as GameObject;
             }
 
             Destroy(gameObject);

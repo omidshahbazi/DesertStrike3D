@@ -77,7 +77,7 @@ namespace RamboTeam.Client.UI
 		{
 			InputManager.Instance.OnAnyKeyPressd -= loadGame;
 			MainMenuMusic.Stop();
-			RamboSceneManager.Instance.LoadScene("MainScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+			RamboSceneManager.Instance.LoadScene("LevelDesignScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
 		}
 
 		private void OnJoinedToRoom()

@@ -205,7 +205,7 @@ namespace RamboTeam.Client
 
         private void ShootHellFireMissle()
         {
-            if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.HellfireCount == 0 || Time.time < nextShotTime)
+            if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.currentHellfireCount == 0 || Time.time < nextShotTime)
                 return;
 
             nextShotTime = Time.time + MissleLuncherRateOfShot;
@@ -222,7 +222,7 @@ namespace RamboTeam.Client
         private void MachineGunShoot()
         {
             Debug.Log("key triggered");
-            if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.GatlingGunCount == 0 || Time.time < nextShotTime)
+            if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.currentGatlingGunCount == 0 || Time.time < nextShotTime)
                 return;
 
             nextShotTime = Time.time + GaltingGunRateOfShot;
@@ -240,7 +240,7 @@ namespace RamboTeam.Client
 
         private void ShootAirCraft()
         {
-            if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.HydraCount == 0 || Time.time < nextAirCraftShotTime)
+            if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.currentHydraCount == 0 || Time.time < nextAirCraftShotTime)
                 return;
 
             nextAirCraftShotTime = Time.time + AirCraftRateOfShot;

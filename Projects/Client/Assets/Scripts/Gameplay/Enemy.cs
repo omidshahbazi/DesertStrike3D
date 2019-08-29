@@ -24,9 +24,11 @@ namespace RamboTeam.Client
         [SerializeField]
         private float currentHP;
 
+        public bool isAttacker = true;
+
         protected bool IsPilot
         {
-			get { return NetworkLayer.Instance.IsPilot; }
+            get { return NetworkLayer.Instance.IsPilot; }
         }
 
 
@@ -37,10 +39,14 @@ namespace RamboTeam.Client
         {
             base.Start();
 
+            if (!isAttacker)
+                return;
+
             sqrRange = Range * Range;
             rateOfShot = 1 / ShotPerSecond;
 
-            target = ChopterPilotController.Instance.transform;
+            if (isAttacker)
+                target = ChopterPilotController.Instance.transform;
         }
 
 
@@ -59,6 +65,7 @@ namespace RamboTeam.Client
 
             if (!IsPilot || target == null || Chopter.Instance.IsDead || IsDead)
                 return;
+
 
             Vector3 diff = target.position - transform.position;
 
