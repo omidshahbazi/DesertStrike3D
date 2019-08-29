@@ -59,7 +59,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Speed: 150
-  Damage: 10
+  Damage: 25
   Lifetime: 20
   impactParticle: {fileID: 6919667222657781936, guid: 9f94d7d63b7704b4e8dadfbc95d4e706,
     type: 3}
@@ -417,16 +417,6 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 228661404241478494, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
-        type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 228661404241478494, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5273504889016700389, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -451,6 +441,16 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSizeZ.scalar
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 228661404241478494, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 228661404241478494, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54237c4e6261e1e40bae8fc15c5a99f8, type: 3}

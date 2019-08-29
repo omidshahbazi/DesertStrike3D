@@ -56,8 +56,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Speed: 100
-  Damage: 10
+  Damage: 25
   Lifetime: 20
+  impactParticle: {fileID: 0}
 --- !u!65 &6667079309155011613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -94,11 +95,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4327355173504166317}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 113f06262ac5faa4aba7b3a0beb4952f,
-        type: 3}
-      propertyPath: m_Name
-      value: Hydra
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 113f06262ac5faa4aba7b3a0beb4952f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -168,6 +164,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 113f06262ac5faa4aba7b3a0beb4952f,
+        type: 3}
+      propertyPath: m_Name
+      value: Hydra
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 113f06262ac5faa4aba7b3a0beb4952f,
         type: 3}
