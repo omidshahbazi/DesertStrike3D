@@ -965,8 +965,28 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 20
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1795460066393468207, guid: e839b28a5537ae94498ab8d0a89b7b6f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e839b28a5537ae94498ab8d0a89b7b6f, type: 3}
+--- !u!1 &687804225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1795460066393468205, guid: e839b28a5537ae94498ab8d0a89b7b6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 687804224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &687804226
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687804225}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 40.2, y: 78.4, z: 39.32}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &781168826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ef5bf711d29819d49aa2f2b746cef20b,
@@ -1020,6 +1040,7 @@ MonoBehaviour:
     type: 3}
   HP: 100
   currentHP: 0
+  isAttacker: 1
 --- !u!1 &814189821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,6 +1492,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rapier_E
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ef5bf711d29819d49aa2f2b746cef20b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ef5bf711d29819d49aa2f2b746cef20b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1688,6 +1714,7 @@ MonoBehaviour:
   Speed: 10
   Damage: 10
   Lifetime: 20
+  impactParticle: {fileID: 0}
 --- !u!1001 &1282457716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2657,6 +2684,7 @@ MonoBehaviour:
     type: 3}
   HP: 100
   currentHP: 0
+  isAttacker: 1
 --- !u!54 &1956774397
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3019,7 +3047,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GatlingGunPosition
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 361195261490994060, guid: 356997536d2512d499e461df7770bbee, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 356997536d2512d499e461df7770bbee, type: 3}
 --- !u!1001 &7161471158507354066
 PrefabInstance:

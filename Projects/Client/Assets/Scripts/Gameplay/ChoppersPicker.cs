@@ -33,7 +33,7 @@ namespace RamboTeam.Client
         {
             base.OnTriggerEnter(Collision);
 
-            if (Collision.gameObject.tag == "ItemArea")
+            if (Collision.gameObject.tag == "ItemArea" && pickedItem == null)
             {
                 DropLadder();
             }
@@ -72,8 +72,12 @@ namespace RamboTeam.Client
             if (!LadderAnimation.enabled)
                 LadderAnimation.enabled = true;
 
+            float normTime = Mathf.Clamp01(LadderAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+            Debug.Log("Ladder Going Down");
+
             LadderAnimation.SetFloat("Direction", 1);
-            LadderAnimation.Play("ChopperPick", -1, float.NegativeInfinity);
+            LadderAnimation.Play("ChopperPick", 0, normTime);
 
             ladderIsUp = false;
         }
@@ -82,8 +86,13 @@ namespace RamboTeam.Client
         {
             if (ladderIsUp)
                 return;
+
+            Debug.Log("Ladder Going UP");
+
+            float normTime = Mathf.Clamp01(LadderAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
             LadderAnimation.SetFloat("Direction", -1);
-            LadderAnimation.Play("ChopperPick", -1, float.NegativeInfinity);
+            LadderAnimation.Play("ChopperPick", 0, normTime);
             ladderIsUp = true;
         }
 
