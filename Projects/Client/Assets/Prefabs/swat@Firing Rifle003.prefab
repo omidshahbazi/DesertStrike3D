@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Range: 100
   ShotPerSecond: 1
-  BulletPrefab: {fileID: 4879226331238033940, guid: 6a9c1066e8073ab418fc58b0525cfd32,
+  BulletPrefab: {fileID: 4572193080810376173, guid: 6a9c1066e8073ab418fc58b0525cfd32,
     type: 3}
   HP: 100
   currentHP: 100
