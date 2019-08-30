@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: -5319555678980933898}
   m_Layer: 0
   m_Name: Barrel_fbx_All
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7763,6 +7763,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel_fbx_All
       objectReference: {fileID: 0}
+    - target: {fileID: 4736898615185797226, guid: 0ca0a98d193b2204c86510dec4898d47,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     - target: {fileID: 8640017250287780473, guid: 0ca0a98d193b2204c86510dec4898d47,
         type: 3}
       propertyPath: m_LocalPosition.x
