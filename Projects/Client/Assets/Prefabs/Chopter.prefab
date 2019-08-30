@@ -212,7 +212,7 @@ MonoBehaviour:
     type: 3}
   RightAirCraft: {fileID: 486607755}
   LeftAirCraft: {fileID: 1059555563}
-  AirCraftRateOfShot: 2
+  AirCraftRateOfShot: 0.5
   MovementSpeed: 75
   RotationSpeed: 75
   VerticalRotation: 30

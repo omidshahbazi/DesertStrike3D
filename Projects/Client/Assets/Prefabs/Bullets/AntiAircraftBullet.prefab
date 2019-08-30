@@ -57,7 +57,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Speed: 150
-  Damage: 10
+  Damage: 20
   Lifetime: 20
   impactParticle: {fileID: 0}
 --- !u!65 &4230617045935187705

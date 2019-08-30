@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1103994261398858766}
   - component: {fileID: -3675757091675255964}
   - component: {fileID: 2216274097138708248}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PowerStation
   m_TagString: Untagged
   m_Icon: {fileID: 0}

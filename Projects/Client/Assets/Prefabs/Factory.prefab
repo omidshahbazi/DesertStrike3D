@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7722164888777741450}
   - component: {fileID: 6614594816319973110}
   - component: {fileID: 7464560834787364574}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5684469723605700960}
   - component: {fileID: 5288434301641179936}
   - component: {fileID: 1334227922826398076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sole2_2:Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

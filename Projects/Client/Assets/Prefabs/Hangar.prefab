@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5551356439241955219}
   - component: {fileID: -7812726725472621717}
   - component: {fileID: 8386329072246274643}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hangar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6087956685354347263}
   - component: {fileID: 178914418564268597}
   - component: {fileID: 773843727002327068}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sl_1_Low:Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

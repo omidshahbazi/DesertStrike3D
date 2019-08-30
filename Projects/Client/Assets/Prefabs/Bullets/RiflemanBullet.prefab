@@ -56,7 +56,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Speed: 300
-  Damage: 1
+  Damage: 5
   Lifetime: 20
   impactParticle: {fileID: 0}
 --- !u!65 &8816799583544689851
@@ -95,11 +95,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 78206469463127158}
     m_Modifications:
-    - target: {fileID: 4186674442152668689, guid: 7336d6fcebc32c74e986509124e6b703,
-        type: 3}
-      propertyPath: m_Name
-      value: GunBullet
-      objectReference: {fileID: 0}
     - target: {fileID: 4992531292361095885, guid: 7336d6fcebc32c74e986509124e6b703,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -154,6 +149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186674442152668689, guid: 7336d6fcebc32c74e986509124e6b703,
+        type: 3}
+      propertyPath: m_Name
+      value: GunBullet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7336d6fcebc32c74e986509124e6b703, type: 3}

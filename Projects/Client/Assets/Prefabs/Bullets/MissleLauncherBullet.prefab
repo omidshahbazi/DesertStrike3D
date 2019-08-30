@@ -57,8 +57,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Speed: 150
-  Damage: 10
+  Damage: 50
   Lifetime: 20
+  impactParticle: {fileID: 0}
 --- !u!65 &121694177630838935
 BoxCollider:
   m_ObjectHideFlags: 0
