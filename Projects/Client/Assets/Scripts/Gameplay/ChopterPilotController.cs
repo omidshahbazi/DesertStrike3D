@@ -281,7 +281,7 @@ namespace RamboTeam.Client
 
 
                     float angle = Vector3.Angle((en.transform.position - this.transform.position), transform.forward);
-                    if (angle < 30)
+                    if (angle < 45)
                     {
                         Debug.Log(angle);
                         findTarget = en;
