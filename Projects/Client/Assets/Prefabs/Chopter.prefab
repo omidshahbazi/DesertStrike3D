@@ -204,7 +204,7 @@ MonoBehaviour:
   RightMissleLuncher: {fileID: 537646499}
   LeftMissleLuncher: {fileID: 2119469389}
   MissleLuncherRateOfShot: 1
-  GaltingGunRateOfShot: 0.1
+  GaltingGunRateOfShot: 0.05
   GaltingPosition: {fileID: 0}
   GaltingBulletPrefab: {fileID: 620008849344824208, guid: f2f5a6e0226e41f45aed0e1af888229c,
     type: 3}
