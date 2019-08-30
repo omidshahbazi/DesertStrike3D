@@ -204,6 +204,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6659411742386955957}
     m_Modifications:
+    - target: {fileID: 459188976769872859, guid: 1deeb330ed9130b429e3c39f06c1838d,
+        type: 3}
+      propertyPath: m_Name
+      value: GatlingGun
+      objectReference: {fileID: 0}
     - target: {fileID: 1301689118259743755, guid: 1deeb330ed9130b429e3c39f06c1838d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -259,11 +264,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 459188976769872859, guid: 1deeb330ed9130b429e3c39f06c1838d,
-        type: 3}
-      propertyPath: m_Name
-      value: GatlingGun
-      objectReference: {fileID: 0}
     - target: {fileID: 7373218825356918882, guid: 1deeb330ed9130b429e3c39f06c1838d,
         type: 3}
       propertyPath: ShapeModule.m_Rotation.x
@@ -294,6 +294,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6659411742386955957}
     m_Modifications:
+    - target: {fileID: 4186674442152668689, guid: 7336d6fcebc32c74e986509124e6b703,
+        type: 3}
+      propertyPath: m_Name
+      value: GunBullet
+      objectReference: {fileID: 0}
     - target: {fileID: 4992531292361095885, guid: 7336d6fcebc32c74e986509124e6b703,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -349,12 +354,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4186674442152668689, guid: 7336d6fcebc32c74e986509124e6b703,
-        type: 3}
-      propertyPath: m_Name
-      value: GunBullet
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1498785839817770139, guid: 7336d6fcebc32c74e986509124e6b703, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7336d6fcebc32c74e986509124e6b703, type: 3}
 --- !u!4 &4089021952914963145 stripped
 Transform:

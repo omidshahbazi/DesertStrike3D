@@ -68,9 +68,6 @@ namespace RamboTeam.Client
 
        
         private List<Enemy> enemiesList = new List<Enemy>();
-        public float x;
-        public float y;
-        public float z;
 
         public bool IsMoving
         {
