@@ -302,7 +302,7 @@ namespace RamboTeam.Client
 
         private Vector3 GetBottomDirection()
         {
-            return  ((transform.forward - transform.up/2)).normalized;
+            return  ((transform.forward - transform.up/5)).normalized;
         }
 
         private void RemoveEnemyFromList(Enemy Enemy)
