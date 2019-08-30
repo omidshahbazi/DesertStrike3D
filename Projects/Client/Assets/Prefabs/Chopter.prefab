@@ -235,8 +235,8 @@ MonoBehaviour:
   chopterRotorBladeAnimation: {fileID: 1523695166}
   pickUp: {fileID: 100012975161125560}
   HellfireCount: 8
-  HydraCount: 34
-  GatlingGunCount: 1120
+  HydraCount: 38
+  GatlingGunCount: 1178
   HP: 600
   LifeCount: 3
   FuelAmount: 120

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &703187627897932689
+--- !u!1 &2322521062450360428
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 703187627897640881}
-  - component: {fileID: 703187627901032339}
-  - component: {fileID: 703187627899934035}
-  m_Layer: 9
-  m_Name: GroundRadar_Low:Mesh
+  - component: {fileID: 2059836913039236018}
+  - component: {fileID: 7566224578419254024}
+  - component: {fileID: 4780903096857653168}
+  - component: {fileID: 6182673629190978461}
+  m_Layer: 0
+  m_Name: Tent:Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &703187627897640881
+--- !u!4 &2059836913039236018
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703187627897932689}
+  m_GameObject: {fileID: 2322521062450360428}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 703187627897640883}
+  m_Father: {fileID: 282143218023324884}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &703187627901032339
+--- !u!33 &7566224578419254024
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703187627897932689}
-  m_Mesh: {fileID: 4300000, guid: 5c66a6f9606e5a143ba00c00fc9dd17d, type: 3}
---- !u!23 &703187627899934035
+  m_GameObject: {fileID: 2322521062450360428}
+  m_Mesh: {fileID: -1836836195593894249, guid: d5d528501589d41458778b601fc608db, type: 3}
+--- !u!23 &4780903096857653168
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703187627897932689}
+  m_GameObject: {fileID: 2322521062450360428}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -57,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14a5dca8df81ddf4fa4c9c4ac733dcb3, type: 2}
+  - {fileID: 2100000, guid: c79d8a1c14b1f944594ded1645d63f67, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +78,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &703187627897932691
+--- !u!65 &6182673629190978461
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322521062450360428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 18.770424, y: 8.40524, z: 14.40471}
+  m_Center: {x: 0.00016260147, y: 0.70301485, z: 2.202355}
+--- !u!1 &3868880271705517767
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,39 +99,56 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 703187627897640883}
-  - component: {fileID: -9163041108048333920}
-  - component: {fileID: 6084006769580715752}
-  - component: {fileID: 8681566947321501732}
-  m_Layer: 9
-  m_Name: SamRadar
+  - component: {fileID: 282143218023324884}
+  - component: {fileID: 4224798145716640875}
+  - component: {fileID: 4499149350094710636}
+  m_Layer: 0
+  m_Name: Tent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &703187627897640883
+--- !u!4 &282143218023324884
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703187627897932691}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 204, y: 6.37, z: 312}
+  m_GameObject: {fileID: 3868880271705517767}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 703187627897640881}
+  - {fileID: 2059836913039236018}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!54 &-9163041108048333920
+--- !u!114 &4224798145716640875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3868880271705517767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab03c4d13553364bb51e8cba1e125e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 10
+  ShotPerSecond: 1
+  BulletPrefab: {fileID: 0}
+  HP: 25
+  currentHP: 0
+  isAttacker: 0
+--- !u!54 &4499149350094710636
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703187627897932691}
+  m_GameObject: {fileID: 3868880271705517767}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -127,35 +158,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &6084006769580715752
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703187627897932691}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 6
-  m_Height: 20
-  m_Direction: 1
-  m_Center: {x: 0, y: 7, z: 0}
---- !u!114 &8681566947321501732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703187627897932691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab03c4d13553364bb51e8cba1e125e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Range: 10
-  ShotPerSecond: 1
-  BulletPrefab: {fileID: 0}
-  HP: 100
-  currentHP: 0
-  isAttacker: 0
