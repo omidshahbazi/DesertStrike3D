@@ -68,7 +68,9 @@ namespace RamboTeam.Client
 
        
         private List<Enemy> enemiesList = new List<Enemy>();
-       
+        public float x;
+        public float y;
+        public float z;
 
         public bool IsMoving
         {
@@ -300,8 +302,7 @@ namespace RamboTeam.Client
 
         private Vector3 GetBottomDirection()
         {
-         
-            return ((transform.forward - transform.up)).normalized;
+            return  ((transform.forward - transform.up/2)).normalized;
         }
 
         private void RemoveEnemyFromList(Enemy Enemy)
