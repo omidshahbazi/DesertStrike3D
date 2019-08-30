@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 162997255}
-  m_IndirectSpecularColor: {r: 0.41717088, g: 0.42751256, b: 0.47287124, a: 1}
+  m_IndirectSpecularColor: {r: 0.4168122, g: 0.42717725, b: 0.4700746, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7125,6 +7125,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7282844917396881195, guid: 334c0e864a539dc49aeb2834e41f20d5,
+        type: 3}
+      propertyPath: m_Name
+      value: PowerStation
+      objectReference: {fileID: 0}
     - target: {fileID: 2216274097138708248, guid: 334c0e864a539dc49aeb2834e41f20d5,
         type: 3}
       propertyPath: m_Size.y
@@ -7134,11 +7139,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7282844917396881195, guid: 334c0e864a539dc49aeb2834e41f20d5,
-        type: 3}
-      propertyPath: m_Name
-      value: PowerStation
       objectReference: {fileID: 0}
     - target: {fileID: 6001755711290592568, guid: 334c0e864a539dc49aeb2834e41f20d5,
         type: 3}
@@ -7434,7 +7434,7 @@ PrefabInstance:
     - target: {fileID: 413547496749230300, guid: f37880cf9b30ae94a9a2e71f1532f05c,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 413547496749230303, guid: f37880cf9b30ae94a9a2e71f1532f05c,
         type: 3}
@@ -8378,6 +8378,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019357643816926507, guid: b869bde9c09dc66418e16b5add12f28d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9019357643816926503, guid: b869bde9c09dc66418e16b5add12f28d,
         type: 3}

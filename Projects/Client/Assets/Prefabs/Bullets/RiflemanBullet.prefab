@@ -55,10 +55,18 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
   Speed: 300
   Damage: 5
   Lifetime: 20
-  impactParticle: {fileID: 0}
+  impactToBuildingParticle: {fileID: 0}
+  impactToTerrainParticle: {fileID: 0}
+  impactToWaterParticle: {fileID: 0}
 --- !u!65 &8816799583544689851
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -66,7 +66,9 @@ namespace RamboTeam.Client
         private bool nextPos;
         private bool nextAirCraftPos;
 
+       
         private List<Enemy> enemiesList = new List<Enemy>();
+       
 
         public bool IsMoving
         {
@@ -214,7 +216,7 @@ namespace RamboTeam.Client
             GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
             Bullet ps = newObject.GetComponent<Bullet>();
             (Enemy en, Vector3 dir) = SearchClosetTarge();
-            ps.SetParamaeters(en == null ? this.transform.forward : dir);
+            ps.SetParamaeters(en == null ? GetBottomDirection() : dir);
             Chopter.Instance.TriggerHellfireShot();
         }
 
@@ -231,7 +233,7 @@ namespace RamboTeam.Client
             GameObject newObject = GameObject.Instantiate(GaltingBulletPrefab, GaltingPosition.position, Quaternion.identity) as GameObject;
             Bullet ps = newObject.GetComponent<Bullet>();
             (Enemy en, Vector3 dir) = SearchClosetTarge();
-            ps.SetParamaeters(en == null ? this.transform.forward : dir);
+            ps.SetParamaeters(en == null ? GetBottomDirection() : dir);
             Chopter.Instance.TriggerGaltingfireShot();
         }
     
@@ -250,7 +252,7 @@ namespace RamboTeam.Client
             Bullet ps = newObject.GetComponent<Bullet>();
 
             (Enemy en, Vector3 dir) = SearchClosetTarge();
-            ps.SetParamaeters(en == null ? this.transform.forward : dir);
+            ps.SetParamaeters(en == null ? GetBottomDirection() : dir);
             Chopter.Instance.TriggerHydraShot();
         }
 
@@ -283,7 +285,6 @@ namespace RamboTeam.Client
                     float angle = Vector3.Angle((en.transform.position - this.transform.position), transform.forward);
                     if (angle < 45)
                     {
-                        Debug.Log(angle);
                         findTarget = en;
                         //They Are looking each other
                         dir = (this.transform.position - en.transform.position).normalized;
@@ -295,6 +296,12 @@ namespace RamboTeam.Client
 
 
             return (findTarget, -1 * dir);
+        }
+
+        private Vector3 GetBottomDirection()
+        {
+         
+            return ((transform.forward - transform.up)).normalized;
         }
 
         private void RemoveEnemyFromList(Enemy Enemy)

@@ -49,17 +49,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LayerShouldAttack:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3088
   ChopterLayer:
     serializedVersion: 2
     m_Bits: 1024
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
   Speed: 150
   Damage: 20
   Lifetime: 20
-  impactParticle: {fileID: 0}
+  impactToBuildingParticle: {fileID: 0}
+  impactToTerrainParticle: {fileID: 0}
+  impactToWaterParticle: {fileID: 0}
 --- !u!65 &4230617045935187705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -192,6 +200,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2745768857674749272}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 113f06262ac5faa4aba7b3a0beb4952f,
+        type: 3}
+      propertyPath: m_Name
+      value: Hydra
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 113f06262ac5faa4aba7b3a0beb4952f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -246,11 +259,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 113f06262ac5faa4aba7b3a0beb4952f,
-        type: 3}
-      propertyPath: m_Name
-      value: Hydra
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 113f06262ac5faa4aba7b3a0beb4952f, type: 3}
