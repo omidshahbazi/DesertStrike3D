@@ -131,20 +131,20 @@ namespace RamboTeam.Client
             {
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                 {
-                    CameraController.Instance.PanOffset += Vector3.forward;
+					PilotCameraController.Instance.PanOffset += Vector3.forward;
                 }
                 if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                 {
-                    CameraController.Instance.PanOffset -= Vector3.forward;
+					PilotCameraController.Instance.PanOffset -= Vector3.forward;
                 }
 
                 if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 {
-                    CameraController.Instance.PanOffset += Vector3.right;
+					PilotCameraController.Instance.PanOffset += Vector3.right;
                 }
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                 {
-                    CameraController.Instance.PanOffset -= Vector3.right;
+					PilotCameraController.Instance.PanOffset -= Vector3.right;
                 }
             }
 

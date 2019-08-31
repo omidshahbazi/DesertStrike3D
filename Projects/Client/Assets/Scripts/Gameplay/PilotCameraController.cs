@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
-	public class CameraController : MonoBehaviorBase
+	public class PilotCameraController : MonoBehaviorBase
 	{
-		public static CameraController Instance
+		public static PilotCameraController Instance
 		{
 			get;
 			private set;
@@ -17,6 +17,10 @@ namespace RamboTeam.Client
 
 		private ChopterPilotController chopter = null;
 		private Transform chopterTransform = null;
+		private Camera tpsCamera = null;
+		private Camera fpsCamera = null;
+
+		private bool isFPS = false;
 
 		public Vector3 PanOffset
 		{
@@ -29,6 +33,15 @@ namespace RamboTeam.Client
 			base.Awake();
 
 			Instance = this;
+
+			tpsCamera = GetComponent<Camera>();
+
+			Transform fpsCameraObject = ChopterPilotController.Instance.transform.Find("FPSCamera");
+			if (fpsCameraObject != null)
+			{
+				fpsCamera = fpsCameraObject.GetComponent<Camera>();
+				fpsCameraObject.gameObject.SetActive(false);
+			}
 		}
 
 		protected override void Start()
@@ -67,6 +80,13 @@ namespace RamboTeam.Client
 
 			transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
 			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
+
+			if (Input.GetKeyUp(KeyCode.V))
+			{
+				isFPS = !isFPS;
+
+				fpsCamera.gameObject.SetActive(isFPS);
+			}
 		}
 	}
 }

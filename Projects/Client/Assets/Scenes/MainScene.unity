@@ -744,21 +744,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1671764797718096619, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -634533969359961367, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -336512478579984190, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: da4f59f3dd6f0274b99ff1a291559c77,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -812,6 +797,21 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: da4f59f3dd6f0274b99ff1a291559c77,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -634533969359961367, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -336512478579984190, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671764797718096619, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2926426679950814022, guid: da4f59f3dd6f0274b99ff1a291559c77,
@@ -1711,10 +1711,18 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 0
   Speed: 10
   Damage: 10
   Lifetime: 20
-  impactParticle: {fileID: 0}
+  impactToBuildingParticle: {fileID: 0}
+  impactToTerrainParticle: {fileID: 0}
+  impactToWaterParticle: {fileID: 0}
 --- !u!1001 &1282457716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2308,7 +2316,7 @@ PrefabInstance:
     - target: {fileID: 1781662371478220324, guid: ee4fb6220c084c54199196de75d02774,
         type: 3}
       propertyPath: m_Name
-      value: GameCamera
+      value: PilotGameCamera
       objectReference: {fileID: 0}
     - target: {fileID: 1781662371478220347, guid: ee4fb6220c084c54199196de75d02774,
         type: 3}
@@ -2365,11 +2373,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6918190543230104811, guid: ee4fb6220c084c54199196de75d02774,
-        type: 3}
-      propertyPath: Speed
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1781662371478220346, guid: ee4fb6220c084c54199196de75d02774,
         type: 3}
       propertyPath: far clip plane
@@ -2379,6 +2382,11 @@ PrefabInstance:
         type: 3}
       propertyPath: near clip plane
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918190543230104811, guid: ee4fb6220c084c54199196de75d02774,
+        type: 3}
+      propertyPath: Speed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4fb6220c084c54199196de75d02774, type: 3}
@@ -2504,21 +2512,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1671764797718096619, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -634533969359961367, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -336512478579984190, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: da4f59f3dd6f0274b99ff1a291559c77,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2572,6 +2565,21 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: da4f59f3dd6f0274b99ff1a291559c77,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -634533969359961367, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -336512478579984190, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671764797718096619, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2926426679950814022, guid: da4f59f3dd6f0274b99ff1a291559c77,
