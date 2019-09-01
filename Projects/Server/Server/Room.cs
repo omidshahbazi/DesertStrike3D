@@ -61,7 +61,16 @@ namespace RamboTeam.Server
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.END_GAME);
 
-			Send((Player == MasterPlayer ? SecondaryPlayer : MasterPlayer), buffer);
+			if (Player == MasterPlayer)
+			{
+				if (SecondaryPlayer != null)
+					Send(SecondaryPlayer, buffer);
+			}
+			else
+			{
+				if (MasterPlayer != null)
+					Send(MasterPlayer, buffer);
+			}
 		}
 	}
 }
