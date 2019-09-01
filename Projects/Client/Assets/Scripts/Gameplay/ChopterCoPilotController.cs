@@ -79,7 +79,7 @@ namespace RamboTeam.Client
 			Vector3 pos = FireTransform.position;
 			Vector3 dir = ChopterModel.transform.forward;
 
-			OnSyncChopterShotMachinegun(pos, dir);
+			ShootInternal(pos, dir);
 
 			NetworkCommands.SyncChopterShotMachinegun(pos, dir);
 		}
@@ -89,6 +89,11 @@ namespace RamboTeam.Client
 			if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot)
 				return;
 
+			ShootInternal(Position, Direction);
+		}
+
+		private void ShootInternal(Vector3 Position, Vector3 Direction)
+		{
 			GameObject newObject = GameObject.Instantiate(BulletObject, Position, Quaternion.identity) as GameObject;
 
 			Bullet ps = newObject.GetComponent<Bullet>();

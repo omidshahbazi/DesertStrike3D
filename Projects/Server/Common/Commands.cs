@@ -19,11 +19,12 @@ namespace RamboTeam.Common
 			public const byte MASTER = 1;
 			public const byte SECONDARY = 2;
 			public const byte SYNC_CHOPTER_TRANSFORM = 3;
-			public const byte SYNC_CHOPTER_FIRE = 4;
+			public const byte SYNC_PILOT_FIRE = 4;
+			public const byte SYNC_CO_PILOT_FIRE = 5;
 
-			public const byte SYNC_ENEMY_FIRE = 5;
+			public const byte SYNC_ENEMY_FIRE = 6;
 
-			public const byte END_GAME = 6;
+			public const byte END_GAME = 7;
 		}
 
 		public static class Bullet
