@@ -57,7 +57,7 @@ namespace RamboTeam.Client
 		{
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM);
-			buffer.WriteBytes(Commands.Room.SYNC_CHOPTER_FIRE);
+			buffer.WriteBytes(Commands.Room.SYNC_PILOT_FIRE);
 			buffer.WriteBytes(Commands.Bullet.HELLFIRE);
 			WriteVector3(Position);
 			WriteVector3(Direction);
@@ -69,7 +69,7 @@ namespace RamboTeam.Client
 		{
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM);
-			buffer.WriteBytes(Commands.Room.SYNC_CHOPTER_FIRE);
+			buffer.WriteBytes(Commands.Room.SYNC_PILOT_FIRE);
 			buffer.WriteBytes(Commands.Bullet.HYDRA);
 			WriteVector3(Position);
 			WriteVector3(Direction);
@@ -81,7 +81,7 @@ namespace RamboTeam.Client
 		{
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM);
-			buffer.WriteBytes(Commands.Room.SYNC_CHOPTER_FIRE);
+			buffer.WriteBytes(Commands.Room.SYNC_PILOT_FIRE);
 			buffer.WriteBytes(Commands.Bullet.GATLING);
 			WriteVector3(Position);
 			WriteVector3(Direction);
@@ -93,7 +93,7 @@ namespace RamboTeam.Client
 		{
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM);
-			buffer.WriteBytes(Commands.Room.SYNC_CHOPTER_FIRE);
+			buffer.WriteBytes(Commands.Room.SYNC_CO_PILOT_FIRE);
 			buffer.WriteBytes(Commands.Bullet.MACHINEGUN);
 			WriteVector3(Position);
 			WriteVector3(Direction);
