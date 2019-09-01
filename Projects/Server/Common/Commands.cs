@@ -22,6 +22,8 @@ namespace RamboTeam.Common
 			public const byte SYNC_CHOPTER_FIRE = 4;
 
 			public const byte SYNC_ENEMY_FIRE = 5;
+
+			public const byte END_GAME = 6;
 		}
 
 		public static class Bullet
@@ -29,6 +31,7 @@ namespace RamboTeam.Common
 			public const byte HELLFIRE = 0;
 			public const byte HYDRA = 1;
 			public const byte GATLING = 2;
+			public const byte MACHINEGUN = 3;
 		}
 
 		public static class Enemy

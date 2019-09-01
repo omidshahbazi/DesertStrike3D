@@ -81,12 +81,12 @@ namespace RamboTeam.Client
 			transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
 			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
 
-			if (Input.GetKeyUp(KeyCode.V))
-			{
-				isFPS = !isFPS;
+			//if (Input.GetKeyUp(KeyCode.V))
+			//{
+			//	isFPS = !isFPS;
 
-				fpsCamera.gameObject.SetActive(isFPS);
-			}
+			//	fpsCamera.gameObject.SetActive(isFPS);
+			//}
 		}
 	}
 }

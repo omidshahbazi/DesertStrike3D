@@ -7,6 +7,8 @@ namespace RamboTeam.Server
 {
 	class Room : LogicObjects
 	{
+		private BufferStream buffer = null;
+
 		public NetworkingPlayer MasterPlayer
 		{
 			get;
@@ -28,6 +30,7 @@ namespace RamboTeam.Server
 			base(Application)
 		{
 			this.MasterPlayer = MasterPlayer;
+			buffer = new BufferStream(new byte[64]);
 		}
 
 		public void HandleRequest(BufferStream Buffer, NetworkingPlayer Player)
@@ -46,6 +49,14 @@ namespace RamboTeam.Server
 		public void SetSecondaryPlayer(NetworkingPlayer Player)
 		{
 			SecondaryPlayer = Player;
+		}
+
+		public void HandlePlayerDisconnection(NetworkingPlayer Player)
+		{
+			buffer.Reset();
+			buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.END_GAME);
+
+			Send((Player == MasterPlayer ? SecondaryPlayer : MasterPlayer), buffer);
 		}
 	}
 }

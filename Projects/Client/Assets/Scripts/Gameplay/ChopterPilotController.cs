@@ -1,12 +1,10 @@
 ﻿//Rambo Team
-using RamboTeam.Client.GamePlayLogic;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace RamboTeam.Client
 {
-    public class ChopterPilotController : MonoBehaviorBase
+	public class ChopterPilotController : MonoBehaviorBase
     {
         public static ChopterPilotController Instance
         {
@@ -65,7 +63,6 @@ namespace RamboTeam.Client
         private GameObject ChopterModel;
         private bool nextPos;
         private bool nextAirCraftPos;
-
        
         private List<Enemy> enemiesList = new List<Enemy>();
 
@@ -90,7 +87,8 @@ namespace RamboTeam.Client
             base.OnEnable();
 
             NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
-            InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
+			NetworkCommands.OnEndGame += OnEndGame;
+			InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
             InputManager.Instance.AddInput(KeyCode.X, ShootAirCraft);
             InputManager.Instance.AddInput(KeyCode.C, MachineGunShoot);
             QueryEnemies();
@@ -98,12 +96,13 @@ namespace RamboTeam.Client
             sqrRange = RangeDetect * RangeDetect;
         }
 
-        protected override void OnDisable()
+		protected override void OnDisable()
         {
             base.OnDisable();
 
-            NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
-            InputManager.Instance.RemoveInput(KeyCode.Z, ShootHellFireMissle);
+			NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
+			NetworkCommands.OnEndGame -= OnEndGame;
+			InputManager.Instance.RemoveInput(KeyCode.Z, ShootHellFireMissle);
             InputManager.Instance.RemoveInput(KeyCode.X, ShootAirCraft);
             InputManager.Instance.RemoveInput(KeyCode.C, MachineGunShoot);
             Enemy.OnEnemyDead -= RemoveEnemyFromList;
@@ -311,6 +310,11 @@ namespace RamboTeam.Client
         private void QueryEnemies()
         {
             enemiesList.AddRange(FindObjectsOfType<Enemy>());
-        }
-    }
+		}
+
+		private void OnEndGame()
+		{
+			UI.GameOver.Instance.Open();
+		}
+	}
 }

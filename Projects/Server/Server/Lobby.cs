@@ -23,7 +23,10 @@ namespace RamboTeam.Server
 			Room room = FindRoom(Player);
 
 			if (room != null)
+			{
+				room.HandlePlayerDisconnection(Player);
 				rooms.Remove(room);
+			}
 		}
 
 		public void HandleRequest(BufferStream Buffer, NetworkingPlayer Player)
