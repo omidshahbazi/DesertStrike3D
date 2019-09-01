@@ -90,7 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff7aa7ff7264064896786561b6734ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyType: 1
   Range: 40
   ShotPerSecond: 1
   BulletPrefab: {fileID: 6044863251272816049, guid: 45f9eeb3ff8dd8649be02be46affdf4e,
     type: 3}
+  HP: 100
+  currentHP: 0
+  isAttacker: 1

@@ -3,8 +3,12 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
+  
+
 	public class AntiAircraftEnemy : Enemy
 	{
+
+
 		protected override void OnEnable()
 		{
 			base.OnEnable();

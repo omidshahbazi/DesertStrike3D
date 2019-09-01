@@ -5,8 +5,19 @@ using UnityEngine;
 namespace RamboTeam.Client
 {
     public delegate void EnemyDead(Enemy Enemy);
+    public enum EnemyPriority
+    {
+        //Highest Number Means Higest priorities
+        none = 0x00,
+        unarmed = 0x01,
+        armed = 0x02,
+        exotic = 0x04
+    }
+
     public class Enemy : MonoBehaviorBase
     {
+        [SerializeField]
+        public EnemyPriority EnemyType;
         public static EnemyDead OnEnemyDead;
         private Transform target = null;
 
@@ -118,6 +129,8 @@ namespace RamboTeam.Client
             gameObject.SetActive(false);
             OnEnemyDead?.Invoke(this);
         }
+
+        
 
         protected override void OnDrawGizmosSelected()
         {

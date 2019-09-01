@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab03c4d13553364bb51e8cba1e125e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyType: 1
   Range: 10
   ShotPerSecond: 1
   BulletPrefab: {fileID: 0}

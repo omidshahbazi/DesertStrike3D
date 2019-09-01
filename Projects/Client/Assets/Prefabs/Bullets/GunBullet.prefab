@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3005553879030688661}
   - component: {fileID: 4425343340529786144}
   - component: {fileID: 6495077582910511412}
-  - component: {fileID: 1498785839817770139}
   - component: {fileID: 1193073476703285020}
   m_Layer: 0
   m_Name: GunBullet
@@ -94,39 +93,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1498785839817770139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4186674442152668689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b7167b69f54b646990c71ab02baef4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LayerShouldAttack:
-    serializedVersion: 2
-    m_Bits: 3088
-  ChopterLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  terrainLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  waterLayer:
-    serializedVersion: 2
-    m_Bits: 16
-  Speed: 150
-  Damage: 20
-  Lifetime: 20
-  impactToBuildingParticle: {fileID: 0}
-  impactToTerrainParticle: {fileID: 0}
-  impactToWaterParticle: {fileID: 0}
 --- !u!54 &1193073476703285020
 Rigidbody:
   m_ObjectHideFlags: 0
