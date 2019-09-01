@@ -88,13 +88,16 @@ namespace RamboTeam.Client
 
             NetworkCommands.OnSyncChopterTransform += OnSyncChopterTransform;
 			NetworkCommands.OnEndGame += OnEndGame;
+			NetworkCommands.OnSyncChopterShotGatling += OnSyncChopterShotGatling;
+			NetworkCommands.OnSyncChopterShotHellfire += OnSyncChopterShotHellfire;
+			NetworkCommands.OnSyncChopterShotHydra += OnSyncChopterShotHydra;
 			InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
             InputManager.Instance.AddInput(KeyCode.X, ShootAirCraft);
             InputManager.Instance.AddInput(KeyCode.C, MachineGunShoot);
             QueryEnemies();
             Enemy.OnEnemyDead += RemoveEnemyFromList;
             sqrRange = RangeDetect * RangeDetect;
-        }
+		}
 
 		protected override void OnDisable()
         {
@@ -102,6 +105,9 @@ namespace RamboTeam.Client
 
 			NetworkCommands.OnSyncChopterTransform -= OnSyncChopterTransform;
 			NetworkCommands.OnEndGame -= OnEndGame;
+			NetworkCommands.OnSyncChopterShotGatling -= OnSyncChopterShotGatling;
+			NetworkCommands.OnSyncChopterShotHellfire -= OnSyncChopterShotHellfire;
+			NetworkCommands.OnSyncChopterShotHydra -= OnSyncChopterShotHydra;
 			InputManager.Instance.RemoveInput(KeyCode.Z, ShootHellFireMissle);
             InputManager.Instance.RemoveInput(KeyCode.X, ShootAirCraft);
             InputManager.Instance.RemoveInput(KeyCode.C, MachineGunShoot);
@@ -210,14 +216,13 @@ namespace RamboTeam.Client
 
             nextShotTime = Time.time + MissleLuncherRateOfShot;
             nextPos = !nextPos;
-            Vector3 pos = nextPos ? RightMissleLuncher.position : LeftMissleLuncher.position;
-            GameObject newObject = GameObject.Instantiate(MissleLuncher, pos, Quaternion.identity) as GameObject;
-            Bullet ps = newObject.GetComponent<Bullet>();
-            (Enemy en, Vector3 dir) = SearchClosetTarge();
-            ps.SetParamaeters(en == null ? GetBottomDirection() : dir);
-            Chopter.Instance.TriggerHellfireShot();
-        }
 
+            Vector3 pos = nextPos ? RightMissleLuncher.position : LeftMissleLuncher.position;
+            (Enemy en, Vector3 dir) = SearchClosetTarge();
+
+			ShootHellFireMissleInternal(pos, en == null ? GetBottomDirection() : dir);
+
+		}
 
         private void MachineGunShoot()
         {
@@ -227,17 +232,11 @@ namespace RamboTeam.Client
 
             nextShotTime = Time.time + GaltingGunRateOfShot;
            
-           
-            GameObject newObject = GameObject.Instantiate(GaltingBulletPrefab, GaltingPosition.position, Quaternion.identity) as GameObject;
-            Bullet ps = newObject.GetComponent<Bullet>();
             (Enemy en, Vector3 dir) = SearchClosetTarge();
-            ps.SetParamaeters(en == null ? GetBottomDirection() : dir);
-            Chopter.Instance.TriggerGaltingfireShot();
-        }
+
+			ShootHellFireMissleInternal(GaltingPosition.position, en == null ? GetBottomDirection() : dir);
+		}
     
-
-
-
         private void ShootAirCraft()
         {
             if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.currentHydraCount == 0 || Time.time < nextAirCraftShotTime)
@@ -245,16 +244,65 @@ namespace RamboTeam.Client
 
             nextAirCraftShotTime = Time.time + AirCraftRateOfShot;
             nextAirCraftPos = !nextAirCraftPos;
+
             Vector3 pos = nextAirCraftPos ? RightAirCraft.position : LeftAirCraft.position;
-            GameObject newObject = GameObject.Instantiate(AirCraftLuncher, pos, Quaternion.identity) as GameObject;
-            Bullet ps = newObject.GetComponent<Bullet>();
-
             (Enemy en, Vector3 dir) = SearchClosetTarge();
-            ps.SetParamaeters(en == null ? GetBottomDirection() : dir);
-            Chopter.Instance.TriggerHydraShot();
-        }
 
-        private (Enemy, Vector3) SearchClosetTarge()
+			ShootHellFireMissleInternal(pos, en == null ? GetBottomDirection() : dir);
+		}
+
+		private void OnSyncChopterShotGatling(Vector3 Position, Vector3 Direction)
+		{
+			if (Chopter.Instance.IsDead || NetworkLayer.Instance.IsPilot)
+				return;
+
+			ShootHellFireMissleInternal(Position, Direction);
+		}
+
+		private void OnSyncChopterShotHellfire(Vector3 Position, Vector3 Direction)
+		{
+			if (Chopter.Instance.IsDead || NetworkLayer.Instance.IsPilot)
+				return;
+
+			MachineGunShootInternal(Position, Direction);
+		}
+
+		private void OnSyncChopterShotHydra(Vector3 Position, Vector3 Direction)
+		{
+			if (Chopter.Instance.IsDead || NetworkLayer.Instance.IsPilot)
+				return;
+
+			ShootAirCraftInternal(Position, Direction);
+		}
+
+		private void ShootHellFireMissleInternal(Vector3 Position, Vector3 Direction)
+		{
+			GameObject newObject = GameObject.Instantiate(MissleLuncher, Position, Quaternion.identity) as GameObject;
+			Bullet ps = newObject.GetComponent<Bullet>();
+			ps.SetParamaeters(Direction);
+
+			Chopter.Instance.TriggerHellfireShot();
+		}
+
+		private void MachineGunShootInternal(Vector3 Position, Vector3 Direction)
+		{
+			GameObject newObject = GameObject.Instantiate(GaltingBulletPrefab, Position, Quaternion.identity) as GameObject;
+			Bullet ps = newObject.GetComponent<Bullet>();
+			ps.SetParamaeters(Direction);
+
+			Chopter.Instance.TriggerGaltingfireShot();
+		}
+
+		private void ShootAirCraftInternal(Vector3 Position, Vector3 Direction)
+		{
+			GameObject newObject = GameObject.Instantiate(AirCraftLuncher, Position, Quaternion.identity) as GameObject;
+			Bullet ps = newObject.GetComponent<Bullet>();
+			ps.SetParamaeters(Direction);
+
+			Chopter.Instance.TriggerHydraShot();
+		}
+
+		private (Enemy, Vector3) SearchClosetTarge()
         {
             Enemy findTarget = null;
             Vector3 dir = Vector3.zero;
