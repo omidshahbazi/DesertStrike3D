@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
-	public class PilotCameraController : MonoBehaviorBase
-	{
+    public class PilotCameraController : MonoBehaviorBase
+    {
 
-		public static PilotCameraController Instance
-		{
-			get;
-			private set;
-		}
+        public static PilotCameraController Instance
+        {
+            get;
+            private set;
+        }
 
-		public float Speed = 10.0F;
-		public float BaseDistance = 30;
-		public float OffsetRadius = 10;
+        public float Speed = 10.0F;
+        public float BaseDistance = 30;
+        public float OffsetRadius = 10;
         public float shakeDuration = 0f;
 
         // Amplitude of the shake. A larger value shakes the camera harder.
@@ -23,79 +23,78 @@ namespace RamboTeam.Client
 
         Vector3 originalPos;
         private ChopterPilotController chopter = null;
-		private Transform chopterTransform = null;
-		private Camera tpsCamera = null;
-		private Camera fpsCamera = null;
+        private Transform chopterTransform = null;
+        private Camera tpsCamera = null;
+        private Camera fpsCamera = null;
 
-		private bool isFPS = false;
+        private bool isFPS = false;
 
-		public Vector3 PanOffset
-		{
-			get;
-			set;
-		}
+        public Vector3 PanOffset
+        {
+            get;
+            set;
+        }
 
-		protected override void Awake()
-		{
-			base.Awake();
+        protected override void Awake()
+        {
+            base.Awake();
 
-			Instance = this;
+            Instance = this;
 
-			tpsCamera = GetComponent<Camera>();
+            tpsCamera = GetComponent<Camera>();
 
-			Transform fpsCameraObject = ChopterPilotController.Instance.transform.Find("FPSCamera");
-			if (fpsCameraObject != null)
-			{
-				fpsCamera = fpsCameraObject.GetComponent<Camera>();
-				fpsCameraObject.gameObject.SetActive(false);
-			}
-		}
+            Transform fpsCameraObject = ChopterPilotController.Instance.transform.Find("FPSCamera");
+            if (fpsCameraObject != null)
+            {
+                fpsCamera = fpsCameraObject.GetComponent<Camera>();
+                fpsCameraObject.gameObject.SetActive(false);
+            }
+        }
 
-		protected override void Start()
-		{
-			base.Start();
+        protected override void Start()
+        {
+            base.Start();
 
-			chopter = ChopterPilotController.Instance;
-			chopterTransform = chopter.transform;
-           
-		}
+            chopter = ChopterPilotController.Instance;
+            chopterTransform = chopter.transform;
 
-		protected override void LateUpdate()
-		{
-			base.LateUpdate();
-            originalPos = tpsCamera.transform.localPosition;
+        }
+
+        protected override void LateUpdate()
+        {
+            base.LateUpdate();
 
             Vector3 forward = chopterTransform.position + new Vector3(-1, 2, -1);
-			forward = (forward - chopterTransform.position).normalized;
-			Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
+            forward = (forward - chopterTransform.position).normalized;
+            Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
 
-			if (chopter.IsMoving)
-			{
-				Vector3 chopterForward = chopterTransform.forward;
-				chopterForward.y = 0;
+            if (chopter.IsMoving)
+            {
+                Vector3 chopterForward = chopterTransform.forward;
+                chopterForward.y = 0;
 
-				float angle = Vector3.Angle(chopterForward, Vector3.right);
+                float angle = Vector3.Angle(chopterForward, Vector3.right);
 
-				if (chopterForward.z < 0)
-					angle = 360 - angle;
+                if (chopterForward.z < 0)
+                    angle = 360 - angle;
 
-				angle *= Mathf.Deg2Rad;
+                angle *= Mathf.Deg2Rad;
 
-				targetPos.x += OffsetRadius * Mathf.Cos(angle) * (Screen.width / (float)Screen.height);
-				targetPos.z += OffsetRadius * Mathf.Sin(angle);
-			}
+                targetPos.x += OffsetRadius * Mathf.Cos(angle) * (Screen.width / (float)Screen.height);
+                targetPos.z += OffsetRadius * Mathf.Sin(angle);
+            }
 
-			float t = Time.deltaTime * Speed;
+            float t = Time.deltaTime * Speed;
 
-			transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
-			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
+            transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
+            transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
 
             if (shakeDuration > 0)
             {
                 tpsCamera.transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
                 shakeDuration -= Time.deltaTime * decreaseFactor;
-             
+
             }
 
             //if (Input.GetKeyUp(KeyCode.V))
@@ -108,9 +107,14 @@ namespace RamboTeam.Client
 
         public void SetCameraShake()
         {
-            shakeDuration = 0.3F;
+            if (shakeDuration <= 0)
+            {
+                shakeDuration = 0.3F;
+                originalPos = tpsCamera.transform.localPosition;
+            }
+
         }
-   
+
 
     }
 }
