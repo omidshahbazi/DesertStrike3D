@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8e8ad976b5c1547addcdb0c4bbec0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyType: 2
+  EnemyType: 4
   Range: 120
   ShotPerSecond: 1
   BulletPrefab: {fileID: 380807794240379697, guid: 993e619aa9316a84c9b1542f809694b8,
@@ -281,14 +281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491930965}
     m_Modifications:
-    - target: {fileID: 100000, guid: 55effc49ede493746acc6a8559ea5bad, type: 3}
-      propertyPath: m_Name
-      value: AntiCraft_Budy
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 55effc49ede493746acc6a8559ea5bad, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 55effc49ede493746acc6a8559ea5bad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -344,6 +336,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 55effc49ede493746acc6a8559ea5bad, type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 55effc49ede493746acc6a8559ea5bad, type: 3}
+      propertyPath: m_Name
+      value: AntiCraft_Budy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 55effc49ede493746acc6a8559ea5bad, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55effc49ede493746acc6a8559ea5bad, type: 3}
