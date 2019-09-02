@@ -237,53 +237,33 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 242434198, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
-      propertyPath: Story
-      value: 
-      objectReference: {fileID: 2123946698}
-    - target: {fileID: 8104492136609101256, guid: 36e5a15c1cd4696459dc0d2da49ada43,
-        type: 3}
-      propertyPath: m_Name
-      value: Story
-      objectReference: {fileID: 0}
-    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
-      propertyPath: m_Text
-      value: "Video   Game   is   not   any   moving   object   on \nevery   digital
-        \  screen"
-      objectReference: {fileID: 0}
-    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
-      propertyPath: m_FontData.m_RichText
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
-      propertyPath: m_FontData.m_AlignByGeometry
+    - target: {fileID: 285363210, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1666667747, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+    - target: {fileID: 2110394734, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
       propertyPath: m_FontData.m_BestFit
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3711373780273740639, guid: 36e5a15c1cd4696459dc0d2da49ada43,
-        type: 3}
+    - target: {fileID: 2110394734, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110394734, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110394734, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110394734, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
       propertyPath: m_Text
-      value: "In   late   2010th   the   Middle   Earth   turns   unrest. A   military
-        \  organization   called   ISIS   started   struggling   in   the   area   and
-        \  capture   some   cities   and   oil   platforms.\r\nA   group   of   countries
-        \  made   companionship   with   each   other   to   kick   them   off   and
-        \  bring   peace   to   Middle   Earth   again. \r\nWith   our   heavy   advanced
-        \  air   force   attack   helicopters...\r\nWe   are   one   of   them."
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 348775574, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36e5a15c1cd4696459dc0d2da49ada43, type: 3}
@@ -675,9 +655,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &2123946698 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8104492136609101256, guid: 36e5a15c1cd4696459dc0d2da49ada43,
-    type: 3}
-  m_PrefabInstance: {fileID: 242434192}
-  m_PrefabAsset: {fileID: 0}

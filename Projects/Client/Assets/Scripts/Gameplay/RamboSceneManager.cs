@@ -29,14 +29,21 @@ namespace RamboTeam.Client
             CurrentSceneName = scene.name;
         }
 
-        public void LoadScene(string Name, LoadSceneMode SceneMode, Action FinalAction = null)
+        public AsyncOperation LoadScene(string Name, LoadSceneMode SceneMode, Action FinalAction = null)
         {
-            SceneManager.LoadScene(Name, SceneMode);
             SceneManager.LoadSceneAsync(Name).completed += RamboSceneManager_completed;
             CurrentSceneName = Name;
-            this.FinalAction = FinalAction ;
-
+            this.FinalAction = FinalAction;
+            AsyncOperation operation = SceneManager.LoadSceneAsync(Name,SceneMode);
+            return operation;
         }
+
+        public void SetLoadSceneParameters(string Name)
+        {
+            CurrentSceneName = Name;
+          
+        }
+
 
         private void RamboSceneManager_completed(AsyncOperation obj)
         {
