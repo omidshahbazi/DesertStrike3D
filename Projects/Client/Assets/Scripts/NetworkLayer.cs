@@ -11,7 +11,8 @@ namespace RamboTeam.Client
 	{
 		private const byte ON_CONNECTION_CATEGORY = byte.MaxValue;
 		private const byte ON_CONNECTED_COMMAND = byte.MaxValue;
-		private const byte ON_DISCONNECTED_COMMAND = byte.MaxValue - 1;
+		private const byte ON_CONNECTION_LOST_COMMAND = byte.MaxValue - 1;
+		private const byte ON_CONNECTION_RESTORED_COMMAND = byte.MaxValue - 2;
 
 		private static NetworkLayer instance = null;
 		public static NetworkLayer Instance
@@ -73,9 +74,13 @@ namespace RamboTeam.Client
 					{
 						NetworkCommands.HandleConnected();
 					}
-					else if (category == ON_DISCONNECTED_COMMAND)
+					else if (category == ON_CONNECTION_LOST_COMMAND)
 					{
-						NetworkCommands.HandleDisconnected();
+						NetworkCommands.HandleConnectionLost();
+					}
+					else if (category == ON_CONNECTION_RESTORED_COMMAND)
+					{
+						NetworkCommands.HandleConnectionRestored();
 					}
 				}
 				else if (category == Commands.Category.LOBBY)
@@ -149,7 +154,8 @@ namespace RamboTeam.Client
 			client.Connect(Host);
 
 			client.OnConnected += OnConnected;
-			client.OnDisconnected += OnDisconnected;
+			client.OnConnectionLost += OnConnectionLost;
+			client.OnConnectionRestored += OnConnectionRestored;
 			client.OnMessageReceived += OnMessageReceived;
 		}
 
@@ -159,16 +165,25 @@ namespace RamboTeam.Client
 
 			incommingMessages.Add(new BufferStream(new byte[] { ON_CONNECTION_CATEGORY, ON_CONNECTED_COMMAND }));
 
-			Debug.Log("Connected");
+			Debug.Log("OnConnected");
 		}
 
-		private void OnDisconnected()
+		private void OnConnectionLost()
 		{
 			IsConnected = false;
 
-			incommingMessages.Add(new BufferStream(new byte[] { ON_CONNECTION_CATEGORY, ON_DISCONNECTED_COMMAND }));
+			incommingMessages.Add(new BufferStream(new byte[] { ON_CONNECTION_CATEGORY, ON_CONNECTION_LOST_COMMAND }));
 
-			Debug.LogError("Disconnected");
+			Debug.LogError("OnConnectionLost");
+		}
+
+		private void OnConnectionRestored()
+		{
+			IsConnected = true;
+
+			incommingMessages.Add(new BufferStream(new byte[] { ON_CONNECTION_CATEGORY, ON_CONNECTION_RESTORED_COMMAND }));
+
+			Debug.LogError("OnConnectionRestored");
 		}
 
 		public void Send(BufferStream Buffer)
