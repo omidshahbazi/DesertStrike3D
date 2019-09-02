@@ -35,8 +35,7 @@ namespace RamboTeam.Client
 
 		public bool IsConnected
 		{
-			get;
-			private set;
+			get { return (client == null ? false : client.IsConnected); }
 		}
 
 		public bool IsPilot
@@ -155,8 +154,6 @@ namespace RamboTeam.Client
 
 		private void OnConnected()
 		{
-			IsConnected = true;
-
 			incommingMessages.Add(new BufferStream(new byte[] { ON_CONNECTION_CATEGORY, ON_CONNECTED_COMMAND }));
 
 			Debug.Log("Connected");
@@ -164,8 +161,6 @@ namespace RamboTeam.Client
 
 		private void OnDisconnected()
 		{
-			IsConnected = false;
-
 			incommingMessages.Add(new BufferStream(new byte[] { ON_CONNECTION_CATEGORY, ON_DISCONNECTED_COMMAND }));
 
 			Debug.LogError("Disconnected");
