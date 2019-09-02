@@ -5,6 +5,7 @@ namespace RamboTeam.Client
 {
 	public class PilotCameraController : MonoBehaviorBase
 	{
+
 		public static PilotCameraController Instance
 		{
 			get;
@@ -14,8 +15,14 @@ namespace RamboTeam.Client
 		public float Speed = 10.0F;
 		public float BaseDistance = 30;
 		public float OffsetRadius = 10;
+        public float shakeDuration = 0f;
 
-		private ChopterPilotController chopter = null;
+        // Amplitude of the shake. A larger value shakes the camera harder.
+        public float shakeAmount = 0.7f;
+        public float decreaseFactor = 1.0f;
+
+        Vector3 originalPos;
+        private ChopterPilotController chopter = null;
 		private Transform chopterTransform = null;
 		private Camera tpsCamera = null;
 		private Camera fpsCamera = null;
@@ -50,13 +57,15 @@ namespace RamboTeam.Client
 
 			chopter = ChopterPilotController.Instance;
 			chopterTransform = chopter.transform;
+           
 		}
 
 		protected override void LateUpdate()
 		{
 			base.LateUpdate();
+            originalPos = tpsCamera.transform.localPosition;
 
-			Vector3 forward = chopterTransform.position + new Vector3(-1, 2, -1);
+            Vector3 forward = chopterTransform.position + new Vector3(-1, 2, -1);
 			forward = (forward - chopterTransform.position).normalized;
 			Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
 
@@ -81,12 +90,27 @@ namespace RamboTeam.Client
 			transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
 			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
 
-			//if (Input.GetKeyUp(KeyCode.V))
-			//{
-			//	isFPS = !isFPS;
+            if (shakeDuration > 0)
+            {
+                tpsCamera.transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
-			//	fpsCamera.gameObject.SetActive(isFPS);
-			//}
-		}
-	}
+                shakeDuration -= Time.deltaTime * decreaseFactor;
+             
+            }
+
+            //if (Input.GetKeyUp(KeyCode.V))
+            //{
+            //	isFPS = !isFPS;
+
+            //	fpsCamera.gameObject.SetActive(isFPS);
+            //}
+        }
+
+        public void SetCameraShake()
+        {
+            shakeDuration = 0.3F;
+        }
+   
+
+    }
 }

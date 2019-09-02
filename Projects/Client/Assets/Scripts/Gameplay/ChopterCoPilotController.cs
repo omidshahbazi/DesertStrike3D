@@ -1,4 +1,5 @@
 ﻿//Rambo Team
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,7 +93,9 @@ namespace RamboTeam.Client
 			ShootInternal(Position, Direction);
 		}
 
-		private void ShootInternal(Vector3 Position, Vector3 Direction)
+    
+
+        private void ShootInternal(Vector3 Position, Vector3 Direction)
 		{
 			GameObject newObject = GameObject.Instantiate(BulletObject, Position, Quaternion.identity) as GameObject;
 

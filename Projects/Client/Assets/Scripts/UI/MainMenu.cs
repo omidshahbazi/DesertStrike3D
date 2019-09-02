@@ -103,7 +103,6 @@ namespace RamboTeam.Client.UI
             AsyncOperation operation = SceneManager.LoadSceneAsync("LevelDesignScene", LoadSceneMode.Single);
             RamboSceneManager.Instance.SetLoadSceneParameters("LevelDesignScene");
 
-
             while (!operation.isDone)
             {
                 progress = Mathf.Clamp01(operation.progress / 0.9f);
