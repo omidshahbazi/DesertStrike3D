@@ -37,11 +37,18 @@ namespace RamboTeam.Client.UI
 			QuitButton.onClick.AddListener(() => Application.Quit());
 
 			NetworkCommands.OnConnected += NetworkCommands_OnConnected;
-			NetworkCommands.OnDisconnected += NetworkCommands_OnDisconnected;
+			NetworkCommands.OnConnectionLost += NetworkCommands_OnDisconnected;
 
 			NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
 
 			CoOpButton.interactable = false;
+		}
+
+		protected override void OnEnable()
+		{
+			base.OnEnable();
+
+			CoOpButton.interactable = NetworkLayer.Instance.IsConnected;
 		}
 
 		private void NetworkCommands_OnConnected()

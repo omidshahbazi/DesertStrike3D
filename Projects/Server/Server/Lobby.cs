@@ -26,6 +26,8 @@ namespace RamboTeam.Server
 			{
 				room.HandlePlayerDisconnection(Player);
 				rooms.Remove(room);
+
+				Log("Room " + room + " removed");
 			}
 		}
 
@@ -46,11 +48,17 @@ namespace RamboTeam.Server
 			buffer.Reset();
 
 			if (room.MasterPlayer == Player)
+			{
 				buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.MASTER);
+
+				Log("Room " + room + " created");
+			}
 			else
 			{
 				buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.SECONDARY);
 				room.SetSecondaryPlayer(Player);
+
+				Log("Player joined to roo " + room);
 			}
 
 			Send(Player, buffer);
@@ -62,7 +70,8 @@ namespace RamboTeam.Server
 			{
 				Room room = rooms[i];
 
-				if (room.MasterPlayer == Player || room.SecondaryPlayer == Player)
+				if ((room.MasterPlayer != null && room.MasterPlayer.IPEndPointHandle == Player.IPEndPointHandle) || 
+					(room.SecondaryPlayer != null && room.SecondaryPlayer.IPEndPointHandle == Player.IPEndPointHandle))
 					return room;
 			}
 

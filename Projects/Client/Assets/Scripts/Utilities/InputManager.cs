@@ -84,7 +84,11 @@ public class InputManager : RamboTeam.Client.Utilities.RamboSingelton<InputManag
             return;
 
         inputMap[KeyCode] -= Action;
-    }
+
+		if (inputMap[KeyCode] == null)
+			inputMap.Remove(KeyCode);
+
+	}
 
     public void RemoveInput(KeyCode KeyCode, MousePressedDelegate Action)
     {

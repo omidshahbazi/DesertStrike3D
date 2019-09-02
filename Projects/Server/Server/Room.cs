@@ -72,5 +72,10 @@ namespace RamboTeam.Server
 					Send(MasterPlayer, buffer);
 			}
 		}
+
+		public override string ToString()
+		{
+			return (MasterPlayer == null ? "[No Player]" : MasterPlayer.IPEndPointHandle.ToString()) + " with " + (SecondaryPlayer == null ? "[No Player]" : SecondaryPlayer.IPEndPointHandle.ToString());
+		}
 	}
 }

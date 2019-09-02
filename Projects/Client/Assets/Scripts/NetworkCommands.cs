@@ -14,7 +14,8 @@ namespace RamboTeam.Client
 		private static BufferStream buffer = new BufferStream(new byte[64]);
 
 		public static event NetworkEventHandler OnConnected;
-		public static event NetworkEventHandler OnDisconnected;
+		public static event NetworkEventHandler OnConnectionLost;
+		public static event NetworkEventHandler OnConnectionRestored;
 
 		public static event NetworkEventHandler OnJoinedToRoom;
 		public static event NetworkEventHandler OnPilot;
@@ -167,10 +168,16 @@ namespace RamboTeam.Client
 				OnConnected();
 		}
 
-		public static void HandleDisconnected()
+		public static void HandleConnectionLost()
 		{
-			if (OnDisconnected != null)
-				OnDisconnected();
+			if (OnConnectionLost != null)
+				OnConnectionLost();
+		}
+
+		public static void HandleConnectionRestored()
+		{
+			if (OnConnectionRestored != null)
+				OnConnectionRestored();
 		}
 
 		public static void HandleJoinedToRoom()

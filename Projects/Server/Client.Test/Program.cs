@@ -26,7 +26,8 @@ namespace RamboTeam.Client.Test
 
 			while (true)
 			{
-				client.Send(buffer);
+				if (client.IsConnected)
+					client.Send(buffer);
 
 				Thread.Sleep(1000);
 			}

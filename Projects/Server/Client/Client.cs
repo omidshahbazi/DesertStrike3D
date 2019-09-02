@@ -16,26 +16,47 @@ namespace RamboTeam.Client
 		private UDPClient socket = null;
 #endif
 
+		private string host;
+		private bool isReconnecting = false;
+
 		public event ConnectionEventHandler OnConnected;
-		public event ConnectionEventHandler OnDisconnected;
+		public event ConnectionEventHandler OnConnectionLost;
+		public event ConnectionEventHandler OnConnectionRestored;
 		public event MessageReceivedEventHandler OnMessageReceived;
+
+		public bool IsConnected
+		{
+			get;
+			private set;
+		}
 
 		public void Connect(string Host)
 		{
+			host = Host;
+
 #if USING_TCP
 			socket = new TCPClient();
 #else
 			socket = new UDPClient();
 #endif
 
-			socket.Connect("127.0.0.1", Constants.PORT_NUMBER);
+			socket.Connect(host, Constants.PORT_NUMBER);
 
-#if DEBUG
 			socket.serverAccepted += OnConnetedEvent;
 			socket.disconnected += OnDisconnectedEvent;
-#endif
-
 			socket.binaryMessageReceived += OnBinaryMessageReceived;
+		}
+
+		private void Disconnect()
+		{
+			if (socket == null)
+				return;
+
+			socket.serverAccepted -= OnConnetedEvent;
+			socket.disconnected -= OnDisconnectedEvent;
+			socket.binaryMessageReceived -= OnBinaryMessageReceived;
+
+			socket.Disconnect(false);
 		}
 
 		public void Send(BufferStream Buffer)
@@ -49,14 +70,33 @@ namespace RamboTeam.Client
 
 		private void OnConnetedEvent(NetWorker Sender)
 		{
-			if (OnConnected != null)
+			IsConnected = true;
+
+			if (isReconnecting)
+			{
+				if (OnConnectionRestored != null)
+					OnConnectionRestored();
+
+				isReconnecting = false;
+			}
+			else if (OnConnected != null)
 				OnConnected();
 		}
 
 		private void OnDisconnectedEvent(NetWorker Sender)
 		{
-			if (OnDisconnected != null)
-				OnDisconnected();
+			IsConnected = false;
+
+			if (OnConnectionLost != null)
+				OnConnectionLost();
+
+			if (string.IsNullOrEmpty(host))
+				return;
+
+			Disconnect();
+
+			isReconnecting = true;
+			Connect(host);
 		}
 
 		private void OnBinaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)

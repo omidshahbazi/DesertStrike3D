@@ -22,5 +22,10 @@ namespace RamboTeam.Server
 		{
 			Application.Send(Player, Buffer);
 		}
+
+		protected static void Log(string Content)
+		{
+			System.Console.WriteLine(Content);
+		}
 	}
 }
