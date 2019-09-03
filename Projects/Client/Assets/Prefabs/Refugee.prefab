@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1348973090423876820}
   m_Layer: 0
   m_Name: Refugee
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ Animator:
   m_GameObject: {fileID: 1700202785948207878}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 40b2ee4eacb6c1249a0d301ad8b2ab4d, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b83f985c90e0d5446b6a3d494b0b2bac, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

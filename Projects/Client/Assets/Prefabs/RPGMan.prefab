@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7096407228940770113}
   - component: {fileID: -3735986819651232320}
   - component: {fileID: 6228892070235026056}
-  - component: {fileID: 2300307628116598860}
+  - component: {fileID: 3223771189223442824}
   m_Layer: 9
   m_Name: RPGMan
   m_TagString: Untagged
@@ -87,7 +87,7 @@ MonoBehaviour:
   EnemyType: 2
   Range: 100
   ShotPerSecond: 1
-  BulletPrefab: {fileID: 4879226331238033940, guid: 6a9c1066e8073ab418fc58b0525cfd32,
+  BulletPrefab: {fileID: 4572193080810376173, guid: 6a9c1066e8073ab418fc58b0525cfd32,
     type: 3}
   HP: 25
   currentHP: 0
@@ -108,8 +108,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &2300307628116598860
-CapsuleCollider:
+--- !u!65 &3223771189223442824
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,9 +118,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 10
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 10, z: 0.5}
   m_Center: {x: 0, y: 5, z: 0}
 --- !u!1001 &5770781948854912867
 PrefabInstance:
