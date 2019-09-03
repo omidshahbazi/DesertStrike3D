@@ -14,10 +14,22 @@ namespace RamboTeam.Client
         exotic = 0x04
     }
 
+    public enum EnemyType
+    {
+        None,
+        AntiAircraft,
+        M3VDA,
+        MissileLauncher,
+        RifleMan,
+        RPGMan
+    }
+
     public class Enemy : MonoBehaviorBase
     {
         [SerializeField]
         public EnemyPriority EnemyType;
+        [SerializeField]
+        public EnemyType Type;
         public static EnemyDead OnEnemyDead;
         private Transform target = null;
 
@@ -125,12 +137,13 @@ namespace RamboTeam.Client
 
         private void OnEnemyDeath()
         {
+            EventManager.OnEnemyDeathCall(this);
             IsDead = true;
             gameObject.SetActive(false);
             OnEnemyDead?.Invoke(this);
         }
 
-        
+
 
         protected override void OnDrawGizmosSelected()
         {

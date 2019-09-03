@@ -22,6 +22,7 @@ namespace RamboTeam.Client.UI
         public Text hellfireText;
         public Text hydraText;
         public Text gatlingGunText;
+        public Text MissionStatusText;
 
         // Start is called before the first frame update
         protected override void Awake()
@@ -38,6 +39,7 @@ namespace RamboTeam.Client.UI
             hellfireText.text = Chopter.Instance.currentHellfireCount.ToString();
             hydraText.text = Chopter.Instance.currentHydraCount.ToString();
             gatlingGunText.text = Chopter.Instance.currentGatlingGunCount.ToString();
+            MissionStatusText.gameObject.SetActive(false);
 
             //StartCoroutine(SendOnPilotMessage()); //Temporary 
         }
@@ -60,6 +62,10 @@ namespace RamboTeam.Client.UI
             EventManager.OnRefugeeUpdate += OnUpdateRefugee;
             EventManager.OnHydraUpdate += OnUpdateHydra;
             EventManager.OnGatlingGunUpdate += OnUpdateGatlingGun;
+
+            EventManager.OnMissionComplete += OnMissionCompleted;
+            EventManager.OnAllMissionsComplete += OnAllMissionsCompleted;
+
         }
 
         protected override void OnDisable()
@@ -74,6 +80,41 @@ namespace RamboTeam.Client.UI
             EventManager.OnHydraUpdate -= OnUpdateHydra;
             EventManager.OnGatlingGunUpdate -= OnUpdateGatlingGun;
 
+            EventManager.OnMissionComplete -= OnMissionCompleted;
+            EventManager.OnAllMissionsComplete -= OnAllMissionsCompleted;
+        }
+
+        private void OnMissionCompleted(Mission Mission)
+        {
+            if (MissionManager.Instance.AreAllTasksDone)
+            {
+                OnAllMissionsCompleted();
+                return;
+            }
+
+            MissionStatusText.text = "Mission " + Mission.Title + " Accomplished";
+            if (!MissionStatusText.gameObject.activeSelf)
+            {
+                MissionStatusText.gameObject.SetActive(true);
+                StopCoroutine(DisableMissionStatus());
+                StartCoroutine(DisableMissionStatus());
+            }
+        }
+
+        private IEnumerator DisableMissionStatus()
+        {
+            yield return new WaitForSeconds(3);
+
+            MissionStatusText.gameObject.SetActive(false);
+        }
+
+        private void OnAllMissionsCompleted()
+        {
+            MissionStatusText.text = "All the Missions Accomplished. Return to Base.";
+            if (!MissionStatusText.gameObject.activeSelf)
+            {
+                MissionStatusText.gameObject.SetActive(true);
+            }
         }
 
         private void OnUpdateRefugee()

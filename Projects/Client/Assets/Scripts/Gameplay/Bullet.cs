@@ -71,7 +71,7 @@ namespace RamboTeam.Client
             if (ChopterLayer.IsContains(Collider.gameObject.layer))
             {
                 chopter.ApplyDamage(Damage);
-                PilotCameraController.Instance.SetCameraShake();
+                //PilotCameraController.Instance.SetCameraShake();
                 targetPos = transform.position;
                 impactPart = impactToBuildingParticle;
             }
