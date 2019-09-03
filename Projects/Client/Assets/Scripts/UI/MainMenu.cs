@@ -10,6 +10,7 @@ namespace RamboTeam.Client.UI
 {
     public class MainMenu : MonoBehaviorBase
     {
+        public Button CreditsButton;
         public Button SingleButton;
         public Button CoOpButton;
         public Button QuitButton;
@@ -17,6 +18,7 @@ namespace RamboTeam.Client.UI
         public GameObject TutorialPanel;
         public GameObject loadingScreen;
         public GameObject CoopMenu;
+        public GameObject CreditsObj;
         public Text Text;
         public Image Image;
         private AudioSource MainMenuMusic;
@@ -46,6 +48,11 @@ namespace RamboTeam.Client.UI
                 //InputManager.Instance.OnAnyKeyPressd += ;
             });
 
+            CreditsButton.onClick.AddListener(() =>
+            {
+                CreditsObj.gameObject.SetActive(true);
+                InputManager.Instance.OnAnyKeyPressd += CloseCreditPanel;
+            });
 
             QuitButton.onClick.AddListener(() => Application.Quit());
 
@@ -55,6 +62,12 @@ namespace RamboTeam.Client.UI
             NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
 
             CoOpButton.interactable = false;
+        }
+
+        private void CloseCreditPanel()
+        {        
+            InputManager.Instance.OnAnyKeyPressd -= CloseCreditPanel;
+            CreditsObj.gameObject.SetActive(false);
         }
 
         protected override void OnEnable()
