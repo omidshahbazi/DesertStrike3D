@@ -52,7 +52,7 @@ namespace RamboTeam.Client
 
 			Application.runInBackground = true;
 
-			Connect("127.0.0.1");
+			Connect("37.202.213.0");
 		}
 
 		protected override void Update()

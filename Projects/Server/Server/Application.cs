@@ -1,8 +1,9 @@
 ﻿//Rambo Team
-
+#define USING_TCP
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
+
 
 namespace RamboTeam.Server
 {
@@ -29,7 +30,6 @@ namespace RamboTeam.Server
 #else
 			socket = new UDPServer(Constants.MAX_CONNECTION_COUNT);
 #endif
-
 			socket.serverAccepted += OnServerAccepted;
 			socket.playerConnected += OnPlayerConnected;
 			socket.playerDisconnected += OnPlayerDisconnected;
@@ -43,7 +43,7 @@ namespace RamboTeam.Server
 
 		public void Bind()
 		{
-			socket.Connect("0.0.0.0", Constants.PORT_NUMBER);
+			socket.Connect("192.168.1.10", Constants.PORT_NUMBER);
 
 			socket.StartAcceptingConnections();
 
