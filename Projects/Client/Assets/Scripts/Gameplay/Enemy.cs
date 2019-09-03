@@ -44,8 +44,8 @@ namespace RamboTeam.Client
         private GameObject BulletPrefab = null;
 
         public float HP = 100;
-        [SerializeField]
-        private float currentHP;
+       
+        public float currentHP { get; private set; }
 
         public bool isAttacker = true;
 

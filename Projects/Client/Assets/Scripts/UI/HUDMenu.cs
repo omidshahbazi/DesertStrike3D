@@ -23,6 +23,8 @@ namespace RamboTeam.Client.UI
         public Text hydraText;
         public Text gatlingGunText;
         public Text MissionStatusText;
+        public GameObject HealthObj;
+        public Image healthImage;
 
         // Start is called before the first frame update
         protected override void Awake()
@@ -40,6 +42,7 @@ namespace RamboTeam.Client.UI
             hydraText.text = Chopter.Instance.currentHydraCount.ToString();
             gatlingGunText.text = Chopter.Instance.currentGatlingGunCount.ToString();
             MissionStatusText.gameObject.SetActive(false);
+            HealthObj.gameObject.SetActive(false);
 
             //StartCoroutine(SendOnPilotMessage()); //Temporary 
         }
@@ -65,8 +68,11 @@ namespace RamboTeam.Client.UI
 
             EventManager.OnMissionComplete += OnMissionCompleted;
             EventManager.OnAllMissionsComplete += OnAllMissionsCompleted;
+            EventManager.OnEnemyDeath += OnEnemyDeath;
 
         }
+
+       
 
         protected override void OnDisable()
         {
@@ -82,6 +88,7 @@ namespace RamboTeam.Client.UI
 
             EventManager.OnMissionComplete -= OnMissionCompleted;
             EventManager.OnAllMissionsComplete -= OnAllMissionsCompleted;
+            EventManager.OnEnemyDeath -= OnEnemyDeath;
         }
 
         private void OnMissionCompleted(Mission Mission)
@@ -100,6 +107,26 @@ namespace RamboTeam.Client.UI
                 StartCoroutine(DisableMissionStatus());
             }
         }
+
+        public void SetEnemyHealth(Enemy Enemy = null)
+        {
+            if (Enemy == null)
+            {
+                HealthObj.gameObject.SetActive(false);
+                return;
+            }
+            HealthObj.gameObject.SetActive(true);
+            healthImage.fillAmount = Enemy.currentHP / Enemy.HP;
+
+            
+        }
+
+    
+        private void OnEnemyDeath(Enemy DeadEnemy)
+        {
+            HealthObj.gameObject.SetActive(false);
+        }
+
 
         private IEnumerator DisableMissionStatus()
         {

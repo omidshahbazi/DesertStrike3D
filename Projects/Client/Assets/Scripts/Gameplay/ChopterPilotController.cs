@@ -1,4 +1,5 @@
 ﻿//Rambo Team
+using RamboTeam.Client.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -344,7 +345,7 @@ namespace RamboTeam.Client
 
             }
 
-
+            HUDMenu.Instance.SetEnemyHealth(findTarget);
             return (findTarget, -1 * dir);
         }
 
