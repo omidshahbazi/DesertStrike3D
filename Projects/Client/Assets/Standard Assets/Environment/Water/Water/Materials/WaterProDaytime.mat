@@ -8,8 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WaterProDaytime
-  m_Shader: {fileID: 4800000, guid: 1cac2e0bcc34e4b3cbb4bd85982eba83, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 2e5d60e33aa6da447bb69ec37053c5ba, type: 3}
+  m_ShaderKeywords: _DEPTHFOG_ON _DISPLACEMENTMODE_GERSTNER _DISPLACEMENT_ON _DISTORTIONQUALITY_HIGH
+    _FOAM_ON _REFLECTIONTYPE_REALTIME
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,8 +21,16 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 2dd3788f8589b40bf82a92d76ffc5091, type: 3}
+        m_Texture: {fileID: 2800000, guid: 15f5794522c0b694dba52b5c6cb286e6, type: 3}
         m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 8900000, guid: 367ce3cf5eb9948419c7cfe09556c3c8, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamTex:
+        m_Texture: {fileID: 2800000, guid: f3ed797cad96fec41b94d8626de3f1ab, type: 3}
+        m_Scale: {x: 50, y: 50}
         m_Offset: {x: 0, y: 0}
     - _Fresnel:
         m_Texture: {fileID: 2800000, guid: 5b5c5575fd4c74abd9f7b30862fb76a3, type: 3}
@@ -52,11 +61,32 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Amplitude: 1
+    - _BumpStrength: 0.735
+    - _Depth: 0.1
+    - _DisplacementMode: 2
+    - _Distortion: 76
+    - _DistortionQuality: 0
+    - _EdgeFade: 1
+    - _EnableFog: 1
+    - _FOAM: 1
+    - _FoamSize: 1.75
+    - _Frequency: 1
     - _FresnelScale: 0.75
     - _GerstnerIntensity: 1
     - _ReflDistort: 0.48
+    - _Reflection: 0.545
+    - _ReflectionType: 1
     - _RefrDistort: 0.36
+    - _RimPower: 25.3
     - _Shininess: 200
+    - _Smoothing: 0.55
+    - _Smoothness: 1.94
+    - _Speed: 1
+    - _SpeedX: 0.5
+    - _SpeedY: 0.5
+    - _Steepness: 1.81
+    - _Tess: 5.6
     - _WaveScale: 0.0351
     m_Colors:
     - WaveSpeed: {r: 9, g: 4.5, b: -8, a: -3.5}
@@ -66,8 +96,12 @@ Material:
     - _BumpDirection: {r: 1, g: 1, b: -1, a: 1}
     - _BumpMap_ST: {r: 1, g: 1, b: 0, a: 0}
     - _BumpTiling: {r: 1, g: 1, b: -2, a: 3}
+    - _Color: {r: 0.33045566, g: 0.65312046, b: 0.8867924, a: 1}
+    - _CubeColor: {r: 0.68950045, g: 0.7736711, b: 0.8014706, a: 1}
+    - _DepthColor: {r: 0.049956758, g: 0.2895687, b: 0.32352942, a: 1}
     - _DistortParams: {r: 1, g: 1, b: 2, a: 1.15}
     - _Foam: {r: 0.1, g: 0.375, b: 0, a: 0}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _Fresnel_ST: {r: 1, g: 1, b: 0, a: 0}
     - _GAmplitude: {r: 0.3, g: 0.35, b: 0.25, a: 0.25}
     - _GDirectionAB: {r: 0.3, g: 0.85, b: 0.85, a: 0.25}
@@ -84,7 +118,11 @@ Material:
     - _ReflectiveColor_ST: {r: 1, g: 1, b: 0, a: 0}
     - _RefrColor: {r: 0.9372549, g: 0.9372549, b: 0.9372549, a: 1}
     - _RefractionTex_ST: {r: 1, g: 1, b: 0, a: 0}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    - _WDirectionAB: {r: 0.3, g: 0.67, b: -0.86, a: -0.25}
+    - _WDirectionCD: {r: 0.15, g: 0.71, b: 0.5, a: 0.5}
+    - _WSpeed: {r: 1.2, g: 1.375, b: 1.1, a: 1.5}
     - _WorldLightDir: {r: 0, g: 0.1, b: -0.5, a: 0}
 --- !u!1002 &2100001
 EditorExtensionImpl:
