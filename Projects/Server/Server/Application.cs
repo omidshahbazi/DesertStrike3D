@@ -1,5 +1,4 @@
 ﻿//Rambo Team
-#define USING_TCP
 using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
