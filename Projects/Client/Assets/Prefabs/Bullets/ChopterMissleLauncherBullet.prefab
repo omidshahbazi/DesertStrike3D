@@ -196,19 +196,81 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &3881895664143284026
-BoxCollider:
+--- !u!1001 &1120684586091141072
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857574804126546550}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.9785202, y: 7.9978013, z: 2.9785202}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Modification:
+    m_TransformParent: {fileID: 6754532364264199890}
+    m_Modifications:
+    - target: {fileID: 5811762561944022438, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_Name
+      value: HellFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab4efa47ea56cfa4b80a7407385658b4, type: 3}
+--- !u!4 &7598036751629109349 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7421051042764201909, guid: ab4efa47ea56cfa4b80a7407385658b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1120684586091141072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1735190200908169918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -216,6 +278,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6754532364264199890}
     m_Modifications:
+    - target: {fileID: 3947341109885698990, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
+        type: 3}
+      propertyPath: m_Name
+      value: HellFireParticle
+      objectReference: {fileID: 0}
     - target: {fileID: 2488273400535006334, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -271,11 +338,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947341109885698990, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
-        type: 3}
-      propertyPath: m_Name
-      value: HellFireParticle
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54237c4e6261e1e40bae8fc15c5a99f8, type: 3}
 --- !u!4 &4223458573955366592 stripped
@@ -283,100 +345,4 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2488273400535006334, guid: 54237c4e6261e1e40bae8fc15c5a99f8,
     type: 3}
   m_PrefabInstance: {fileID: 1735190200908169918}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3173651140972569471
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6754532364264199890}
-    m_Modifications:
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 12a315a359ea90a45a9154d521bd146f,
-        type: 3}
-      propertyPath: m_Name
-      value: HellFire
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 12a315a359ea90a45a9154d521bd146f, type: 3}
---- !u!1 &6857574804126546550 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 12a315a359ea90a45a9154d521bd146f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3173651140972569471}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7598036751629109349 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 12a315a359ea90a45a9154d521bd146f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3173651140972569471}
   m_PrefabAsset: {fileID: 0}

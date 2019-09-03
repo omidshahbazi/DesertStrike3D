@@ -71,7 +71,8 @@ MonoBehaviour:
     type: 3}
   impactToTerrainParticle: {fileID: 6919667222657781936, guid: 9f94d7d63b7704b4e8dadfbc95d4e706,
     type: 3}
-  impactToWaterParticle: {fileID: 0}
+  impactToWaterParticle: {fileID: 6919667222657781936, guid: 9f94d7d63b7704b4e8dadfbc95d4e706,
+    type: 3}
 --- !u!65 &4230617045935187705
 BoxCollider:
   m_ObjectHideFlags: 0
