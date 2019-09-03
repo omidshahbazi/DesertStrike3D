@@ -42,6 +42,7 @@ namespace RamboTeam.Client.UI
             CoOpButton.onClick.AddListener(() =>
             {
                 ShowCoopMenu();
+                NetworkCommands.JoinToRoom();
                 //InputManager.Instance.OnAnyKeyPressd += ;
             });
 
@@ -67,10 +68,6 @@ namespace RamboTeam.Client.UI
         {
             CoOpButton.interactable = true;
 
-            CoOpButton.onClick.AddListener(() =>
-            {
-                NetworkCommands.JoinToRoom();
-            });
         }
 
         private void NetworkCommands_OnDisconnected()
@@ -80,6 +77,7 @@ namespace RamboTeam.Client.UI
 
         private void ShowStory()
         {
+            CoOpButton.gameObject.SetActive(false);
             Story.gameObject.SetActive(true);
 
         }
