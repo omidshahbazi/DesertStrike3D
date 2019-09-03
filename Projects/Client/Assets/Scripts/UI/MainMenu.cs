@@ -10,12 +10,15 @@ namespace RamboTeam.Client.UI
 {
     public class MainMenu : MonoBehaviorBase
     {
+        public Button CreditsButton;
         public Button SingleButton;
         public Button CoOpButton;
         public Button QuitButton;
         public GameObject Story;
         public GameObject TutorialPanel;
         public GameObject loadingScreen;
+        public GameObject CoopMenu;
+        public GameObject CreditsObj;
         public Text Text;
         public Image Image;
         private AudioSource MainMenuMusic;
@@ -38,6 +41,18 @@ namespace RamboTeam.Client.UI
                 ShowStory();
                 InputManager.Instance.OnAnyKeyPressd += ShowTutorial;
             });
+            CoOpButton.onClick.AddListener(() =>
+            {
+                ShowCoopMenu();
+                NetworkCommands.JoinToRoom();
+                //InputManager.Instance.OnAnyKeyPressd += ;
+            });
+
+            CreditsButton.onClick.AddListener(() =>
+            {
+                CreditsObj.gameObject.SetActive(true);
+                InputManager.Instance.OnAnyKeyPressd += CloseCreditPanel;
+            });
 
             QuitButton.onClick.AddListener(() => Application.Quit());
 
@@ -47,6 +62,12 @@ namespace RamboTeam.Client.UI
             NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
 
             CoOpButton.interactable = false;
+        }
+
+        private void CloseCreditPanel()
+        {        
+            InputManager.Instance.OnAnyKeyPressd -= CloseCreditPanel;
+            CreditsObj.gameObject.SetActive(false);
         }
 
         protected override void OnEnable()
@@ -60,10 +81,6 @@ namespace RamboTeam.Client.UI
         {
             CoOpButton.interactable = true;
 
-            CoOpButton.onClick.AddListener(() =>
-            {
-                NetworkCommands.JoinToRoom();
-            });
         }
 
         private void NetworkCommands_OnDisconnected()
@@ -73,6 +90,7 @@ namespace RamboTeam.Client.UI
 
         private void ShowStory()
         {
+            CoOpButton.gameObject.SetActive(false);
             Story.gameObject.SetActive(true);
 
         }
@@ -83,6 +101,11 @@ namespace RamboTeam.Client.UI
             InputManager.Instance.OnAnyKeyPressd -= ShowTutorial;
             InputManager.Instance.OnAnyKeyPressd += loadGame;
 
+        }
+
+        private void ShowCoopMenu()
+        {
+            CoopMenu.gameObject.SetActive(true);
         }
 
 
