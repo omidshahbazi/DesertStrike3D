@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetMaxHeight: 30
-  SetMinHeight: 20
+  SetMinHeight: 25
   Range: 5
+  state: 0
 --- !u!1 &7940254347214032129
 GameObject:
   m_ObjectHideFlags: 0

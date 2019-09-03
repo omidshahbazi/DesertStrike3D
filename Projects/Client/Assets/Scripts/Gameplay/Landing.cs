@@ -30,6 +30,7 @@ namespace RamboTeam.Client
         public State state;
         private bool isProcess;
 
+
         protected override void Start()
         {
             base.Start();
@@ -51,10 +52,11 @@ namespace RamboTeam.Client
             switch(state)
             {
                 case State.Landed:
-                  chinstance.transform.position = new Vector3(chinstance.transform.position.x, Mathf.Lerp(chinstance.transform.position.y, SetMaxHeight, 3F), chinstance.transform.position.z);
+                    chinstance.transform.position = Vector3.Slerp(chinstance.transform.position, new Vector3(chinstance.transform.position.x, SetMaxHeight, chinstance.transform.position.z), Time.deltaTime *10);
                     break;
                 case State.Fly:
-                    chinstance.transform.position = new Vector3(chinstance.transform.position.x, Mathf.Lerp(chinstance.transform.position.y, SetMinHeight, 3F), chinstance.transform.position.z);
+                    chinstance.transform.position = Vector3.Slerp(chinstance.transform.position, new Vector3(chinstance.transform.position.x, SetMinHeight, chinstance.transform.position.z), Time.deltaTime*10);
+
                     break;
             }
             if (chinstance.transform.position.y == SetMaxHeight || chinstance.transform.position.y == SetMinHeight)
@@ -78,6 +80,8 @@ namespace RamboTeam.Client
                 isProcess = false;
                 return;
             }
+
+      
         }
 
         protected override void OnDrawGizmosSelected()
