@@ -19,7 +19,7 @@ namespace RamboTeam.Client
 
 		public static event NetworkEventHandler OnJoinedToRoom;
 		public static event NetworkEventHandler OnPilot;
-		public static event NetworkEventHandler OnCommando;
+		public static event NetworkEventHandler OnCoPilot;
 
 		public static event NetworkEventHandler OnEndGame;
 		public static event SyncChopterTransformEventHandler OnSyncChopterTransform;
@@ -192,10 +192,10 @@ namespace RamboTeam.Client
 				OnPilot();
 		}
 
-		public static void HandleCommando()
+		public static void HandleCoPilot()
 		{
-			if (OnCommando != null)
-				OnCommando();
+			if (OnCoPilot != null)
+				OnCoPilot();
 		}
 
 		public static void HandleEndGame()

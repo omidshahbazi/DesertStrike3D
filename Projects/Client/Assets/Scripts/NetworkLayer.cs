@@ -98,7 +98,7 @@ namespace RamboTeam.Client
 					{
 						IsPilot = false;
 						NetworkCommands.HandleJoinedToRoom();
-						NetworkCommands.HandleCommando();
+						NetworkCommands.HandleCoPilot();
 					}
 					else if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
 					{

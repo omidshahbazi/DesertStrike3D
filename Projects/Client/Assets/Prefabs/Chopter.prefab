@@ -380,10 +380,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032755b6c776be746b9cd61e52d78b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChopterModel: {fileID: 3531565312313610673}
-  Range: 30
+  CoPilotTransform: {fileID: 3757867057319729511}
   FireTransform: {fileID: 7495172261047024886}
-  BulletObject: {fileID: 4186674442152668689, guid: 7336d6fcebc32c74e986509124e6b703,
+  BulletObject: {fileID: 620008849344824208, guid: f2f5a6e0226e41f45aed0e1af888229c,
     type: 3}
   RateOfFire: 0.2
 --- !u!1 &3352075043938754473
@@ -443,7 +442,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3531565312313610673}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.13, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8796443329234748394}
@@ -535,14 +534,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3757867057319729511}
   - component: {fileID: 5493197876301357530}
-  - component: {fileID: 4645891842395577101}
+  - component: {fileID: 1620440074561661293}
   m_Layer: 10
-  m_Name: FPSCamera
+  m_Name: CoPilotCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3757867057319729511
 Transform:
   m_ObjectHideFlags: 0
@@ -551,7 +550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7440637366407482323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.45, z: 11.21}
+  m_LocalPosition: {x: 0, y: -2.05, z: 14.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1282614176317508941}
@@ -600,14 +599,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4645891842395577101
-AudioListener:
+--- !u!114 &1620440074561661293
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7440637366407482323}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809e4a3856d2f9049ab8698d77ed042d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxYawAngle: 60
+  MaxPitchAngle: 30
 --- !u!1 &7810317012342072886
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +733,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3531565312313707921}
     m_Modifications:
+    - target: {fileID: 1652491331545971774, guid: 3417c8bd14247d44d876287400d2c321,
+        type: 3}
+      propertyPath: m_Name
+      value: Ladder
+      objectReference: {fileID: 0}
     - target: {fileID: 1652491331545971775, guid: 3417c8bd14247d44d876287400d2c321,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -783,11 +793,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1652491331545971774, guid: 3417c8bd14247d44d876287400d2c321,
-        type: 3}
-      propertyPath: m_Name
-      value: Ladder
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3417c8bd14247d44d876287400d2c321, type: 3}
 --- !u!4 &361195261490994062 stripped
@@ -815,6 +820,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3531565312313707921}
     m_Modifications:
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_Name
+      value: SmokeParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -868,21 +888,6 @@ PrefabInstance:
     - target: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_Name
-      value: SmokeParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
