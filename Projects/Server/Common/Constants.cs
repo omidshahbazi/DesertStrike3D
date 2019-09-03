@@ -28,8 +28,8 @@ namespace RamboTeam.Common
 |   |_________/        |_|       |_|  \_\     |_____|    |_|  \_\    |________|    |
 |__________________________________________________________________________________|";
 
-		//public const string SERVER_IP = "127.0.0.1";
 		public const string SERVER_IP = "37.202.213.0";
+		public const string HOST_IP = "192.168.1.10";
 
 		public const int PORT_NUMBER = 85;
 

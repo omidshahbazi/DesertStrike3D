@@ -42,7 +42,7 @@ namespace RamboTeam.Server
 
 		public void Bind()
 		{
-			socket.Connect(Constants.SERVER_IP, Constants.PORT_NUMBER);
+			socket.Connect(Constants.HOST_IP, Constants.PORT_NUMBER);
 
 			socket.StartAcceptingConnections();
 
