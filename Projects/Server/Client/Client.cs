@@ -30,17 +30,15 @@ namespace RamboTeam.Client
 			private set;
 		}
 
-		public void Connect(string Host)
+		public void Connect()
 		{
-			host = Host;
-
 #if USING_TCP
 			socket = new TCPClient();
 #else
 			socket = new UDPClient();
 #endif
 
-			socket.Connect(host, Constants.PORT_NUMBER);
+			socket.Connect(Constants.SERVER_IP, Constants.PORT_NUMBER);
 
 			socket.serverAccepted += OnConnetedEvent;
 			socket.disconnected += OnDisconnectedEvent;
@@ -96,7 +94,7 @@ namespace RamboTeam.Client
 			Disconnect();
 
 			isReconnecting = true;
-			Connect(host);
+			Connect();
 		}
 
 		private void OnBinaryMessageReceived(NetworkingPlayer Player, Binary Frame, NetWorker Sender)

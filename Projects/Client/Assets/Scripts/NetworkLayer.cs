@@ -49,10 +49,9 @@ namespace RamboTeam.Client
 		{
 			base.Awake();
 
-
 			Application.runInBackground = true;
 
-			Connect("37.202.213.0");
+			Connect();
 		}
 
 		protected override void Update()
@@ -145,12 +144,12 @@ namespace RamboTeam.Client
 			}
 		}
 
-		public void Connect(string Host)
+		public void Connect()
 		{
 			incommingMessages = new List<BufferStream>();
 
 			client = new Client();
-			client.Connect(Host);
+			client.Connect();
 
 			client.OnConnected += OnConnected;
 			client.OnConnectionLost += OnConnectionLost;

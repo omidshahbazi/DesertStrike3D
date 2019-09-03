@@ -12,7 +12,7 @@ namespace RamboTeam.Client.Test
 		static void Main(string[] args)
 		{
 			Client client = new Client();
-			client.Connect("127.0.0.1");
+			client.Connect();
 
 			client.OnMessageReceived += Client_OnMessageReceived;
 
