@@ -182,12 +182,16 @@ namespace RamboTeam.Client
 
                     if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                     {
+                        IsMoving = true;
+
                         horizontalRoation = HorizontalRotation;
 
                         transform.Rotate(0, Time.deltaTime * RotationSpeed * -1, 0, Space.World);
                     }
                     if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                     {
+                        IsMoving = true;
+
                         horizontalRoation = HorizontalRotation * -1;
 
                         transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);

@@ -118,7 +118,6 @@ namespace RamboTeam.Client.UI
             HealthObj.gameObject.SetActive(true);
             healthImage.fillAmount = Enemy.currentHP / Enemy.HP;
 
-            
         }
 
     
