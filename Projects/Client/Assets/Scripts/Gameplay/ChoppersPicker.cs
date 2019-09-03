@@ -12,11 +12,19 @@ namespace RamboTeam.Client
         private Animator LadderAnimation;
 
         private bool ladderIsUp = true;
+        private AudioSource audioSource;
 
         public PickUpBehaviour pickedItem
         {
             get;
             private set;
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            audioSource = GetComponent<AudioSource>();
         }
 
         protected override void Update()
@@ -27,6 +35,27 @@ namespace RamboTeam.Client
             {
                 pickedItem.transform.position = pickerTransform.position;
             }
+
+
+
+        }
+
+        protected override void LateUpdate()
+        {
+            base.LateUpdate();
+
+            if (LadderAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime > 0 && LadderAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            {
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.time *= LadderAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime;
+                    audioSource.Play();
+                }
+            }
+
+            if (LadderAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0 || LadderAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+                audioSource.Stop();
+
         }
 
         protected override void OnTriggerEnter(Collider Collision)
@@ -69,6 +98,9 @@ namespace RamboTeam.Client
             if (!ladderIsUp)
                 return;
 
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+
             if (!LadderAnimation.enabled)
                 LadderAnimation.enabled = true;
 
@@ -87,6 +119,8 @@ namespace RamboTeam.Client
             if (ladderIsUp)
                 return;
 
+            if (!audioSource.isPlaying)
+                audioSource.Play();
             Debug.Log("Ladder Going UP");
 
             float normTime = Mathf.Clamp01(LadderAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime);

@@ -14,7 +14,10 @@ namespace RamboTeam.Client
         private Animator chopterDeathAnimation;
         [SerializeField]
         private Animator chopterRotorBladeAnimation;
-
+        public int RightArmDestructionHP = 150;
+        public GameObject RightArmDestructionParticle;
+        public int LeftArmDestructionHP = 75;
+        public GameObject LeftArmDestructionParticle;
 
         private float nextFuelUpdateTime = 0.0F;
         public static Chopter Instance
@@ -66,6 +69,9 @@ namespace RamboTeam.Client
             currentHellfireCount = HellfireCount;
 
             smokeParticle.SetActive(false);
+            LeftArmDestructionParticle.SetActive(false);
+            RightArmDestructionParticle.SetActive(false);
+
             nextFuelUpdateTime = Time.time + FuelCostTime;
         }
 
@@ -114,11 +120,27 @@ namespace RamboTeam.Client
 
             EventManager.OnHealthUpdateCall();
 
-
+            CheckArmsDestructionState();
             if (currentHP == 0)
             {
                 OnChopterDeath();
             }
+        }
+
+        private void CheckArmsDestructionState()
+        {
+            if (currentHP <= LeftArmDestructionHP && !LeftArmDestructionParticle.activeSelf)
+                LeftArmDestructionParticle.SetActive(true);
+
+            if (currentHP > LeftArmDestructionHP && LeftArmDestructionParticle.activeSelf)
+                LeftArmDestructionParticle.SetActive(false);
+
+
+            if (currentHP <= RightArmDestructionHP && !RightArmDestructionParticle.activeSelf)
+                RightArmDestructionParticle.SetActive(true);
+            if (currentHP > RightArmDestructionHP && RightArmDestructionParticle.activeSelf)
+                RightArmDestructionParticle.SetActive(false);
+
         }
 
         private void OnChopterDeath()
@@ -168,7 +190,7 @@ namespace RamboTeam.Client
             EventManager.OnHealthUpdateCall();
             EventManager.OnLifeUpdateCall();
             EventManager.OnFuelUpdateCall();
-
+            CheckArmsDestructionState();
             IsDead = false;
         }
 
@@ -183,6 +205,8 @@ namespace RamboTeam.Client
             {
                 if (pickUp.pickedItem == null)
                     return;
+
+                EventManager.OnPickUpCall(pickUp.pickedItem);
 
                 switch (pickUp.pickedItem.Type)
                 {
@@ -216,6 +240,7 @@ namespace RamboTeam.Client
                     case PickUpBehaviour.PickUpType.HealthPack:
                         currentHP = (uint)Mathf.Min(currentHP + pickUp.pickedItem.Amount, HP);
                         EventManager.OnHealthUpdateCall();
+                        CheckArmsDestructionState();
                         break;
                     default:
                         break;
