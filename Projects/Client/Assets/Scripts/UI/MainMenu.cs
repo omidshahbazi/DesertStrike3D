@@ -16,6 +16,7 @@ namespace RamboTeam.Client.UI
         public GameObject Story;
         public GameObject TutorialPanel;
         public GameObject loadingScreen;
+        public GameObject CoopMenu;
         public Text Text;
         public Image Image;
         private AudioSource MainMenuMusic;
@@ -38,6 +39,12 @@ namespace RamboTeam.Client.UI
                 ShowStory();
                 InputManager.Instance.OnAnyKeyPressd += ShowTutorial;
             });
+            CoOpButton.onClick.AddListener(() =>
+            {
+                ShowCoopMenu();
+                //InputManager.Instance.OnAnyKeyPressd += ;
+            });
+
 
             QuitButton.onClick.AddListener(() => Application.Quit());
 
@@ -83,6 +90,11 @@ namespace RamboTeam.Client.UI
             InputManager.Instance.OnAnyKeyPressd -= ShowTutorial;
             InputManager.Instance.OnAnyKeyPressd += loadGame;
 
+        }
+
+        private void ShowCoopMenu()
+        {
+            CoopMenu.gameObject.SetActive(true);
         }
 
 
