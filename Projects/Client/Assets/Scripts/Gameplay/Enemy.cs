@@ -21,7 +21,10 @@ namespace RamboTeam.Client
         M3VDA,
         MissileLauncher,
         RifleMan,
-        RPGMan
+        RPGMan,
+        SamRadar,
+        PowerStation,
+        Hangar
     }
 
     public class Enemy : MonoBehaviorBase
