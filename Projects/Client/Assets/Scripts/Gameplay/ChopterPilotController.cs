@@ -167,17 +167,19 @@ namespace RamboTeam.Client
 
                     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                     {
+                        IsMoving = true;
                         verticalRoation = VerticalRotation;
 
                         transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
-                        IsMoving = true;
+                       
                     }
                     if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                     {
+                        IsMoving = true;
                         verticalRoation = VerticalRotation * -1;
 
                         transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
-                        IsMoving = true;
+                        
                     }
 
                     if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
