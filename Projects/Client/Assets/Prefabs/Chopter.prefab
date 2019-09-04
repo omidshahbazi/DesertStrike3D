@@ -216,7 +216,7 @@ MonoBehaviour:
   LeftAirCraft: {fileID: 1059555563}
   AirCraftRateOfShot: 0.5
   MovementSpeed: 75
-  RotationSpeed: 75
+  RotationSpeed: 100
   VerticalRotation: 30
   HorizontalRotation: 20
   ChopterModel: {fileID: 3531565312313610673}
