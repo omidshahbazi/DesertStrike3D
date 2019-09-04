@@ -85,12 +85,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyType: 2
+  Type: 0
   Range: 100
-  ShotPerSecond: 2
+  ShotPerSecond: 4
   BulletPrefab: {fileID: 2196423762651213752, guid: 2507e47b3fe91c34d9a46c7c3831e3ac,
     type: 3}
   HP: 25
-  currentHP: 0
   isAttacker: 1
 --- !u!54 &-5095989023779230332
 Rigidbody:
@@ -119,8 +119,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 10, z: 4}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 8, y: 12, z: 8}
+  m_Center: {x: 0, y: 6, z: 0}
 --- !u!1001 &6101171172396278137
 PrefabInstance:
   m_ObjectHideFlags: 0
