@@ -64,7 +64,8 @@ MonoBehaviour:
   Speed: 100
   Damage: 25
   Lifetime: 20
-  impactToBuildingParticle: {fileID: 0}
+  impactToBuildingParticle: {fileID: 6919667222657781936, guid: 9f94d7d63b7704b4e8dadfbc95d4e706,
+    type: 3}
   impactToTerrainParticle: {fileID: 0}
   impactToWaterParticle: {fileID: 0}
 --- !u!65 &6667079309155011613
