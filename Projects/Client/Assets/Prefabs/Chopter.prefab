@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smokeParticle: {fileID: 7438292909932348517}
-  chopterDeathAnimation: {fileID: 697587262}
+  chopterDeathAnimation: {fileID: 0}
   chopterRotorBladeAnimation: {fileID: 1523695166}
   RightArmDestructionHP: 150
   RightArmDestructionParticle: {fileID: 9112659759790629052}
@@ -430,7 +430,6 @@ GameObject:
   - component: {fileID: 3531565312313707921}
   - component: {fileID: 3531565312316575153}
   - component: {fileID: 3531565312315608945}
-  - component: {fileID: 697587262}
   m_Layer: 10
   m_Name: Chopter
   m_TagString: Untagged
@@ -511,25 +510,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &697587262
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3531565312313610673}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 308eb00e17ecd0b4a913a5c42ea824f2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7440637366407482323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,15 +1076,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 372081843e9dda24fb3adf00b3379892, type: 3}
---- !u!4 &3091951255744093500 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5157049350702451360, guid: 372081843e9dda24fb3adf00b3379892,
-    type: 3}
-  m_PrefabInstance: {fileID: 7888428884770969500}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5037724098021086068 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
+    type: 3}
+  m_PrefabInstance: {fileID: 7888428884770969500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3091951255744093500 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5157049350702451360, guid: 372081843e9dda24fb3adf00b3379892,
     type: 3}
   m_PrefabInstance: {fileID: 7888428884770969500}
   m_PrefabAsset: {fileID: 0}
@@ -1262,15 +1242,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 637e82ac626e97548952220bbae2873d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d, type: 3}
---- !u!4 &8796443330205855541 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d,
-    type: 3}
-  m_PrefabInstance: {fileID: 8796443330205463989}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8796443330205561621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8796443330205463989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8796443330205855541 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d,
     type: 3}
   m_PrefabInstance: {fileID: 8796443330205463989}
   m_PrefabAsset: {fileID: 0}
