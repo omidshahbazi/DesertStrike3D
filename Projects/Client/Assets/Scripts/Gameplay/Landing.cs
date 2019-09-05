@@ -37,13 +37,15 @@ namespace RamboTeam.Client
             Instance = this;
             chinstance = ChopterPilotController.Instance;
             sqrRange = Range * Range;
-            state = State.Landed;
+            state = State.Fly;
          
         }
 
         protected override void Update()
         {
             base.Update();
+
+            return;
             if (Input.GetKeyDown(KeyCode.F))
                 SetOperation();
             if (!isProcess)
