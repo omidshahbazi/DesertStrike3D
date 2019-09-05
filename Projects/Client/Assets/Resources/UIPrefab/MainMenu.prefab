@@ -367,8 +367,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1c277c2587e99a842bbbad5638450639, type: 3}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 5715676fe78e82f44aefeefeda2aa765, type: 3}
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -379,8 +379,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Video   Game   is   not   any   moving   object   on \nevery   digital
-    \  screen"
+  m_Text: "Video Game is not any moving object on \nevery digital screen"
 --- !u!1 &2110394732
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,11 +446,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1c277c2587e99a842bbbad5638450639, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 5715676fe78e82f44aefeefeda2aa765, type: 3}
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0

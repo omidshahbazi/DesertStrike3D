@@ -25,6 +25,9 @@ namespace RamboTeam.Client.UI
         public Text MissionStatusText;
         public GameObject HealthObj;
         public Image healthImage;
+        public GameObject missionPanel;
+        public GameObject misssionItem;
+        public RectTransform missionsItemsPanel;
 
         // Start is called before the first frame update
         protected override void Awake()
@@ -43,6 +46,8 @@ namespace RamboTeam.Client.UI
             gatlingGunText.text = Chopter.Instance.currentGatlingGunCount.ToString();
             MissionStatusText.gameObject.SetActive(false);
             HealthObj.gameObject.SetActive(false);
+            missionPanel.SetActive(false);
+            InputManager.Instance.AddInput(KeyCode.M, ShowHideMissionPanel);
 
             //StartCoroutine(SendOnPilotMessage()); //Temporary 
         }
@@ -69,10 +74,51 @@ namespace RamboTeam.Client.UI
             EventManager.OnMissionComplete += OnMissionCompleted;
             EventManager.OnAllMissionsComplete += OnAllMissionsCompleted;
             EventManager.OnEnemyDeath += OnEnemyDeath;
+            InputManager.Instance.AddInput(KeyCode.Tab, ShowHideMissionPanel);
 
         }
 
-       
+        private void ShowHideMissionPanel()
+        {
+            if (missionPanel.activeSelf || PauseMenu.Instance.isGamePaused)
+                return;
+            UpdateMissions();
+
+            missionPanel.SetActive(true);
+            missionPanel.transform.SetAsLastSibling();
+            Time.timeScale = 0;
+            InputManager.Instance.OnKeyRealeased += OnkeyCode;
+        }
+
+        private void OnkeyCode(KeyCode KeyCode)
+        {
+            if (KeyCode != KeyCode.M)
+                return;
+            missionPanel.SetActive(false);
+            Time.timeScale = 1;
+            InputManager.Instance.OnKeyRealeased -= OnkeyCode;
+        }
+
+        private void UpdateMissions()
+        {
+            for (int i = 0; i < missionsItemsPanel.childCount; ++i)
+            {
+                Destroy(missionsItemsPanel.GetChild(i).gameObject);
+            }
+
+            List<Mission> Missions = MissionManager.Instance.Missions;
+
+            for (int i = 0; i < Missions.Count; ++i)
+            {
+                Mission mis = Missions[i];
+                GameObject missionItem = GameObject.Instantiate(misssionItem);
+                missionItem.transform.SetParent(missionsItemsPanel, false);
+                missionItem.transform.SetAsLastSibling();
+                MissionItem item = missionItem.GetComponent<MissionItem>();
+                item.SetData((i + 1).ToString() + " " + mis.Description, mis.IsDone);
+            }
+
+        }
 
         protected override void OnDisable()
         {
@@ -89,6 +135,7 @@ namespace RamboTeam.Client.UI
             EventManager.OnMissionComplete -= OnMissionCompleted;
             EventManager.OnAllMissionsComplete -= OnAllMissionsCompleted;
             EventManager.OnEnemyDeath -= OnEnemyDeath;
+            InputManager.Instance.RemoveInput(KeyCode.Tab, ShowHideMissionPanel);
         }
 
         private void OnMissionCompleted(Mission Mission)
@@ -120,7 +167,7 @@ namespace RamboTeam.Client.UI
 
         }
 
-    
+
         private void OnEnemyDeath(Enemy DeadEnemy)
         {
             HealthObj.gameObject.SetActive(false);

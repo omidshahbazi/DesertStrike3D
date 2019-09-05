@@ -123,8 +123,8 @@ namespace RamboTeam.Client.UI
 
         IEnumerator LoadAsync()
         {
-            AsyncOperation operation = SceneManager.LoadSceneAsync("LevelDesignScene", LoadSceneMode.Single);
-            RamboSceneManager.Instance.SetLoadSceneParameters("LevelDesignScene");
+            AsyncOperation operation = SceneManager.LoadSceneAsync("FinalScene001", LoadSceneMode.Single);
+            RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001");
 
             while (!operation.isDone)
             {

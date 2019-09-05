@@ -109,13 +109,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyType: 4
+  Type: 0
   Range: 120
   ShotPerSecond: 1
   BulletPrefab: {fileID: 670093052942939127, guid: 5feef8803e4086d439611d23f740da27,
     type: 3}
   HP: 75
-  currentHP: 0
   isAttacker: 1
+  TransformsForTargetRotation:
+  - {fileID: 2039015851659334834}
 --- !u!136 &6428535334898159651
 CapsuleCollider:
   m_ObjectHideFlags: 0

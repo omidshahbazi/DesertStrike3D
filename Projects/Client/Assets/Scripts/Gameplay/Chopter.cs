@@ -18,6 +18,7 @@ namespace RamboTeam.Client
         public GameObject RightArmDestructionParticle;
         public int LeftArmDestructionHP = 75;
         public GameObject LeftArmDestructionParticle;
+        private AudioSource rotorAudio;
 
         private float nextFuelUpdateTime = 0.0F;
         public static Chopter Instance
@@ -71,7 +72,7 @@ namespace RamboTeam.Client
             smokeParticle.SetActive(false);
             LeftArmDestructionParticle.SetActive(false);
             RightArmDestructionParticle.SetActive(false);
-
+            rotorAudio = GetComponent<AudioSource>();
             nextFuelUpdateTime = Time.time + FuelCostTime;
         }
 
@@ -153,6 +154,7 @@ namespace RamboTeam.Client
             chopterRotorBladeAnimation.enabled = false;
             chopterDeathAnimation.enabled = true;
             chopterDeathAnimation.Play("ChopperDeath", -1, 0.0F);
+            rotorAudio.Stop();
 
             if (currentLifeCount == 0)
             {
@@ -186,6 +188,7 @@ namespace RamboTeam.Client
             currentRefugeesCount = 0;
             IsDead = false;
             smokeParticle.SetActive(false);
+            rotorAudio.Play();
 
             EventManager.OnHealthUpdateCall();
             EventManager.OnLifeUpdateCall();

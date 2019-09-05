@@ -19,7 +19,11 @@ namespace RamboTeam.Client.UI
         public Button ReturnToMainMenu;
         public Button QuitButton;
         public GameObject TutorialPanel;
-        private bool isGamePaused;
+        public bool isGamePaused
+        {
+            get;
+            private set;
+        }
 
         // Start is called before the first frame update
         protected override void Awake()
@@ -45,6 +49,7 @@ namespace RamboTeam.Client.UI
             this.gameObject.SetActive(false);
             InputManager.Instance.AddInput(KeyCode.Escape, PauseGame);
             InputManager.Instance.AddInput(KeyCode.F1, ShowTutorial);
+
 
         }
 

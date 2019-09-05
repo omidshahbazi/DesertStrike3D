@@ -92,6 +92,9 @@ MonoBehaviour:
     type: 3}
   HP: 25
   isAttacker: 1
+  TransformsForTargetRotation:
+  - {fileID: 2436145447997514426}
+  RotationToTargetSpeed: 300
 --- !u!54 &-5095989023779230332
 Rigidbody:
   m_ObjectHideFlags: 0
