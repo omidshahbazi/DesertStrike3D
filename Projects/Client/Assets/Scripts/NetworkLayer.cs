@@ -39,11 +39,11 @@ namespace RamboTeam.Client
 			get { return (client == null ? false : client.IsConnected); }
 		}
 
-		public bool IsPilot
-		{
-			get;
-			set;
-		}
+        public bool IsPilot
+        {
+            get;
+            set;
+        } = true;
 
 		protected override void Awake()
 		{
