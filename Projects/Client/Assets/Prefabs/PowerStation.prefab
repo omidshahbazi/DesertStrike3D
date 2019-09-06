@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7282844917396881195}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 778.7, y: 26.4, z: 255.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   isAttacker: 0
   TransformsForTargetRotation: []
   RotationToTargetSpeed: 150
+  ShotStartPosition: {fileID: 0}
 --- !u!54 &-3675757091675255964
 Rigidbody:
   m_ObjectHideFlags: 0

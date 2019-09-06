@@ -50,8 +50,8 @@ namespace RamboTeam.Client
         public bool IsDead { get; private set; } = false;
         public float FuelCostTime = 2.0f;
         private float nextRefugeeReleaseTime;
-        private float RefugessReleaseGapTime = 2.0f;
-        private int HealthPerRefugeeAmount = 30;
+        public float RefugessReleaseGapTime = 2.0f;
+        public int HealthPerRefugeeAmount = 30;
 
         private bool IsPilot
         {

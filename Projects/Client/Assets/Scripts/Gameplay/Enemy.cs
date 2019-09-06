@@ -26,7 +26,11 @@ namespace RamboTeam.Client
         RPGMan,
         SamRadar,
         PowerStation,
-        Hangar
+        Hangar,
+        WatchTower,
+        Tent,
+        Factory,
+        House
     }
 
     public class Enemy : MonoBehaviorBase
@@ -64,6 +68,7 @@ namespace RamboTeam.Client
 
         public List<Transform> TransformsForTargetRotation = new List<Transform>();
         public float RotationToTargetSpeed = 150;
+        public Transform ShotStartPosition;
         private bool isRotatingTowardTarget = false;
 
         protected override void Start()
@@ -109,7 +114,7 @@ namespace RamboTeam.Client
             if (isAnyTransformAlignedToTarget())
             {
                 nextShotTime = Time.time + rateOfShot;
-                Shot(transform.position, diff.normalized);
+                Shot(ShotStartPosition.position, diff.normalized);
             }
             else // Rotate To Target First
             {
