@@ -43,7 +43,7 @@ namespace RamboTeam.Client
         {
             get;
             set;
-        } = true;
+        }
 
 		protected override void Awake()
 		{
