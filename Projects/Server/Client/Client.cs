@@ -16,7 +16,6 @@ namespace RamboTeam.Client
 		private UDPClient socket = null;
 #endif
 
-		private string host;
 		private bool isReconnecting = false;
 
 		public event ConnectionEventHandler OnConnected;
@@ -87,9 +86,6 @@ namespace RamboTeam.Client
 
 			if (OnConnectionLost != null)
 				OnConnectionLost();
-
-			if (string.IsNullOrEmpty(host))
-				return;
 
 			Disconnect();
 
