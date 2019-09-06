@@ -1,5 +1,7 @@
 ﻿//Rambo Team
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RamboTeam.Client
@@ -14,10 +16,25 @@ namespace RamboTeam.Client
         exotic = 0x04
     }
 
+    public enum EnemyType
+    {
+        None,
+        AntiAircraft,
+        M3VDA,
+        MissileLauncher,
+        RifleMan,
+        RPGMan,
+        SamRadar,
+        PowerStation,
+        Hangar
+    }
+
     public class Enemy : MonoBehaviorBase
     {
         [SerializeField]
         public EnemyPriority EnemyType;
+        [SerializeField]
+        public EnemyType Type;
         public static EnemyDead OnEnemyDead;
         private Transform target = null;
 
@@ -32,8 +49,8 @@ namespace RamboTeam.Client
         private GameObject BulletPrefab = null;
 
         public float HP = 100;
-        [SerializeField]
-        private float currentHP;
+
+        public float currentHP { get; private set; }
 
         public bool isAttacker = true;
 
@@ -45,6 +62,9 @@ namespace RamboTeam.Client
 
         private bool IsDead { get; set; } = false;
 
+        public List<Transform> TransformsForTargetRotation = new List<Transform>();
+        public float RotationToTargetSpeed = 150;
+        private bool isRotatingTowardTarget = false;
 
         protected override void Start()
         {
@@ -86,9 +106,61 @@ namespace RamboTeam.Client
             if (Time.time < nextShotTime)
                 return;
 
-            nextShotTime = Time.time + rateOfShot;
+            if (isAnyTransformAlignedToTarget())
+            {
+                nextShotTime = Time.time + rateOfShot;
+                Shot(transform.position, diff.normalized);
+            }
+            else // Rotate To Target First
+            {
+                isRotatingTowardTarget = true;
+                for (int i = 0; i < TransformsForTargetRotation.Count; ++i)
+                {
+                    if (TransformsForTargetRotation[i] != null)
+                        StartCoroutine(RotateToTarget(TransformsForTargetRotation[i]));
+                    else
+                    {
+                        Debug.LogError("a trasform is set to get rotated to target but it's reference is missig!");
+                    }
+                }
+            }
 
-            Shot(transform.position, diff.normalized);
+        }
+
+        private bool isAnyTransformAlignedToTarget()
+        {
+            if (TransformsForTargetRotation == null || TransformsForTargetRotation.Count == 0)
+                return true;
+
+            if (GetRotationTowardTarget(TransformsForTargetRotation[0]) == TransformsForTargetRotation[0].rotation)
+                return true;
+
+            return false;
+        }
+
+        private IEnumerator RotateToTarget(Transform Trans)
+        {
+            var lookRot = GetRotationTowardTarget(Trans);
+
+            if (lookRot == Trans.rotation)
+            {
+                isRotatingTowardTarget = false;
+                yield return null;
+            }
+
+            Trans.rotation = Quaternion.RotateTowards(Trans.rotation, lookRot, RotationToTargetSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        private Quaternion GetRotationTowardTarget(Transform trans)
+        {
+            Vector3 dir = target.position - trans.position;
+
+            dir = new Vector3(dir.x, 0.0f, dir.z) * -1;
+
+            var lookRot = Quaternion.LookRotation(dir);
+
+            return lookRot;
         }
 
         protected virtual void Shot(Vector3 Position, Vector3 Direction)
@@ -125,12 +197,13 @@ namespace RamboTeam.Client
 
         private void OnEnemyDeath()
         {
+            EventManager.OnEnemyDeathCall(this);
             IsDead = true;
             gameObject.SetActive(false);
             OnEnemyDead?.Invoke(this);
         }
 
-        
+
 
         protected override void OnDrawGizmosSelected()
         {

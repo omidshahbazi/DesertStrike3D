@@ -12,11 +12,11 @@ namespace RamboTeam.Client
     public delegate void HydraUpdateEventHandler();
     public delegate void GatlingGunUpdateEventHandler();
     public delegate void RefugeeUpdateEventHandler();
-    //public delegate void OnEnemyDeathEventHandler(Enemy DeadEnemy);
+    public delegate void OnEnemyDeathEventHandler(Enemy DeadEnemy);
     public delegate void OnPickUpEventHandler(PickUpBehaviour PickedItem);
-    //public delegate void OnMissionUpdateEventHandler(Mission Mission);
-    //public delegate void OnMissionCompleteEventHandler(Mission Mission);
-    //public delegate void OnAllMissonsCompleteEventHandler();
+    public delegate void OnMissionUpdateEventHandler(Mission Mission);
+    public delegate void OnMissionCompleteEventHandler(Mission Mission);
+    public delegate void OnAllMissonsCompleteEventHandler();
 
 
 
@@ -31,11 +31,11 @@ namespace RamboTeam.Client
         public static event HydraUpdateEventHandler OnHydraUpdate;
         public static event GatlingGunUpdateEventHandler OnGatlingGunUpdate;
         public static event RefugeeUpdateEventHandler OnRefugeeUpdate;
-//        public static event OnEnemyDeathEventHandler OnEnemyDeath;
+        public static event OnEnemyDeathEventHandler OnEnemyDeath;
         public static event OnPickUpEventHandler OnPickUp;
-        //public static event OnMissionUpdateEventHandler OnMissionUpdate;
-        //public static event OnMissionCompleteEventHandler OnMissionComplete;
-        //public static event OnAllMissonsCompleteEventHandler OnAllMissionsComplete;
+        public static event OnMissionUpdateEventHandler OnMissionUpdate;
+        public static event OnMissionCompleteEventHandler OnMissionComplete;
+        public static event OnAllMissonsCompleteEventHandler OnAllMissionsComplete;
 
         public static void OnHealthUpdateCall()
         {
@@ -74,17 +74,17 @@ namespace RamboTeam.Client
                 OnGatlingGunUpdate();
         }
 
-        //internal static void OnMissionCompletedCall(Mission Mission)
-        //{
-        //    if (OnMissionComplete != null)
-        //        OnMissionComplete(Mission);
-        //}
+        internal static void OnMissionCompletedCall(Mission Mission)
+        {
+            if (OnMissionComplete != null)
+                OnMissionComplete(Mission);
+        }
 
-        //public static void OnMissionUpdatedCall(Mission Mission)
-        //{
-        //    if (OnMissionUpdate != null)
-        //        OnMissionUpdate(Mission);
-        //}
+        public static void OnMissionUpdatedCall(Mission Mission)
+        {
+            if (OnMissionUpdate != null)
+                OnMissionUpdate(Mission);
+        }
 
         public static void OnRefugeeUpdateCall()
         {
@@ -92,11 +92,11 @@ namespace RamboTeam.Client
                 OnRefugeeUpdate();
         }
 
-        //public static void OnEnemyDeathCall(Enemy Enemy)
-        //{
-        //    if (OnEnemyDeath != null)
-        //        OnEnemyDeath(Enemy);
-        //}
+        public static void OnEnemyDeathCall(Enemy Enemy)
+        {
+            if (OnEnemyDeath != null)
+                OnEnemyDeath(Enemy);
+        }
 
         public static void OnPickUpCall(PickUpBehaviour pickedItem)
         {
@@ -104,10 +104,10 @@ namespace RamboTeam.Client
                 OnPickUp(pickedItem);
         }
 
-        //internal static void OnAllMissionsCompletedCall()
-        //{
-        //    if (OnAllMissionsComplete != null)
-        //        OnAllMissionsComplete();
-        //}
+        internal static void OnAllMissionsCompletedCall()
+        {
+            if (OnAllMissionsComplete != null)
+                OnAllMissionsComplete();
+        }
     }
 }

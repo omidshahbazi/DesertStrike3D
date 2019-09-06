@@ -159,8 +159,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1282614176317508941}
-  - component: {fileID: 190542415041830114}
   - component: {fileID: -3877245281971093171}
+  - component: {fileID: 190542415041830114}
   - component: {fileID: 1471349536}
   - component: {fileID: 3693040047368355762}
   - component: {fileID: 7914862266053381810}
@@ -188,6 +188,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3877245281971093171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282614176317508976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b91aa900cc27364fad3ad99539a8449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smokeParticle: {fileID: 7438292909932348517}
+  chopterDeathAnimation: {fileID: 7223395138167286622}
+  chopterRotorBladeAnimation: {fileID: 1523695166}
+  RightArmDestructionHP: 150
+  RightArmDestructionParticle: {fileID: 9112659759790629052}
+  LeftArmDestructionHP: 75
+  LeftArmDestructionParticle: {fileID: 5037724098021086068}
+  pickUp: {fileID: 100012975161125560}
+  HellfireCount: 8
+  HydraCount: 38
+  GatlingGunCount: 1178
+  HP: 600
+  LifeCount: 3
+  FuelAmount: 120
+  FuelCostTime: 2
 --- !u!114 &190542415041830114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,37 +243,10 @@ MonoBehaviour:
   LeftAirCraft: {fileID: 1059555563}
   AirCraftRateOfShot: 0.5
   MovementSpeed: 75
-  RotationSpeed: 75
+  RotationSpeed: 100
   VerticalRotation: 30
   HorizontalRotation: 20
   ChopterModel: {fileID: 3531565312313610673}
---- !u!114 &-3877245281971093171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282614176317508976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b91aa900cc27364fad3ad99539a8449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smokeParticle: {fileID: 7438292909932348517}
-  chopterDeathAnimation: {fileID: 697587262}
-  chopterRotorBladeAnimation: {fileID: 1523695166}
-  RightArmDestructionHP: 150
-  RightArmDestructionParticle: {fileID: 9112659759790629052}
-  LeftArmDestructionHP: 75
-  LeftArmDestructionParticle: {fileID: 5037724098021086068}
-  pickUp: {fileID: 100012975161125560}
-  HellfireCount: 8
-  HydraCount: 38
-  GatlingGunCount: 1178
-  HP: 600
-  LifeCount: 3
-  FuelAmount: 120
-  FuelCostTime: 2
 --- !u!82 &1471349536
 AudioSource:
   m_ObjectHideFlags: 0
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 3531565312313707921}
   - component: {fileID: 3531565312316575153}
   - component: {fileID: 3531565312315608945}
-  - component: {fileID: 697587262}
+  - component: {fileID: 7223395138167286622}
   m_Layer: 10
   m_Name: Chopter
   m_TagString: Untagged
@@ -511,7 +511,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &697587262
+--- !u!95 &7223395138167286622
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

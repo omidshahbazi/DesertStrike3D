@@ -1,4 +1,5 @@
 ﻿//Rambo Team
+using RamboTeam.Client.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -127,6 +128,9 @@ namespace RamboTeam.Client
 
         protected override void Update()
         {
+            if (Landing.Instance.state == Landing.State.Landed)
+                return;
+
             base.Update();
 
             float t = Time.deltaTime;
@@ -157,34 +161,40 @@ namespace RamboTeam.Client
             {
                 IsMoving = false;
 
-                if (!isControlDown)
+                if (!isControlDown && !Chopter.Instance.IsDead)
                 {
                     verticalRoation = 0;
                     horizontalRoation = 0;
 
                     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                     {
+                        IsMoving = true;
                         verticalRoation = VerticalRotation;
 
                         transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
-                        IsMoving = true;
+
                     }
                     if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                     {
+                        IsMoving = true;
                         verticalRoation = VerticalRotation * -1;
 
                         transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
-                        IsMoving = true;
+
                     }
 
                     if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                     {
+                        IsMoving = true;
+
                         horizontalRoation = HorizontalRotation;
 
                         transform.Rotate(0, Time.deltaTime * RotationSpeed * -1, 0, Space.World);
                     }
                     if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                     {
+                        IsMoving = true;
+
                         horizontalRoation = HorizontalRotation * -1;
 
                         transform.Rotate(0, Time.deltaTime * RotationSpeed, 0, Space.World);
@@ -329,7 +339,7 @@ namespace RamboTeam.Client
                     continue;
                 if (enemyType != EnemyPriority.none && en.EnemyType < enemyType)
                     continue;
-              
+
                 if (mag < closetPoint)
                 {
                     closetPoint = diff.sqrMagnitude;
@@ -342,7 +352,7 @@ namespace RamboTeam.Client
 
             }
 
-
+            HUDMenu.Instance.SetEnemyHealth(findTarget);
             return (findTarget, -1 * dir);
         }
 
