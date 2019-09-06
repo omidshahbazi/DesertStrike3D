@@ -765,6 +765,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1466675608, guid: 26b72f3ab14352743af408af72a6cc22, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3743304799789676279, guid: 26b72f3ab14352743af408af72a6cc22,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26b72f3ab14352743af408af72a6cc22, type: 3}
 --- !u!224 &209830004 stripped
@@ -3297,7 +3306,7 @@ PrefabInstance:
     - target: {fileID: 605276981623233167, guid: bd40d76c79aa58b46935f70f345d6393,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1412
+      value: -1147
       objectReference: {fileID: 0}
     - target: {fileID: 605276981623233167, guid: bd40d76c79aa58b46935f70f345d6393,
         type: 3}
@@ -5050,6 +5059,28 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 289465597, guid: 7deb1b2e783f95a4d8542187df6e2aef, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 1008437593, guid: 7deb1b2e783f95a4d8542187df6e2aef, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 1466675608, guid: 7deb1b2e783f95a4d8542187df6e2aef, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 2148668761855236833, guid: 7deb1b2e783f95a4d8542187df6e2aef,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3743304799789676279, guid: 7deb1b2e783f95a4d8542187df6e2aef,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7deb1b2e783f95a4d8542187df6e2aef, type: 3}
 --- !u!224 &1076779459 stripped
@@ -9076,6 +9107,11 @@ PrefabInstance:
       propertyPath: OffsetRadius
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 6918190543230104811, guid: ee4fb6220c084c54199196de75d02774,
+        type: 3}
+      propertyPath: shakeAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1781662371478220346, guid: ee4fb6220c084c54199196de75d02774,
         type: 3}
       propertyPath: far clip plane
@@ -10384,7 +10420,7 @@ PrefabInstance:
     - target: {fileID: 1282614176317508941, guid: 356997536d2512d499e461df7770bbee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1415
+      value: -1146
       objectReference: {fileID: 0}
     - target: {fileID: 1282614176317508941, guid: 356997536d2512d499e461df7770bbee,
         type: 3}
