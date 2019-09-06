@@ -160,7 +160,7 @@ namespace RamboTeam.Client
             {
                 IsMoving = false;
 
-                if (!isControlDown)
+                if (!isControlDown && !Chopter.Instance.IsDead)
                 {
                     verticalRoation = 0;
                     horizontalRoation = 0;
@@ -171,7 +171,7 @@ namespace RamboTeam.Client
                         verticalRoation = VerticalRotation;
 
                         transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
-                       
+
                     }
                     if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                     {
@@ -179,7 +179,7 @@ namespace RamboTeam.Client
                         verticalRoation = VerticalRotation * -1;
 
                         transform.Translate(transform.forward * Time.deltaTime * MovementSpeed * -1, Space.World);
-                        
+
                     }
 
                     if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -338,7 +338,7 @@ namespace RamboTeam.Client
                     continue;
                 if (enemyType != EnemyPriority.none && en.EnemyType < enemyType)
                     continue;
-              
+
                 if (mag < closetPoint)
                 {
                     closetPoint = diff.sqrMagnitude;

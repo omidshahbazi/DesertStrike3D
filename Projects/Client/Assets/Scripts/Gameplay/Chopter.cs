@@ -177,7 +177,7 @@ namespace RamboTeam.Client
         private IEnumerator ReviveChopter()
         {
 
-            yield return new WaitForSecondsRealtime(chopterDeathAnimation.GetCurrentAnimatorClipInfo(0).Length + 0.5F);
+            yield return new WaitForSecondsRealtime(chopterDeathAnimation.GetCurrentAnimatorClipInfo(0).Length + 1.5F);
 
             Debug.Log("Revive");
             chopterDeathAnimation.enabled = false;
