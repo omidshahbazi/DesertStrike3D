@@ -826,6 +826,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3743304798874040069, guid: 26b72f3ab14352743af408af72a6cc22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3743304798874040074, guid: 26b72f3ab14352743af408af72a6cc22,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5745,6 +5750,17 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 829370948192783129, guid: 7deb1b2e783f95a4d8542187df6e2aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148668761855236833, guid: 7deb1b2e783f95a4d8542187df6e2aef,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d4d27de7db5ba734791def375a25e063,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7deb1b2e783f95a4d8542187df6e2aef, type: 3}
 --- !u!224 &1076779459 stripped
@@ -13877,7 +13893,7 @@ PrefabInstance:
     - target: {fileID: 7748820240895098004, guid: be34a9fa0c7b74945bf9ade83e364734,
         type: 3}
       propertyPath: Missions.Array.data[0].Description
-      value: Pick 1 Hydra Ammo (Blue Crate)
+      value: Pick 1 Hydra Ammo (Blue Crates)
       objectReference: {fileID: 0}
     - target: {fileID: 7748820240895098004, guid: be34a9fa0c7b74945bf9ade83e364734,
         type: 3}
