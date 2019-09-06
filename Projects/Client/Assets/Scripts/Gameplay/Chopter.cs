@@ -185,7 +185,7 @@ namespace RamboTeam.Client
             chopterDeathAnimation.transform.localPosition = Vector3.zero;
             currentFuelAmount = FuelAmount;
             currentHP = HP;
-            currentRefugeesCount = 0;
+            //currentRefugeesCount = 0;
             IsDead = false;
             smokeParticle.SetActive(false);
             rotorAudio.Play();
