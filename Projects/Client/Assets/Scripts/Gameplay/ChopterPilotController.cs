@@ -130,6 +130,7 @@ namespace RamboTeam.Client
         {
             if (Landing.Instance.state == Landing.State.Landed)
                 return;
+
             base.Update();
 
             float t = Time.deltaTime;

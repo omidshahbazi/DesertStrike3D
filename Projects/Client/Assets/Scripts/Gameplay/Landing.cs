@@ -31,6 +31,8 @@ namespace RamboTeam.Client
         private bool isProcess;
 
 
+
+
         protected override void Start()
         {
             base.Start();
@@ -45,7 +47,6 @@ namespace RamboTeam.Client
         {
             base.Update();
 
-            return;
             if (Input.GetKeyDown(KeyCode.F))
                 SetOperation();
             if (!isProcess)
@@ -65,7 +66,11 @@ namespace RamboTeam.Client
             {
                 isProcess = false;
                 state = state == State.Fly ? State.Landed : State.Fly;
+
+
+
             }
+
         }
 
         private void SetOperation()

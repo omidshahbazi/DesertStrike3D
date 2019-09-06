@@ -49,6 +49,9 @@ namespace RamboTeam.Client
         public uint currentRefugeesCount { get; private set; } = 0;
         public bool IsDead { get; private set; } = false;
         public float FuelCostTime = 2.0f;
+        private float nextRefugeeReleaseTime;
+        private float RefugessReleaseGapTime = 2.0f;
+        private int HealthPerRefugeeAmount = 30;
 
         private bool IsPilot
         {
@@ -95,6 +98,20 @@ namespace RamboTeam.Client
                 if (currentFuelAmount == 0)
                     OnChopterDeath();
             }
+
+            if (currentRefugeesCount != 0)
+            {
+                if (Landing.Instance.state == Landing.State.Landed)
+                {
+                    if (nextRefugeeReleaseTime < Time.time)
+                    {
+                        nextRefugeeReleaseTime = Time.time + RefugessReleaseGapTime;
+                        UpdateCurrentRefugee(-1);
+                        UpdateCurrentHP(HealthPerRefugeeAmount);
+                    }
+                }
+            }
+
         }
 
         internal void TriggerHellfireShot()
@@ -214,42 +231,66 @@ namespace RamboTeam.Client
                 switch (pickUp.pickedItem.Type)
                 {
                     case PickUpBehaviour.PickUpType.Refugee:
-                        {
-                            currentRefugeesCount += pickUp.pickedItem.Amount;
-                            EventManager.OnRefugeeUpdateCall();
-                        }
+                        UpdateCurrentRefugee((int)pickUp.pickedItem.Amount);
                         break;
                     case PickUpBehaviour.PickUpType.HellfireAmmo:
-                        {
-                            currentHellfireCount = (uint)Mathf.Min(currentHellfireCount + pickUp.pickedItem.Amount, HellfireCount);
-                            EventManager.OnHellfireUpdateCall();
-                        }
+                        UpdateCurrentHellfire((int)pickUp.pickedItem.Amount);
                         break;
                     case PickUpBehaviour.PickUpType.HydraAmmo:
-                        {
-                            currentHydraCount = (uint)Mathf.Min(currentHydraCount + pickUp.pickedItem.Amount, HydraCount);
-                            EventManager.OnHydraUpdateCall();
-                        }
+                        UpdateCurrentHydra((int)pickUp.pickedItem.Amount);
                         break;
                     case PickUpBehaviour.PickUpType.GatlingGun:
-                        currentGatlingGunCount = (uint)Mathf.Min(currentGatlingGunCount + pickUp.pickedItem.Amount, GatlingGunCount);
-                        EventManager.OnGatlingGunUpdateCall();
-
+                        UpdateCurrentGatlingGun((int)pickUp.pickedItem.Amount);
                         break;
                     case PickUpBehaviour.PickUpType.Fuel:
-                        currentFuelAmount = (uint)Mathf.Min(currentFuelAmount + pickUp.pickedItem.Amount, FuelAmount);
-                        EventManager.OnFuelUpdateCall();
+                        UpdateCurrentFuel((int)pickUp.pickedItem.Amount);
                         break;
                     case PickUpBehaviour.PickUpType.HealthPack:
-                        currentHP = (uint)Mathf.Min(currentHP + pickUp.pickedItem.Amount, HP);
-                        EventManager.OnHealthUpdateCall();
-                        CheckArmsDestructionState();
+                        UpdateCurrentHP((int)pickUp.pickedItem.Amount);
                         break;
                     default:
                         break;
                 }
                 pickUp.DestroyPickedItem();
             }
+        }
+
+        private void UpdateCurrentRefugee(int Amount)
+        {
+            currentRefugeesCount = (uint)Mathf.Max(0, currentRefugeesCount + Amount);
+            EventManager.OnRefugeeUpdateCall();
+        }
+
+        private void UpdateCurrentHellfire(int Amount)
+        {
+
+            currentHellfireCount = (uint)Mathf.Min(currentHellfireCount + Amount, HellfireCount);
+            EventManager.OnHellfireUpdateCall();
+        }
+
+        private void UpdateCurrentHydra(int Amount)
+        {
+            currentHydraCount = (uint)Mathf.Min(currentHydraCount + Amount, HydraCount);
+            EventManager.OnHydraUpdateCall();
+        }
+
+        private void UpdateCurrentGatlingGun(int Amount)
+        {
+            currentGatlingGunCount = (uint)Mathf.Min(currentGatlingGunCount + Amount, GatlingGunCount);
+            EventManager.OnGatlingGunUpdateCall();
+        }
+
+        private void UpdateCurrentFuel(int Amount)
+        {
+            currentFuelAmount = (uint)Mathf.Min(currentFuelAmount + Amount, FuelAmount);
+            EventManager.OnFuelUpdateCall();
+        }
+
+        private void UpdateCurrentHP(int Amount)
+        {
+            currentHP = (uint)Mathf.Min(currentHP + Amount, HP);
+            EventManager.OnHealthUpdateCall();
+            CheckArmsDestructionState();
         }
 
         internal void TriggerHydraShot()
