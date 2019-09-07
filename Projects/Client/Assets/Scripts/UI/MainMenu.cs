@@ -14,6 +14,9 @@ namespace RamboTeam.Client.UI
         public Button SingleButton;
         public Button CoOpButton;
         public Button QuitButton;
+        public Button PilotButton;
+        public Button CoPilotButton;
+        public GameObject MissionBrief;
         public GameObject Story;
         public GameObject TutorialPanel;
         public GameObject loadingScreen;
@@ -44,7 +47,7 @@ namespace RamboTeam.Client.UI
             CoOpButton.onClick.AddListener(() =>
             {
                 ShowCoopMenu();
-                NetworkCommands.JoinToRoom();
+               
                 //InputManager.Instance.OnAnyKeyPressd += ;
             });
 
@@ -54,6 +57,17 @@ namespace RamboTeam.Client.UI
                 InputManager.Instance.OnAnyKeyPressd += CloseCreditPanel;
             });
 
+            PilotButton.onClick.AddListener(() =>
+            {
+               // NetworkCommands.OnPilot();
+            });
+
+            CoPilotButton.onClick.AddListener(() =>
+            {
+                //NetworkCommands.JoinToRoom();
+            });
+
+
             QuitButton.onClick.AddListener(() => Application.Quit());
 
             NetworkCommands.OnConnected += NetworkCommands_OnConnected;
@@ -62,14 +76,10 @@ namespace RamboTeam.Client.UI
             NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
 
             CoOpButton.interactable = false;
+            InputManager.Instance.AddInput(KeyCode.Escape, () => CoopMenu.gameObject.SetActive(false));
         }
 
-        private void CloseCreditPanel()
-        {        
-            InputManager.Instance.OnAnyKeyPressd -= CloseCreditPanel;
-            CreditsObj.gameObject.SetActive(false);
-        }
-
+ 
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -80,7 +90,6 @@ namespace RamboTeam.Client.UI
         private void NetworkCommands_OnConnected()
         {
             CoOpButton.interactable = true;
-
         }
 
         private void NetworkCommands_OnDisconnected()
@@ -92,20 +101,28 @@ namespace RamboTeam.Client.UI
         {
             CoOpButton.gameObject.SetActive(false);
             Story.gameObject.SetActive(true);
-
         }
 
         private void ShowTutorial()
         {
             TutorialPanel.gameObject.SetActive(true);
             InputManager.Instance.OnAnyKeyPressd -= ShowTutorial;
-            InputManager.Instance.OnAnyKeyPressd += loadGame;
+
+            InputManager.Instance.OnAnyKeyPressd += ShowMissionBreif;
 
         }
 
         private void ShowCoopMenu()
         {
             CoopMenu.gameObject.SetActive(true);
+        }
+
+        private void ShowMissionBreif()
+        {
+            MissionBrief.gameObject.SetActive(true);
+            InputManager.Instance.OnAnyKeyPressd -= ShowMissionBreif;
+            InputManager.Instance.OnAnyKeyPressd += loadGame;
+
         }
 
 
@@ -119,9 +136,8 @@ namespace RamboTeam.Client.UI
             StartCoroutine(LoadAsync());
         }
 
-   
 
-        IEnumerator LoadAsync()
+        private IEnumerator LoadAsync()
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync("FinalScene001", LoadSceneMode.Single);
             RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001");
@@ -138,11 +154,19 @@ namespace RamboTeam.Client.UI
             }
 
         }
+
         private void OnJoinedToRoom()
         {
             ShowStory();
             InputManager.Instance.OnAnyKeyPressd += loadGame;
         }
+
+        private void CloseCreditPanel()
+        {
+            InputManager.Instance.OnAnyKeyPressd -= CloseCreditPanel;
+            CreditsObj.gameObject.SetActive(false);
+        }
+
     }
 }
 
