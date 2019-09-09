@@ -3,6 +3,7 @@ using RamboTeam.Client.UI;
 using System;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace RamboTeam.Client
 {
@@ -52,6 +53,12 @@ namespace RamboTeam.Client
         private float nextRefugeeReleaseTime;
         public float RefugessReleaseGapTime = 2.0f;
         public int HealthPerRefugeeAmount = 30;
+        public List<AudioClip> OnHitAudioClips = new List<AudioClip>();
+        public AudioClip OnDeathAudio;
+        public AudioClip OnLowFuelAudio;
+        public int LowFuelAmount = 30;
+        public bool islowFuelLoop = true;
+        private AudioSource lowFuelAudioSource = null;
 
         private bool IsPilot
         {
@@ -91,9 +98,8 @@ namespace RamboTeam.Client
 
             if (Time.time > nextFuelUpdateTime)
             {
-                currentFuelAmount--;
                 nextFuelUpdateTime = Time.time + FuelCostTime;
-                EventManager.OnFuelUpdateCall();
+                UpdateCurrentFuel(-1);
 
                 if (currentFuelAmount == 0)
                     OnChopterDeath();
@@ -143,6 +149,16 @@ namespace RamboTeam.Client
             {
                 OnChopterDeath();
             }
+            else
+            {
+                if (OnHitAudioClips.Count != 0)
+                {
+
+                    AudioClip clip = OnHitAudioClips[UnityEngine.Random.Range(0, OnHitAudioClips.Count)];
+                    if (clip != null)
+                        AudioManager.Instance.PlayAudio(clip, transform.position, null);
+                }
+            }
         }
 
         private void CheckArmsDestructionState()
@@ -164,6 +180,9 @@ namespace RamboTeam.Client
         private void OnChopterDeath()
         {
             Debug.Log("Dead");
+            if (OnDeathAudio != null)
+                AudioManager.Instance.PlayAudio(OnDeathAudio, transform.position, null);
+
             smokeParticle.SetActive(true);
             IsDead = true;
             currentLifeCount--;
@@ -284,6 +303,24 @@ namespace RamboTeam.Client
         {
             currentFuelAmount = (uint)Mathf.Min(currentFuelAmount + Amount, FuelAmount);
             EventManager.OnFuelUpdateCall();
+
+            if (currentFuelAmount > LowFuelAmount)
+            {
+                if (lowFuelAudioSource != null)
+                    lowFuelAudioSource.Stop();
+            }
+            else
+            {
+                if (lowFuelAudioSource == null)
+                {
+                    lowFuelAudioSource = AudioManager.Instance.PlayAudio(OnLowFuelAudio, Vector3.zero, this.transform, 0.0F, 1.0F, islowFuelLoop);
+                }
+                else
+                {
+                    if (!lowFuelAudioSource.isPlaying)
+                        lowFuelAudioSource.Play();
+                }
+            }
         }
 
         private void UpdateCurrentHP(int Amount)

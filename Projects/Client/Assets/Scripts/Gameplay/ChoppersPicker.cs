@@ -78,7 +78,7 @@ namespace RamboTeam.Client
                     return;
 
                 pickedItem.transform.position = pickerTransform.position;
-
+                pickedItem.Picked();
                 RollUpPicker();
             }
         }
@@ -135,6 +135,7 @@ namespace RamboTeam.Client
         {
             if (pickedItem == null)
                 return;
+
             GameObject.Destroy(pickedItem.gameObject);
             pickedItem = null;
         }

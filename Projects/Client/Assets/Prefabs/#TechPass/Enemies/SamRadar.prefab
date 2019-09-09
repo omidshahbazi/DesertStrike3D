@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6513928173907297577}
-  m_LocalRotation: {x: 0, y: 0.704095, z: 0, w: -0.71010584}
+  m_LocalRotation: {x: 0, y: 0.62858945, z: 0, w: -0.7777374}
   m_LocalPosition: {x: 403.4875, y: 4.81114, z: 1070.8096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -73,6 +73,10 @@ MonoBehaviour:
   TransformsForTargetRotation: []
   RotationToTargetSpeed: 150
   ShotStartPosition: {fileID: 0}
+  OnDeathAudio:
+  - {fileID: 8300000, guid: bccb0892313b27c49be677d9bf937132, type: 3}
+  - {fileID: 8300000, guid: bccb0892313b27c49be677d9bf937132, type: 3}
+  - {fileID: 8300000, guid: bccb0892313b27c49be677d9bf937132, type: 3}
 --- !u!65 &8989871072127135010
 BoxCollider:
   m_ObjectHideFlags: 0

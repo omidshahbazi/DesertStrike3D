@@ -151,3 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 3
   Amount: 1178
+  OnAreaRange: 75
+  onAreaAudio: {fileID: 0}
+  OnPickAudio: {fileID: 8300000, guid: 42fabdbe9d9891d4db33e5f49f078967, type: 3}

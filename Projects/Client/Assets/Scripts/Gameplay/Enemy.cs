@@ -70,6 +70,7 @@ namespace RamboTeam.Client
         public float RotationToTargetSpeed = 150;
         public Transform ShotStartPosition;
         private bool isRotatingTowardTarget = false;
+        public List<AudioClip> OnDeathAudio;
 
         protected override void Start()
         {
@@ -203,6 +204,14 @@ namespace RamboTeam.Client
         private void OnEnemyDeath()
         {
             EventManager.OnEnemyDeathCall(this);
+
+            if (OnDeathAudio.Count != 0)
+            {
+                AudioClip clip = OnDeathAudio[UnityEngine.Random.Range(0, OnDeathAudio.Count)];
+                if (clip != null)
+                    AudioManager.Instance.PlayAudio(clip, transform.position, null);
+            }
+
             IsDead = true;
             gameObject.SetActive(false);
             OnEnemyDead?.Invoke(this);
