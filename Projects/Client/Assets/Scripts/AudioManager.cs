@@ -56,17 +56,19 @@ public class AudioManager : MonoBehaviorBase
         if (Parent != null)
             mainParent = Parent;
 
-        if (audioItem == null)
-        {
-            Debug.Log("NULLLLLLLLLLL");
-            return null;
-        }
+
         GameObject item;
         if (audioItem == null)
             item = GameObject.Instantiate(Resources.Load("AudioManagerItem")) as GameObject;
         else
         {
             item = GameObject.Instantiate(audioItem, Pos, Quaternion.identity) as GameObject;
+        }
+
+        if (item == null)
+        {
+            Debug.Log("NULLLLLLLLLLL");
+            return null;
         }
 
         item.name = AudioClip.name;
