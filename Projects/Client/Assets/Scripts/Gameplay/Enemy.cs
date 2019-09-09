@@ -160,9 +160,10 @@ namespace RamboTeam.Client
 
         private Quaternion GetRotationTowardTarget(Transform trans)
         {
-            Vector3 dir = target.position - trans.position;
+            Vector3 dir = trans.position - target.position;
 
-            dir = new Vector3(dir.x, 0.0f, dir.z) * -1;
+
+            dir = new Vector3(dir.x, 0.0f, dir.z);
 
             var lookRot = Quaternion.LookRotation(dir);
 
