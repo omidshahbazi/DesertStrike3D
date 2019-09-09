@@ -28,6 +28,7 @@ namespace RamboTeam.Client
             private set;
         }
 
+
         public ChoppersPicker pickUp;
         //Weapons Count
 
@@ -104,11 +105,11 @@ namespace RamboTeam.Client
 
             if (Time.time > nextFuelUpdateTime)
             {
-                nextFuelUpdateTime = Time.time + FuelCostTime;
-                if (Input.GetKey(KeyCode.Space) && currentFuelAmount > LowFuelAmount)
-                    UpdateCurrentFuel(-10);
-                else
-                    UpdateCurrentFuel(-1);
+                float nextCostTime = FuelCostTime;
+                if (Input.GetKey(KeyCode.Space) && isEngineBoostEquipted && currentFuelAmount > LowFuelAmount)
+                    nextCostTime = FuelCostTime / 10;
+                nextFuelUpdateTime = Time.time + nextCostTime;
+                UpdateCurrentFuel(-1);
 
 
                 if (currentFuelAmount == 0)
