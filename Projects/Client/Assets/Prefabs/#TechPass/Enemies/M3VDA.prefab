@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5977643845560916572}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShotPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 2008542187937073467}
   - component: {fileID: 1924088008272900844}
   - component: {fileID: 1924088008272900843}
-  m_Layer: 0
+  - component: {fileID: 6766256007233894878}
+  m_Layer: 9
   m_Name: M3VDA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,13 +125,14 @@ MonoBehaviour:
   Type: 2
   Range: 150
   ShotPerSecond: 5
+  delayShotPerSecond: 0
   BulletPrefab: {fileID: 6044863251272816049, guid: 45f9eeb3ff8dd8649be02be46affdf4e,
     type: 3}
   HP: 100
   isAttacker: 1
   TransformsForTargetRotation:
   - {fileID: 3707444849453477657}
-  RotationToTargetSpeed: 150
+  RotationToTargetSpeed: 200
   ShotStartPosition: {fileID: 5977643845560916572}
   OnDeathAudio: []
 --- !u!114 &1924088008272900844
@@ -174,6 +176,19 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &6766256007233894878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83589186340356223}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.92, y: 10, z: 20}
+  m_Center: {x: 0.65, y: 5, z: -4}
 --- !u!1 &498354378184227586
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3707444849453477657}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: -180?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,6 +231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mv3da_p1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b08d76745e53e2a46ab2575401e468a3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b08d76745e53e2a46ab2575401e468a3,
         type: 3}
@@ -291,6 +311,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mv3da_p3
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b49ddf91b9801f94badf926d044c674b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b49ddf91b9801f94badf926d044c674b,
         type: 3}
@@ -372,6 +397,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TierFR
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d689de79f12d3eb49bc9aee78786b257,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d689de79f12d3eb49bc9aee78786b257,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -451,6 +481,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TierBR
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d689de79f12d3eb49bc9aee78786b257,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d689de79f12d3eb49bc9aee78786b257,
         type: 3}
@@ -532,6 +567,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TierFL
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d689de79f12d3eb49bc9aee78786b257,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d689de79f12d3eb49bc9aee78786b257,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -611,6 +651,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TierBL
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d689de79f12d3eb49bc9aee78786b257,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d689de79f12d3eb49bc9aee78786b257,
         type: 3}
