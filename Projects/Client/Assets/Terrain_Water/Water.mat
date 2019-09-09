@@ -70,15 +70,15 @@ Material:
     m_Floats:
     - _Amplitude: 0.05
     - _BumpScale: 1
-    - _BumpStrength: 0.22
+    - _BumpStrength: 0.3
     - _Cutoff: 0.5
-    - _Depth: 0.5
+    - _Depth: 0.1
     - _DetailNormalMapScale: 1
     - _DisplacementMode: 1
-    - _Distortion: 3
+    - _Distortion: 34
     - _DistortionQuality: 0
     - _DstBlend: 0
-    - _EdgeFade: 1
+    - _EdgeFade: 0.5
     - _EnableFog: 0
     - _FOAM: 1
     - _FoamSize: 0.5
@@ -93,7 +93,7 @@ Material:
     - _Reflection: 0.5
     - _ReflectionType: 1
     - _RimPower: 9
-    - _Smoothing: 1
+    - _Smoothing: 0.93
     - _Smoothness: 0.83
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
