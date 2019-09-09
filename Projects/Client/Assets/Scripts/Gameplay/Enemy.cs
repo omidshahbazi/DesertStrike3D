@@ -48,6 +48,7 @@ namespace RamboTeam.Client
 
         public float Range = 10;
         public float ShotPerSecond = 1;
+        public float delayShotPerSecond = 0;
 
         [SerializeField]
         private GameObject BulletPrefab = null;
@@ -71,7 +72,7 @@ namespace RamboTeam.Client
         public Transform ShotStartPosition;
         private bool isRotatingTowardTarget = false;
         public List<AudioClip> OnDeathAudio;
-
+        private int perSecondCounter;
         protected override void Start()
         {
             base.Start();
@@ -79,8 +80,10 @@ namespace RamboTeam.Client
             if (!isAttacker)
                 return;
 
+
             sqrRange = Range * Range;
             rateOfShot = 1 / ShotPerSecond;
+            perSecondCounter = (int)Math.Round(ShotPerSecond);
 
             if (isAttacker)
                 target = ChopterPilotController.Instance.transform;
@@ -112,10 +115,21 @@ namespace RamboTeam.Client
             if (Time.time < nextShotTime)
                 return;
 
+
             if (isAnyTransformAlignedToTarget())
             {
-                nextShotTime = Time.time + rateOfShot;
+                if (perSecondCounter == 0)
+                {
+                    nextShotTime = Time.time + rateOfShot + delayShotPerSecond;
+                    perSecondCounter = (int)Math.Round(ShotPerSecond);
+                }
+                else
+                {
+                    nextShotTime = Time.time + rateOfShot;
+                }
+
                 Shot(ShotStartPosition.position, diff.normalized);
+                perSecondCounter--;
             }
             else // Rotate To Target First
             {
