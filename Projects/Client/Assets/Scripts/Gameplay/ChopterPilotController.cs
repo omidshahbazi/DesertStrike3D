@@ -171,7 +171,10 @@ namespace RamboTeam.Client
                         IsMoving = true;
                         verticalRoation = VerticalRotation;
 
-                        transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
+                        if (Input.GetKey(KeyCode.Space) && Chopter.Instance.isEngineBoostEquipted && Chopter.Instance.currentFuelAmount > Chopter.Instance.LowFuelAmount)
+                            transform.Translate(transform.forward * Time.deltaTime * (MovementSpeed * 2), Space.World);
+                        else
+                            transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
 
                     }
                     if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))

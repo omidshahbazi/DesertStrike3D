@@ -16,7 +16,8 @@ public class PickUpBehaviour : MonoBehaviorBase
         HydraAmmo,
         GatlingGun,
         Fuel,
-        HealthPack
+        HealthPack,
+        EngineBoost
     }
 
     public PickUpType Type;

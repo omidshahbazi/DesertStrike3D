@@ -60,6 +60,12 @@ namespace RamboTeam.Client
         public bool islowFuelLoop = true;
         private AudioSource lowFuelAudioSource = null;
 
+        public bool isEngineBoostEquipted
+        {
+            get;
+            private set;
+        }
+
         private bool IsPilot
         {
             get { return NetworkLayer.Instance.IsPilot; }
@@ -99,7 +105,11 @@ namespace RamboTeam.Client
             if (Time.time > nextFuelUpdateTime)
             {
                 nextFuelUpdateTime = Time.time + FuelCostTime;
-                UpdateCurrentFuel(-1);
+                if (Input.GetKey(KeyCode.Space) && currentFuelAmount > LowFuelAmount)
+                    UpdateCurrentFuel(-10);
+                else
+                    UpdateCurrentFuel(-1);
+
 
                 if (currentFuelAmount == 0)
                     OnChopterDeath();
@@ -266,6 +276,9 @@ namespace RamboTeam.Client
                         break;
                     case PickUpBehaviour.PickUpType.HealthPack:
                         UpdateCurrentHP((int)pickUp.pickedItem.Amount);
+                        break;
+                    case PickUpBehaviour.PickUpType.EngineBoost:
+                        isEngineBoostEquipted = true;
                         break;
                     default:
                         break;
