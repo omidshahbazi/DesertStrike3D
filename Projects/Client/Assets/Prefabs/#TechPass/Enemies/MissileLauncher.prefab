@@ -151,6 +151,8 @@ MonoBehaviour:
   - {fileID: 1475012967069840776}
   RotationToTargetSpeed: 150
   ShotStartPosition: {fileID: 185085521886206481}
+  OnDeathAudio:
+  - {fileID: 0}
 --- !u!65 &4712390807228847873
 BoxCollider:
   m_ObjectHideFlags: 0

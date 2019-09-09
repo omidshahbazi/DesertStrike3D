@@ -127,6 +127,8 @@ MonoBehaviour:
   - {fileID: 8094529865940516328}
   RotationToTargetSpeed: 300
   ShotStartPosition: {fileID: 8107529468197538789}
+  OnDeathAudio:
+  - {fileID: 8300000, guid: 04a17f154a98de943b2068966b7b50d9, type: 3}
 --- !u!54 &7555924848902828758
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,8 +156,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8, y: 12, z: 8}
-  m_Center: {x: 0, y: 6, z: 0}
+  m_Size: {x: 8, y: 20, z: 8}
+  m_Center: {x: 0, y: 10, z: 0}
 --- !u!1001 &374035977678077483
 PrefabInstance:
   m_ObjectHideFlags: 0

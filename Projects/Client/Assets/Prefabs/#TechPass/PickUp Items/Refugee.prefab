@@ -221,7 +221,8 @@ MonoBehaviour:
   Type: 0
   Amount: 1
   OnAreaRange: 75
-  onAreaAudio: {fileID: 8300000, guid: 42fabdbe9d9891d4db33e5f49f078967, type: 3}
+  isOnAreaAudioLoop: 1
+  onAreaAudio: {fileID: 8300000, guid: d146fd10367b2e64d8207ef58dd213da, type: 3}
   OnPickAudio: {fileID: 8300000, guid: 42fabdbe9d9891d4db33e5f49f078967, type: 3}
 --- !u!1 &7407245835049783142
 GameObject:
