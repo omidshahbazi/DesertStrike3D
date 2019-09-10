@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1557195312600981593}
-  - component: {fileID: 3654401367283943812}
   - component: {fileID: 5647950250566598018}
   m_Layer: 0
   m_Name: ItemArea
@@ -32,19 +31,6 @@ Transform:
   m_Father: {fileID: 8044133035234149520}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3654401367283943812
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 816358386255888498}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7.35, y: 19.35, z: 5.91}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &5647950250566598018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -84,7 +70,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6483452526439642755}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -123,7 +109,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.3087482, y: 7.8307867, z: 2.4155943}
+  m_Size: {x: 5.3, y: 6.78, z: 8.52}
   m_Center: {x: 0.022429226, y: 4, z: 0.10693588}
 --- !u!114 &6690395440675754321
 MonoBehaviour:
@@ -139,6 +125,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 5
   Amount: 50
+  OnAreaRange: 10
+  isOnAreaAudioLoop: 1
+  onAreaAudio: {fileID: 0}
+  OnPickAudio: {fileID: 0}
 --- !u!1 &6963616292330987565
 GameObject:
   m_ObjectHideFlags: 0

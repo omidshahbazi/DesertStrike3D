@@ -364,6 +364,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 90a18068e4a8cff4abbe45826a9c616e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 90a18068e4a8cff4abbe45826a9c616e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1394,6 +1399,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain_3
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 20f69711ff991a443a27e15977c8eb48,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 20f69711ff991a443a27e15977c8eb48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1572,6 +1582,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Terrain_2
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 55003f37a27afd04fbadb71d3ec21359,
+        type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 55003f37a27afd04fbadb71d3ec21359,
         type: 3}
@@ -2890,7 +2905,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.62236524
+      value: 0.9865794
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -2900,7 +2915,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.78272706
+      value: 0.16328232
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
