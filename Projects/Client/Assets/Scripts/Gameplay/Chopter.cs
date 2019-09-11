@@ -320,7 +320,7 @@ namespace RamboTeam.Client
 
         private void UpdateCurrentFuel(float Amount)
         {
-            currentFuelAmount = Mathf.Min(currentFuelAmount + Amount, FuelAmount);
+            currentFuelAmount = Mathf.Clamp(currentFuelAmount + Amount, 0.0F, FuelAmount);
 
             fuelElapsedUpdateTime += Math.Abs(Amount);
 
