@@ -144,13 +144,15 @@ MonoBehaviour:
   Type: 9
   Range: 120
   ShotPerSecond: 1
+  delayShotPerSecond: 0
   BulletPrefab: {fileID: 4572193080810376173, guid: 6a9c1066e8073ab418fc58b0525cfd32,
     type: 3}
-  HP: 150
+  HP: 125
   isAttacker: 1
   TransformsForTargetRotation: []
   RotationToTargetSpeed: 150
   ShotStartPosition: {fileID: 9005999974689774356}
+  OnDeathAudio: []
 --- !u!65 &6910710165781555747
 BoxCollider:
   m_ObjectHideFlags: 0

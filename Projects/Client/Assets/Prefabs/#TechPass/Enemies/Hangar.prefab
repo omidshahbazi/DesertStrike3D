@@ -50,12 +50,14 @@ MonoBehaviour:
   Type: 8
   Range: 10
   ShotPerSecond: 1
+  delayShotPerSecond: 0
   BulletPrefab: {fileID: 0}
-  HP: 300
+  HP: 250
   isAttacker: 0
   TransformsForTargetRotation: []
   RotationToTargetSpeed: 150
   ShotStartPosition: {fileID: 0}
+  OnDeathAudio: []
 --- !u!54 &1095677557107068496
 Rigidbody:
   m_ObjectHideFlags: 0

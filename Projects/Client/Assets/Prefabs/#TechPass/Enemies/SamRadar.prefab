@@ -27,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6513928173907297577}
-  m_LocalRotation: {x: 0, y: 0.62858945, z: 0, w: -0.7777374}
+  m_LocalRotation: {x: 0, y: -0.16963673, z: 0, w: -0.9855067}
   m_LocalPosition: {x: 403.4875, y: 4.81114, z: 1070.8096}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 6513928173906876683}
   m_Father: {fileID: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   Type: 6
   Range: 10
   ShotPerSecond: 1
+  delayShotPerSecond: 0
   BulletPrefab: {fileID: 0}
   HP: 100
   isAttacker: 0
