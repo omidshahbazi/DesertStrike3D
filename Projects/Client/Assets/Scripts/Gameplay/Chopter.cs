@@ -47,10 +47,10 @@ namespace RamboTeam.Client
         public uint currentGatlingGunCount { get; private set; } = 0;
         public float currentHP { get; private set; } = 0;
         public uint currentLifeCount { get; private set; } = 0;
-        public uint currentFuelAmount { get; private set; } = 0;
+        public float currentFuelAmount { get; private set; } = 0;
         public uint currentRefugeesCount { get; private set; } = 0;
         public bool IsDead { get; private set; } = false;
-        public float FuelCostTime = 2.0f;
+        public float FuelCostPerSecond = 2.0f;
         private float nextRefugeeReleaseTime;
         public float RefugessReleaseGapTime = 2.0f;
         public int HealthPerRefugeeAmount = 30;
@@ -59,6 +59,7 @@ namespace RamboTeam.Client
         public AudioClip OnLowFuelAudio;
         public int LowFuelAmount = 30;
         public bool islowFuelLoop = true;
+        private float fuelElapsedUpdateTime = 0.0F;
         private AudioSource lowFuelAudioSource = null;
 
         public bool isEngineBoostEquipted
@@ -90,7 +91,7 @@ namespace RamboTeam.Client
             LeftArmDestructionParticle.SetActive(false);
             RightArmDestructionParticle.SetActive(false);
             rotorAudio = GetComponent<AudioSource>();
-            nextFuelUpdateTime = Time.time + FuelCostTime;
+            nextFuelUpdateTime = Time.time + FuelCostPerSecond;
         }
 
         protected override void Update()
@@ -103,18 +104,7 @@ namespace RamboTeam.Client
             if (!IsPilot)
                 return;
 
-            if (Time.time > nextFuelUpdateTime)
-            {
-                float nextCostTime = FuelCostTime;
-                if (Input.GetKey(KeyCode.Space) && isEngineBoostEquipted && currentFuelAmount > LowFuelAmount)
-                    nextCostTime = FuelCostTime / 10;
-                nextFuelUpdateTime = Time.time + nextCostTime;
-                UpdateCurrentFuel(-1);
-
-
-                if (currentFuelAmount == 0)
-                    OnChopterDeath();
-            }
+            UpdateFuel();
 
             if (currentRefugeesCount != 0)
             {
@@ -129,6 +119,21 @@ namespace RamboTeam.Client
                 }
             }
 
+        }
+
+        private void UpdateFuel()
+        {
+            float cost;
+            if (Input.GetKey(KeyCode.Space) && isEngineBoostEquipted && currentFuelAmount > LowFuelAmount)
+            {
+                cost = Time.deltaTime * FuelCostPerSecond * 10;
+            }
+            else
+            {
+                cost = Time.deltaTime * FuelCostPerSecond;
+            }
+
+            UpdateCurrentFuel(-cost);
         }
 
         internal void TriggerHellfireShot()
@@ -313,10 +318,17 @@ namespace RamboTeam.Client
             EventManager.OnGatlingGunUpdateCall();
         }
 
-        private void UpdateCurrentFuel(int Amount)
+        private void UpdateCurrentFuel(float Amount)
         {
-            currentFuelAmount = (uint)Mathf.Min(currentFuelAmount + Amount, FuelAmount);
-            EventManager.OnFuelUpdateCall();
+            currentFuelAmount = Mathf.Min(currentFuelAmount + Amount, FuelAmount);
+
+            fuelElapsedUpdateTime += Math.Abs(Amount);
+
+            if (fuelElapsedUpdateTime > 1.0F)
+            {
+                EventManager.OnFuelUpdateCall();
+                fuelElapsedUpdateTime -= 1.0F;
+            }
 
             if (currentFuelAmount > LowFuelAmount)
             {
@@ -335,6 +347,9 @@ namespace RamboTeam.Client
                         lowFuelAudioSource.Play();
                 }
             }
+
+            if (currentFuelAmount == 0)
+                OnChopterDeath();
         }
 
         private void UpdateCurrentHP(int Amount)

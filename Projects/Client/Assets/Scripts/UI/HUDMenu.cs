@@ -212,7 +212,7 @@ namespace RamboTeam.Client.UI
 
         private void OnUpdateFuel()
         {
-            fuelText.text = Chopter.Instance.currentFuelAmount.ToString();
+            fuelText.text = Chopter.Instance.currentFuelAmount.ToString("0");
         }
 
         private void OnUpdateHellfire()

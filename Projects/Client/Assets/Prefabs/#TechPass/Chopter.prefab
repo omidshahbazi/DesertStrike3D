@@ -463,7 +463,7 @@ MonoBehaviour:
   HP: 600
   LifeCount: 3
   FuelAmount: 120
-  FuelCostTime: 2
+  FuelCostPerSecond: 0.5
   RefugessReleaseGapTime: 2
   HealthPerRefugeeAmount: 30
   OnHitAudioClips:
@@ -1085,21 +1085,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1154,6 +1139,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03a3d42e22277ee48ad1c515f860ca16, type: 3}

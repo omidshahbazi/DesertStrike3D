@@ -28,7 +28,7 @@ public class PickUpBehaviour : MonoBehaviorBase
     public AudioClip OnPickAudio;
     private float OnAreaRangesqr;
     private Chopter target;
-
+    private bool isPicked = false;
     private AudioSource onAreaAudioSource = null;
     //public float PickupRange = 30;
 
@@ -63,6 +63,8 @@ public class PickUpBehaviour : MonoBehaviorBase
         if (target.IsDead)
             return;
 
+        if (isPicked)
+            return;
 
         Vector3 diff = target.transform.position - transform.position;
 
@@ -77,7 +79,6 @@ public class PickUpBehaviour : MonoBehaviorBase
         {
             return;
         }
-
         onAreaAudioSource = AudioManager.Instance.PlayAudio(onAreaAudio, Chopter.Instance.transform.position, null, 0, 1, isOnAreaAudioLoop);
     }
 
@@ -116,6 +117,13 @@ public class PickUpBehaviour : MonoBehaviorBase
         if (OnPickAudio != null)
         {
             AudioManager.Instance.PlayAudio(OnPickAudio, Chopter.Instance.transform.position, null);
+        }
+
+        if (onAreaAudioSource != null)
+        {
+            isPicked = true;
+            onAreaAudioSource.loop = false;
+            onAreaAudioSource.Stop();
         }
     }
 }
