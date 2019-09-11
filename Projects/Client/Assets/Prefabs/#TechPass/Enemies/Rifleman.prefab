@@ -118,7 +118,8 @@ MonoBehaviour:
   EnemyType: 2
   Type: 4
   Range: 100
-  ShotPerSecond: 4
+  ShotPerSecond: 5
+  delayShotPerSecond: 2
   BulletPrefab: {fileID: 2196423762651213752, guid: 2507e47b3fe91c34d9a46c7c3831e3ac,
     type: 3}
   HP: 25

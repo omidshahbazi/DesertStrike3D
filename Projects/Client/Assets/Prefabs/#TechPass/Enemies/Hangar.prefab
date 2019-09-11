@@ -57,7 +57,8 @@ MonoBehaviour:
   TransformsForTargetRotation: []
   RotationToTargetSpeed: 150
   ShotStartPosition: {fileID: 0}
-  OnDeathAudio: []
+  OnDeathAudio:
+  - {fileID: 8300000, guid: f781245418715a94abd4a72e83235fa9, type: 3}
 --- !u!54 &1095677557107068496
 Rigidbody:
   m_ObjectHideFlags: 0
