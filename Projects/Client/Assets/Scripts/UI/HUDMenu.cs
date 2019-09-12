@@ -28,6 +28,7 @@ namespace RamboTeam.Client.UI
         public GameObject missionPanel;
         public GameObject misssionItem;
         public RectTransform missionsItemsPanel;
+        public GameObject mapPanel;
 
         // Start is called before the first frame update
         protected override void Awake()
@@ -48,6 +49,8 @@ namespace RamboTeam.Client.UI
             HealthObj.gameObject.SetActive(false);
             missionPanel.SetActive(false);
             InputManager.Instance.AddInput(KeyCode.M, ShowHideMissionPanel);
+            InputManager.Instance.AddInput(KeyCode.Tab, ShowMapPanel);
+
 
             //StartCoroutine(SendOnPilotMessage()); //Temporary 
         }
@@ -74,13 +77,11 @@ namespace RamboTeam.Client.UI
             EventManager.OnMissionComplete += OnMissionCompleted;
             EventManager.OnAllMissionsComplete += OnAllMissionsCompleted;
             EventManager.OnEnemyDeath += OnEnemyDeath;
-            InputManager.Instance.AddInput(KeyCode.Tab, ShowHideMissionPanel);
-
         }
 
         private void ShowHideMissionPanel()
         {
-            if (missionPanel.activeSelf || PauseMenu.Instance.isGamePaused)
+            if (mapPanel.activeSelf || missionPanel.activeSelf || PauseMenu.Instance.isGamePaused)
                 return;
             UpdateMissions();
 
@@ -90,13 +91,34 @@ namespace RamboTeam.Client.UI
             InputManager.Instance.OnKeyRealeased += OnkeyCode;
         }
 
+        private void ShowMapPanel()
+        {
+            if (mapPanel.activeSelf || missionPanel.activeSelf || PauseMenu.Instance.isGamePaused)
+                return;
+
+            mapPanel.SetActive(true);
+            mapPanel.transform.SetAsLastSibling();
+            Time.timeScale = 0;
+            InputManager.Instance.OnKeyRealeased += OnkeyCode;
+        }
+
         private void OnkeyCode(KeyCode KeyCode)
         {
-            if (KeyCode != KeyCode.M)
+            if (KeyCode == KeyCode.M)
+            {
+                missionPanel.SetActive(false);
+                Time.timeScale = 1;
+                InputManager.Instance.OnKeyRealeased -= OnkeyCode;
                 return;
-            missionPanel.SetActive(false);
-            Time.timeScale = 1;
-            InputManager.Instance.OnKeyRealeased -= OnkeyCode;
+            }
+            if (KeyCode == KeyCode.Tab)
+            {
+                mapPanel.SetActive(false);
+                Time.timeScale = 1;
+                InputManager.Instance.OnKeyRealeased -= OnkeyCode;
+                return;
+            }
+
         }
 
         private void UpdateMissions()
