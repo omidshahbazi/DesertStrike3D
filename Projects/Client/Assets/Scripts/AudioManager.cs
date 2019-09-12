@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviorBase
 {
@@ -32,6 +33,7 @@ public class AudioManager : MonoBehaviorBase
         base.Awake();
 
         instance = this;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public AudioSource PlayAudio(AudioClip AudioClip, Vector3 Pos, Transform Parent = null)
@@ -83,6 +85,15 @@ public class AudioManager : MonoBehaviorBase
         audioSources.Add(audioComponent);
 
         return audioComponent;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        for (int i = 0; i < audioSources.Count; ++i)
+        {
+            if (audioSources[i] != null)
+                audioSources[i].Stop();
+        }
     }
 
     private AudioSource IsAlreadyExist(AudioClip audioClip, Transform parent, float volume, bool isLopp)
