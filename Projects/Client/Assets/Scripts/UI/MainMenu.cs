@@ -76,15 +76,24 @@ namespace RamboTeam.Client.UI
             NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
 
             CoOpButton.interactable = false;
-            InputManager.Instance.AddInput(KeyCode.Escape, () => CoopMenu.gameObject.SetActive(false));
+            InputManager.Instance.AddInput(KeyCode.Backspace, OnBackSpaceClick);
         }
 
- 
+        private void OnBackSpaceClick()
+        {
+            CoopMenu.gameObject.SetActive(false);
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
 
             CoOpButton.interactable = NetworkLayer.Instance.IsConnected;
+        }
+
+        protected  void OnDestroy()
+        {
+            InputManager.Instance.RemoveInput(KeyCode.Backspace, OnBackSpaceClick);
         }
 
         private void NetworkCommands_OnConnected()
