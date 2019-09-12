@@ -43,6 +43,7 @@ namespace RamboTeam.Client.UI
             ReturnToMainMenu.onClick.AddListener(() =>
             {
                 RamboSceneManager.Instance.LoadScene("MainMenu", UnityEngine.SceneManagement.LoadSceneMode.Single);
+                Time.timeScale = 1;
             });
 
             QuitButton.onClick.AddListener(() => Application.Quit());

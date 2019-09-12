@@ -3,13 +3,9 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
-    public class PilotCameraController : MonoBehaviorBase
+    public class PilotCameraController : RamboTeam.Client.Utilities.RamboSingelton<PilotCameraController>
     {
-        public static PilotCameraController Instance
-        {
-            get;
-            private set;
-        }
+
 
         public float Speed = 10.0F;
         public float BaseDistance = 30;
@@ -37,9 +33,7 @@ namespace RamboTeam.Client
         {
             base.Awake();
 
-            Instance = this;
-
-            chopter = ChopterPilotController.Instance;
+           chopter = ChopterPilotController.Instance;
             chopterTransform = chopter.transform;
 
             coPilotCameraObject = ChopterPilotController.Instance.transform.Find("CoPilotCamera");
