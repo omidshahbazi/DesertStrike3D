@@ -84,7 +84,7 @@ MonoBehaviour:
     type: 3}
   impactToTerrainParticle: {fileID: 804364873296241853, guid: 5bcae96a00088b840833ffcb8344fbdb,
     type: 3}
-  impactToWaterParticle: {fileID: 743658598375992376, guid: eec1d538e90aac041bfd693f69b97f8c,
+  impactToWaterParticle: {fileID: 2363642758125986955, guid: c43aa7f9dd08eaf4d81ff33c719e6b9d,
     type: 3}
 --- !u!82 &5520369693476405784
 AudioSource:
