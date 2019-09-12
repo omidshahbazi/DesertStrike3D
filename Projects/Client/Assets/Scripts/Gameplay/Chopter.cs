@@ -108,7 +108,7 @@ namespace RamboTeam.Client
 
             if (currentRefugeesCount != 0)
             {
-                if (Landing.Instance.state == Landing.State.Landed)
+                if (Landing.state == Landing.State.Landed)
                 {
                     if (nextRefugeeReleaseTime < Time.time)
                     {

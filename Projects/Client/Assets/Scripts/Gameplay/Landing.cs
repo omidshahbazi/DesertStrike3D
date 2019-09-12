@@ -27,7 +27,7 @@ namespace RamboTeam.Client
         private ChopterPilotController chinstance;
         private float sqrRange;
 
-        public State state;
+        public static State state;
         private bool isProcess;
 
 

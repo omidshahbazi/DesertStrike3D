@@ -132,7 +132,7 @@ namespace RamboTeam.Client
 
         protected override void Update()
         {
-            if (Landing.Instance.state == Landing.State.Landed)
+            if (Landing.state == Landing.State.Landed)
                 return;
 
             base.Update();
