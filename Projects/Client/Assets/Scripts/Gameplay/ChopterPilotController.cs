@@ -43,7 +43,10 @@ namespace RamboTeam.Client
         [SerializeField]
         public float AirCraftRateOfShot;
 
-        private float nextShotTime;
+		[SerializeField]
+		public GameObject ChopterModel;
+
+		private float nextShotTime;
         private float nextAirCraftShotTime;
 
         private const float SYNC_RATE = 2;
@@ -63,8 +66,6 @@ namespace RamboTeam.Client
 
         public GameObject gatlingGunShootParticle;
 
-        [SerializeField]
-        private GameObject ChopterModel;
         private bool nextPos;
         private bool nextAirCraftPos;
 

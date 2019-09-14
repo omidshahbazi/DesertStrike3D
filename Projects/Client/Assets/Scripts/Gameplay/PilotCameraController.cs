@@ -5,9 +5,10 @@ namespace RamboTeam.Client
 {
     public class PilotCameraController : RamboTeam.Client.Utilities.RamboSingelton<PilotCameraController>
     {
+		public static readonly Vector3 SINGLE_PLAYER_CAMERA_OFFSET_DIRECTION = new Vector3(-1, 2, -1);
+		public static readonly Vector3 MULTI_PLAYER_CAMERA_OFFSET_DIRECTION = new Vector3(0, 0.2F, -1);
 
-
-        public float Speed = 10.0F;
+		public float Speed = 10.0F;
         public float BaseDistance = 30;
         public float OffsetRadius = 10;
         public float shakeDuration = 0f;
@@ -20,8 +21,9 @@ namespace RamboTeam.Client
         private ChopterPilotController chopter = null;
         private Transform chopterTransform = null;
         private Transform coPilotCameraObject = null;
+		private Transform chopterModelTransform = null;
 
-        private bool isFPS = false;
+		private bool isFPS = false;
 
         public Vector3 PanOffset
         {
@@ -39,7 +41,8 @@ namespace RamboTeam.Client
             coPilotCameraObject = ChopterPilotController.Instance.transform.Find("CoPilotCamera");
             if (coPilotCameraObject != null)
                 coPilotCameraObject.gameObject.SetActive(false);
-        }
+			chopterModelTransform = chopter.ChopterModel.transform;
+		}
 
         protected override void OnEnable()
         {
@@ -48,51 +51,54 @@ namespace RamboTeam.Client
             coPilotCameraObject.gameObject.SetActive(!NetworkLayer.Instance.IsPilot);
         }
 
-        protected override void LateUpdate()
-        {
-            base.LateUpdate();
+		protected override void LateUpdate()
+		{
+			base.LateUpdate();
 
-            if (!NetworkLayer.Instance.IsPilot)
-                return;
+			if (!NetworkLayer.Instance.IsPilot)
+				return;
 
-            Vector3 forward = chopterTransform.position + new Vector3(-1, 2, -1);
-            forward = (forward - chopterTransform.position).normalized;
-            Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
+			Vector3 forward = Vector3.zero;
 
-            if (chopter.IsMoving)
-            {
-                Vector3 chopterForward = chopterTransform.forward;
-                chopterForward.y = 0;
+			if (RamboSceneManager.IsMultiplayer)
+				forward = chopterModelTransform.TransformPoint(MULTI_PLAYER_CAMERA_OFFSET_DIRECTION);
+			else
+				forward = chopterTransform.position + SINGLE_PLAYER_CAMERA_OFFSET_DIRECTION;
 
-                float angle = Vector3.Angle(chopterForward, Vector3.right);
+			forward = (forward - chopterTransform.position).normalized;
+			Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
 
-                if (chopterForward.z < 0)
-                    angle = 360 - angle;
+			if (!RamboSceneManager.IsMultiplayer && chopter.IsMoving)
+			{
+				Vector3 chopterForward = chopterTransform.forward;
+				chopterForward.y = 0;
 
-                angle *= Mathf.Deg2Rad;
+				float angle = Vector3.Angle(chopterForward, Vector3.right);
 
-                targetPos.x += OffsetRadius * Mathf.Cos(angle) * (Screen.width / (float)Screen.height);
-                targetPos.z += OffsetRadius * Mathf.Sin(angle) * (Screen.width / (float)Screen.height);
-            }
+				if (chopterForward.z < 0)
+					angle = 360 - angle;
 
-            float t = Time.deltaTime * Speed;
+				angle *= Mathf.Deg2Rad;
 
+				targetPos.x += OffsetRadius * Mathf.Cos(angle) * (Screen.width / (float)Screen.height);
+				targetPos.z += OffsetRadius * Mathf.Sin(angle) * (Screen.width / (float)Screen.height);
+			}
 
-            transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
-            transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
+			float t = Time.deltaTime * Speed;
 
+			transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
+			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
 
-            transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
-            if (shakeDuration > 0)
-            {
-                transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+			if (shakeDuration > 0)
+			{
+				transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
-                shakeDuration -= Time.deltaTime * decreaseFactor;
+				shakeDuration -= Time.deltaTime * decreaseFactor;
 
-            }
-        }
+			}
+		}
 
-        public void SetCameraShake()
+		public void SetCameraShake()
         {
             if (!NetworkLayer.Instance.IsPilot)
                 return;

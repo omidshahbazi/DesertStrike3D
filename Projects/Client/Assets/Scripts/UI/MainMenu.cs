@@ -28,7 +28,9 @@ namespace RamboTeam.Client.UI
         private bool isKeyGet;
         private float progress;
 
-        protected override void Awake()
+		private bool isMultiplayer = false;
+
+		protected override void Awake()
         {
             base.Awake();
 
@@ -40,13 +42,17 @@ namespace RamboTeam.Client.UI
             TutorialPanel.gameObject.SetActive(false);
             SingleButton.onClick.AddListener(() =>
             {
-                NetworkLayer.Instance.IsPilot = true;
+				isMultiplayer = false;
+
+				NetworkLayer.Instance.IsPilot = true;
                 ShowStory();
                 InputManager.Instance.OnAnyKeyPressd += ShowTutorial;
             });
             CoOpButton.onClick.AddListener(() =>
-            {
-                ShowCoopMenu();
+			{
+				isMultiplayer = true;
+
+				ShowCoopMenu();
                
                 //InputManager.Instance.OnAnyKeyPressd += ;
             });
@@ -149,7 +155,7 @@ namespace RamboTeam.Client.UI
         private IEnumerator LoadAsync()
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync("FinalScene001", LoadSceneMode.Single);
-            RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001");
+            RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001", isMultiplayer);
 
             while (!operation.isDone)
             {
