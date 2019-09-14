@@ -471,8 +471,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bccb0892313b27c49be677d9bf937132, type: 3}
   - {fileID: 0}
   - {fileID: 8300000, guid: f625893eb2afb604885fbc10f51a60d9, type: 3}
-  OnDeathAudio: {fileID: 8300000, guid: 45c04e04b73b16a4eaf9d5f1f164ed78, type: 3}
-  OnLowFuelAudio: {fileID: 8300000, guid: bccb0892313b27c49be677d9bf937132, type: 3}
+  OnDeathAudio: {fileID: 0}
+  OnLowFuelAudio: {fileID: 0}
   LowFuelAmount: 30
   islowFuelLoop: 1
 --- !u!114 &2672427305967171349
