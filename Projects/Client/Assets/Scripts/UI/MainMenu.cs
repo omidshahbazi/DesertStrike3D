@@ -8,76 +8,83 @@ using UnityEngine.UI;
 
 namespace RamboTeam.Client.UI
 {
-    public class MainMenu : MonoBehaviorBase
-    {
-        public Button CreditsButton;
-        public Button SingleButton;
-        public Button CoOpButton;
-        public Button QuitButton;
-        public Button PilotButton;
-        public Button CoPilotButton;
-        public GameObject MissionBrief;
-        public GameObject Story;
-        public GameObject TutorialPanel;
-        public GameObject loadingScreen;
-        public GameObject CoopMenu;
-        public GameObject CreditsObj;
-        public Text Text;
-        public Image Image;
-        private AudioSource MainMenuMusic;
-        private bool isKeyGet;
-        private float progress;
+	public class MainMenu : MonoBehaviorBase
+	{
+		public Button CreditsButton;
+		public Button SingleButton;
+		public Button CoOpButton;
+		public Button QuitButton;
+		public Button PilotButton;
+		public Button CoPilotButton;
+		public Button StartButton;
+		public GameObject MissionBrief;
+		public GameObject Story;
+		public GameObject TutorialPanel;
+		public GameObject loadingScreen;
+		public GameObject CoopMenu;
+		public GameObject CreditsObj;
+		public Text Text;
+		public Image Image;
+		private AudioSource MainMenuMusic;
+		private bool isKeyGet;
+		private float progress;
 
 		private bool isMultiplayer = false;
 
 		protected override void Awake()
-        {
-            base.Awake();
+		{
+			base.Awake();
 
-            NetworkLayer networkLayer = NetworkLayer.Instance;
+			NetworkLayer networkLayer = NetworkLayer.Instance;
 
-            MainMenuMusic = GetComponent<AudioSource>();
-            MainMenuMusic.Play();
-            Story.gameObject.SetActive(false);
-            TutorialPanel.gameObject.SetActive(false);
-            SingleButton.onClick.AddListener(() =>
-            {
+			MainMenuMusic = GetComponent<AudioSource>();
+			MainMenuMusic.Play();
+			Story.gameObject.SetActive(false);
+			TutorialPanel.gameObject.SetActive(false);
+			SingleButton.onClick.AddListener(() =>
+			{
 				isMultiplayer = false;
 
 				NetworkLayer.Instance.IsPilot = true;
-                ShowStory();
-                InputManager.Instance.OnAnyKeyPressd += ShowTutorial;
-            });
-            CoOpButton.onClick.AddListener(() =>
+				ShowStory();
+				InputManager.Instance.OnAnyKeyPressd += ShowTutorial;
+			});
+			CoOpButton.onClick.AddListener(() =>
 			{
 				isMultiplayer = true;
 
 				NetworkCommands.JoinToRoom();
-               
-            });
 
-            CreditsButton.onClick.AddListener(() =>
-            {
-                CreditsObj.gameObject.SetActive(true);
-                InputManager.Instance.OnAnyKeyPressd += CloseCreditPanel;
-            });
+			});
 
-            PilotButton.onClick.AddListener(() =>
-            {
+			CreditsButton.onClick.AddListener(() =>
+			{
+				CreditsObj.gameObject.SetActive(true);
+				InputManager.Instance.OnAnyKeyPressd += CloseCreditPanel;
+			});
+
+			PilotButton.onClick.AddListener(() =>
+			{
 				NetworkCommands.BecomePilot();
 			});
 
-            CoPilotButton.onClick.AddListener(() =>
+			CoPilotButton.onClick.AddListener(() =>
 			{
 				NetworkCommands.BecomeCoPilot();
 			});
 
-            QuitButton.onClick.AddListener(() => Application.Quit());
+			StartButton.onClick.AddListener(() =>
+			{
+				ShowStory();
+				InputManager.Instance.OnAnyKeyPressd += loadGame;
+			});
 
-            NetworkCommands.OnConnected += NetworkCommands_OnConnected;
-            NetworkCommands.OnConnectionLost += NetworkCommands_OnDisconnected;
+			QuitButton.onClick.AddListener(() => Application.Quit());
 
-            NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
+			NetworkCommands.OnConnected += NetworkCommands_OnConnected;
+			NetworkCommands.OnConnectionLost += NetworkCommands_OnDisconnected;
+
+			NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
 
 			NetworkCommands.OnBecomePilot += OnBecomePilot;
 			NetworkCommands.OnBecomeCoPilot += OnBecomeCoPilot;
@@ -86,10 +93,9 @@ namespace RamboTeam.Client.UI
 			NetworkCommands.OnCoPilotReserved += OnCoPilotReserved;
 			NetworkCommands.OnCoPilotReleased += OnCoPilotReleased;
 
-
 			CoOpButton.interactable = false;
-            InputManager.Instance.AddInput(KeyCode.Backspace, OnBackSpaceClick);
-        }
+			InputManager.Instance.AddInput(KeyCode.Backspace, OnBackSpaceClick);
+		}
 
 		private void OnBecomePilot()
 		{
@@ -122,105 +128,102 @@ namespace RamboTeam.Client.UI
 		}
 
 		private void OnBackSpaceClick()
-        {
-            CoopMenu.gameObject.SetActive(false);
-        }
+		{
+			CoopMenu.gameObject.SetActive(false);
+		}
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
+		protected override void OnEnable()
+		{
+			base.OnEnable();
 
-            CoOpButton.interactable = NetworkLayer.Instance.IsConnected;
-        }
+			CoOpButton.interactable = NetworkLayer.Instance.IsConnected;
+		}
 
-        protected  void OnDestroy()
-        {
-            InputManager.Instance.RemoveInput(KeyCode.Backspace, OnBackSpaceClick);
-        }
+		protected void OnDestroy()
+		{
+			InputManager.Instance.RemoveInput(KeyCode.Backspace, OnBackSpaceClick);
+		}
 
-        private void NetworkCommands_OnConnected()
-        {
-            CoOpButton.interactable = true;
-        }
+		private void NetworkCommands_OnConnected()
+		{
+			CoOpButton.interactable = true;
+		}
 
-        private void NetworkCommands_OnDisconnected()
-        {
-            CoOpButton.interactable = false;
-        }
+		private void NetworkCommands_OnDisconnected()
+		{
+			CoOpButton.interactable = false;
+		}
 
-        private void ShowStory()
-        {
-            CoOpButton.gameObject.SetActive(false);
-            Story.gameObject.SetActive(true);
-        }
+		private void ShowStory()
+		{
+			CoOpButton.gameObject.SetActive(false);
+			Story.gameObject.SetActive(true);
+		}
 
-        private void ShowTutorial()
-        {
-            TutorialPanel.gameObject.SetActive(true);
-            InputManager.Instance.OnAnyKeyPressd -= ShowTutorial;
+		private void ShowTutorial()
+		{
+			TutorialPanel.gameObject.SetActive(true);
+			InputManager.Instance.OnAnyKeyPressd -= ShowTutorial;
 
-            InputManager.Instance.OnAnyKeyPressd += ShowMissionBreif;
+			InputManager.Instance.OnAnyKeyPressd += ShowMissionBreif;
 
-        }
+		}
 
-        private void ShowCoopMenu()
-        {
-            CoopMenu.gameObject.SetActive(true);
-        }
+		private void ShowCoopMenu()
+		{
+			CoopMenu.gameObject.SetActive(true);
+		}
 
-        private void ShowMissionBreif()
-        {
-            MissionBrief.gameObject.SetActive(true);
-            InputManager.Instance.OnAnyKeyPressd -= ShowMissionBreif;
-            InputManager.Instance.OnAnyKeyPressd += loadGame;
+		private void ShowMissionBreif()
+		{
+			MissionBrief.gameObject.SetActive(true);
+			InputManager.Instance.OnAnyKeyPressd -= ShowMissionBreif;
+			InputManager.Instance.OnAnyKeyPressd += loadGame;
 
-        }
-
-
-
-        private void loadGame()
-        {
-            InputManager.Instance.OnAnyKeyPressd -= loadGame;
-            MainMenuMusic.Stop();
-
-            loadingScreen.SetActive(true);
-            StartCoroutine(LoadAsync());
-        }
+		}
 
 
-        private IEnumerator LoadAsync()
-        {
-            AsyncOperation operation = SceneManager.LoadSceneAsync("FinalScene001", LoadSceneMode.Single);
-            RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001", isMultiplayer);
 
-            while (!operation.isDone)
-            {
-                progress = Mathf.Clamp01(operation.progress / 0.9f);
+		private void loadGame()
+		{
+			InputManager.Instance.OnAnyKeyPressd -= loadGame;
+			MainMenuMusic.Stop();
 
-                Image.fillAmount = progress;
+			loadingScreen.SetActive(true);
+			StartCoroutine(LoadAsync());
+		}
 
-                Text.text = "Loading... " + (int)(progress * 100f) + "%";
 
-                yield return null;
-            }
+		private IEnumerator LoadAsync()
+		{
+			AsyncOperation operation = SceneManager.LoadSceneAsync("FinalScene001", LoadSceneMode.Single);
+			RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001", isMultiplayer);
 
-        }
+			while (!operation.isDone)
+			{
+				progress = Mathf.Clamp01(operation.progress / 0.9f);
 
-        private void OnJoinedToRoom()
+				Image.fillAmount = progress;
+
+				Text.text = "Loading... " + (int)(progress * 100f) + "%";
+
+				yield return null;
+			}
+
+		}
+
+		private void OnJoinedToRoom()
 		{
 			ShowCoopMenu();
+		}
 
-			//ShowStory();
-   //         InputManager.Instance.OnAnyKeyPressd += loadGame;
-        }
+		private void CloseCreditPanel()
+		{
+			InputManager.Instance.OnAnyKeyPressd -= CloseCreditPanel;
+			CreditsObj.gameObject.SetActive(false);
+		}
 
-        private void CloseCreditPanel()
-        {
-            InputManager.Instance.OnAnyKeyPressd -= CloseCreditPanel;
-            CreditsObj.gameObject.SetActive(false);
-        }
-
-    }
+	}
 }
 
 

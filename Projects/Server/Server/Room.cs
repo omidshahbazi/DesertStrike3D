@@ -13,17 +13,8 @@ namespace RamboTeam.Server
 		private BufferStream buffer = null;
 		private List<NetworkingPlayer> players = null;
 
-		public NetworkingPlayer PilotPlayer
-		{
-			get;
-			private set;
-		}
-
-		public NetworkingPlayer CoPilotPlayer
-		{
-			get;
-			private set;
-		}
+		private NetworkingPlayer pilotPlayer = null;
+		private NetworkingPlayer coPilotPlayer = null;
 
 		public bool IsFull
 		{
@@ -46,31 +37,31 @@ namespace RamboTeam.Server
 				command == Commands.Room.SYNC_PILOT_FIRE ||
 				command == Commands.Room.SYNC_ENEMY_FIRE)
 			{
-				if (CoPilotPlayer != null)
-					Send(CoPilotPlayer, Buffer);
+				if (coPilotPlayer != null)
+					Send(coPilotPlayer, Buffer);
 			}
 			else if (command == Commands.Room.SYNC_CO_PILOT_FIRE)
 			{
-				if (PilotPlayer != null)
-					Send(PilotPlayer, Buffer);
+				if (pilotPlayer != null)
+					Send(pilotPlayer, Buffer);
 			}
 			else if (command == Commands.Room.BECOME_PILOT)
 			{
-				if (PilotPlayer == null)
+				if (pilotPlayer == null)
 				{
-					PilotPlayer = Player;
+					pilotPlayer = Player;
 
 					buffer.Reset();
 					buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.BECOME_PILOT);
-					Send(PilotPlayer, buffer);
+					Send(pilotPlayer, buffer);
 
 					buffer.Reset();
 					buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.PILOT_RESERVED);
-					SendToAll(PilotPlayer);
+					SendToAll(pilotPlayer);
 
-					if (CoPilotPlayer != null && CoPilotPlayer.IPEndPointHandle == Player.IPEndPointHandle)
+					if (coPilotPlayer != null && coPilotPlayer.IPEndPointHandle == Player.IPEndPointHandle)
 					{
-						CoPilotPlayer = null;
+						coPilotPlayer = null;
 
 						buffer.Reset();
 						buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.CO_PILOT_RELEASED);
@@ -80,21 +71,21 @@ namespace RamboTeam.Server
 			}
 			else if (command == Commands.Room.BECOME_CO_PILOT)
 			{
-				if (CoPilotPlayer == null)
+				if (coPilotPlayer == null)
 				{
-					CoPilotPlayer = Player;
+					coPilotPlayer = Player;
 
 					buffer.Reset();
 					buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.BECOME_CO_PILOT);
-					Send(CoPilotPlayer, buffer);
+					Send(coPilotPlayer, buffer);
 
 					buffer.Reset();
 					buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.CO_PILOT_RESERVED);
-					SendToAll(CoPilotPlayer);
+					SendToAll(coPilotPlayer);
 
-					if (PilotPlayer != null && PilotPlayer.IPEndPointHandle == Player.IPEndPointHandle)
+					if (pilotPlayer != null && pilotPlayer.IPEndPointHandle == Player.IPEndPointHandle)
 					{
-						PilotPlayer = null;
+						pilotPlayer = null;
 
 						buffer.Reset();
 						buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.PILOT_RELEASED);
@@ -114,15 +105,15 @@ namespace RamboTeam.Server
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.END_GAME);
 
-			if (Player == PilotPlayer)
+			if (Player == pilotPlayer)
 			{
-				if (CoPilotPlayer != null)
-					Send(CoPilotPlayer, buffer);
+				if (coPilotPlayer != null)
+					Send(coPilotPlayer, buffer);
 			}
 			else
 			{
-				if (PilotPlayer != null)
-					Send(PilotPlayer, buffer);
+				if (pilotPlayer != null)
+					Send(pilotPlayer, buffer);
 			}
 		}
 
@@ -146,7 +137,7 @@ namespace RamboTeam.Server
 
 		public override string ToString()
 		{
-			return (PilotPlayer == null ? "[No Player]" : PilotPlayer.IPEndPointHandle.ToString()) + " with " + (CoPilotPlayer == null ? "[No Player]" : CoPilotPlayer.IPEndPointHandle.ToString());
+			return (pilotPlayer == null ? "[No Player]" : pilotPlayer.IPEndPointHandle.ToString()) + " with " + (coPilotPlayer == null ? "[No Player]" : coPilotPlayer.IPEndPointHandle.ToString());
 		}
 	}
 }

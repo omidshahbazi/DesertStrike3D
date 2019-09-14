@@ -45,19 +45,14 @@ namespace RamboTeam.Server
 		{
 			Room room = GetAnEmptyRoom(Player);
 
+			room.AddPlayer(Player);
+
 			buffer.Reset();
 
-			if (room.PilotPlayer == Player)
-			{
-				Log("Room " + room + " created");
-			}
-			else
-			{
-				//buffer.WriteBytes(Commands.Category.ROOM, Commands.Room.SECONDARY);
-				room.AddPlayer(Player);
-
+			if (room.IsFull)
 				Log("Player joined to roo " + room);
-			}
+			else
+				Log("Room " + room + " created");
 
 			buffer.WriteBytes(Commands.Category.LOBBY, Commands.Lobby.JOIN_TO_ROOM);
 
@@ -92,7 +87,6 @@ namespace RamboTeam.Server
 			}
 
 			room = new Room(Application);
-			room.AddPlayer(Player);
 
 			rooms.Add(room);
 
