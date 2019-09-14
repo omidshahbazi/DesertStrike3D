@@ -6,7 +6,7 @@ namespace RamboTeam.Common
     public static class Constants
     {
 		public const string SERVER_HEADER_TEXT =
-@" _________________________________________________________________________________
+@"_________________________________________________________________________________
 |   ________       ________     _________    ________    ______      _________     |
 |   |       \     |  ______|   /   ______|  |  ______|  |  _   \    |____ ____|    |
 |   |        \    | |         |  /          | |         | | |   \       | |        |
@@ -28,8 +28,10 @@ namespace RamboTeam.Common
 |   |_________/        |_|       |_|  \_\     |_____|    |_|  \_\    |________|    |
 |__________________________________________________________________________________|";
 
-		public const string SERVER_IP = "89.42.209.124";
-		public const string HOST_IP = "89.42.209.124";
+		//public const string SERVER_IP = "89.42.209.124";
+		//public const string HOST_IP = "89.42.209.124";
+		public const string SERVER_IP = "127.0.0.1";
+		public const string HOST_IP = "127.0.0.1";
 
 		public const int PORT_NUMBER = 85;
 

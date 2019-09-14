@@ -16,15 +16,19 @@ namespace RamboTeam.Common
 
 		public static class Room
 		{
-			public const byte MASTER = 1;
-			public const byte SECONDARY = 2;
-			public const byte SYNC_CHOPTER_TRANSFORM = 3;
-			public const byte SYNC_PILOT_FIRE = 4;
-			public const byte SYNC_CO_PILOT_FIRE = 5;
+			public const byte BECOME_PILOT = 1;
+			public const byte BECOME_CO_PILOT = 2;
+			public const byte PILOT_RESERVED = 3;
+			public const byte PILOT_RELEASED = 4;
+			public const byte CO_PILOT_RESERVED = 5;
+			public const byte CO_PILOT_RELEASED = 6;
+			public const byte SYNC_CHOPTER_TRANSFORM = 7;
+			public const byte SYNC_PILOT_FIRE = 8;
+			public const byte SYNC_CO_PILOT_FIRE = 9;
 
-			public const byte SYNC_ENEMY_FIRE = 6;
+			public const byte SYNC_ENEMY_FIRE = 10;
 
-			public const byte END_GAME = 7;
+			public const byte END_GAME = 11;
 		}
 
 		public static class Bullet

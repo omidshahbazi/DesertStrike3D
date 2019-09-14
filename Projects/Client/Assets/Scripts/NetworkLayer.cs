@@ -83,21 +83,39 @@ namespace RamboTeam.Client
 				}
 				else if (category == Commands.Category.LOBBY)
 				{
-
-				}
-				else if (category == Commands.Category.ROOM)
-				{
-					if (command == Commands.Room.MASTER)
+					if (command == Commands.Lobby.JOIN_TO_ROOM)
 					{
 						IsPilot = true;
 						NetworkCommands.HandleJoinedToRoom();
-						NetworkCommands.HandlePilot();
 					}
-					else if (command == Commands.Room.SECONDARY)
+				}
+				else if (category == Commands.Category.ROOM)
+				{
+					if (command == Commands.Room.BECOME_PILOT)
+					{
+						IsPilot = true;
+						NetworkCommands.HandleBecomePilot();
+					}
+					else if (command == Commands.Room.BECOME_CO_PILOT)
 					{
 						IsPilot = false;
-						NetworkCommands.HandleJoinedToRoom();
-						NetworkCommands.HandleCoPilot();
+						NetworkCommands.HandleBecomeCoPilot();
+					}
+					else if (command == Commands.Room.PILOT_RESERVED)
+					{
+						NetworkCommands.HandlePilotReserved();
+					}
+					else if (command == Commands.Room.PILOT_RELEASED)
+					{
+						NetworkCommands.HandlePilotReleased();
+					}
+					else if (command == Commands.Room.CO_PILOT_RESERVED)
+					{
+						NetworkCommands.HandleCoPilotReserved();
+					}
+					else if (command == Commands.Room.CO_PILOT_RELEASED)
+					{
+						NetworkCommands.HandleCoPilotReleased();
 					}
 					else if (command == Commands.Room.SYNC_CHOPTER_TRANSFORM)
 					{

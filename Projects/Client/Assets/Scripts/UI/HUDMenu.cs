@@ -59,7 +59,7 @@ namespace RamboTeam.Client.UI
         {
             yield return new WaitForSeconds(1.0F);
 
-            NetworkCommands.HandlePilot();
+            NetworkCommands.HandleBecomePilot();
         }
 
         protected override void OnEnable()

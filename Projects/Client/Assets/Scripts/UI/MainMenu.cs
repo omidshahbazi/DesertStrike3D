@@ -52,9 +52,8 @@ namespace RamboTeam.Client.UI
 			{
 				isMultiplayer = true;
 
-				ShowCoopMenu();
+				NetworkCommands.JoinToRoom();
                
-                //InputManager.Instance.OnAnyKeyPressd += ;
             });
 
             CreditsButton.onClick.AddListener(() =>
@@ -65,14 +64,13 @@ namespace RamboTeam.Client.UI
 
             PilotButton.onClick.AddListener(() =>
             {
-               // NetworkCommands.OnPilot();
-            });
+				NetworkCommands.BecomePilot();
+			});
 
             CoPilotButton.onClick.AddListener(() =>
-            {
-                //NetworkCommands.JoinToRoom();
-            });
-
+			{
+				NetworkCommands.BecomeCoPilot();
+			});
 
             QuitButton.onClick.AddListener(() => Application.Quit());
 
@@ -81,11 +79,49 @@ namespace RamboTeam.Client.UI
 
             NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
 
-            CoOpButton.interactable = false;
+			NetworkCommands.OnBecomePilot += OnBecomePilot;
+			NetworkCommands.OnBecomeCoPilot += OnBecomeCoPilot;
+			NetworkCommands.OnPilotReserved += OnPilotReserved;
+			NetworkCommands.OnPilotReleased += OnPilotReleased;
+			NetworkCommands.OnCoPilotReserved += OnCoPilotReserved;
+			NetworkCommands.OnCoPilotReleased += OnCoPilotReleased;
+
+
+			CoOpButton.interactable = false;
             InputManager.Instance.AddInput(KeyCode.Backspace, OnBackSpaceClick);
         }
 
-        private void OnBackSpaceClick()
+		private void OnBecomePilot()
+		{
+			PilotButton.interactable = false;
+		}
+
+		private void OnBecomeCoPilot()
+		{
+			CoPilotButton.interactable = false;
+		}
+
+		private void OnPilotReserved()
+		{
+			PilotButton.interactable = false;
+		}
+
+		private void OnPilotReleased()
+		{
+			PilotButton.interactable = true;
+		}
+
+		private void OnCoPilotReserved()
+		{
+			CoPilotButton.interactable = false;
+		}
+
+		private void OnCoPilotReleased()
+		{
+			CoPilotButton.interactable = true;
+		}
+
+		private void OnBackSpaceClick()
         {
             CoopMenu.gameObject.SetActive(false);
         }
@@ -171,9 +207,11 @@ namespace RamboTeam.Client.UI
         }
 
         private void OnJoinedToRoom()
-        {
-            ShowStory();
-            InputManager.Instance.OnAnyKeyPressd += loadGame;
+		{
+			ShowCoopMenu();
+
+			//ShowStory();
+   //         InputManager.Instance.OnAnyKeyPressd += loadGame;
         }
 
         private void CloseCreditPanel()

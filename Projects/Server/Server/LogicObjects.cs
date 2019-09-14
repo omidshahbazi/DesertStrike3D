@@ -1,6 +1,5 @@
 ﻿//Rambo Team
 using BeardedManStudios.Forge.Networking;
-using BeardedManStudios.Forge.Networking.Frame;
 using RamboTeam.Common;
 
 namespace RamboTeam.Server

@@ -18,8 +18,12 @@ namespace RamboTeam.Client
 		public static event NetworkEventHandler OnConnectionRestored;
 
 		public static event NetworkEventHandler OnJoinedToRoom;
-		public static event NetworkEventHandler OnPilot;
-		public static event NetworkEventHandler OnCoPilot;
+		public static event NetworkEventHandler OnBecomePilot;
+		public static event NetworkEventHandler OnBecomeCoPilot;
+		public static event NetworkEventHandler OnPilotReserved;
+		public static event NetworkEventHandler OnPilotReleased;
+		public static event NetworkEventHandler OnCoPilotReserved;
+		public static event NetworkEventHandler OnCoPilotReleased;
 
 		public static event NetworkEventHandler OnEndGame;
 		public static event SyncChopterTransformEventHandler OnSyncChopterTransform;
@@ -39,6 +43,24 @@ namespace RamboTeam.Client
 			buffer.Reset();
 			buffer.WriteBytes(Commands.Category.LOBBY);
 			buffer.WriteBytes(Commands.Lobby.JOIN_TO_ROOM);
+
+			NetworkLayer.Instance.Send(buffer);
+		}
+
+		public static void BecomePilot()
+		{
+			buffer.Reset();
+			buffer.WriteBytes(Commands.Category.ROOM);
+			buffer.WriteBytes(Commands.Room.BECOME_PILOT);
+
+			NetworkLayer.Instance.Send(buffer);
+		}
+
+		public static void BecomeCoPilot()
+		{
+			buffer.Reset();
+			buffer.WriteBytes(Commands.Category.ROOM);
+			buffer.WriteBytes(Commands.Room.BECOME_CO_PILOT);
 
 			NetworkLayer.Instance.Send(buffer);
 		}
@@ -186,16 +208,40 @@ namespace RamboTeam.Client
 				OnJoinedToRoom();
 		}
 
-		public static void HandlePilot()
+		public static void HandleBecomePilot()
 		{
-			if (OnPilot != null)
-				OnPilot();
+			if (OnBecomePilot != null)
+				OnBecomePilot();
 		}
 
-		public static void HandleCoPilot()
+		public static void HandleBecomeCoPilot()
 		{
-			if (OnCoPilot != null)
-				OnCoPilot();
+			if (OnBecomeCoPilot != null)
+				OnBecomeCoPilot();
+		}
+
+		public static void HandlePilotReserved()
+		{
+			if (OnPilotReserved != null)
+				OnPilotReserved();
+		}
+
+		public static void HandlePilotReleased()
+		{
+			if (OnPilotReleased != null)
+				OnPilotReleased();
+		}
+
+		public static void HandleCoPilotReserved()
+		{
+			if (OnCoPilotReserved != null)
+				OnCoPilotReserved();
+		}
+
+		public static void HandleCoPilotReleased()
+		{
+			if (OnCoPilotReleased != null)
+				OnCoPilotReleased();
 		}
 
 		public static void HandleEndGame()
