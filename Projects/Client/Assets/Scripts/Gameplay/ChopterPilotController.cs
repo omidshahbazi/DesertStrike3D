@@ -1,5 +1,6 @@
 ﻿//Rambo Team
 using RamboTeam.Client.UI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -63,6 +64,8 @@ namespace RamboTeam.Client
         public float VerticalRotation = 15;
         public float HorizontalRotation = 10;
 
+        public GameObject gatlingGunShootParticle;
+
         private bool nextPos;
         private bool nextAirCraftPos;
 
@@ -96,6 +99,7 @@ namespace RamboTeam.Client
             InputManager.Instance.AddInput(KeyCode.Z, ShootHellFireMissle);
             InputManager.Instance.AddInput(KeyCode.X, ShootAirCraft);
             InputManager.Instance.AddInput(KeyCode.C, MachineGunShoot);
+
             QueryEnemies();
             Enemy.OnEnemyDead += RemoveEnemyFromList;
             sqrRange = RangeDetect * RangeDetect;
@@ -129,7 +133,7 @@ namespace RamboTeam.Client
 
         protected override void Update()
         {
-            if (Landing.Instance.state == Landing.State.Landed)
+            if (Landing.state == Landing.State.Landed)
                 return;
 
             base.Update();
@@ -172,7 +176,10 @@ namespace RamboTeam.Client
                         IsMoving = true;
                         verticalRoation = VerticalRotation;
 
-                        transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
+                        if (Input.GetKey(KeyCode.Space) && Chopter.Instance.isEngineBoostEquipted && Chopter.Instance.currentFuelAmount > Chopter.Instance.LowFuelAmount)
+                            transform.Translate(transform.forward * Time.deltaTime * (MovementSpeed * 2), Space.World);
+                        else
+                            transform.Translate(transform.forward * Time.deltaTime * MovementSpeed, Space.World);
 
                     }
                     if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
@@ -242,13 +249,36 @@ namespace RamboTeam.Client
             if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.currentGatlingGunCount == 0 || Time.time < nextShotTime)
                 return;
 
+            InputManager.Instance.OnKeyRealeased += OnKeyRelease;
+
+
+            if (!gatlingGunShootParticle.activeSelf)
+            {
+                gatlingGunShootParticle.SetActive(true);
+            }
+
             nextShotTime = Time.time + GaltingGunRateOfShot;
 
             (Enemy en, Vector3 dir) = SearchClosetTarge();
 
-            MachineGunShootInternal(GaltingPosition.position, en == null ? GetBottomDirection() : dir);
+            Vector3 finalDir = en == null ? GetBottomDirection() : dir;
+
+            float rndRange = UnityEngine.Random.Range(-0.03F, 0.03F);
+            finalDir += GaltingPosition.right * rndRange;
+
+            MachineGunShootInternal(GaltingPosition.position, finalDir);
 
             NetworkCommands.SyncChopterShotHellfire(GaltingPosition.position, en == null ? GetBottomDirection() : dir);
+        }
+
+        private void OnKeyRelease(KeyCode KeyCode)
+        {
+            if (KeyCode == KeyCode.C)
+            {
+                InputManager.Instance.OnKeyRealeased -= OnKeyRelease;
+                gatlingGunShootParticle.SetActive(false);
+            }
+
         }
 
         private void ShootAirCraft()

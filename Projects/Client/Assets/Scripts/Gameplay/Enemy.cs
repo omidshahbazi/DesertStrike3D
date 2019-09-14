@@ -26,7 +26,11 @@ namespace RamboTeam.Client
         RPGMan,
         SamRadar,
         PowerStation,
-        Hangar
+        Hangar,
+        WatchTower,
+        Tent,
+        Factory,
+        House
     }
 
     public class Enemy : MonoBehaviorBase
@@ -44,6 +48,7 @@ namespace RamboTeam.Client
 
         public float Range = 10;
         public float ShotPerSecond = 1;
+        public float delayShotPerSecond = 0;
 
         [SerializeField]
         private GameObject BulletPrefab = null;
@@ -64,8 +69,10 @@ namespace RamboTeam.Client
 
         public List<Transform> TransformsForTargetRotation = new List<Transform>();
         public float RotationToTargetSpeed = 150;
+        public Transform ShotStartPosition;
         private bool isRotatingTowardTarget = false;
-
+        public List<AudioClip> OnDeathAudio;
+        private int perSecondCounter;
         protected override void Start()
         {
             base.Start();
@@ -73,8 +80,10 @@ namespace RamboTeam.Client
             if (!isAttacker)
                 return;
 
+
             sqrRange = Range * Range;
             rateOfShot = 1 / ShotPerSecond;
+            perSecondCounter = (int)Math.Round(ShotPerSecond);
 
             if (isAttacker)
                 target = ChopterPilotController.Instance.transform;
@@ -106,10 +115,21 @@ namespace RamboTeam.Client
             if (Time.time < nextShotTime)
                 return;
 
+
             if (isAnyTransformAlignedToTarget())
             {
-                nextShotTime = Time.time + rateOfShot;
-                Shot(transform.position, diff.normalized);
+                if (perSecondCounter == 0)
+                {
+                    nextShotTime = Time.time + rateOfShot + delayShotPerSecond;
+                    perSecondCounter = (int)Math.Round(ShotPerSecond);
+                }
+                else
+                {
+                    nextShotTime = Time.time + rateOfShot;
+                }
+
+                Shot(ShotStartPosition.position, diff.normalized);
+                perSecondCounter--;
             }
             else // Rotate To Target First
             {
@@ -154,9 +174,10 @@ namespace RamboTeam.Client
 
         private Quaternion GetRotationTowardTarget(Transform trans)
         {
-            Vector3 dir = target.position - trans.position;
+            Vector3 dir = trans.position - target.position;
 
-            dir = new Vector3(dir.x, 0.0f, dir.z) * -1;
+
+            dir = new Vector3(dir.x, 0.0f, dir.z);
 
             var lookRot = Quaternion.LookRotation(dir);
 
@@ -198,6 +219,14 @@ namespace RamboTeam.Client
         private void OnEnemyDeath()
         {
             EventManager.OnEnemyDeathCall(this);
+
+            if (OnDeathAudio.Count != 0)
+            {
+                AudioClip clip = OnDeathAudio[UnityEngine.Random.Range(0, OnDeathAudio.Count)];
+                if (clip != null)
+                    AudioManager.Instance.PlayAudio(clip, transform.position, null);
+            }
+
             IsDead = true;
             gameObject.SetActive(false);
             OnEnemyDead?.Invoke(this);

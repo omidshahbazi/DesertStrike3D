@@ -3,6 +3,7 @@ using RamboTeam.Client.UI;
 using System;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace RamboTeam.Client
 {
@@ -27,6 +28,7 @@ namespace RamboTeam.Client
             private set;
         }
 
+
         public ChoppersPicker pickUp;
         //Weapons Count
 
@@ -45,13 +47,26 @@ namespace RamboTeam.Client
         public uint currentGatlingGunCount { get; private set; } = 0;
         public float currentHP { get; private set; } = 0;
         public uint currentLifeCount { get; private set; } = 0;
-        public uint currentFuelAmount { get; private set; } = 0;
+        public float currentFuelAmount { get; private set; } = 0;
         public uint currentRefugeesCount { get; private set; } = 0;
         public bool IsDead { get; private set; } = false;
-        public float FuelCostTime = 2.0f;
+        public float FuelCostPerSecond = 2.0f;
         private float nextRefugeeReleaseTime;
-        private float RefugessReleaseGapTime = 2.0f;
-        private int HealthPerRefugeeAmount = 30;
+        public float RefugessReleaseGapTime = 2.0f;
+        public int HealthPerRefugeeAmount = 30;
+        public List<AudioClip> OnHitAudioClips = new List<AudioClip>();
+        public AudioClip OnDeathAudio;
+        public AudioClip OnLowFuelAudio;
+        public int LowFuelAmount = 30;
+        public bool islowFuelLoop = true;
+        private float fuelElapsedUpdateTime = 0.0F;
+        private AudioSource lowFuelAudioSource = null;
+
+        public bool isEngineBoostEquipted
+        {
+            get;
+            private set;
+        }
 
         private bool IsPilot
         {
@@ -76,7 +91,7 @@ namespace RamboTeam.Client
             LeftArmDestructionParticle.SetActive(false);
             RightArmDestructionParticle.SetActive(false);
             rotorAudio = GetComponent<AudioSource>();
-            nextFuelUpdateTime = Time.time + FuelCostTime;
+            nextFuelUpdateTime = Time.time + FuelCostPerSecond;
         }
 
         protected override void Update()
@@ -89,19 +104,11 @@ namespace RamboTeam.Client
             if (!IsPilot)
                 return;
 
-            if (Time.time > nextFuelUpdateTime)
-            {
-                currentFuelAmount--;
-                nextFuelUpdateTime = Time.time + FuelCostTime;
-                EventManager.OnFuelUpdateCall();
-
-                if (currentFuelAmount == 0)
-                    OnChopterDeath();
-            }
+            UpdateFuel();
 
             if (currentRefugeesCount != 0)
             {
-                if (Landing.Instance.state == Landing.State.Landed)
+                if (Landing.state == Landing.State.Landed)
                 {
                     if (nextRefugeeReleaseTime < Time.time)
                     {
@@ -112,6 +119,21 @@ namespace RamboTeam.Client
                 }
             }
 
+        }
+
+        private void UpdateFuel()
+        {
+            float cost;
+            if (Input.GetKey(KeyCode.Space) && isEngineBoostEquipted && currentFuelAmount > LowFuelAmount)
+            {
+                cost = Time.deltaTime * FuelCostPerSecond * 10;
+            }
+            else
+            {
+                cost = Time.deltaTime * FuelCostPerSecond;
+            }
+
+            UpdateCurrentFuel(-cost);
         }
 
         internal void TriggerHellfireShot()
@@ -143,6 +165,16 @@ namespace RamboTeam.Client
             {
                 OnChopterDeath();
             }
+            else
+            {
+                if (OnHitAudioClips.Count != 0)
+                {
+
+                    AudioClip clip = OnHitAudioClips[UnityEngine.Random.Range(0, OnHitAudioClips.Count)];
+                    if (clip != null)
+                        AudioManager.Instance.PlayAudio(clip, transform.position, null);
+                }
+            }
         }
 
         private void CheckArmsDestructionState()
@@ -164,6 +196,9 @@ namespace RamboTeam.Client
         private void OnChopterDeath()
         {
             Debug.Log("Dead");
+            if (OnDeathAudio != null)
+                AudioManager.Instance.PlayAudio(OnDeathAudio, transform.position, null);
+
             smokeParticle.SetActive(true);
             IsDead = true;
             currentLifeCount--;
@@ -248,6 +283,9 @@ namespace RamboTeam.Client
                     case PickUpBehaviour.PickUpType.HealthPack:
                         UpdateCurrentHP((int)pickUp.pickedItem.Amount);
                         break;
+                    case PickUpBehaviour.PickUpType.EngineBoost:
+                        isEngineBoostEquipted = true;
+                        break;
                     default:
                         break;
                 }
@@ -280,10 +318,38 @@ namespace RamboTeam.Client
             EventManager.OnGatlingGunUpdateCall();
         }
 
-        private void UpdateCurrentFuel(int Amount)
+        private void UpdateCurrentFuel(float Amount)
         {
-            currentFuelAmount = (uint)Mathf.Min(currentFuelAmount + Amount, FuelAmount);
-            EventManager.OnFuelUpdateCall();
+            currentFuelAmount = Mathf.Clamp(currentFuelAmount + Amount, 0.0F, FuelAmount);
+
+            fuelElapsedUpdateTime += Math.Abs(Amount);
+
+            if (fuelElapsedUpdateTime > 1.0F)
+            {
+                EventManager.OnFuelUpdateCall();
+                fuelElapsedUpdateTime -= 1.0F;
+            }
+
+            if (currentFuelAmount > LowFuelAmount)
+            {
+                if (lowFuelAudioSource != null)
+                    lowFuelAudioSource.Stop();
+            }
+            else
+            {
+                if (lowFuelAudioSource == null)
+                {
+                    lowFuelAudioSource = AudioManager.Instance.PlayAudio(OnLowFuelAudio, Vector3.zero, this.transform, 0.0F, 1.0F, islowFuelLoop);
+                }
+                else
+                {
+                    if (!lowFuelAudioSource.isPlaying)
+                        lowFuelAudioSource.Play();
+                }
+            }
+
+            if (currentFuelAmount == 0)
+                OnChopterDeath();
         }
 
         private void UpdateCurrentHP(int Amount)

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LayerShouldAttack:
     serializedVersion: 2
-    m_Bits: 3088
+    m_Bits: 1024
   ChopterLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -61,10 +61,11 @@ MonoBehaviour:
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
-  Speed: 10
+  Speed: 200
   Damage: 10
   Lifetime: 20
-  impactToBuildingParticle: {fileID: 0}
+  impactToBuildingParticle: {fileID: 743658598375992376, guid: eec1d538e90aac041bfd693f69b97f8c,
+    type: 3}
   impactToTerrainParticle: {fileID: 0}
   impactToWaterParticle: {fileID: 0}
 --- !u!65 &7790495611490789497

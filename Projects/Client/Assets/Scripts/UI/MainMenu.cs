@@ -14,6 +14,9 @@ namespace RamboTeam.Client.UI
         public Button SingleButton;
         public Button CoOpButton;
         public Button QuitButton;
+        public Button PilotButton;
+        public Button CoPilotButton;
+        public GameObject MissionBrief;
         public GameObject Story;
         public GameObject TutorialPanel;
         public GameObject loadingScreen;
@@ -27,7 +30,7 @@ namespace RamboTeam.Client.UI
 
 		private bool isMultiplayer = false;
 
-        protected override void Awake()
+		protected override void Awake()
         {
             base.Awake();
 
@@ -38,18 +41,19 @@ namespace RamboTeam.Client.UI
             Story.gameObject.SetActive(false);
             TutorialPanel.gameObject.SetActive(false);
             SingleButton.onClick.AddListener(() =>
-			{
+            {
 				isMultiplayer = false;
+
 				NetworkLayer.Instance.IsPilot = true;
                 ShowStory();
                 InputManager.Instance.OnAnyKeyPressd += ShowTutorial;
             });
             CoOpButton.onClick.AddListener(() =>
-            {
+			{
 				isMultiplayer = true;
 
 				ShowCoopMenu();
-                NetworkCommands.JoinToRoom();
+               
                 //InputManager.Instance.OnAnyKeyPressd += ;
             });
 
@@ -59,6 +63,17 @@ namespace RamboTeam.Client.UI
                 InputManager.Instance.OnAnyKeyPressd += CloseCreditPanel;
             });
 
+            PilotButton.onClick.AddListener(() =>
+            {
+               // NetworkCommands.OnPilot();
+            });
+
+            CoPilotButton.onClick.AddListener(() =>
+            {
+                //NetworkCommands.JoinToRoom();
+            });
+
+
             QuitButton.onClick.AddListener(() => Application.Quit());
 
             NetworkCommands.OnConnected += NetworkCommands_OnConnected;
@@ -67,12 +82,12 @@ namespace RamboTeam.Client.UI
             NetworkCommands.OnJoinedToRoom += OnJoinedToRoom;
 
             CoOpButton.interactable = false;
+            InputManager.Instance.AddInput(KeyCode.Backspace, OnBackSpaceClick);
         }
 
-        private void CloseCreditPanel()
-        {        
-            InputManager.Instance.OnAnyKeyPressd -= CloseCreditPanel;
-            CreditsObj.gameObject.SetActive(false);
+        private void OnBackSpaceClick()
+        {
+            CoopMenu.gameObject.SetActive(false);
         }
 
         protected override void OnEnable()
@@ -82,10 +97,14 @@ namespace RamboTeam.Client.UI
             CoOpButton.interactable = NetworkLayer.Instance.IsConnected;
         }
 
+        protected  void OnDestroy()
+        {
+            InputManager.Instance.RemoveInput(KeyCode.Backspace, OnBackSpaceClick);
+        }
+
         private void NetworkCommands_OnConnected()
         {
             CoOpButton.interactable = true;
-
         }
 
         private void NetworkCommands_OnDisconnected()
@@ -103,7 +122,8 @@ namespace RamboTeam.Client.UI
         {
             TutorialPanel.gameObject.SetActive(true);
             InputManager.Instance.OnAnyKeyPressd -= ShowTutorial;
-            InputManager.Instance.OnAnyKeyPressd += loadGame;
+
+            InputManager.Instance.OnAnyKeyPressd += ShowMissionBreif;
 
         }
 
@@ -111,6 +131,16 @@ namespace RamboTeam.Client.UI
         {
             CoopMenu.gameObject.SetActive(true);
         }
+
+        private void ShowMissionBreif()
+        {
+            MissionBrief.gameObject.SetActive(true);
+            InputManager.Instance.OnAnyKeyPressd -= ShowMissionBreif;
+            InputManager.Instance.OnAnyKeyPressd += loadGame;
+
+        }
+
+
 
         private void loadGame()
         {
@@ -121,7 +151,8 @@ namespace RamboTeam.Client.UI
             StartCoroutine(LoadAsync());
         }
 
-        IEnumerator LoadAsync()
+
+        private IEnumerator LoadAsync()
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync("FinalScene001", LoadSceneMode.Single);
             RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001", isMultiplayer);
@@ -134,15 +165,23 @@ namespace RamboTeam.Client.UI
 
                 Text.text = "Loading... " + (int)(progress * 100f) + "%";
 
-				yield return null;
-			}
-		}
+                yield return null;
+            }
+
+        }
 
         private void OnJoinedToRoom()
         {
             ShowStory();
             InputManager.Instance.OnAnyKeyPressd += loadGame;
         }
+
+        private void CloseCreditPanel()
+        {
+            InputManager.Instance.OnAnyKeyPressd -= CloseCreditPanel;
+            CreditsObj.gameObject.SetActive(false);
+        }
+
     }
 }
 

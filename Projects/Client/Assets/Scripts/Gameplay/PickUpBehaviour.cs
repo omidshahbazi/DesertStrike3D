@@ -1,6 +1,7 @@
 ﻿//Rambo Team
 
 using RamboTeam.Client;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,11 +16,20 @@ public class PickUpBehaviour : MonoBehaviorBase
         HydraAmmo,
         GatlingGun,
         Fuel,
-        HealthPack
+        HealthPack,
+        EngineBoost
     }
 
     public PickUpType Type;
     public uint Amount = 1;
+    public float OnAreaRange = 10.0f;
+    public bool isOnAreaAudioLoop = true;
+    public AudioClip onAreaAudio;
+    public AudioClip OnPickAudio;
+    private float OnAreaRangesqr;
+    private Chopter target;
+    private bool isPicked = false;
+    private AudioSource onAreaAudioSource = null;
     //public float PickupRange = 30;
 
     //private BoxCollider minRangeCollider;
@@ -28,30 +38,48 @@ public class PickUpBehaviour : MonoBehaviorBase
     protected override void Awake()
     {
         base.Awake();
-       // minRangeCollider = this.GetComponent<BoxCollider>();
+        // minRangeCollider = this.GetComponent<BoxCollider>();
     }
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+
+        OnAreaRangesqr = OnAreaRange * OnAreaRange;
+        target = Chopter.Instance;
     }
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
 
-        //if (target == null)
-        //    return;
+        if (target == null)
+        {
+            target = Chopter.Instance;
+            return;
+        }
 
-        //Vector3 offset = target.position - transform.position;
-        //float sqrLen = offset.sqrMagnitude;
+        if (target.IsDead)
+            return;
 
-        //// square the distance we compare with
-        //if (sqrLen < PickupRange * PickupRange)
-        //{
-        //    print("inside pickup area!");
-        //};
+        if (isPicked)
+            return;
+
+        Vector3 diff = target.transform.position - transform.position;
+
+        if (diff.sqrMagnitude > OnAreaRangesqr)
+        {
+            if (onAreaAudioSource != null && onAreaAudioSource.isPlaying)
+                onAreaAudioSource.Stop();
+            return;
+        }
+
+        if (onAreaAudioSource != null && onAreaAudioSource.isPlaying)
+        {
+            return;
+        }
+        onAreaAudioSource = AudioManager.Instance.PlayAudio(onAreaAudio, Chopter.Instance.transform.position, null, 0, 1, isOnAreaAudioLoop);
     }
 
     protected override void OnEnable()
@@ -74,11 +102,28 @@ public class PickUpBehaviour : MonoBehaviorBase
     {
         base.OnTriggerExit(Collision);
 
-       // target = null;
+        // target = null;
     }
 
-    private void OnGUI()
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+
+        Gizmos.DrawWireSphere(transform.position, OnAreaRange);
+    }
+    internal void Picked()
     {
 
+        if (OnPickAudio != null)
+        {
+            AudioManager.Instance.PlayAudio(OnPickAudio, Chopter.Instance.transform.position, null);
+        }
+
+        if (onAreaAudioSource != null)
+        {
+            isPicked = true;
+            onAreaAudioSource.loop = false;
+            onAreaAudioSource.Stop();
+        }
     }
 }
