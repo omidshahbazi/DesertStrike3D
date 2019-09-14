@@ -16,7 +16,13 @@ namespace RamboTeam.Client
 
         public Action FinalAction { get; private set; }
 
-        protected override void Awake()
+		public static bool IsMultiplayer
+		{
+			get;
+			set;
+		}
+
+		protected override void Awake()
         {
             base.Awake();
 
@@ -38,12 +44,11 @@ namespace RamboTeam.Client
             return operation;
         }
 
-        public void SetLoadSceneParameters(string Name)
+        public void SetLoadSceneParameters(string Name, bool IsMultiplayer)
         {
             CurrentSceneName = Name;
-          
-        }
-
+			RamboSceneManager.IsMultiplayer = IsMultiplayer;
+		}
 
         private void RamboSceneManager_completed(AsyncOperation obj)
         {

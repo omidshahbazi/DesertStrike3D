@@ -25,6 +25,8 @@ namespace RamboTeam.Client.UI
         private bool isKeyGet;
         private float progress;
 
+		private bool isMultiplayer = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -36,14 +38,17 @@ namespace RamboTeam.Client.UI
             Story.gameObject.SetActive(false);
             TutorialPanel.gameObject.SetActive(false);
             SingleButton.onClick.AddListener(() =>
-            {
-                NetworkLayer.Instance.IsPilot = true;
+			{
+				isMultiplayer = false;
+				NetworkLayer.Instance.IsPilot = true;
                 ShowStory();
                 InputManager.Instance.OnAnyKeyPressd += ShowTutorial;
             });
             CoOpButton.onClick.AddListener(() =>
             {
-                ShowCoopMenu();
+				isMultiplayer = true;
+
+				ShowCoopMenu();
                 NetworkCommands.JoinToRoom();
                 //InputManager.Instance.OnAnyKeyPressd += ;
             });
@@ -92,7 +97,6 @@ namespace RamboTeam.Client.UI
         {
             CoOpButton.gameObject.SetActive(false);
             Story.gameObject.SetActive(true);
-
         }
 
         private void ShowTutorial()
@@ -108,8 +112,6 @@ namespace RamboTeam.Client.UI
             CoopMenu.gameObject.SetActive(true);
         }
 
-
-
         private void loadGame()
         {
             InputManager.Instance.OnAnyKeyPressd -= loadGame;
@@ -119,12 +121,10 @@ namespace RamboTeam.Client.UI
             StartCoroutine(LoadAsync());
         }
 
-   
-
         IEnumerator LoadAsync()
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync("FinalScene001", LoadSceneMode.Single);
-            RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001");
+            RamboSceneManager.Instance.SetLoadSceneParameters("FinalScene001", isMultiplayer);
 
             while (!operation.isDone)
             {
@@ -134,10 +134,10 @@ namespace RamboTeam.Client.UI
 
                 Text.text = "Loading... " + (int)(progress * 100f) + "%";
 
-                yield return null;
-            }
+				yield return null;
+			}
+		}
 
-        }
         private void OnJoinedToRoom()
         {
             ShowStory();
