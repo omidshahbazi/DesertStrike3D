@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: -3877245281971093171}
   - component: {fileID: 190542415041830114}
   - component: {fileID: 7914862266053381810}
+  - component: {fileID: -4179132322431984441}
   m_Layer: 10
   m_Name: Chopter
   m_TagString: Untagged
@@ -322,9 +323,14 @@ MonoBehaviour:
   HP: 600
   LifeCount: 3
   FuelAmount: 120
-  FuelCostTime: 2
+  FuelCostPerSecond: 2
   RefugessReleaseGapTime: 2
   HealthPerRefugeeAmount: 30
+  OnHitAudioClips: []
+  OnDeathAudio: {fileID: 0}
+  OnLowFuelAudio: {fileID: 0}
+  LowFuelAmount: 30
+  islowFuelLoop: 1
 --- !u!114 &190542415041830114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,11 +358,12 @@ MonoBehaviour:
   RightAirCraft: {fileID: 486607755}
   LeftAirCraft: {fileID: 1059555563}
   AirCraftRateOfShot: 0.5
+  ChopterModel: {fileID: 3531565312313610673}
   MovementSpeed: 75
   RotationSpeed: 100
   VerticalRotation: 30
   HorizontalRotation: 20
-  ChopterModel: {fileID: 3531565312313610673}
+  gatlingGunShootParticle: {fileID: 0}
 --- !u!54 &7914862266053381810
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -373,6 +380,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &-4179132322431984441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282614176317508976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032755b6c776be746b9cd61e52d78b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoPilotTransform: {fileID: 3757867057319729511}
+  FireTransform: {fileID: 7495172261047024886}
+  BulletObject: {fileID: 4186674442152668689, guid: 7336d6fcebc32c74e986509124e6b703,
+    type: 3}
+  RateOfFire: 0.01
 --- !u!1 &3352075043938754473
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +860,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -890,21 +929,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03a3d42e22277ee48ad1c515f860ca16, type: 3}
@@ -1080,15 +1104,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 372081843e9dda24fb3adf00b3379892, type: 3}
---- !u!1 &5037724098021086068 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
-    type: 3}
-  m_PrefabInstance: {fileID: 7888428884770969500}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3091951255744093500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5157049350702451360, guid: 372081843e9dda24fb3adf00b3379892,
+    type: 3}
+  m_PrefabInstance: {fileID: 7888428884770969500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5037724098021086068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
     type: 3}
   m_PrefabInstance: {fileID: 7888428884770969500}
   m_PrefabAsset: {fileID: 0}
@@ -1246,15 +1270,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 637e82ac626e97548952220bbae2873d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d, type: 3}
---- !u!1 &8796443330205561621 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d,
-    type: 3}
-  m_PrefabInstance: {fileID: 8796443330205463989}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8796443330205855541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8796443330205463989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8796443330205561621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d,
     type: 3}
   m_PrefabInstance: {fileID: 8796443330205463989}
   m_PrefabAsset: {fileID: 0}

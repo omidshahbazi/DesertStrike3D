@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 7891413607219555002}
   - component: {fileID: 2672427305967171349}
   - component: {fileID: 5360851886181049669}
+  - component: {fileID: 3794382577179106156}
   m_Layer: 10
   m_Name: Chopter
   m_TagString: Untagged
@@ -524,6 +525,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &3794382577179106156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926696754829174407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032755b6c776be746b9cd61e52d78b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoPilotTransform: {fileID: 1410769099027640976}
+  FireTransform: {fileID: 5743950298827527937}
+  BulletObject: {fileID: 620008849344824208, guid: f2f5a6e0226e41f45aed0e1af888229c,
+    type: 3}
+  RateOfFire: 0.01
 --- !u!1 &4679481268939513892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,15 +1263,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03a3d42e22277ee48ad1c515f860ca16, type: 3}
---- !u!4 &3425540555115094490 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
-    type: 3}
-  m_PrefabInstance: {fileID: 7500872670701103994}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4650161044149219218 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+    type: 3}
+  m_PrefabInstance: {fileID: 7500872670701103994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3425540555115094490 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
     type: 3}
   m_PrefabInstance: {fileID: 7500872670701103994}
   m_PrefabAsset: {fileID: 0}

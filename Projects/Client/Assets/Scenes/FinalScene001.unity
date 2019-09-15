@@ -437,7 +437,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9236529
+      value: 0.34366447
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -447,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.38323024
+      value: -0.9390926
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -553,16 +553,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8807315074079345033, guid: f89ab56ff5cb4014eb3bbfd35844c064,
-        type: 3}
-      propertyPath: ShotStartPosition
-      value: 
-      objectReference: {fileID: 84055861}
     - target: {fileID: 6480181203889208254, guid: f89ab56ff5cb4014eb3bbfd35844c064,
         type: 3}
       propertyPath: m_Name
       value: Boat_Low_uv (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8807315074079345033, guid: f89ab56ff5cb4014eb3bbfd35844c064,
+        type: 3}
+      propertyPath: ShotStartPosition
+      value: 
+      objectReference: {fileID: 84055861}
     - target: {fileID: 8049449449424701869, guid: f89ab56ff5cb4014eb3bbfd35844c064,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -730,7 +730,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.751209
+      value: 0.023200618
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -740,7 +740,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.66006446
+      value: -0.9997308
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -4711,16 +4711,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8807315074079345033, guid: f89ab56ff5cb4014eb3bbfd35844c064,
-        type: 3}
-      propertyPath: ShotStartPosition
-      value: 
-      objectReference: {fileID: 778897567}
     - target: {fileID: 6480181203889208254, guid: f89ab56ff5cb4014eb3bbfd35844c064,
         type: 3}
       propertyPath: m_Name
       value: Boat_Low_uv
       objectReference: {fileID: 0}
+    - target: {fileID: 8807315074079345033, guid: f89ab56ff5cb4014eb3bbfd35844c064,
+        type: 3}
+      propertyPath: ShotStartPosition
+      value: 
+      objectReference: {fileID: 778897567}
     - target: {fileID: 8049449449424701869, guid: f89ab56ff5cb4014eb3bbfd35844c064,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5453,16 +5453,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588905465154798234, guid: 692ea037d07de564a90fafd7fc821244,
-        type: 3}
-      propertyPath: MaxYawAngle
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588905465154798234, guid: 692ea037d07de564a90fafd7fc821244,
-        type: 3}
-      propertyPath: MaxPitchAngle
-      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 692ea037d07de564a90fafd7fc821244, type: 3}
