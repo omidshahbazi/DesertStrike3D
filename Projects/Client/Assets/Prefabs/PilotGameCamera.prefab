@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d652c414601f57946a2668ece2f164b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 10
   SingleplayerBaseDistance: 150
   MultiplayerBaseDistance: 100
   OffsetRadius: 60

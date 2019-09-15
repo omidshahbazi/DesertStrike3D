@@ -437,7 +437,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.34366447
+      value: 0.8549585
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -447,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9390926
+      value: -0.5186965
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -730,7 +730,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.023200618
+      value: 0.6425773
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -740,7 +740,7 @@ PrefabInstance:
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9997308
+      value: -0.7662209
       objectReference: {fileID: 0}
     - target: {fileID: 6513928173906876681, guid: 65949378ee867f54db5df42fed106f37,
         type: 3}
@@ -5454,6 +5454,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3588905465154798234, guid: 692ea037d07de564a90fafd7fc821244,
+        type: 3}
+      propertyPath: MaxYawAngle
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588905465154798234, guid: 692ea037d07de564a90fafd7fc821244,
+        type: 3}
+      propertyPath: MaxPitchAngle
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 692ea037d07de564a90fafd7fc821244, type: 3}
 --- !u!1001 &910248540
@@ -7659,15 +7669,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7465438141444764273, guid: 09acd3aab5d78794da51966bced7ac41,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 94
-      objectReference: {fileID: 0}
     - target: {fileID: 4091447029351536607, guid: 09acd3aab5d78794da51966bced7ac41,
         type: 3}
       propertyPath: m_Name
       value: EngineBoost
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465438141444764273, guid: 09acd3aab5d78794da51966bced7ac41,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 94
       objectReference: {fileID: 0}
     - target: {fileID: 1052967916490040780, guid: 09acd3aab5d78794da51966bced7ac41,
         type: 3}
@@ -11122,7 +11132,7 @@ PrefabInstance:
     - target: {fileID: 6918190543230104811, guid: ee4fb6220c084c54199196de75d02774,
         type: 3}
       propertyPath: Speed
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6918190543230104811, guid: ee4fb6220c084c54199196de75d02774,
         type: 3}
