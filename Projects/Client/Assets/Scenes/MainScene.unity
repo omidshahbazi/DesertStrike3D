@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -744,6 +744,21 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1671764797718096619, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -634533969359961367, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -336512478579984190, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: da4f59f3dd6f0274b99ff1a291559c77,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -797,21 +812,6 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: da4f59f3dd6f0274b99ff1a291559c77,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -634533969359961367, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -336512478579984190, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671764797718096619, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2926426679950814022, guid: da4f59f3dd6f0274b99ff1a291559c77,
@@ -1034,13 +1034,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e798bdf04bf4942ba92285250ae6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyType: 0
+  Type: 0
   Range: 100
   ShotPerSecond: 1
+  delayShotPerSecond: 0
   BulletPrefab: {fileID: 670093052942939127, guid: 5feef8803e4086d439611d23f740da27,
     type: 3}
   HP: 100
-  currentHP: 0
   isAttacker: 1
+  TransformsForTargetRotation: []
+  RotationToTargetSpeed: 150
+  ShotStartPosition: {fileID: 0}
+  OnDeathAudio: []
 --- !u!1 &814189821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2379,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6918190543230104811, guid: ee4fb6220c084c54199196de75d02774,
+        type: 3}
+      propertyPath: Speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1781662371478220346, guid: ee4fb6220c084c54199196de75d02774,
         type: 3}
       propertyPath: far clip plane
@@ -2382,11 +2393,6 @@ PrefabInstance:
         type: 3}
       propertyPath: near clip plane
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6918190543230104811, guid: ee4fb6220c084c54199196de75d02774,
-        type: 3}
-      propertyPath: Speed
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4fb6220c084c54199196de75d02774, type: 3}
@@ -2512,6 +2518,21 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1671764797718096619, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -634533969359961367, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -336512478579984190, guid: da4f59f3dd6f0274b99ff1a291559c77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: da4f59f3dd6f0274b99ff1a291559c77,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2565,21 +2586,6 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: da4f59f3dd6f0274b99ff1a291559c77,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -634533969359961367, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -336512478579984190, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671764797718096619, guid: da4f59f3dd6f0274b99ff1a291559c77,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2926426679950814022, guid: da4f59f3dd6f0274b99ff1a291559c77,
@@ -2686,13 +2692,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e798bdf04bf4942ba92285250ae6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyType: 0
+  Type: 0
   Range: 100
   ShotPerSecond: 1
+  delayShotPerSecond: 0
   BulletPrefab: {fileID: 670093052942939127, guid: 5feef8803e4086d439611d23f740da27,
     type: 3}
   HP: 100
-  currentHP: 0
   isAttacker: 1
+  TransformsForTargetRotation: []
+  RotationToTargetSpeed: 150
+  ShotStartPosition: {fileID: 0}
+  OnDeathAudio: []
 --- !u!54 &1956774397
 Rigidbody:
   m_ObjectHideFlags: 0
