@@ -471,8 +471,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bccb0892313b27c49be677d9bf937132, type: 3}
   - {fileID: 0}
   - {fileID: 8300000, guid: f625893eb2afb604885fbc10f51a60d9, type: 3}
-  OnDeathAudio: {fileID: 0}
-  OnLowFuelAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 8300000, guid: 29cea4fb8f70c6748b518453a1caf821, type: 3}
+  OnLowFuelAudio: {fileID: 8300000, guid: f0d4e17cc580f794795abeb4feb7d9c5, type: 3}
   LowFuelAmount: 30
   islowFuelLoop: 1
 --- !u!114 &2672427305967171349
@@ -502,12 +502,12 @@ MonoBehaviour:
   RightAirCraft: {fileID: 2860541303862435964}
   LeftAirCraft: {fileID: 2860541303293944604}
   AirCraftRateOfShot: 0.5
+  ChopterModel: {fileID: 1634820787167296070}
   MovementSpeed: 75
   RotationSpeed: 100
   VerticalRotation: 30
   HorizontalRotation: 20
   gatlingGunShootParticle: {fileID: 796072421733170537}
-  ChopterModel: {fileID: 1634820787167296070}
 --- !u!54 &5360851886181049669
 Rigidbody:
   m_ObjectHideFlags: 0
