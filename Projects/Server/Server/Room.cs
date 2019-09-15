@@ -23,7 +23,7 @@ namespace RamboTeam.Server
 
 		public bool HasCoPilot
 		{
-			get { return pilotPlayer != null; }
+			get { return coPilotPlayer != null; }
 		}
 
 		public bool IsFull

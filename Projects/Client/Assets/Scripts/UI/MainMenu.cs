@@ -100,11 +100,15 @@ namespace RamboTeam.Client.UI
 		private void OnBecomePilot()
 		{
 			PilotButton.interactable = false;
+
+			StartButton.interactable = (!PilotButton.interactable && !CoPilotButton.interactable);
 		}
 
 		private void OnBecomeCoPilot()
 		{
 			CoPilotButton.interactable = false;
+
+			StartButton.interactable = (!PilotButton.interactable && !CoPilotButton.interactable);
 		}
 
 		private void OnPilotReserved()
