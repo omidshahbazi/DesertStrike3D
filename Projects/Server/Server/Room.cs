@@ -16,6 +16,16 @@ namespace RamboTeam.Server
 		private NetworkingPlayer pilotPlayer = null;
 		private NetworkingPlayer coPilotPlayer = null;
 
+		public bool HasPilot
+		{
+			get { return pilotPlayer != null; }
+		}
+
+		public bool HasCoPilot
+		{
+			get { return pilotPlayer != null; }
+		}
+
 		public bool IsFull
 		{
 			get { return players.Count == MAX_PLAYER_COUNT; }

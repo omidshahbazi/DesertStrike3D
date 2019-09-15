@@ -110,21 +110,29 @@ namespace RamboTeam.Client.UI
 		private void OnPilotReserved()
 		{
 			PilotButton.interactable = false;
+
+			StartButton.interactable = (!PilotButton.interactable && !CoPilotButton.interactable);
 		}
 
 		private void OnPilotReleased()
 		{
 			PilotButton.interactable = true;
+
+			StartButton.interactable = (!PilotButton.interactable && !CoPilotButton.interactable);
 		}
 
 		private void OnCoPilotReserved()
 		{
 			CoPilotButton.interactable = false;
+
+			StartButton.interactable = (!PilotButton.interactable && !CoPilotButton.interactable);
 		}
 
 		private void OnCoPilotReleased()
 		{
 			CoPilotButton.interactable = true;
+
+			StartButton.interactable = (!PilotButton.interactable && !CoPilotButton.interactable);
 		}
 
 		private void OnBackSpaceClick()
@@ -137,6 +145,7 @@ namespace RamboTeam.Client.UI
 			base.OnEnable();
 
 			CoOpButton.interactable = NetworkLayer.Instance.IsConnected;
+			StartButton.interactable = false;
 		}
 
 		protected void OnDestroy()
@@ -169,9 +178,12 @@ namespace RamboTeam.Client.UI
 
 		}
 
-		private void ShowCoopMenu()
+		private void ShowCoopMenu(bool HasPilot, bool HasCoPilot)
 		{
 			CoopMenu.gameObject.SetActive(true);
+
+			PilotButton.interactable = !HasPilot;
+			CoPilotButton.interactable = !HasCoPilot;
 		}
 
 		private void ShowMissionBreif()
@@ -212,9 +224,9 @@ namespace RamboTeam.Client.UI
 
 		}
 
-		private void OnJoinedToRoom()
+		private void OnJoinedToRoom(bool HasPilot, bool HasCoPilot)
 		{
-			ShowCoopMenu();
+			ShowCoopMenu(HasPilot, HasCoPilot);
 		}
 
 		private void CloseCreditPanel()

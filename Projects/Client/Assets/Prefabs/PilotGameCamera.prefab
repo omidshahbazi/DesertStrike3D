@@ -97,7 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
-  BaseDistance: 150
+  SingleplayerBaseDistance: 150
+  MultiplayerBaseDistance: 100
   OffsetRadius: 60
   shakeDuration: 0
   shakeAmount: 0

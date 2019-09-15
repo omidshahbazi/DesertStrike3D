@@ -9,8 +9,9 @@ namespace RamboTeam.Client
 		public static readonly Vector3 MULTI_PLAYER_CAMERA_OFFSET_DIRECTION = new Vector3(0, 0.2F, -1);
 
 		public float Speed = 10.0F;
-        public float BaseDistance = 30;
-        public float OffsetRadius = 10;
+		public float SingleplayerBaseDistance = 150;
+		public float MultiplayerBaseDistance = 100;
+		public float OffsetRadius = 10;
         public float shakeDuration = 0f;
 
         // Amplitude of the shake. A larger value shakes the camera harder.
@@ -61,12 +62,17 @@ namespace RamboTeam.Client
 			Vector3 forward = Vector3.zero;
 
 			if (RamboSceneManager.IsMultiplayer)
-				forward = chopterModelTransform.TransformPoint(MULTI_PLAYER_CAMERA_OFFSET_DIRECTION);
+				forward = chopterTransform.TransformPoint(MULTI_PLAYER_CAMERA_OFFSET_DIRECTION);
 			else
 				forward = chopterTransform.position + SINGLE_PLAYER_CAMERA_OFFSET_DIRECTION;
 
 			forward = (forward - chopterTransform.position).normalized;
-			Vector3 targetPos = chopterTransform.position + (forward * BaseDistance);
+			Vector3 targetPos = Vector3.zero;
+
+			if (RamboSceneManager.IsMultiplayer)
+				targetPos = chopterTransform.position + (forward * MultiplayerBaseDistance);
+			else
+				targetPos = chopterTransform.position + (forward * SingleplayerBaseDistance);
 
 			if (!RamboSceneManager.IsMultiplayer && chopter.IsMoving)
 			{

@@ -5,6 +5,7 @@ using UnityEngine;
 namespace RamboTeam.Client
 {
 	public delegate void NetworkEventHandler();
+	public delegate void JoinedToRoom(bool HasPilot, bool HasCoPilot);
 	public delegate void SyncChopterTransformEventHandler(Vector3 Position, Vector3 Rotation);
 	public delegate void SyncChopterShotEventHandler(Vector3 Position, Vector3 Direction);
 	public delegate void SyncEnemyShotEventHandler(Vector3 Position, Vector3 Direction);
@@ -17,7 +18,7 @@ namespace RamboTeam.Client
 		public static event NetworkEventHandler OnConnectionLost;
 		public static event NetworkEventHandler OnConnectionRestored;
 
-		public static event NetworkEventHandler OnJoinedToRoom;
+		public static event JoinedToRoom OnJoinedToRoom;
 		public static event NetworkEventHandler OnBecomePilot;
 		public static event NetworkEventHandler OnBecomeCoPilot;
 		public static event NetworkEventHandler OnPilotReserved;
@@ -202,10 +203,13 @@ namespace RamboTeam.Client
 				OnConnectionRestored();
 		}
 
-		public static void HandleJoinedToRoom()
+		public static void HandleJoinedToRoom(BufferStream Buffer)
 		{
+			bool hasPilot = Buffer.ReadBool();
+			bool hasCoPilot = Buffer.ReadBool();
+
 			if (OnJoinedToRoom != null)
-				OnJoinedToRoom();
+				OnJoinedToRoom(hasPilot, hasCoPilot);
 		}
 
 		public static void HandleBecomePilot()

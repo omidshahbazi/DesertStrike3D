@@ -86,7 +86,7 @@ namespace RamboTeam.Client
 					if (command == Commands.Lobby.JOIN_TO_ROOM)
 					{
 						IsPilot = true;
-						NetworkCommands.HandleJoinedToRoom();
+						NetworkCommands.HandleJoinedToRoom(buffer);
 					}
 				}
 				else if (category == Commands.Category.ROOM)

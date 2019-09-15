@@ -27,17 +27,24 @@ namespace RamboTeam.Common
 			Index = 0;
 		}
 
+		public bool ReadBool()
+		{
+			bool value = BitConverter.ToBoolean(Buffer, Index);
+			Index += sizeof(bool);
+			return value;
+		}
+
 		public int ReadInt32()
 		{
 			int value = BitConverter.ToInt32(Buffer, Index);
-			Index += 4;
+			Index += sizeof(int);
 			return value;
 		}
 
 		public float ReadFloat32()
 		{
 			float value = BitConverter.ToSingle(Buffer, Index);
-			Index += 4;
+			Index += sizeof(float);
 			return value;
 		}
 
@@ -50,6 +57,11 @@ namespace RamboTeam.Common
 		{
 			for (int i = 0; i < Length; ++i)
 				Data[i] = Buffer[Index++];
+		}
+
+		public void WriteBool(bool Value)
+		{
+			WriteBytes(BitConverter.GetBytes(Value));
 		}
 
 		public void WriteInt32(int Value)

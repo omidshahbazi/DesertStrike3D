@@ -244,9 +244,8 @@ namespace RamboTeam.Client
         }
 
         private void MachineGunShoot()
-        {
-            Debug.Log("key triggered");
-            if (Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.currentGatlingGunCount == 0 || Time.time < nextShotTime)
+		{
+            if (RamboSceneManager.IsMultiplayer || Chopter.Instance.IsDead || !NetworkLayer.Instance.IsPilot || Chopter.Instance.currentGatlingGunCount == 0 || Time.time < nextShotTime)
                 return;
 
             InputManager.Instance.OnKeyRealeased += OnKeyRelease;
