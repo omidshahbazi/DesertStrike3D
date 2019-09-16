@@ -112,7 +112,6 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -758,11 +757,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 1652491331545971774, guid: 3417c8bd14247d44d876287400d2c321,
-        type: 3}
-      propertyPath: m_Name
-      value: Ladder
-      objectReference: {fileID: 0}
     - target: {fileID: 1652491331545971775, guid: 3417c8bd14247d44d876287400d2c321,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -817,6 +811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652491331545971774, guid: 3417c8bd14247d44d876287400d2c321,
+        type: 3}
+      propertyPath: m_Name
+      value: Ladder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3417c8bd14247d44d876287400d2c321, type: 3}
@@ -931,16 +930,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
-        type: 3}
-      propertyPath: m_Name
-      value: LeftArmDestructionParticle (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: 372081843e9dda24fb3adf00b3379892,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -996,6 +985,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
+        type: 3}
+      propertyPath: m_Name
+      value: LeftArmDestructionParticle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 372081843e9dda24fb3adf00b3379892, type: 3}
 --- !u!1 &7087320323404888195 stripped
@@ -1017,6 +1016,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
+    - target: {fileID: 316342344993377554, guid: 16d434a32a916d44d92e9839a6703c87,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 316342344993377554, guid: 16d434a32a916d44d92e9839a6703c87,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a41d470059bb99c41bf065f7220e6cf5, type: 3}
     - target: {fileID: 2471227604063185234, guid: 16d434a32a916d44d92e9839a6703c87,
         type: 3}
       propertyPath: m_Name
@@ -1080,11 +1089,6 @@ PrefabInstance:
     - target: {fileID: 3839083909994933240, guid: 16d434a32a916d44d92e9839a6703c87,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 316342344993377554, guid: 16d434a32a916d44d92e9839a6703c87,
-        type: 3}
-      propertyPath: m_Volume
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1298,36 +1302,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_Name
-      value: SmokeParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1383,6 +1357,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_Name
+      value: SmokeParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03a3d42e22277ee48ad1c515f860ca16, type: 3}
 --- !u!1 &4650161044149219218 stripped
@@ -1404,16 +1408,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 2923050729936291048, guid: b3473b51131ff9341811e33860bcc8b1,
-        type: 3}
-      propertyPath: m_Name
-      value: RightArmDestructionParticle (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: b3473b51131ff9341811e33860bcc8b1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: b3473b51131ff9341811e33860bcc8b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1467,6 +1461,16 @@ PrefabInstance:
     - target: {fileID: 5157049350702451360, guid: b3473b51131ff9341811e33860bcc8b1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: b3473b51131ff9341811e33860bcc8b1,
+        type: 3}
+      propertyPath: m_Name
+      value: RightArmDestructionParticle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: b3473b51131ff9341811e33860bcc8b1,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
