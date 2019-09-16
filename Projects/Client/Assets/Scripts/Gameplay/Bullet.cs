@@ -82,7 +82,7 @@ namespace RamboTeam.Client
                     return;
 
                 enemy.ApplyDamage(Damage);
-                PilotCameraController.Instance.SetCameraShake();
+               // PilotCameraController.Instance.SetCameraShake();
 
                 impactPart = impactToBuildingParticle;
                 targetPos = transform.position;

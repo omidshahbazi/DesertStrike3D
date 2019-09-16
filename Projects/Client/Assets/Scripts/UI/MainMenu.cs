@@ -17,6 +17,7 @@ namespace RamboTeam.Client.UI
 		public Button PilotButton;
 		public Button CoPilotButton;
 		public Button StartButton;
+        public Button BackButton;
 		public GameObject MissionBrief;
 		public GameObject Story;
 		public GameObject TutorialPanel;
@@ -78,6 +79,10 @@ namespace RamboTeam.Client.UI
 				ShowStory();
 				InputManager.Instance.OnAnyKeyPressd += loadGame;
 			});
+            BackButton.onClick.AddListener(() =>
+            {
+                OnBackSpaceClick();
+            });
 
 			QuitButton.onClick.AddListener(() => Application.Quit());
 
@@ -95,6 +100,7 @@ namespace RamboTeam.Client.UI
 
 			CoOpButton.interactable = false;
 			InputManager.Instance.AddInput(KeyCode.Backspace, OnBackSpaceClick);
+
 		}
 
 		private void OnBecomePilot()
