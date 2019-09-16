@@ -177,7 +177,7 @@ namespace RamboTeam.Client.UI
             }
         }
 
-        public void SetEnemyHealth(Enemy Enemy = null)
+        public void SetEnemyHealth(Enemy Enemy)
         {
             if (Enemy == null)
             {

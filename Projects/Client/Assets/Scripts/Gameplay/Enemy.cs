@@ -1,4 +1,5 @@
 ﻿//Rambo Team
+using RamboTeam.Client.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -206,13 +207,17 @@ namespace RamboTeam.Client
                 return;
 
             currentHP = Mathf.Clamp(currentHP - Damage, 0, HP);
-
+           
             EventManager.OnHealthUpdateCall();
 
 
             if (currentHP == 0)
             {
+                HUDMenu.Instance.SetEnemyHealth(null);
                 OnEnemyDeath();
+            }else
+            {
+                HUDMenu.Instance.SetEnemyHealth(this);
             }
         }
 
