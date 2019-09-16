@@ -181,11 +181,17 @@ namespace RamboTeam.Client.UI
         {
             if (Enemy == null)
             {
+                healthImage.fillAmount = 1;
                 HealthObj.gameObject.SetActive(false);
                 return;
             }
-            HealthObj.gameObject.SetActive(true);
-            healthImage.fillAmount = Enemy.currentHP / Enemy.HP;
+            float val = (Enemy.currentHP / Enemy.HP);
+            if (val == 1)
+                HealthObj.gameObject.SetActive(false);
+            else
+                HealthObj.gameObject.SetActive(true);
+
+            healthImage.fillAmount = val;
 
         }
 
