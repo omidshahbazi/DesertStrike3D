@@ -15,7 +15,6 @@ public class RadarBehaviour : MonoBehaviorBase
     protected override void Start()
     {
         base.Start();
-        this.runInEditMode = true;
     }
     protected override void Update()
     {
