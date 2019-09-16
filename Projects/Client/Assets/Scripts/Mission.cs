@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Mission 
+public class Mission
 {
     [Tooltip("Text Show In Mission # Accomplished in HUD, It will Replaced WWith #")]
     public string Title;
@@ -30,11 +30,15 @@ public class Mission
         get { return currentCount >= Count; }
     }
 
-    public void IncreaseCurrentCount(int Count )
+    public void IncreaseCurrentCount(int Count)
     {
         currentCount += Count;
     }
 
+    public void Reset()
+    {
+        currentCount = 0;
+    }
 
     public int GetCurrentCount()
     {

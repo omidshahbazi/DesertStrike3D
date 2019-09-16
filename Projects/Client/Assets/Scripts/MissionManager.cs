@@ -143,6 +143,13 @@ public class MissionManager : MonoBehaviorBase
             Debug.Log("No Mission is Set");
             return;
         }
+        else
+        {
+            for (int i = 0; i < Missions.Count; ++i)
+            {
+                Missions[i].Reset();
+            }
+        }
 
         EventManager.OnEnemyDeath += OnEnemyDeath;
         EventManager.OnPickUp += OnPickUpItem;

@@ -20,6 +20,8 @@ namespace RamboTeam.Client
         public int LeftArmDestructionHP = 75;
         public GameObject LeftArmDestructionParticle;
         private AudioSource rotorAudio;
+        public GameObject EngineBoostModel;
+        public Transform EngineBoostParticle;
 
         private float nextFuelUpdateTime = 0.0F;
         public static Chopter Instance
@@ -61,6 +63,9 @@ namespace RamboTeam.Client
         public bool islowFuelLoop = true;
         private float fuelElapsedUpdateTime = 0.0F;
         private AudioSource lowFuelAudioSource = null;
+        public AudioSource engineBoostAudio;
+        public ParticleSystem boostTrailsLeft;
+        public ParticleSystem boostTrailsRight;
 
         public bool isEngineBoostEquipted
         {
@@ -121,21 +126,81 @@ namespace RamboTeam.Client
 
         }
 
+        private float turnOnStartTime;
+        private bool isEngineBoostOn = false;
+        private float EngineBoostEffectTime = 1.0F;
+        private float elapsedEngineActivationTime = 0.0F;
         private void UpdateFuel()
         {
             float cost;
             if (Input.GetKey(KeyCode.Space) && isEngineBoostEquipted && currentFuelAmount > LowFuelAmount)
             {
+                TurnOnEngineBoostEffecs();
                 cost = Time.deltaTime * FuelCostPerSecond * 10;
             }
             else
             {
+                TurnOffEngineBoostEffecs();
+                //EngineBoostParticle.localPosition = new Vector3(EngineBoostParticle.localPosition.x, 40, EngineBoostParticle.localPosition.z);
                 cost = Time.deltaTime * FuelCostPerSecond;
             }
 
             UpdateCurrentFuel(-cost);
         }
 
+        private void TurnOnEngineBoostEffecs()
+        {
+            if (!isEngineBoostOn)
+            {
+                isEngineBoostOn = true;
+                turnOnStartTime = Time.time;
+                elapsedEngineActivationTime = 0.0F;
+                boostTrailsLeft.Play();
+                boostTrailsRight.Play();
+            }   
+
+            if (elapsedEngineActivationTime / EngineBoostEffectTime <= 1.0F)
+            {
+                if (!engineBoostAudio.isPlaying)
+                {
+                    engineBoostAudio.Play();
+                }
+                engineBoostAudio.volume = elapsedEngineActivationTime / EngineBoostEffectTime;
+                EngineBoostParticle.localPosition = Vector3.Lerp(EngineBoostParticle.localPosition, new Vector3(EngineBoostParticle.localPosition.x, -8, EngineBoostParticle.localPosition.z), elapsedEngineActivationTime / EngineBoostEffectTime);
+                elapsedEngineActivationTime += Time.deltaTime;
+            }
+            else
+            {
+                engineBoostAudio.volume = 1;
+            }
+        }
+
+        private void TurnOffEngineBoostEffecs()
+        {
+            if (isEngineBoostOn)
+            {
+                isEngineBoostOn = false;
+                turnOnStartTime = Time.time;
+                elapsedEngineActivationTime = 0.0F;
+                boostTrailsLeft.Stop();
+                boostTrailsRight.Stop();
+            }
+            if (elapsedEngineActivationTime / EngineBoostEffectTime <= 1.0F)
+            {
+                //if (!engineBoostAudio.isPlaying)
+                //{
+                //    engineBoostAudio.Play();
+                //}
+                engineBoostAudio.volume = 1.0F - (elapsedEngineActivationTime / EngineBoostEffectTime);
+                EngineBoostParticle.localPosition = Vector3.Lerp(EngineBoostParticle.localPosition, new Vector3(EngineBoostParticle.localPosition.x, 50, EngineBoostParticle.localPosition.z), elapsedEngineActivationTime / EngineBoostEffectTime);
+                elapsedEngineActivationTime += Time.deltaTime;
+            }
+            else
+            {
+                engineBoostAudio.volume = 0;
+
+            }
+        }
         internal void TriggerHellfireShot()
         {
             currentHellfireCount--;
@@ -285,6 +350,8 @@ namespace RamboTeam.Client
                         break;
                     case PickUpBehaviour.PickUpType.EngineBoost:
                         isEngineBoostEquipted = true;
+                        EngineBoostParticle.localPosition = new Vector3(EngineBoostParticle.localPosition.x, 40, EngineBoostParticle.localPosition.z);
+                        EngineBoostModel.SetActive(true);
                         break;
                     default:
                         break;
