@@ -382,7 +382,7 @@ namespace RamboTeam.Client
 
             }
 
-            HUDMenu.Instance.SetEnemyHealth(findTarget);
+           
             return (findTarget, -1 * dir);
         }
 

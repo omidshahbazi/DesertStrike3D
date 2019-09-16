@@ -2,6 +2,7 @@
 using UnityEngine;
 using RamboTeam.Client.Utilities;
 using System;
+using RamboTeam.Client.UI;
 
 namespace RamboTeam.Client
 {
@@ -90,12 +91,16 @@ namespace RamboTeam.Client
             }
             else if (terrainLayer.IsContains(Collider.gameObject.layer)) //impact to terrain
             {
+                HUDMenu.Instance.SetEnemyHealth(null);
+
                 impactPart = impactToTerrainParticle;
                 targetPos = transform.position;
 
             }
             else if (waterLayer.IsContains(Collider.gameObject.layer))//impact to water
             {
+                HUDMenu.Instance.SetEnemyHealth(null);
+
                 impactPart = impactToWaterParticle;
                 targetPos = transform.position;
             }
