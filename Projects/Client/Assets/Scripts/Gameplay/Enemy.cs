@@ -219,7 +219,7 @@ namespace RamboTeam.Client
         private void OnEnemyDeath()
         {
             EventManager.OnEnemyDeathCall(this);
-
+            PilotCameraController.Instance.SetCameraShake();
             if (OnDeathAudio.Count != 0)
             {
                 AudioClip clip = OnDeathAudio[UnityEngine.Random.Range(0, OnDeathAudio.Count)];

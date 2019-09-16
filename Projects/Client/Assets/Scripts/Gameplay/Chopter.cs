@@ -195,6 +195,7 @@ namespace RamboTeam.Client
 
         private void OnChopterDeath()
         {
+            PilotCameraController.Instance.SetCameraShake();
             Debug.Log("Dead");
             if (OnDeathAudio != null)
                 AudioManager.Instance.PlayAudio(OnDeathAudio, transform.position, null);

@@ -100,6 +100,6 @@ MonoBehaviour:
   SingleplayerBaseDistance: 150
   MultiplayerBaseDistance: 100
   OffsetRadius: 60
-  shakeDuration: 0
-  shakeAmount: 0
+  shakeDuration: 1
+  shakeAmount: 2
   decreaseFactor: 1
