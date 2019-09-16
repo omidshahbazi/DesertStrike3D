@@ -467,12 +467,12 @@ MonoBehaviour:
   FuelAmount: 120
   FuelCostPerSecond: 0.5
   RefugessReleaseGapTime: 2
-  HealthPerRefugeeAmount: 30
+  HealthPerRefugeeAmount: 60
   OnHitAudioClips:
   - {fileID: 8300000, guid: bccb0892313b27c49be677d9bf937132, type: 3}
   - {fileID: 0}
   - {fileID: 8300000, guid: f625893eb2afb604885fbc10f51a60d9, type: 3}
-  OnDeathAudio: {fileID: 8300000, guid: 29cea4fb8f70c6748b518453a1caf821, type: 3}
+  OnDeathAudio: {fileID: 8300000, guid: 8a2fdbca2898e824fb800818341d065c, type: 3}
   OnLowFuelAudio: {fileID: 8300000, guid: f0d4e17cc580f794795abeb4feb7d9c5, type: 3}
   LowFuelAmount: 30
   islowFuelLoop: 1
@@ -751,11 +751,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 1652491331545971774, guid: 3417c8bd14247d44d876287400d2c321,
-        type: 3}
-      propertyPath: m_Name
-      value: Ladder
-      objectReference: {fileID: 0}
     - target: {fileID: 1652491331545971775, guid: 3417c8bd14247d44d876287400d2c321,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -810,6 +805,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652491331545971774, guid: 3417c8bd14247d44d876287400d2c321,
+        type: 3}
+      propertyPath: m_Name
+      value: Ladder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3417c8bd14247d44d876287400d2c321, type: 3}
@@ -924,16 +924,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
-        type: 3}
-      propertyPath: m_Name
-      value: LeftArmDestructionParticle (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: 372081843e9dda24fb3adf00b3379892,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -987,6 +977,16 @@ PrefabInstance:
     - target: {fileID: 5157049350702451360, guid: 372081843e9dda24fb3adf00b3379892,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
+        type: 3}
+      propertyPath: m_Name
+      value: LeftArmDestructionParticle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 372081843e9dda24fb3adf00b3379892,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1176,36 +1176,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_Name
-      value: SmokeParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: 03a3d42e22277ee48ad1c515f860ca16,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1261,6 +1231,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_Name
+      value: SmokeParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051161803384424527, guid: 03a3d42e22277ee48ad1c515f860ca16,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03a3d42e22277ee48ad1c515f860ca16, type: 3}
 --- !u!1 &4650161044149219218 stripped
@@ -1282,16 +1282,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 2923050729936291048, guid: b3473b51131ff9341811e33860bcc8b1,
-        type: 3}
-      propertyPath: m_Name
-      value: RightArmDestructionParticle (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2923050729936291048, guid: b3473b51131ff9341811e33860bcc8b1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5157049350702451360, guid: b3473b51131ff9341811e33860bcc8b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1345,6 +1335,16 @@ PrefabInstance:
     - target: {fileID: 5157049350702451360, guid: b3473b51131ff9341811e33860bcc8b1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: b3473b51131ff9341811e33860bcc8b1,
+        type: 3}
+      propertyPath: m_Name
+      value: RightArmDestructionParticle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923050729936291048, guid: b3473b51131ff9341811e33860bcc8b1,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
