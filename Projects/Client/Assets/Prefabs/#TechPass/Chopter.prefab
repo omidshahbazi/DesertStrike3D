@@ -112,6 +112,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1016,6 +1017,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
+    - target: {fileID: 7265115996046987450, guid: 16d434a32a916d44d92e9839a6703c87,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679018021697731584, guid: 16d434a32a916d44d92e9839a6703c87,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 316342344993377554, guid: 16d434a32a916d44d92e9839a6703c87,
         type: 3}
       propertyPath: m_Volume
@@ -1136,14 +1147,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d, type: 3}
-      propertyPath: m_Name
-      value: Aphachi_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1188,6 +1191,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d, type: 3}
+      propertyPath: m_Name
+      value: Aphachi_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 2a48c8b06c7bfe94b8bfdf8a65ff772d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1213,14 +1224,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1634820787166799462}
     m_Modifications:
-    - target: {fileID: 100000, guid: b194a8d6fd3320545b19ec0bd6690c19, type: 3}
-      propertyPath: m_Name
-      value: Aphachi_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: b194a8d6fd3320545b19ec0bd6690c19, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b194a8d6fd3320545b19ec0bd6690c19, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.39
@@ -1276,6 +1279,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: b194a8d6fd3320545b19ec0bd6690c19, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.63909
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b194a8d6fd3320545b19ec0bd6690c19, type: 3}
+      propertyPath: m_Name
+      value: Aphachi_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b194a8d6fd3320545b19ec0bd6690c19, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: b194a8d6fd3320545b19ec0bd6690c19, type: 3}
       propertyPath: m_Materials.Array.data[0]

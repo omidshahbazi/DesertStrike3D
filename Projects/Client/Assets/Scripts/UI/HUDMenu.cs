@@ -29,6 +29,8 @@ namespace RamboTeam.Client.UI
         public GameObject misssionItem;
         public RectTransform missionsItemsPanel;
         public GameObject mapPanel;
+        public Text lowFuelText;
+        public Text lowwArmorText;
 
         // Start is called before the first frame update
         protected override void Awake()
@@ -60,6 +62,22 @@ namespace RamboTeam.Client.UI
             yield return new WaitForSeconds(1.0F);
 
             NetworkCommands.HandleBecomePilot();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (lowFuelText.gameObject.activeSelf)
+            {
+                float t = Mathf.PingPong(Time.time * 1.0F, 1.0F);
+                lowFuelText.color = Color.Lerp(Color.yellow, Color.red, t);
+            }
+            if (lowwArmorText.gameObject.activeSelf)
+            {
+                float t = Mathf.PingPong(Time.time * 1.0F, 1.0F);
+                lowwArmorText.color = Color.Lerp(Color.yellow, Color.red, t);
+            }
         }
 
         protected override void OnEnable()
@@ -241,6 +259,15 @@ namespace RamboTeam.Client.UI
         private void OnUpdateFuel()
         {
             fuelText.text = Chopter.Instance.currentFuelAmount.ToString("0");
+
+            if (Chopter.Instance.currentFuelAmount <= Chopter.Instance.LowFuelAmount)
+            {
+                lowFuelText.gameObject.SetActive(true);
+            }
+            else
+            {
+                lowFuelText.gameObject.SetActive(false);
+            }
         }
 
         private void OnUpdateHellfire()
@@ -251,6 +278,17 @@ namespace RamboTeam.Client.UI
         private void OnUpdateHealth()
         {
             armorText.text = Chopter.Instance.currentHP.ToString();
+
+
+            if (Chopter.Instance.currentHP <= Chopter.Instance.LeftArmDestructionHP || Chopter.Instance.currentHP <= Chopter.Instance.RightArmDestructionHP)
+            {
+                lowwArmorText.gameObject.SetActive(true);
+                //Do Blink
+            }
+            else
+            {
+                lowwArmorText.gameObject.SetActive(false);
+            }
         }
     }
 
