@@ -35,9 +35,7 @@ namespace RamboTeam.Client.UI
 
             ReturnToGame.onClick.AddListener(() =>
             {
-                this.gameObject.SetActive(false);
-                Time.timeScale = 1;
-                isGamePaused = false;
+                OnResume();
             });
 
             ReturnToMainMenu.onClick.AddListener(() =>
@@ -48,10 +46,13 @@ namespace RamboTeam.Client.UI
 
             QuitButton.onClick.AddListener(() => Application.Quit());
             this.gameObject.SetActive(false);
-            InputManager.Instance.AddInput(KeyCode.Escape, PauseGame);
+            InputManager.Instance.OnKeyRealeased += PauseGame;
             InputManager.Instance.AddInput(KeyCode.F1, ShowTutorial);
+            InputManager.Instance.AddInput(KeyCode.Escape, WTFIsThisInputSystem);
+        }
 
-
+        private void WTFIsThisInputSystem()
+        {
         }
 
         private void ShowTutorial()
@@ -65,7 +66,7 @@ namespace RamboTeam.Client.UI
             InputManager.Instance.OnKeyRealeased += OnkeyCode;
         }
 
-        private void  OnkeyCode(KeyCode KeyCode)
+        private void OnkeyCode(KeyCode KeyCode)
         {
             if (KeyCode != KeyCode.F1)
                 return;
@@ -76,18 +77,36 @@ namespace RamboTeam.Client.UI
         }
 
 
-        private void PauseGame()
+        private void PauseGame(KeyCode KeyCode)
         {
-            isGamePaused = true;
-            this.gameObject.transform.SetAsLastSibling();
-            this.gameObject.SetActive(true);
-            Time.timeScale = 0;
+            if (KeyCode != KeyCode.Escape)
+                return;
+
+            if (!gameObject.activeSelf)
+            {
+                isGamePaused = true;
+                this.gameObject.transform.SetAsLastSibling();
+                this.gameObject.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                OnResume();
+            }
+        }
+
+        private void OnResume()
+        {
+            this.gameObject.SetActive(false);
+            Time.timeScale = 1;
+            isGamePaused = false;
         }
 
         private void OnDestroy()
         {
-            InputManager.Instance.RemoveInput(KeyCode.Escape, PauseGame);
             InputManager.Instance.RemoveInput(KeyCode.F1, ShowTutorial);
+            InputManager.Instance.OnKeyRealeased -= PauseGame;
+            InputManager.Instance.RemoveInput(KeyCode.Escape, WTFIsThisInputSystem);
         }
     }
 
