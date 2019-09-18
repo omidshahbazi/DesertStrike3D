@@ -73,6 +73,7 @@ namespace RamboTeam.Client
         public Transform ShotStartPosition;
         private bool isRotatingTowardTarget = false;
         public List<AudioClip> OnDeathAudio;
+        public GameObject OnDeathParticle;
         private int perSecondCounter;
         protected override void Start()
         {
@@ -207,7 +208,7 @@ namespace RamboTeam.Client
                 return;
 
             currentHP = Mathf.Clamp(currentHP - Damage, 0, HP);
-           
+
             EventManager.OnHealthUpdateCall();
 
 
@@ -215,7 +216,8 @@ namespace RamboTeam.Client
             {
                 HUDMenu.Instance.SetEnemyHealth(null);
                 OnEnemyDeath();
-            }else
+            }
+            else
             {
                 HUDMenu.Instance.SetEnemyHealth(this);
             }
@@ -230,6 +232,11 @@ namespace RamboTeam.Client
                 AudioClip clip = OnDeathAudio[UnityEngine.Random.Range(0, OnDeathAudio.Count)];
                 if (clip != null)
                     AudioManager.Instance.PlayAudio(clip, transform.position, null);
+            }
+
+            if (OnDeathParticle != null)
+            {
+                GameObject impactObj = GameObject.Instantiate(OnDeathParticle, transform.position, Quaternion.identity) as GameObject;
             }
 
             IsDead = true;
