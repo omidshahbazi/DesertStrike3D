@@ -38,8 +38,7 @@ namespace RamboTeam.Client
             if (coPilotCameraObject != null)
                 coPilotCameraObject.gameObject.SetActive(false);
             chopterModelTransform = chopter.ChopterModel.transform;
-            if (decreaseFactor == 0)
-                decreaseFactor = 0.5F;
+
         }
 
         protected override void OnEnable()
@@ -97,8 +96,6 @@ namespace RamboTeam.Client
                 transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
                 shakeDuration -= Time.deltaTime * decreaseFactor;
-                Debug.Log(shakeDuration);
-                Debug.Log(decreaseFactor);
             }
         }
 
