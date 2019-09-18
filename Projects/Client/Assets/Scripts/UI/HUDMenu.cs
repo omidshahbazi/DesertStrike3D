@@ -31,6 +31,8 @@ namespace RamboTeam.Client.UI
         public GameObject mapPanel;
         public Text lowFuelText;
         public Text lowwArmorText;
+        public GameObject missionName;
+        public GameObject missionVictoryPanel;
 
         // Start is called before the first frame update
         protected override void Awake()
@@ -78,6 +80,22 @@ namespace RamboTeam.Client.UI
                 float t = Mathf.PingPong(Time.time * 1.0F, 1.0F);
                 lowwArmorText.color = Color.Lerp(Color.yellow, Color.red, t);
             }
+
+            if (Landing.state == Landing.State.Landed && MissionManager.Instance.AreAllTasksDone && !missionPanel.activeSelf)
+            {
+                UpdateMissions();
+                CheckVictoryState();
+                missionPanel.SetActive(true);
+                missionPanel.transform.SetAsLastSibling();
+                Time.timeScale = 0; 
+            }
+        }
+
+        private void CheckVictoryState()
+        {
+            bool isVictory = MissionManager.Instance.AreAllTasksDone;
+            missionName.SetActive(!isVictory);
+            missionVictoryPanel.SetActive(isVictory);
         }
 
         protected override void OnEnable()
@@ -95,14 +113,22 @@ namespace RamboTeam.Client.UI
             EventManager.OnMissionComplete += OnMissionCompleted;
             EventManager.OnAllMissionsComplete += OnAllMissionsCompleted;
             EventManager.OnEnemyDeath += OnEnemyDeath;
+            missionPanel.SetActive(false);
+        }
+
+        public void QuitToMainMenu()
+        {
+            RamboSceneManager.Instance.LoadScene("MainMenu", UnityEngine.SceneManagement.LoadSceneMode.Single);
+            Time.timeScale = 1;
         }
 
         private void ShowHideMissionPanel()
         {
             if (mapPanel.activeSelf || missionPanel.activeSelf || PauseMenu.Instance.isGamePaused)
                 return;
-            UpdateMissions();
 
+            UpdateMissions();
+            CheckVictoryState();
             missionPanel.SetActive(true);
             missionPanel.transform.SetAsLastSibling();
             Time.timeScale = 0;
