@@ -223,6 +223,9 @@ namespace RamboTeam.Client.UI
 
         public void SetEnemyHealth(Enemy Enemy)
         {
+			if (healthImage == null)
+				return;
+
             if (Enemy == null)
             {
                 healthImage.fillAmount = 1;

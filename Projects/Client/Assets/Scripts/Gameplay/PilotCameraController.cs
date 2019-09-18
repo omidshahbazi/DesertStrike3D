@@ -3,55 +3,49 @@ using UnityEngine;
 
 namespace RamboTeam.Client
 {
-    public class PilotCameraController : RamboTeam.Client.Utilities.RamboSingelton<PilotCameraController>
-    {
+	public class PilotCameraController : RamboTeam.Client.Utilities.RamboSingelton<PilotCameraController>
+	{
 		public static readonly Vector3 SINGLE_PLAYER_CAMERA_OFFSET_DIRECTION = new Vector3(-1, 2, -1);
 		public static readonly Vector3 MULTI_PLAYER_CAMERA_OFFSET_DIRECTION = new Vector3(0, 0.2F, -1);
 
-        [SerializeField]
+		[SerializeField]
 		public float Speed = 10.0F;
 		public float SingleplayerBaseDistance = 150;
 		public float MultiplayerBaseDistance = 100;
 		public float OffsetRadius = 10;
-        public float shakeDuration = 0f;
+		public float shakeDuration = 0f;
 
-        // Amplitude of the shake. A larger value shakes the camera harder.
-        public float shakeAmount = 0.7f;
-        public float decreaseFactor = 1.0f;
+		// Amplitude of the shake. A larger value shakes the camera harder.
+		public float shakeAmount = 0.7f;
+		public float decreaseFactor = 1.0f;
 
-        Vector3 originalPos;
-        private ChopterPilotController chopter = null;
-        private Transform chopterTransform = null;
-        private Transform coPilotCameraObject = null;
+		Vector3 originalPos;
+		private ChopterPilotController chopter = null;
+		private Transform chopterTransform = null;
+		private Transform coPilotCameraObject = null;
 		private Transform chopterModelTransform = null;
 
 		private bool isFPS = false;
 
-        public Vector3 PanOffset
-        {
-            get;
-            set;
-        }
+		protected override void Awake()
+		{
+			base.Awake();
 
-        protected override void Awake()
-        {
-            base.Awake();
+			chopter = ChopterPilotController.Instance;
+			chopterTransform = chopter.transform;
 
-           chopter = ChopterPilotController.Instance;
-            chopterTransform = chopter.transform;
-
-            coPilotCameraObject = ChopterPilotController.Instance.transform.Find("CoPilotCamera");
-            if (coPilotCameraObject != null)
-                coPilotCameraObject.gameObject.SetActive(false);
+			coPilotCameraObject = ChopterPilotController.Instance.transform.Find("CoPilotCamera");
+			if (coPilotCameraObject != null)
+				coPilotCameraObject.gameObject.SetActive(false);
 			chopterModelTransform = chopter.ChopterModel.transform;
 		}
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
+		protected override void OnEnable()
+		{
+			base.OnEnable();
 
-            coPilotCameraObject.gameObject.SetActive(!NetworkLayer.Instance.IsPilot);
-        }
+			coPilotCameraObject.gameObject.SetActive(!NetworkLayer.Instance.IsPilot);
+		}
 
 		protected override void LateUpdate()
 		{
@@ -93,7 +87,7 @@ namespace RamboTeam.Client
 
 			float t = Time.deltaTime * Speed;
 
-			transform.position = Vector3.Lerp(transform.position, targetPos + PanOffset, t);
+			transform.position = Vector3.Lerp(transform.position, targetPos, t);
 			transform.forward = Vector3.Lerp(transform.forward, forward * -1, t);
 
 			if (shakeDuration > 0)
@@ -106,15 +100,15 @@ namespace RamboTeam.Client
 		}
 
 		public void SetCameraShake()
-        {
-            if (!NetworkLayer.Instance.IsPilot)
-                return;
+		{
+			if (!NetworkLayer.Instance.IsPilot)
+				return;
 
-            if (shakeDuration <= 0)
-            {
-                shakeDuration = 0.3F;
-                originalPos = transform.localPosition;
-            }
-        }
-    }
+			if (shakeDuration <= 0)
+			{
+				shakeDuration = 0.3F;
+				originalPos = transform.localPosition;
+			}
+		}
+	}
 }

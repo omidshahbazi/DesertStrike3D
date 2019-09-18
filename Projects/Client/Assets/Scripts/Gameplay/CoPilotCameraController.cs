@@ -11,14 +11,22 @@ namespace RamboTeam.Client
 			private set;
 		}
 
+		private Camera camera = null;
+		private float defaultFOV = 0;
+		private bool isInZoom = false;
+
 		public float MaxYawAngle = 90.0F;
 		public float MaxPitchAngle = 45.0F;
+		public float ZoomFOV = 30;
 
 		protected override void Awake()
 		{
 			base.Awake();
 
 			Instance = this;
+
+			camera = GetComponent<Camera>();
+			defaultFOV = camera.fieldOfView;
 		}
 
 		protected override void LateUpdate()
@@ -39,6 +47,13 @@ namespace RamboTeam.Client
 			float pitchAngle = (MaxPitchAngle / 2) * normalizedMousePosition.y * -1;
 
 			transform.localRotation = Quaternion.Euler(pitchAngle, yawAngle, 0);
+
+			if (Input.GetKeyUp(KeyCode.Mouse1))
+			{
+				isInZoom = !isInZoom;
+
+				camera.fieldOfView = (isInZoom ? ZoomFOV : defaultFOV);
+			}
 		}
 	}
 }
