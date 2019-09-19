@@ -77,11 +77,11 @@ namespace RamboTeam.Client.UI
             StartButton.onClick.AddListener(() =>
             {
                 ShowStory();
-                InputManager.Instance.OnAnyKeyPressd += loadGame;
+                //InputManager.Instance.OnAnyKeyPressd += loadGame;
             });
             BackButton.onClick.AddListener(() =>
             {
-                OnBackSpaceClick();
+                OnBackSpaceClick(KeyCode.Backspace);
             });
 
             QuitButton.onClick.AddListener(() => Application.Quit());
@@ -99,7 +99,12 @@ namespace RamboTeam.Client.UI
             NetworkCommands.OnCoPilotReleased += OnCoPilotReleased;
 
             CoOpButton.interactable = false;
-            InputManager.Instance.AddInput(KeyCode.Backspace, OnBackSpaceClick);
+            InputManager.Instance.AddInput(KeyCode.Backspace, OnBackSpace);
+            InputManager.Instance.OnKeyRealeased += OnBackSpaceClick;
+        }
+
+        private void OnBackSpace()
+        {
         }
 
         private void OnBecomePilot()
@@ -144,16 +149,19 @@ namespace RamboTeam.Client.UI
             StartButton.interactable = (!PilotButton.interactable && !CoPilotButton.interactable);
         }
 
-        private void OnBackSpaceClick()
+        private void OnBackSpaceClick(KeyCode Key)
         {
-            if (Story.activeSelf)
-                BackFromStory();
+            if (Key != KeyCode.Backspace)
+                return;
+
+            if (MissionBrief.activeSelf)
+                BackFromBrief();
             else if (TutorialPanel.activeSelf)
                 BackFromTutorial();
             else if (CoopMenu.activeSelf)
                 BackFromCoop();
-            else if (MissionBrief.activeSelf)
-                BackFromBrief();
+            else if (Story.activeSelf)
+                BackFromStory();
         }
 
         public void BackFromCoop()
@@ -171,7 +179,9 @@ namespace RamboTeam.Client.UI
 
         protected void OnDestroy()
         {
-            InputManager.Instance.RemoveInput(KeyCode.Backspace, OnBackSpaceClick);
+            InputManager.Instance.RemoveInput(KeyCode.Backspace, OnBackSpace);
+            InputManager.Instance.OnKeyRealeased -= OnBackSpaceClick;
+
         }
 
         private void NetworkCommands_OnConnected()
