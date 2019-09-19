@@ -173,7 +173,7 @@ namespace RamboTeam.Client
             {
                 IsMoving = false;
 
-                if (!isControlDown && !Chopter.Instance.IsDead)
+                if (!isControlDown && !Chopter.Instance.IsDead && IsInArea())
                 {
                     verticalRoation = 0;
                     horizontalRoation = 0;
@@ -232,6 +232,33 @@ namespace RamboTeam.Client
 
                 IsMoving = ((lastPosition - transform.position).sqrMagnitude > 1);
             }
+        }
+
+        private bool IsInArea()
+        {
+            if (transform.position.x > 2100)
+            {
+                transform.position = new Vector3(2100, transform.position.y, transform.position.z);
+                return false;
+
+            }
+            if (transform.position.x < -2000)
+            {
+                transform.position = new Vector3(-2000, transform.position.y, transform.position.z);
+                return false;
+            }
+            if (transform.position.z < -600)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, -600);
+                return false;
+            }
+            if (transform.position.z > 1550)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, 1550);
+                return false;
+            }
+
+            return true;
         }
 
         protected override void LateUpdate()
