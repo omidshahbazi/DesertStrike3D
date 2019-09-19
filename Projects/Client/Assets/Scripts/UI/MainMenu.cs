@@ -199,7 +199,7 @@ namespace RamboTeam.Client.UI
         public void ShowTutorial()
         {
             TutorialPanel.gameObject.SetActive(true);
-            Story.gameObject.SetActive(false);
+            //Story.gameObject.SetActive(false);
 
             //InputManager.Instance.OnAnyKeyPressd -= ShowTutorial;
 
@@ -223,7 +223,7 @@ namespace RamboTeam.Client.UI
         public void ShowMissionBreif()
         {
             MissionBrief.gameObject.SetActive(true);
-            TutorialPanel.gameObject.SetActive(false);
+            //TutorialPanel.gameObject.SetActive(false);
             //InputManager.Instance.OnAnyKeyPressd -= ShowMissionBreif;
             //InputManager.Instance.OnAnyKeyPressd += loadGame;
 
