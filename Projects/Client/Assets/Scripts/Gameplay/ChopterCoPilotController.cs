@@ -84,6 +84,8 @@ namespace RamboTeam.Client
 			Bullet ps = newObject.GetComponent<Bullet>();
 
 			ps.SetParamaeters(Direction);
+
+			Chopter.Instance.TriggerGaltingfireShot();
 		}
 	}
 }

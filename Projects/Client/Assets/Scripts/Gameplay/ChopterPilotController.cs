@@ -145,20 +145,20 @@ namespace RamboTeam.Client
 			{
 				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 				{
-					transform.Translate(transform.forward * Time.deltaTime * (MovementSpeed * 2), Space.World);
+					transform.Translate(PilotCameraController.Instance.transform.forward * Time.deltaTime * MovementSpeed, Space.World);
 				}
 				if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 				{
-					transform.Translate(transform.forward * -1 * Time.deltaTime * (MovementSpeed * 2), Space.World);
+					transform.Translate(PilotCameraController.Instance.transform.forward * -1 * Time.deltaTime * MovementSpeed, Space.World);
 				}
 
 				if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 				{
-					transform.Translate(transform.right * Time.deltaTime * (MovementSpeed * 2), Space.World);
+					transform.Translate(PilotCameraController.Instance.transform.right * Time.deltaTime * MovementSpeed, Space.World);
 				}
 				if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
 				{
-					transform.Translate(transform.right * -1 * Time.deltaTime * (MovementSpeed * 2), Space.World);
+					transform.Translate(PilotCameraController.Instance.transform.right * -1 * Time.deltaTime * MovementSpeed, Space.World);
 				}
 			}
 
