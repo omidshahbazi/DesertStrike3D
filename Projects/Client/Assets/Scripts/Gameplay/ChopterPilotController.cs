@@ -237,7 +237,7 @@ namespace RamboTeam.Client
         protected override void LateUpdate()
         {
             base.LateUpdate();
-            if (!Chopter.Instance.IsDead && NetworkLayer.Instance.IsPilot)
+            if (!Chopter.Instance.IsDead && NetworkLayer.Instance.IsPilot && !RamboSceneManager.IsMultiplayer)
             {
                 (Enemy en, Vector3 dir) = SearchClosetTarge();
 

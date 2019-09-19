@@ -77,7 +77,7 @@ namespace RamboTeam.Client.UI
             StartButton.onClick.AddListener(() =>
             {
                 ShowStory();
-                //InputManager.Instance.OnAnyKeyPressd += loadGame;
+                InputManager.Instance.OnAnyKeyPressd += loadGame;
             });
             BackButton.onClick.AddListener(() =>
             {
@@ -246,7 +246,7 @@ namespace RamboTeam.Client.UI
 
         public void loadGame()
         {
-            //InputManager.Instance.OnAnyKeyPressd -= loadGame;
+            InputManager.Instance.OnAnyKeyPressd -= loadGame;
             MainMenuMusic.Stop();
 
             loadingScreen.SetActive(true);
