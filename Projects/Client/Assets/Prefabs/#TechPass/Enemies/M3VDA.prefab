@@ -97,6 +97,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -135,6 +136,8 @@ MonoBehaviour:
   RotationToTargetSpeed: 200
   ShotStartPosition: {fileID: 5977643845560916572}
   OnDeathAudio: []
+  OnDeathParticle: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 3}
 --- !u!114 &1924088008272900844
 MonoBehaviour:
   m_ObjectHideFlags: 0

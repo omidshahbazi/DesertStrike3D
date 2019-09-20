@@ -59,6 +59,8 @@ MonoBehaviour:
   ShotStartPosition: {fileID: 0}
   OnDeathAudio:
   - {fileID: 8300000, guid: f781245418715a94abd4a72e83235fa9, type: 3}
+  OnDeathParticle: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 3}
 --- !u!54 &6887712003933533507
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,6 +155,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

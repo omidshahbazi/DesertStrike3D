@@ -65,6 +65,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -127,12 +128,16 @@ MonoBehaviour:
   Type: 10
   Range: 10
   ShotPerSecond: 1
+  delayShotPerSecond: 0
   BulletPrefab: {fileID: 0}
   HP: 25
   isAttacker: 0
   TransformsForTargetRotation: []
   RotationToTargetSpeed: 150
   ShotStartPosition: {fileID: 0}
+  OnDeathAudio: []
+  OnDeathParticle: {fileID: 2965116748124890979, guid: 753dbddc8b20cd849ad0f63bde6cc8f5,
+    type: 3}
 --- !u!54 &8233463318754818180
 Rigidbody:
   m_ObjectHideFlags: 0
